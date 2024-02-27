@@ -139,3 +139,15 @@ The entites here are heavily inspired by STIX, though this is still an early ske
 ## Tutorials
 
 - https://www.youtube.com/watch?v=Q1i4bIIFOFc
+
+
+## Software:
+
+### NER Frameworks
+- https://eyurtsev.github.io/kor/tutorial.html
+- https://github.com/explosion/spacy-llm
+- https://spacy.io/usage/large-language-models
+
+### Tracing
+
+- https://www.langchain.com/langsmith
