@@ -1,4 +1,5 @@
 from langchain.chat_models import ChatOpenAI
+from langchain.callbacks import get_openai_callback
 from kor import create_extraction_chain, Object, Text
 
 llm = ChatOpenAI(
@@ -34,6 +35,18 @@ schema = Object(
 )
 
 chain = create_extraction_chain(llm, schema, encoder_or_encoder_class='json')
+
+# DEBUG
+print(chain.prompt.format_prompt(text="[user input]").to_string())
+
 # Example usage:
-result = chain.invoke("LockBit, BlueCharlie, and Windows 10 were mentioned")
-print(result['text']['data'])
+
+with get_openai_callback() as cb:
+    result = chain.invoke("LockBit, BlueCharlie, and Windows 10 were mentioned")
+    print(f"Total Tokens: {cb.total_tokens}")
+    print(f"Prompt Tokens: {cb.prompt_tokens}")
+    print(f"Completion Tokens: {cb.completion_tokens}")
+    print(f"Successful Requests: {cb.successful_requests}")
+    print(f"Total Cost (USD): ${cb.total_cost}")
+    print("/////////")
+    print(result['text']['data'])
