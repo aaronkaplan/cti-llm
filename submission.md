@@ -35,4 +35,5 @@ The talk will give the audience
 
 
 # Presenters
-@aaronkaplan, A. Happe, @igloscka, @adulau, @brandl and @c00kie-
+@aaronkaplan, A. Happe, @igloscka, @adulau, @brandl and @C00kie-
+
