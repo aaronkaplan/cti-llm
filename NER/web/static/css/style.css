@@ -1,0 +1,87 @@
+:root {
+    --color-1: #D3AB9E;
+    --color-2: #6e7582;
+    --color-3: #bb8082;
+    --color-4: #f39189;
+    --color-5: #A7BED3;
+    /* Pastel Blue */
+    --color-6: #C6E2E9;
+    /* Light Cyan */
+    --color-7: #FAD2E1;
+    /* Soft Pink */
+    --color-8: #E2CFC4;
+    /* Pastel Beige */
+    --color-9: #F9E2AE;
+    /* Pastel Yellow */
+    --color-10: #A8D5BA;
+    /* Mint Green */
+    --color-11: #D1BEED;
+    /* Lavender */
+    --color-12: #FFC8A2;
+    /* Peach */
+    --color-13: #B8A9C9;
+    /* Lilac */
+    --color-14: #FBE4D5;
+    /* Cream */
+    --color-15: #D6E5E3;
+    /* Powder Blue */
+    --color-16: #EDE7B1;
+    /* Pale Lemon */
+    --color-17: #F4BFBF;
+    /* Soft Coral */
+    --color-18: #B5EAD7;
+    /* Tea Green */
+    --color-19: #FFDACC;
+    /* Melon */
+}
+
+body {
+    line-height: 2em;
+}
+
+.match-list {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap onto multiple lines */
+    gap: 10px; /* Adds space between items */
+}
+
+
+.match {
+    border-radius: 5px;
+    padding: .2em .5em;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.match .action {
+    display: none;
+}
+
+.match:not(:has(.match:hover)):hover > .action {
+    display: inline;
+}
+
+.match:not(:has(.match:hover)):hover::after {
+    content: attr(data-category);
+    position: absolute;
+    top: -2em;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: .2em .5em;
+    border-radius: 5px;
+    font-weight: bold;
+    white-space: nowrap;
+    z-index: 9999;
+}
+
+.match-list .match:hover::after {
+    display: none;
+}
+
+/*
+.match > .match:hover::after {
+    top: 1em;
+}
+*/
