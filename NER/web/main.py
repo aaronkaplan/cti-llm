@@ -98,9 +98,12 @@ async def process_text(text_input: TextInput):
         print(f"Successful Requests: {cb.successful_requests}")
         print(f"Total Cost (USD): ${cb.total_cost}")
         # TODO: There should not be a need to decode this, this is broken
-        return json_encoder.decode(result['text']['raw'])
+        return json_encoder.decode(result['text']['raw']) # PLUS ID
 
     
+@app.post("/annotation")
+async def annotation(document_id: int, tag_type: str, tag_value: str, action: str, start_pos: int, end_postion: int):
+    pass
 
 @app.get("/")
 async def read_root():
