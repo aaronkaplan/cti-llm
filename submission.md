@@ -32,3 +32,7 @@ The talk will give the audience
 - an understanding of the challenges of fine-tuning a local LLM and its' limits
 - an understanding on how to use our local CTI LLM ("neuroCTI")
 - an understanding on how to integrate CTI LLMs into your CTI workflow, particularly into MISP.
+
+
+# Presenters
+@aaronkaplan, A. Happe, @igloscka, @adulau, @brandl and @c00kie-
