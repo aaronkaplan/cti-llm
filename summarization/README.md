@@ -56,6 +56,7 @@ The obvious downside to ROUGE is that it does not compare *semantics* in summari
 
 ## Comparing existing methods
 
+(tables below taken from https://github.com/aaronkaplan/cti-llm/blob/main/summarization)
 ### Metric summary
 
 ![Method summary table](https://miro.medium.com/v2/resize:fit:875/1*jz4IUkjnuNfvA-0s4rSD9g.png)
