@@ -29,7 +29,7 @@ Recall-Oriented Understudy for Gisting Evaluation (ROUGE) is a set of simple met
 
 The obvious downside to ROUGE is that it does not compare *semantics* in summaries. 
 
-#### BLUE
+#### BLEU
 
 #### METEOR
 
