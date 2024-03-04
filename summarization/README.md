@@ -15,10 +15,10 @@ Here, we follow [Human-like Summarization Evaluation with ChatGPT](https://arxiv
 By following their paper, we attempt to create an LLM summarization evaluator via GPT-3.5/GPT-4. 
 
 The paper nicely states the problem this way:
->> Evaluating text summarization, like other text generation tasks, is a challenging problem. While human evaluation is considered the gold standard, it is expensive and time-consuming. As a result, automatic evaluation metrics play a crucial role. 
->> 
+> Evaluating text summarization, like other text generation tasks, is a challenging problem. While human evaluation is considered the gold standard, it is expensive and time-consuming. As a result, *automatic evaluation metrics* play a crucial role. 
+> 
 
-But first, let's talk about existing metrics to compare automatic summaries.
+But first, let's talk about these existing *automatic evaluation metrics* to compare summaries.
 (Also, [this blog]() post does an excellent job at explaining the existing metrics)
 
 ### Automatic evaluation metrics
@@ -39,7 +39,7 @@ The obvious downside to ROUGE is that it does not compare *semantics* in summari
 
 #### FactCC and  DAE
 
-### Human evaluation metrics
+### Human/manual evaluation metrics
 
 #### Likert scale scoring
 
