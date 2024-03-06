@@ -1,12 +1,35 @@
+document.addEventListener('DOMContentLoaded', function() {
+    // Extract the AUTH_TOKEN from the URL hash
+    const token = window.location.hash.substring(1); // Remove '#' from the beginning
+    // Populate the token into the form field
+    const tokenField = document.getElementById('tokenField');
+
+    // Populate the token into the form field and adjust field properties if token exists
+    if (token) {
+        tokenField.value = token;
+        tokenField.disabled = true; // Disable the field
+        // TODO: Check if actually valid
+        tokenField.classList.add('is-valid'); // Add success class to change background color
+    }
+});
+
 async function processAndDisplay() {
     // Get the text from the input field
     const text = document.getElementById('textInput').value;
+    const token = document.getElementById('tokenField').value;
+
+    // Ensure the token is present
+    if (!token) {
+        console.error('Token is missing.');
+        return;
+    }
 
     // Send a request to the FastAPI endpoint
-    const response = await fetch('/process-text', {
+    const response = await fetch('/api/ner/process-text', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`, // Use the token from the form
         },
         body: JSON.stringify({ text: text }),
     });
