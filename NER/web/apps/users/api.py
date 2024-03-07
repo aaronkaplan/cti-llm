@@ -29,3 +29,20 @@ def get_token(request, auth_data: AuthSchema):
         return {"token": new_token.token, "expires": new_token.expiry_as_iso8601}
     else:
         return {"error": "Invalid credentials"}, 401
+
+
+class TokenValidationSchema(Schema):
+    token: str
+
+
+@router.post("/validate_token", auth=None) # No authentication required for this endpoint
+def validate_token(request, token_data: TokenValidationSchema):
+    try:
+        # Attempt to authenticate using the provided token
+        user = GlobalAuth().authenticate(request, token_data.token)
+        if user:
+            return {"status": "valid"}
+        else:
+            return {"status": "invalid"}
+    except Token.DoesNotExist:
+        return {"status": "invalid"}

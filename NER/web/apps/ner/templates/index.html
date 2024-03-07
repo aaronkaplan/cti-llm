@@ -17,16 +17,18 @@
                 <div class="col-lg-7">
                     <h2 class="mb-4">Named Entity Extractor</h2>
                     <form id="textProcessForm">
-                        <div class="form-group">
-                            <label for="textInput">Token:</label>
-                            <input class="form-control form-control-sm" id="tokenField" rows="1" name="token" value=""></textarea>
+                            <label for="textInput">Invite code:</label>
+                        <div class="input-group">
+                            <input class="form-control" id="tokenField" rows="1" name="token" value="" aria-describedby="checkTokenButton"></textarea>
+                            <button id="checkTokenButton" type="button" class="btn btn-outline-secondary">Check Token</button>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mt-2">
                             <label for="textInput">Text:</label>
                             <textarea class="form-control" id="textInput" rows="10"></textarea>
                         </div>
-                        <div class="d-grid gap-2 p-2 ">
-                            <button type="button" class="btn btn-outline-success" onclick="processAndDisplay()">Process</button>
+                        <div class="d-grid gap-2 mt-4"> 
+                            <button id="processButton" type="button" class="btn btn-outline-secondary" disabled onclick="processAndDisplay()">
+                                <span id="loadingIndicator" class="spinner-grow spinner-grow-sm invisible" role="status" aria-hidden="true"></span> Process</button>
                         </div>
                     </form>
                     <hr>
