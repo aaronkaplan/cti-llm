@@ -1,0 +1,21 @@
+name,url,file_name,file_url
+MAR-10448362-1.v1 Volt Typhoon,https://www.cisa.gov/news-events/analysis-reports/ar24-038a,MAR-10448362-1.v1 Volt Typhoon,https://www.cisa.gov/sites/default/files/2024-02/MAR-10448362.c1.v1.CLEAR_.pdf
+MAR-10448362-1.v1 Volt Typhoon,https://www.cisa.gov/news-events/analysis-reports/ar24-038a,AR24-038A STIX JSON,https://www.cisa.gov/sites/default/files/2024-02/MAR-10448362.c1.v1.CLEAR_stix2.json
+MAR-10478915-1.v1 Citrix Bleed,https://www.cisa.gov/news-events/analysis-reports/ar23-325a,MAR-10478915-1.v1 Citrix Bleed,https://www.cisa.gov/sites/default/files/2023-11/MAR-10478915.r1.v1.CLEAR_.pdf
+MAR-10478915-1.v1 Citrix Bleed,https://www.cisa.gov/news-events/analysis-reports/ar23-325a,AR23-325A JSON,https://www.cisa.gov/sites/default/files/2023-11/MAR-10478915.r1.v1.CLEAR_stix2.json
+MAR-10430311-1.v1 Multiple Nation-State Threat Actors Exploit CVE-2022-47966 and CVE-2022-42475,https://www.cisa.gov/news-events/analysis-reports/ar23-250a,MAR-10430311-1.v1 Multiple Nation-State Threat Actors Exploit CVE-2022-47966 and CVE-2022-42475,https://www.cisa.gov/sites/default/files/2023-09/MAR-10430311.c1.v1.CLEAR_.pdf
+MAR-10430311-1.v1 Multiple Nation-State Threat Actors Exploit CVE-2022-47966 and CVE-2022-42475,https://www.cisa.gov/news-events/analysis-reports/ar23-250a,AR23-250A JSON,https://www.cisa.gov/sites/default/files/2023-09/MAR-10430311.c1.v1.CLEAR_stix2.json
+"MAR-10454006.r5.v1 SUBMARINE, SKIPJACK, SEASPRAY, WHIRLPOOL, and SALTWATER Backdoors",https://www.cisa.gov/news-events/analysis-reports/ar23-250a-0,AR23-250A_PDF,https://www.cisa.gov/sites/default/files/2023-09/MAR-10454006.r5.v1.CLEAR__0.pdf
+"MAR-10454006.r5.v1 SUBMARINE, SKIPJACK, SEASPRAY, WHIRLPOOL, and SALTWATER Backdoors",https://www.cisa.gov/news-events/analysis-reports/ar23-250a-0,AR23-250A_JSON,https://www.cisa.gov/sites/default/files/2023-09/MAR-10454006.r5.v1.CLEAR_stix2.json
+Infamous Chisel Malware Analysis Report,https://www.cisa.gov/news-events/analysis-reports/ar23-243a,AR23-243A STIX JSON,https://www.cisa.gov/sites/default/files/2023-08/AR23-243A%20Infamous%20Chisel%20Malware%20Analysis%20Report.stix_.json
+Infamous Chisel Malware Analysis Report,https://www.cisa.gov/news-events/analysis-reports/ar23-243a,AR23-243A STIX XML,https://www.cisa.gov/sites/default/files/2023-08/AR23-243A.stix_.xml
+MAR-10459736.r1.v1 WHIRLPOOL Backdoor,https://www.cisa.gov/news-events/analysis-reports/ar23-230a,AR23-230A PDF,https://www.cisa.gov/sites/default/files/2023-08/MAR-10459736.r1.v1.CLEAR_.pdf
+MAR-10459736.r1.v1 WHIRLPOOL Backdoor,https://www.cisa.gov/news-events/analysis-reports/ar23-230a,AR23-230A JSON,https://www.cisa.gov/sites/default/files/2023-08/MAR-10459736.r1.v1.CLEAR_stix2.json
+MAR-10454006.r4.v2 SEASPY and WHIRLPOOL Backdoors,https://www.cisa.gov/news-events/analysis-reports/ar23-221a,AR23-221A PDF,https://www.cisa.gov/sites/default/files/2023-08/MAR-10454006.r4.v2.CLEAR_.pdf
+MAR-10454006.r4.v2 SEASPY and WHIRLPOOL Backdoors,https://www.cisa.gov/news-events/analysis-reports/ar23-221a,AR23-221A JSON,https://www.cisa.gov/sites/default/files/2023-08/MAR-10454006.r4.v2.CLEAR_stix2.json
+MAR-10454006-r1.v2 SUBMARINE Backdoor,https://www.cisa.gov/news-events/analysis-reports/ar23-209a,AR23-209A PDF,https://www.cisa.gov/sites/default/files/2023-07/MAR-10454006.r1.v2.CLEAR_.pdf
+MAR-10454006-r1.v2 SUBMARINE Backdoor,https://www.cisa.gov/news-events/analysis-reports/ar23-209a,AR23-209A JSON,https://www.cisa.gov/sites/default/files/2023-07/MAR-10454006.r1.v2.CLEAR_stix2.json
+MAR-10454006-r2.v1 SEASPY Backdoor,https://www.cisa.gov/news-events/analysis-reports/ar23-209b,AR23-209B PDF,https://www.cisa.gov/sites/default/files/2023-07/MAR-10454006.r2.v1.CLEAR_.pdf
+MAR-10454006-r2.v1 SEASPY Backdoor,https://www.cisa.gov/news-events/analysis-reports/ar23-209b,AR23-209B JSON,https://www.cisa.gov/sites/default/files/2023-07/MAR-10454006.r2.v1.CLEAR_stix2.json
+MAR-10454006-r3.v1 Exploit Payload Backdoor,https://www.cisa.gov/news-events/analysis-reports/ar23-209c,AR23-209C PDF,https://www.cisa.gov/sites/default/files/2023-07/MAR-10454006.r3.v1.CLEAR_.pdf
+MAR-10454006-r3.v1 Exploit Payload Backdoor,https://www.cisa.gov/news-events/analysis-reports/ar23-209c,AR23-209C JSON,https://www.cisa.gov/sites/default/files/2023-07/MAR-10454006.r3.v1.CLEAR_stix2.json
