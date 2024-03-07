@@ -1,0 +1,606 @@
+{
+    "type": "bundle",
+    "id": "bundle--6b85c076-e342-4227-b8c7-15deeb92f277",
+    "objects": [
+        {
+            "type": "identity",
+            "spec_version": "2.1",
+            "id": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created_by_ref": "identity--42ac3c92-60d2-418f-ba8e-838944e6110b",
+            "created": "2023-04-12T17:53:09.646Z",
+            "modified": "2023-04-12T17:53:09.646Z",
+            "name": "GeminiProduction_CMA",
+            "description": "Cybersecurity and Infrastructure Security Agency Production Identity. Code and Media Analysis.",
+            "identity_class": "system",
+            "confidence": 100,
+            "lang": "en",
+            "object_marking_refs": [
+                "marking-definition--bab4a63c-aed9-4cf5-a766-dfca5abac2bb"
+            ]
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--272aca0e-f758-5014-b7e6-75a0305837d5",
+            "hashes": {
+                "MD5": "52d5e2a07cd93c14f1ba170e3a3d6747",
+                "SHA-1": "8acaf9908229871ab33033df7b6a328ec1db56d5",
+                "SHA-256": "98e79f95cf8de8ace88bf223421db5dce303b112152d66ffdf27ebdfcdf967e9",
+                "SHA-512": "317414f28d34f8295aa76cf9f39d4fd42c9bad292458dbd2a19f08a6a8b451e271179b7ef78afd8a2fe92a2e1103d9ef5e220557febf42d91900c268b8d61b69",
+                "SSDEEP": "6:halw5fwmUDXSLp8k7KdXSLp8kukK7va2RK4HvEEIVpmYY:sMULS98QAS98kuZ7XPcK3"
+            },
+            "size": 376,
+            "name": "a.bat",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--5c12b30f-2ece-411a-a2b6-905006a34587",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-09-26T14:42:27.000Z",
+            "modified": "2023-09-26T14:42:27.000Z",
+            "name": "a.bat",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This file is a Windows batch file called a.bat that is used to execute the file called a.exe with the file called a.dll as an argument.  The output is printed to a file named 'z.txt' located in the path C:\\Windows\\Tasks.  Next, a.bat pings the loop back internet protocol (IP) address 127.0.0[.]1 three times. \r\n\r\nThe next command it runs is reg save to save the HKLM\\SYSTEM registry hive into the C:\\Windows\\tasks\\em directory.  Again, a.bat pings the loop back address 127.0.0[.]1 one time before executing another reg save command and saves the HKLM\\SAM registry hive into the C:\\Windows\\Task\\am directory.  Next, a.bat runs three makecab commands to create three Cabinet (.cab) files from the previously mentioned saved registry hives and one file named C:\\Users\\Public\\a.png.  The names of the .cab files are as follows:\r\n\r\n--Start names and paths of .cab files created--\r\nc:\\windows\\tasks\\em.cab\r\nc:\\windows\\tasks\\am.cab\r\nc:\\windows\\tasks\\a.cab\r\n--End names and paths of .cab files created--",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10478915_01 rule_content=rule CISA_10478915_01 : trojan installs_other_components\n{\n\tmeta:\n\t\tauthor = \"CISA Code & Media Analysis\"\n\t\tincident = \"10478915\"\n\t\tdate = \"2023-11-06\"\n\t\tlast_modified = \"20231108_1500\"\n\t\tactor = \"n/a\"\n\t\tfamily = \"n/a\"\n\t\tcapabilities = \"installs-other-components\"\n\t\tmalware_Type = \"trojan\"\n\t\ttool_type = \"information-gathering\"\n\t\tdescription = \"Detects trojan .bat samples\"\n\t\tsha256 = \"98e79f95cf8de8ace88bf223421db5dce303b112152d66ffdf27ebdfcdf967e9\"\n\tstrings:\n\t\t$s1 = { 63 3a 5c 77 69 6e 64 6f 77 73 5c 74 61 73 6b 73 5c 7a 2e 74 78 74 }\n\t\t$s2 = { 72 65 67 20 73 61 76 65 20 68 6b 6c 6d 5c 73 79 73 74 65 6d 20 63 3a 5c 77 69 6e 64 6f 77 73 5c 74 61 73 6b 73 5c 65 6d }\n\t\t$s3 = { 6d 61 6b 65 63 61 62 20 63 3a 5c 75 73 65 72 73 5c 70 75 62 6c 69 63 5c 61 2e 70 6e 67 20 63 3a 5c 77 69 6e 64 6f 77 73 5c 74 61 73 6b 73 5c 61 2e 63 61 62 }\n\tcondition:\n\t\tall of them\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-11-16T14:40:15.681862Z"
+        },
+        {
+            "type": "note",
+            "spec_version": "2.1",
+            "id": "note--e033cb31-fbdb-45b9-bd14-e4301c651e16",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-09-26T14:42:27.000Z",
+            "modified": "2023-09-26T14:42:27.000Z",
+            "content": "This file is a Windows batch file called a.bat that is used to execute the file called a.exe with the file called a.dll as an argument.  The output is printed to a file named 'z.txt' located in the path C:\\Windows\\Tasks.  Next, a.bat pings the loop back internet protocol (IP) address 127.0.0[.]1 three times. \r\n\r\nThe next command it runs is reg save to save the HKLM\\SYSTEM registry hive into the C:\\Windows\\tasks\\em directory.  Again, a.bat pings the loop back address 127.0.0[.]1 one time before executing another reg save command and saves the HKLM\\SAM registry hive into the C:\\Windows\\Task\\am directory.  Next, a.bat runs three makecab commands to create three Cabinet (.cab) files from the previously mentioned saved registry hives and one file named C:\\Users\\Public\\a.png.  The names of the .cab files are as follows:\r\n\r\n--Start names and paths of .cab files created--\r\nc:\\windows\\tasks\\em.cab\r\nc:\\windows\\tasks\\am.cab\r\nc:\\windows\\tasks\\a.cab\r\n--End names and paths of .cab files created--",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "object_refs": [
+                "file--272aca0e-f758-5014-b7e6-75a0305837d5"
+            ]
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--49552673-c8ea-50b9-a196-4663a33bfae8",
+            "hashes": {
+                "MD5": "37f7241963cf8279f7c1d322086a5194",
+                "SHA-1": "ec401ae8ddebef4038cedb65cc0d5ba6c1fdef28",
+                "SHA-256": "e557e1440e394537cca71ed3d61372106c3c70eb6ef9f07521768f23a0974068",
+                "SHA-512": "02c2473b90ba787fea41a9840c7dc9a9869685ca8fdca3521278e0cc986e1797e36552f41f1ac206f5ec5bdc0ac40f13cd36217aea3aad13518e9764ea92c1f7",
+                "SSDEEP": "3072:u8txkT6wDLf/p3ufznQbCQVlvxxV5hmWIh:NgpDbZufLQpjxJ9U"
+            },
+            "size": 145920,
+            "name": "a.exe",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--84aeb797-4299-4ef7-b7ae-57f916ee5721",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-09-26T14:42:27.000Z",
+            "modified": "2023-09-26T14:42:27.000Z",
+            "name": "a.exe",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This file is a 64-bit Windows command-line executable called a.exe that is executed by a.bat.  This file issues the Remote Procedure Call (RPC) ncalrpc:[lsasspirpc] to the RPC end point to provide a file path to the LSASS on the infected machine.  Once the file path is returned, the malware loads the accompanying DLL file called a.dll into the running LSASS process.  If the DLL is correctly loaded, then the malware outputs the message \"[*]success\" in the console.",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10478915_02 rule_content=rule CISA_10478915_02 : trojan installs_other_components\n{\n\tmeta:\n\t\tauthor = \"CISA Code & Media Analysis\"\n\t\tincident = \"10478915\"\n\t\tdate = \"2023-11-06\"\n\t\tlast_modified = \"20231108_1500\"\n\t\tactor = \"n/a\"\n\t\tfamily = \"n/a\"\n\t\tcapabilities = \"installs-other-components\"\n\t\tmalware_type = \"trojan\"\n\t\ttool_type = \"unknown\"\n\t\tdescription = \"Detects trojan PE32 samples\"\n\t\tsha256 = \"e557e1440e394537cca71ed3d61372106c3c70eb6ef9f07521768f23a0974068\"\n\tstrings:\n\t\t$s1 = { 57 72 69 74 65 46 69 6c 65 }\n\t\t$s2 = { 41 70 70 50 6f 6c 69 63 79 47 65 74 50 72 6f 63 65 73 73 54 65 72 6d 69 6e 61 74 69 6f 6e 4d 65 74 68 6f 64 }\n\t\t$s3 = { 6f 70 65 72 61 74 6f 72 20 63 6f 5f 61 77 61 69 74 }\n\t\t$s4 = { 43 6f 6d 70 6c 65 74 65 20 4f 62 6a 65 63 74 20 4c 6f 63 61 74 6f 72 }\n\t\t$s5 = { 64 65 6c 65 74 65 5b 5d }\n\t\t$s6 = { 4e 41 4e 28 49 4e 44 29 }\n\tcondition:\n\t\tuint16(0) == 0x5a4d and pe.imphash() == \"6e8ca501c45a9b85fff2378cffaa24b2\" and pe.size_of_code == 84480 and all of them\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-11-16T14:40:15.71802Z"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--dd1e10de-b0f8-4bcf-861b-76fe980f055e",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-09-26T14:42:27.000Z",
+            "modified": "2023-09-26T14:42:27.000Z",
+            "product": "antiy",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Trojan/Win64.Malgent",
+            "result": "unknown",
+            "sample_ref": "file--49552673-c8ea-50b9-a196-4663a33bfae8"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--a78aa17d-3dd4-483f-ba12-ca977debbc3b",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-09-26T14:42:27.000Z",
+            "modified": "2023-09-26T14:42:27.000Z",
+            "product": "avira",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "TR/Redcap.sbphc",
+            "result": "unknown",
+            "sample_ref": "file--49552673-c8ea-50b9-a196-4663a33bfae8"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--9f5db9a7-9ef7-44f8-9189-553c2cc276f5",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-09-26T14:42:27.000Z",
+            "modified": "2023-09-26T14:42:27.000Z",
+            "product": "bitdefender",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Trojan.GenericKD.70103917",
+            "result": "unknown",
+            "sample_ref": "file--49552673-c8ea-50b9-a196-4663a33bfae8"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--c2abd168-d969-4160-b427-dacaf686f65e",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-09-26T14:42:27.000Z",
+            "modified": "2023-09-26T14:42:27.000Z",
+            "product": "emsisoft",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Trojan.GenericKD.70103917 (B)",
+            "result": "unknown",
+            "sample_ref": "file--49552673-c8ea-50b9-a196-4663a33bfae8"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--4b0f18bd-e09a-408d-9d36-415ca54ad600",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-09-26T14:42:27.000Z",
+            "modified": "2023-09-26T14:42:27.000Z",
+            "product": "ikarus",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Trojan.Win64.Malgent",
+            "result": "unknown",
+            "sample_ref": "file--49552673-c8ea-50b9-a196-4663a33bfae8"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--5e485e81-7e00-42d7-9fc3-5c08690e9206",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-09-26T14:42:27.000Z",
+            "modified": "2023-09-26T14:42:27.000Z",
+            "product": "k7",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Riskware ( 00584baa1 )",
+            "result": "unknown",
+            "sample_ref": "file--49552673-c8ea-50b9-a196-4663a33bfae8"
+        },
+        {
+            "type": "malware",
+            "spec_version": "2.1",
+            "id": "malware--eb408b5c-09b1-449c-9125-d451a8c4ae0d",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-09-26T14:42:27.000Z",
+            "modified": "2023-09-26T14:42:27.000Z",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This file is a 64-bit Windows command-line executable called a.exe that is executed by a.bat.  This file issues the Remote Procedure Call (RPC) ncalrpc:[lsasspirpc] to the RPC end point to provide a file path to the LSASS on the infected machine.  Once the file path is returned, the malware loads the accompanying DLL file called a.dll into the running LSASS process.  If the DLL is correctly loaded, then the malware outputs the message \"[*]success\" in the console.",
+            "malware_types": [
+                "trojan"
+            ],
+            "is_family": false,
+            "sample_refs": [
+                "file--49552673-c8ea-50b9-a196-4663a33bfae8"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--d9f8b89d-305b-4e39-89cc-aad2f4a4a9a1",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-09-26T14:42:27.000Z",
+            "modified": "2023-09-26T14:42:27.000Z",
+            "name": "a.exe",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[file:hashes.'MD5'='37f7241963cf8279f7c1d322086a5194' OR file:hashes.'SHA-1'='ec401ae8ddebef4038cedb65cc0d5ba6c1fdef28' OR file:hashes.'SHA-256'='e557e1440e394537cca71ed3d61372106c3c70eb6ef9f07521768f23a0974068' OR file:hashes.'SHA-512'='02c2473b90ba787fea41a9840c7dc9a9869685ca8fdca3521278e0cc986e1797e36552f41f1ac206f5ec5bdc0ac40f13cd36217aea3aad13518e9764ea92c1f7']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-11-16T14:40:15.726853Z"
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--e2e1a9d3-1363-51a8-a780-23f78f8c917a",
+            "hashes": {
+                "MD5": "206b8b9624ee446cad18335702d6da19",
+                "SHA-1": "364ef2431a8614b4ef9240afa00cd12bfba3119b",
+                "SHA-256": "17a27b1759f10d1f6f1f51a11c0efea550e2075c2c394259af4d3f855bbcc994",
+                "SHA-512": "efa720237bd2773719d7f8e377f63f93d25a691a6f2b8f52ff9ecbd1495c215690d01400d8b7fd9bb79b47de09817d72c82676b67ed70ecf61b002c7d8e9e11d",
+                "SSDEEP": "3072:oCNLoO2N+p5Fm6nfZvD8sLVdN9dtFiokDFMYLcu:j1o/+34YRvDtFiwu"
+            },
+            "size": 106496,
+            "name": "a.dll",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--f6384914-d773-4d7e-b9ed-e1838371c145",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-09-26T14:42:27.000Z",
+            "modified": "2023-09-26T14:42:27.000Z",
+            "name": "a.dll",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This file is a 64-bit Windows DLL called a.dll that is executed by a.bat as a parameter for the file a.exe.  The file a.exe loads this file into the running LSASS process on the infected machine.  The file a.dll calls the Windows API CreateFileW to create a file called a.png in the path C:\\Users\\Public.\r\n\r\nNext, a.dll loads DbgCore.dll then utilizes MiniDumpWriteDump function to dump LSASS process memory to disk.  If successful, the dumped process memory is written to a.png.  Once this is complete, the file a.bat specifies that the file a.png is used to create the cabinet file called a.cab in the path C:\\Windows\\Tasks.",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10478915_03 rule_content=rule CISA_10478915_03 : trojan steals_authentication_credentials credential_exploitation\n{\n\tmeta:\n\t\tauthor = \"CISA Code & Media Analysis\"\n\t\tincident = \"10478915\"\n\t\tdate = \"2023-11-06\"\n\t\tlast_modified = \"20231108_1500\"\n\t\tactor = \"n/a\"\n\t\tfamily = \"n/a\"\n\t\tcapabilities = \"steals-authentication-credentials\"\n\t\tmalware_type = \"trojan\"\n\t\ttool_type = \"credential-exploitation\"\n\t\tdescription = \"Detects trojan DLL samples\"\n\t\tsha256 = \"17a27b1759f10d1f6f1f51a11c0efea550e2075c2c394259af4d3f855bbcc994\"\n\tstrings:\n\t\t$s1 = { 64 65 6c 65 74 65 }\n\t\t$s2 = { 3c 2f 74 72 75 73 74 49 6e 66 6f 3e }\n\t\t$s3 = { 42 61 73 65 20 43 6c 61 73 73 20 44 65 73 63 72 69 70 74 6f 72 20 61 74 20 28 }\n\t\t$s4 = { 49 6e 69 74 69 61 6c 69 7a 65 43 72 69 74 69 63 61 6c 53 65 63 74 69 6f 6e 45 78 }\n\t\t$s5 = { 46 69 6e 64 46 69 72 73 74 46 69 6c 65 45 78 57 }\n\t\t$s6 = { 47 65 74 54 69 63 6b 43 6f 75 6e 74 }\n\tcondition:\n\t\tuint16(0) == 0x5a4d and pe.subsystem == pe.SUBSYSTEM_WINDOWS_CUI and pe.size_of_code == 56832 and all of them\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-11-16T14:40:15.77768Z"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--a13bb548-ac3e-49d3-a5e2-a171d5bc2b43",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-09-26T14:42:27.000Z",
+            "modified": "2023-09-26T14:42:27.000Z",
+            "product": "antiy",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Trojan/Win64.Agent",
+            "result": "unknown",
+            "sample_ref": "file--e2e1a9d3-1363-51a8-a780-23f78f8c917a"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--d5260841-3693-4b4e-b3f8-bffccc184799",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-09-26T14:42:27.000Z",
+            "modified": "2023-09-26T14:42:27.000Z",
+            "product": "bitdefender",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Trojan.GenericKD.70057986",
+            "result": "unknown",
+            "sample_ref": "file--e2e1a9d3-1363-51a8-a780-23f78f8c917a"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--5f447be4-9408-4da0-be20-a0a8ef7a2d5b",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-09-26T14:42:27.000Z",
+            "modified": "2023-09-26T14:42:27.000Z",
+            "product": "eset",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "a variant of Win64/Agent.DAU trojan",
+            "result": "unknown",
+            "sample_ref": "file--e2e1a9d3-1363-51a8-a780-23f78f8c917a"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--d7c20040-9114-4709-b609-d1f230198e1f",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-09-26T14:42:27.000Z",
+            "modified": "2023-09-26T14:42:27.000Z",
+            "product": "emsisoft",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Trojan.GenericKD.70057986 (B)",
+            "result": "unknown",
+            "sample_ref": "file--e2e1a9d3-1363-51a8-a780-23f78f8c917a"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--ac013608-5fc8-4eb4-93db-82e071ee002b",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-09-26T14:42:27.000Z",
+            "modified": "2023-09-26T14:42:27.000Z",
+            "product": "ikarus",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Trojan.Win64.Agent",
+            "result": "unknown",
+            "sample_ref": "file--e2e1a9d3-1363-51a8-a780-23f78f8c917a"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--440260c8-b268-471d-af38-b90279d8cd13",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-09-26T14:42:27.000Z",
+            "modified": "2023-09-26T14:42:27.000Z",
+            "product": "k7",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Trojan ( 005ad67a1 )",
+            "result": "unknown",
+            "sample_ref": "file--e2e1a9d3-1363-51a8-a780-23f78f8c917a"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--47c9fa88-b331-4b2e-86e2-64282aab3fe6",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-09-26T14:42:27.000Z",
+            "modified": "2023-09-26T14:42:27.000Z",
+            "product": "zillya",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Trojan.Agent.Win64.39686",
+            "result": "unknown",
+            "sample_ref": "file--e2e1a9d3-1363-51a8-a780-23f78f8c917a"
+        },
+        {
+            "type": "malware",
+            "spec_version": "2.1",
+            "id": "malware--a1e53fea-9148-4c25-b1c7-da233d87c930",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-09-26T14:42:27.000Z",
+            "modified": "2023-09-26T14:42:27.000Z",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This file is a 64-bit Windows DLL called a.dll that is executed by a.bat as a parameter for the file a.exe.  The file a.exe loads this file into the running LSASS process on the infected machine.  The file a.dll calls the Windows API CreateFileW to create a file called a.png in the path C:\\Users\\Public.\r\n\r\nNext, a.dll loads DbgCore.dll then utilizes MiniDumpWriteDump function to dump LSASS process memory to disk.  If successful, the dumped process memory is written to a.png.  Once this is complete, the file a.bat specifies that the file a.png is used to create the cabinet file called a.cab in the path C:\\Windows\\Tasks.",
+            "malware_types": [
+                "trojan"
+            ],
+            "is_family": false,
+            "sample_refs": [
+                "file--e2e1a9d3-1363-51a8-a780-23f78f8c917a"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--a2ed1e76-995c-4ac2-96f3-361a818d7bf8",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-09-26T14:42:27.000Z",
+            "modified": "2023-09-26T14:42:27.000Z",
+            "name": "a.dll",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[file:hashes.'MD5'='206b8b9624ee446cad18335702d6da19' OR file:hashes.'SHA-1'='364ef2431a8614b4ef9240afa00cd12bfba3119b' OR file:hashes.'SHA-256'='17a27b1759f10d1f6f1f51a11c0efea550e2075c2c394259af4d3f855bbcc994' OR file:hashes.'SHA-512'='efa720237bd2773719d7f8e377f63f93d25a691a6f2b8f52ff9ecbd1495c215690d01400d8b7fd9bb79b47de09817d72c82676b67ed70ecf61b002c7d8e9e11d']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-11-16T14:40:15.784715Z"
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--e5ef55cc-e9d8-585e-baf5-4bebebe966a3",
+            "hashes": {
+                "MD5": "9cff554fa65c1b207da66683b295d4ad",
+                "SHA-1": "b8e74921d7923c808a0423e6e46807c4f0699b6e",
+                "SHA-256": "906602ea3c887af67bcb4531bbbb459d7c24a2efcb866bcb1e3b028a51f12ae6",
+                "SHA-512": "131621770e1899d81e6ff312b3245fe4e4013c36f82818a82fdd319982e6b742a72d906b6fb86c422bb720cd648f927b905a8fc193299ad7d8b3947e766abbd3",
+                "SSDEEP": "48:BpsnUP6s3ceBg5YbFYNXEtUyzzYyUyh0+FVzYA6P+Fqbaug9trYhTHhIQG86w09:BuUP6sseBIOqXEvpcrb89Z2THCQ6P"
+            },
+            "size": 2645,
+            "name": "a.py",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--e9f069da-febc-449d-b923-22793ec3f067",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-09-26T14:42:27.000Z",
+            "modified": "2023-09-26T14:42:27.000Z",
+            "name": "a.py",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This file is a Python script called a.py that attempts to leverage WinRM to establish a session.  The script attempts to authenticate to the remote machine using NT LAN Manager (NTLM) if the keyword \"hashpasswd\" is present.  If the keyword \"hashpasswd\" is not present, then the script attempts to authenticate using basic authentication.  Once a WinRM session is established with the remote machine, the script has the ability to execute command line arguments on the remote machine.  If there is no command specified, then a default command of \u201cwhoami\u201d is run.",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10478915_04 rule_content=rule CISA_10478915_04 : backdoor communicates_with_c2 remote_access\n{\n\tmeta:\n\t\tauthor = \"CISA Code & Media Analysis\"\n\t\tincident = \"10478915\"\n\t\tdate = \"2023-11-06\"\n\t\tlast_modified = \"20231108_1500\"\n\t\tactor = \"n/a\"\n\t\tfamily = \"n/a\"\n\t\tcapabilities = \"communicates-with-c2\"\n\t\tmalware_type = \"backdoor\"\n\t\ttool_type = \"remote-access\"\n\t\tdescription = \"Detects trojan python samples\"\n\t\tsha256 = \"906602ea3c887af67bcb4531bbbb459d7c24a2efcb866bcb1e3b028a51f12ae6\"\n\tstrings:\n\t\t$s1 = { 70 6f 72 74 20 3d 20 34 34 33 20 69 66 20 22 68 74 74 70 73 22 } \n\t\t$s2 = { 6b 77 61 72 67 73 2e 67 65 74 28 22 68 61 73 68 70 61 73 73 77 64 22 29 3a }\n\t\t$s3 = { 77 69 6e 72 6d 2e 53 65 73 73 69 6f 6e 20 62 61 73 69 63 20 65 72 72 6f 72 }\n\t\t$s4 = { 57 69 6e 64 77 6f 73 63 6d 64 2e 72 75 6e 5f 63 6d 64 28 73 74 72 28 63 6d 64 29 29 }\n\tcondition:\n\t\tall of them\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-11-16T14:40:15.805722Z"
+        },
+        {
+            "type": "note",
+            "spec_version": "2.1",
+            "id": "note--f918d5ca-cc36-49fd-a7f9-c88c359ff60b",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-09-26T14:42:27.000Z",
+            "modified": "2023-09-26T14:42:27.000Z",
+            "content": "This file is a Python script called a.py that attempts to leverage WinRM to establish a session.  The script attempts to authenticate to the remote machine using NT LAN Manager (NTLM) if the keyword \"hashpasswd\" is present.  If the keyword \"hashpasswd\" is not present, then the script attempts to authenticate using basic authentication.  Once a WinRM session is established with the remote machine, the script has the ability to execute command line arguments on the remote machine.  If there is no command specified, then a default command of \u201cwhoami\u201d is run.",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "object_refs": [
+                "file--e5ef55cc-e9d8-585e-baf5-4bebebe966a3"
+            ]
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--19d68fb6-3c72-4d79-ae7c-df020e2eba86",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-09-26T14:42:27.000Z",
+            "modified": "2023-09-26T14:42:27.000Z",
+            "relationship_type": "related-to",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "source_ref": "file--272aca0e-f758-5014-b7e6-75a0305837d5",
+            "target_ref": "malware--eb408b5c-09b1-449c-9125-d451a8c4ae0d"
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--997b86ca-d0bc-452c-8b53-9752c28d86be",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-09-26T14:42:27.000Z",
+            "modified": "2023-09-26T14:42:27.000Z",
+            "relationship_type": "related-to",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "source_ref": "file--272aca0e-f758-5014-b7e6-75a0305837d5",
+            "target_ref": "malware--a1e53fea-9148-4c25-b1c7-da233d87c930"
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--f368361c-f410-4d80-acc3-febe5b8dc405",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-09-26T14:42:27.000Z",
+            "modified": "2023-09-26T14:42:27.000Z",
+            "relationship_type": "related-to",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "source_ref": "malware--eb408b5c-09b1-449c-9125-d451a8c4ae0d",
+            "target_ref": "malware--a1e53fea-9148-4c25-b1c7-da233d87c930"
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--cd4e8b0e-e33c-491c-852b-9ed58f983785",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-09-26T14:42:27.000Z",
+            "modified": "2023-09-26T14:42:27.000Z",
+            "relationship_type": "related-to",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "source_ref": "malware--eb408b5c-09b1-449c-9125-d451a8c4ae0d",
+            "target_ref": "file--272aca0e-f758-5014-b7e6-75a0305837d5"
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--dbeb7c72-150d-4f90-a4d6-efcd58411930",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-09-26T14:42:27.000Z",
+            "modified": "2023-09-26T14:42:27.000Z",
+            "relationship_type": "related-to",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "source_ref": "malware--a1e53fea-9148-4c25-b1c7-da233d87c930",
+            "target_ref": "malware--eb408b5c-09b1-449c-9125-d451a8c4ae0d"
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--6d82ee97-9d7c-41e5-a4a1-14105c89f093",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-09-26T14:42:27.000Z",
+            "modified": "2023-09-26T14:42:27.000Z",
+            "relationship_type": "related-to",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "source_ref": "malware--a1e53fea-9148-4c25-b1c7-da233d87c930",
+            "target_ref": "file--272aca0e-f758-5014-b7e6-75a0305837d5"
+        },
+        {
+            "type": "report",
+            "spec_version": "2.1",
+            "id": "report--124008c0-e519-4f1d-b1fd-bd42bfae2198",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-09-26T14:42:27.000Z",
+            "modified": "2023-11-16T14:40:15.82912Z",
+            "name": "MAR-10478915.r1.v1",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "Responding to the recently disclosed CVE-2023-4966, affecting Citrix NetScaler ADC and NetScaler Gateway appliances, CISA received four files for analysis that show files being used to save registry hives, dump the Local Security Authority Subsystem Service (LSASS) process memory to disk, and attempts to establish sessions via Windows Remote Management (WinRM).  The files include:\r\n\r\n\t\u2022\tWindows Batch file (.bat)\r\n\t\u2022\tWindows Executable (.exe)\r\n\t\u2022\tWindows Dynamic Link Library (.dll)\r\n\t\u2022\tPython Script (.py)\r\n\r\n",
+            "report_types": [
+                "observed-data",
+                "malware",
+                "indicator"
+            ],
+            "published": "2023-09-26T14:42:27Z",
+            "object_refs": [
+                "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+                "file--272aca0e-f758-5014-b7e6-75a0305837d5",
+                "indicator--5c12b30f-2ece-411a-a2b6-905006a34587",
+                "note--e033cb31-fbdb-45b9-bd14-e4301c651e16",
+                "file--49552673-c8ea-50b9-a196-4663a33bfae8",
+                "indicator--84aeb797-4299-4ef7-b7ae-57f916ee5721",
+                "malware-analysis--dd1e10de-b0f8-4bcf-861b-76fe980f055e",
+                "malware-analysis--a78aa17d-3dd4-483f-ba12-ca977debbc3b",
+                "malware-analysis--9f5db9a7-9ef7-44f8-9189-553c2cc276f5",
+                "malware-analysis--c2abd168-d969-4160-b427-dacaf686f65e",
+                "malware-analysis--4b0f18bd-e09a-408d-9d36-415ca54ad600",
+                "malware-analysis--5e485e81-7e00-42d7-9fc3-5c08690e9206",
+                "malware--eb408b5c-09b1-449c-9125-d451a8c4ae0d",
+                "indicator--d9f8b89d-305b-4e39-89cc-aad2f4a4a9a1",
+                "file--e2e1a9d3-1363-51a8-a780-23f78f8c917a",
+                "indicator--f6384914-d773-4d7e-b9ed-e1838371c145",
+                "malware-analysis--a13bb548-ac3e-49d3-a5e2-a171d5bc2b43",
+                "malware-analysis--d5260841-3693-4b4e-b3f8-bffccc184799",
+                "malware-analysis--5f447be4-9408-4da0-be20-a0a8ef7a2d5b",
+                "malware-analysis--d7c20040-9114-4709-b609-d1f230198e1f",
+                "malware-analysis--ac013608-5fc8-4eb4-93db-82e071ee002b",
+                "malware-analysis--440260c8-b268-471d-af38-b90279d8cd13",
+                "malware-analysis--47c9fa88-b331-4b2e-86e2-64282aab3fe6",
+                "malware--a1e53fea-9148-4c25-b1c7-da233d87c930",
+                "indicator--a2ed1e76-995c-4ac2-96f3-361a818d7bf8",
+                "file--e5ef55cc-e9d8-585e-baf5-4bebebe966a3",
+                "indicator--e9f069da-febc-449d-b923-22793ec3f067",
+                "note--f918d5ca-cc36-49fd-a7f9-c88c359ff60b",
+                "relationship--19d68fb6-3c72-4d79-ae7c-df020e2eba86",
+                "relationship--997b86ca-d0bc-452c-8b53-9752c28d86be",
+                "relationship--f368361c-f410-4d80-acc3-febe5b8dc405",
+                "relationship--cd4e8b0e-e33c-491c-852b-9ed58f983785",
+                "relationship--dbeb7c72-150d-4f90-a4d6-efcd58411930",
+                "relationship--6d82ee97-9d7c-41e5-a4a1-14105c89f093"
+            ]
+        }
+    ]
+}

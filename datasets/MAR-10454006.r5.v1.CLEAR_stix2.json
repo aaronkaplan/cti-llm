@@ -1,0 +1,629 @@
+{
+    "type": "bundle",
+    "id": "bundle--f18c06a3-4e3f-4d30-83de-48be70be81fb",
+    "objects": [
+        {
+            "type": "identity",
+            "spec_version": "2.1",
+            "id": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created_by_ref": "identity--42ac3c92-60d2-418f-ba8e-838944e6110b",
+            "created": "2023-04-12T17:53:09.646Z",
+            "modified": "2023-04-12T17:53:09.646Z",
+            "name": "GeminiProduction_CMA",
+            "description": "Cybersecurity and Infrastructure Security Agency Production Identity. Code and Media Analysis.",
+            "identity_class": "system",
+            "confidence": 100,
+            "lang": "en",
+            "object_marking_refs": [
+                "marking-definition--bab4a63c-aed9-4cf5-a766-dfca5abac2bb"
+            ]
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--5d97ca80-8d58-5a92-814b-256a32549eec",
+            "hashes": {
+                "MD5": "9fdc1dc99bc8184ee410880427dba89c",
+                "SHA-1": "be570775552f937d8588bceb3e2cbb0c18408fc1",
+                "SHA-256": "4183edae732506a18b5c802cbf0a471a77c3f1e4336a32ccb4958671e404493c",
+                "SHA-512": "2bb94fdfe31a464c63b8cd726f6ba1c3b18da538221d5bae943dfb03ec353a41826bdcb007bc2b7dfeb76afe619aa8ce078808e9b30079a6f947cce8ace891ff",
+                "SSDEEP": "3::"
+            },
+            "size": 3894,
+            "name": "machineecho_-n_Y2htb2QgK3ggL3Jvb3QvbWFjKgpzaCAvcm9vdC9tYWNoKlxgKgoK___base64_-d__sh_-slack",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "note",
+            "spec_version": "2.1",
+            "id": "note--3dbb81a0-caeb-4749-9dc0-385bfa65fd9e",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "content": "This file is a SUBMARINE artifact, an empty text/data file.  The name of the file is designed to exploit a vulnerability on the target environment where the base64 string within the file name will be executed on the Linux shell. The code in Figure 1 will change the permissions of any directory/file/path with that begins with '/root/mac' to executable. Then, anything containing the string 'mach*' in the directory/file/path '/root/mach' are executed.",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "object_refs": [
+                "file--5d97ca80-8d58-5a92-814b-256a32549eec"
+            ]
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--838a5a98-f2fc-5eb0-8356-76eb2df2070b",
+            "hashes": {
+                "MD5": "ad1dc51a66201689d442499f70b78dea",
+                "SHA-1": "c71bccdc006cca700257a69ed227e0cb1bc071ed",
+                "SHA-256": "63788797919985d0e567cf9133ad2ab7a1c415e81598dc07c0bfa3a1566aeb90",
+                "SHA-512": "3258af057858ef0930a48771869871736bfb866ef740e81f2518c0d4c217b5c0c5f8eb06985b72a3762ce011458245940be6bb1d4907d2ed0f4e18886bbc48c3",
+                "SSDEEP": "12:HA4SKFBMygPZr7NBiC+c6jaY7PCbozFJG:thFBMZr7NBazjTzCbozG"
+            },
+            "size": 530,
+            "name": "get_fs_info.pl",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--afb30e8b-d52a-45f7-b273-9533ff5a1882",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "name": "get_fs_info.pl",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact, belonging to the SKIPJACK malware family, is a Perl script that enumerates file system information. This script first checks the file system by opening '/etc/fstab.main/,' then checks the value against the array 'ARGV[0]', which perl automatically provides to hold all values from the command line in. The script will print either 'xfs' or hda depending on the type of file system it finds. The script contains a second if statement that gathers more information about the type of file system. This second if statement contains the regular expression '/^\\/dev\\/(\\S+)\\d+\\s+\\/\\s+(\\S+)/,'  which translates to '/etc/fstab.' The script uses this second half of the code to check for file system type or information about the partition, which it then prints based on the value of '$requested_data.'",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10454006_11 rule_content=rule CISA_10454006_11 : trojan\n{\n\tmeta:\n\t\tauthor = \"CISA Code & Media Analysis\"\n\t\tincident = \"10454006\"\n\t\tdate = \"2023-07-20\"\n\t\tlast_modified = \"20230726_1700\"\n\t\tactor = \"n/a\"\n\t\tfamily = \"n/a\"\n\t\tCapabilities = \"n/a\"\n\t\tMalware_Type = \"trojan\"\n\t\tTool_Type = \"unknown\"\n\t\tdescription = \"Detects perl script linked to SKIPJACK backdoor samples\"\n\t\tSHA256 = \"63788797919985d0e567cf9133ad2ab7a1c415e81598dc07c0bfa3a1566aeb90\"\n\tstrings:\n\t\t$s1 = { 2f 65 74 63 2f 66 73 74 61 62 2e 6d 61 69 6e }\n\t\t$s2 = { 28 3c 46 53 54 41 42 3e 29 }\n\t\t$s3 = { 6d 79 20 28 24 70 61 72 74 69 74 69 6f 6e 2c 20 24 66 73 5f 74 79 70 65 29 }\n\t\t$s4 = { 70 72 69 6e 74 20 24 66 73 5f 74 79 70 65 }\n\t\t$s5 = { 70 72 69 6e 74 20 24 70 61 72 74 69 74 69 6f 6e }\n\tcondition:\n\t\tall of them\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-09-05T22:40:38.881252Z"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--b15e0588-766b-48ac-92bf-8507fdf51e18",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "sophos",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Unavailable (production)",
+            "result": "unknown",
+            "sample_ref": "file--838a5a98-f2fc-5eb0-8356-76eb2df2070b"
+        },
+        {
+            "type": "note",
+            "spec_version": "2.1",
+            "id": "note--b5ba47f6-bfea-4fc8-a846-366801f3ac96",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "content": "This artifact, belonging to the SKIPJACK malware family, is a Perl script that enumerates file system information. This script first checks the file system by opening '/etc/fstab.main/,' then checks the value against the array 'ARGV[0]', which perl automatically provides to hold all values from the command line in. The script will print either 'xfs' or hda depending on the type of file system it finds. The script contains a second if statement that gathers more information about the type of file system. This second if statement contains the regular expression '/^\\/dev\\/(\\S+)\\d+\\s+\\/\\s+(\\S+)/,'  which translates to '/etc/fstab.' The script uses this second half of the code to check for file system type or information about the partition, which it then prints based on the value of '$requested_data.'",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "object_refs": [
+                "file--838a5a98-f2fc-5eb0-8356-76eb2df2070b"
+            ]
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--423b6e9c-bf6b-5198-8481-aee8e57a23fa",
+            "hashes": {
+                "MD5": "666da297066a2596cacb13b3da9572bf",
+                "SHA-1": "64b337d7e82c82a4b40c8cb88fbc651929995eef",
+                "SHA-256": "44e1fbe71c9fcf9881230cb924987e0e615a7504c3c04d44ae157f07405e3598",
+                "SHA-512": "4881a79d95bf83190be1542d7b26c7b1dee5eece1a689dc81bf2b661b43b3d724703dc4a48f824d8d960e2a480bcbea2e4007eb19023ee1bf329d993009deffc",
+                "SSDEEP": "96:JnJKszX3Z+p351GUw5FbsNmnwdx8sMEFoiKe3:JnJjzZ+j14FIEnqxjMEKQ"
+            },
+            "size": 3930,
+            "name": "mod_sender.lua",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--8b17034f-18ac-4434-8e87-49db4b974a54",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "name": "mod_sender.lua",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact is a trojanized Lua module that has been identified as a \"SEASPRAY\" variant. SEASPRAY registers an event handler for all incoming email attachments. This variant checks for the sender and the string \u201cobt\u201d, which is hard coded in the lua file. If that string is found the malware uses os.execute to execute the file \u201csaslautchd\u201d, see Figure 3.",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10454006_12 rule_content=rule CISA_10454006_12 : SEASPRAY trojan evades_av\n{\n\tmeta:\n\t\tauthor = \"CISA Code & Media Analysis\"\n\t\tincident = \"10454006\"\n\t\tdate = \"2023-08-23\"\n\t\tlast_modified = \"20230905_1500\"\n\t\tactor = \"n/a\"\n\t\tfamily = \"SEASPRAY\"\n\t\tcapabilities = \"evades-av\"\n\t\tmalware_type = \"trojan\"\n\t\ttool_type = \"unknown\"\n\t\tdescription = \"Detects SEASPRAY samples\"\n\t\tsha256 = \"44e1fbe71c9fcf9881230cb924987e0e615a7504c3c04d44ae157f07405e3598\"\n\tstrings:\n\t\t$s1 = { 6f 73 2e 65 78 65 63 75 74 65 28 27 73 61 73 6c 61 75 74 63 68 64 27 }\n\t\t$s2 = { 73 65 6e 64 65 72 }\n\t\t$s3 = { 73 74 72 69 6e 67 2e 66 69 6e 64 }\n\t\t$s4 = { 73 74 72 69 6e 67 2e 6c 6f 77 65 72 }\n\t\t$s5 = { 62 6c 6f 63 6b 2f 61 63 63 65 70 74 }\n\t\t$s6 = { 72 65 74 75 72 6e 20 41 63 74 69 6f 6e 2e 6e 65 77 7b }\n\t\t$s7 = { 4c 69 73 74 65 6e 65 72 2e 6e 65 77 7b }\n\tcondition:\n\t\tfilesize < 10KB and all of them\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-09-05T22:40:38.900771Z"
+        },
+        {
+            "type": "note",
+            "spec_version": "2.1",
+            "id": "note--8ec7df4b-729f-45af-9869-8705e8653f8d",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "content": "This artifact is a trojanized Lua module that has been identified as a \"SEASPRAY\" variant. SEASPRAY registers an event handler for all incoming email attachments. This variant checks for the sender and the string \u201cobt\u201d, which is hard coded in the lua file. If that string is found the malware uses os.execute to execute the file \u201csaslautchd\u201d, see Figure 3.",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "object_refs": [
+                "file--423b6e9c-bf6b-5198-8481-aee8e57a23fa"
+            ]
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--b9899d45-ae73-5e39-9ce0-fa384867960a",
+            "hashes": {
+                "MD5": "436587bad5e061a7e594f9971d89c468",
+                "SHA-1": "cf22082532d4d6387ea1c9bc4dc5b255aa7a0290",
+                "SHA-256": "9f04525835f998d454ed68cfc7fcb6b0907f2130ae6c6ab7495d41aa36ad8ccf",
+                "SHA-512": "825ba4c46f1f9c5a4f2ab3ccfd8e3ec02f50f749776df783a085aff89cb19ed983b07ecd0703c74a0474bec56e918ada002b683dec1228f18181a91b0b339234",
+                "SSDEEP": "98304:J8sPi2iUKJYO0OAgikIn9FCJM+rXKZ9ldvVkhyfMuG9vU:xVUildN0uX"
+            },
+            "size": 5034648,
+            "name": "saslautchd",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--025e892a-5083-47e8-a330-7cc37a714fe4",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "name": "saslautchd",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact, belonging to the WHIRLPOOL malware family,  is a 64-bit Linux Executable and Linkable Format (ELF) file.  The malware checks processor hardware and architecture, to include if the target system uses AMD or Intel, see Figure 4.  Figure 5 shows the malware determining the kernel version by invoking the 'uname' command line function and exploring the contents of the '/proc/sys/kernel/osrelease' file. Figures 6, 7, and 8 show the malware's capacity to connect to a remote address, and then create a new process with the command line argument '/bin/sh.' The connection to a remote host and the invocation of a bash shell are the two components/phases used by reverse shells. Figure 9 shows the malware's capacity to interact with the Name Service Cache Daemon by creating and connecting to a Unix socket at ./var/run/nscd/socket.' This socket can cache Domain Name System (DNS) requests. Rather than listening on port 53, it listens on the socket file itself, for data from other programs/processes. Figure 10 shows the malware's capacity to perform DNS resolution, using the system call 'sys_getpeername.' The malware accesses the target's environment variables.  See below list below:\r\n\r\n--Begin Accessed Environment Variables--\r\nGCONV_PATH\r\nGETCONF_DIR\r\nHTTPS_PROXY\r\nHTTP_PROXY\r\nLANG\r\nLANGUAGE\r\nLC_ALL\r\nLC_COLLATE\r\nLD_WARN\r\nLD_LIBRARY_PATH\r\nLD_BIND_NOW\r\nLD_BIND_NOT\r\nLD_DYNAMIC_WEAK\r\nLD_PROFILE_OUTPUT\r\nLD_ASSUME_KERNEL\r\nLOCALDOMAIN\r\nNO_PROXY\r\nOPENSSL_CONF\r\nOPENSSL_ia32cap\r\nOUTPUT_CHARSET\r\nPOSIX\r\nTZ\r\nTZDIR\r\nRESOLV_ADD_TRIM_DOMAINS\r\nRESOLV_HOST_CONF\r\nRESOLV_MULTI\r\nRESOLV_OVERRIDE_TRIM_DOMAINS\r\nRES_OPTIONS\r\nRESOLV_REORDER\r\n--End Accessed Environment Variables--\r\n\r\nThe malware further access the following files at runtime:\r\n\r\n--Begin Accessed Files--\r\n/etc/aliases\r\n/etc/ethers\r\n/etc/group\r\n/etc/hosts\r\n/etc/networks\r\n/etc/protocols\r\n/etc/passwd\r\n/etc/rpc\r\n/etc/services\r\n/etc/gshadow\r\n/etc/shadow\r\n/etc/netgroup\r\n/dev/full\r\n/dev/urandom\r\n/dev/random\r\n/proc/sys/kernel/rtsig-\r\n/proc/sys/kernel/ngroups_max\r\n/sys/devices/system/cpu/online\r\n/proc/stat\r\n/proc/self/fd\r\n-- End Accessed Files--",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10452108_02 rule_content=rule CISA_10452108_02 : WHIRLPOOL backdoor communicates_with_c2 installs_other_components\n{\n\tmeta:\n\t\tauthor = \"CISA Code & Media Analysis\"\n\t\tincident = \"10452108\"\n\t\tdate = \"2023-06-20\"\n\t\tlast_modified = \"20230804_1730\"\n\t\tactor = \"n/a\"\n\t\tfamily = \"WHIRLPOOL\"\n\t\tCapabilities = \"communicates-with-c2 installs-other-components\"\n\t\tMalware_Type = \"backdoor\"\n\t\tTool_Type = \"unknown\"\n\t\tdescription = \"Detects malicious Linux WHIRLPOOL samples\"\n\t\tsha256_1 = \"83ca636253fd1eb898b244855838e2281f257bbe8ead428b69528fc50b60ae9c\"\n\t\tsha256_2 = \"8849a3273e0362c45b4928375d196714224ec22cb1d2df5d029bf57349860347\"\n\tstrings:\n\t\t$s0 = { 65 72 72 6f 72 20 2d 31 20 65 78 69 74 }\n\t\t$s1 = { 63 72 65 61 74 65 20 73 6f 63 6b 65 74 20 65 72 72 6f 72 3a 20 25 73 28 65 72 72 6f 72 3a 20 25 64 29 }\n\t\t$s2 = { c7 00 20 32 3e 26 66 c7 40 04 31 00 }\n\t\t$a3 = { 70 6c 61 69 6e 5f 63 6f 6e 6e 65 63 74 }\n\t\t$a4 = { 63 6f 6e 6e 65 63 74 20 65 72 72 6f 72 3a 20 25 73 28 65 72 72 6f 72 3a 20 25 64 29 }\n\t\t$a5 = { 73 73 6c 5f 63 6f 6e 6e 65 63 74 }\n\tcondition:\n\t\tuint32(0) == 0x464c457f and 4 of them\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-09-05T22:40:38.919394Z"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--ee2feaf1-5182-45ff-b29b-c0355ace9fd7",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "antiy",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Trojan/Linux.SAgnt",
+            "result": "unknown",
+            "sample_ref": "file--b9899d45-ae73-5e39-9ce0-fa384867960a"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--cb655166-d9c4-4ebd-926c-0fcb5e7f777a",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "avira",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "LINUX/Whirlpool.A",
+            "result": "unknown",
+            "sample_ref": "file--b9899d45-ae73-5e39-9ce0-fa384867960a"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--bc065a47-7c17-4060-a5b8-bfd46a87a985",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "bitdefender",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Trojan.Generic.34035237",
+            "result": "unknown",
+            "sample_ref": "file--b9899d45-ae73-5e39-9ce0-fa384867960a"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--fb855070-1f71-44d5-89d9-b7cf5c294b51",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "eset",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Linux/WhirlPool.A trojan",
+            "result": "unknown",
+            "sample_ref": "file--b9899d45-ae73-5e39-9ce0-fa384867960a"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--e1553517-f07b-4338-862a-52c185ad6d24",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "emsisoft",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Trojan.Generic.34035237 (B)",
+            "result": "unknown",
+            "sample_ref": "file--b9899d45-ae73-5e39-9ce0-fa384867960a"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--477228f9-a3fb-4d73-ba00-c99ec7cbd391",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "mcafee",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Generic trojan.xj",
+            "result": "unknown",
+            "sample_ref": "file--b9899d45-ae73-5e39-9ce0-fa384867960a"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--81da5102-32e4-4333-b75b-334b2d65329f",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "sophos",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Linux/Agnt-BS",
+            "result": "unknown",
+            "sample_ref": "file--b9899d45-ae73-5e39-9ce0-fa384867960a"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--2c71b57d-a825-47fa-b40e-5a5d2e6f64ec",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "varist",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "E64/Agent.FP",
+            "result": "unknown",
+            "sample_ref": "file--b9899d45-ae73-5e39-9ce0-fa384867960a"
+        },
+        {
+            "type": "malware",
+            "spec_version": "2.1",
+            "id": "malware--54014492-05d5-4735-a1dc-30bdada6f80b",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact, belonging to the WHIRLPOOL malware family,  is a 64-bit Linux Executable and Linkable Format (ELF) file.  The malware checks processor hardware and architecture, to include if the target system uses AMD or Intel, see Figure 4.  Figure 5 shows the malware determining the kernel version by invoking the 'uname' command line function and exploring the contents of the '/proc/sys/kernel/osrelease' file. Figures 6, 7, and 8 show the malware's capacity to connect to a remote address, and then create a new process with the command line argument '/bin/sh.' The connection to a remote host and the invocation of a bash shell are the two components/phases used by reverse shells. Figure 9 shows the malware's capacity to interact with the Name Service Cache Daemon by creating and connecting to a Unix socket at ./var/run/nscd/socket.' This socket can cache Domain Name System (DNS) requests. Rather than listening on port 53, it listens on the socket file itself, for data from other programs/processes. Figure 10 shows the malware's capacity to perform DNS resolution, using the system call 'sys_getpeername.' The malware accesses the target's environment variables.  See below list below:\r\n\r\n--Begin Accessed Environment Variables--\r\nGCONV_PATH\r\nGETCONF_DIR\r\nHTTPS_PROXY\r\nHTTP_PROXY\r\nLANG\r\nLANGUAGE\r\nLC_ALL\r\nLC_COLLATE\r\nLD_WARN\r\nLD_LIBRARY_PATH\r\nLD_BIND_NOW\r\nLD_BIND_NOT\r\nLD_DYNAMIC_WEAK\r\nLD_PROFILE_OUTPUT\r\nLD_ASSUME_KERNEL\r\nLOCALDOMAIN\r\nNO_PROXY\r\nOPENSSL_CONF\r\nOPENSSL_ia32cap\r\nOUTPUT_CHARSET\r\nPOSIX\r\nTZ\r\nTZDIR\r\nRESOLV_ADD_TRIM_DOMAINS\r\nRESOLV_HOST_CONF\r\nRESOLV_MULTI\r\nRESOLV_OVERRIDE_TRIM_DOMAINS\r\nRES_OPTIONS\r\nRESOLV_REORDER\r\n--End Accessed Environment Variables--\r\n\r\nThe malware further access the following files at runtime:\r\n\r\n--Begin Accessed Files--\r\n/etc/aliases\r\n/etc/ethers\r\n/etc/group\r\n/etc/hosts\r\n/etc/networks\r\n/etc/protocols\r\n/etc/passwd\r\n/etc/rpc\r\n/etc/services\r\n/etc/gshadow\r\n/etc/shadow\r\n/etc/netgroup\r\n/dev/full\r\n/dev/urandom\r\n/dev/random\r\n/proc/sys/kernel/rtsig-\r\n/proc/sys/kernel/ngroups_max\r\n/sys/devices/system/cpu/online\r\n/proc/stat\r\n/proc/self/fd\r\n-- End Accessed Files--",
+            "malware_types": [
+                "trojan"
+            ],
+            "is_family": false,
+            "sample_refs": [
+                "file--b9899d45-ae73-5e39-9ce0-fa384867960a"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--6fa1753f-2b61-4140-9983-8098132224f7",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "name": "saslautchd",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[file:hashes.'MD5'='436587bad5e061a7e594f9971d89c468' OR file:hashes.'SHA-1'='cf22082532d4d6387ea1c9bc4dc5b255aa7a0290' OR file:hashes.'SHA-256'='9f04525835f998d454ed68cfc7fcb6b0907f2130ae6c6ab7495d41aa36ad8ccf' OR file:hashes.'SHA-512'='825ba4c46f1f9c5a4f2ab3ccfd8e3ec02f50f749776df783a085aff89cb19ed983b07ecd0703c74a0474bec56e918ada002b683dec1228f18181a91b0b339234']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-09-05T22:40:38.927627Z"
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--b5a1b743-933d-549e-9a58-a7a4307076d6",
+            "hashes": {
+                "MD5": "4ec4ceda84c580054f191caa09916c68",
+                "SHA-1": "6505513ca06db10b17f6d4792c30a53733309231",
+                "SHA-256": "caab341a35badbc65046bd02efa9ad2fe2671eb80ece0f2fa9cf70f5d7f4bedc",
+                "SHA-512": "c61493cfa3c6c41520b6ef608da9398b4fa6a7805293bc98d628335f536509d95585d42f93b8edeabf971390e874c5291b552afe66d72651839a295b76c42380",
+                "SSDEEP": "24576:25gY/a9MQrLO457KIRTQvAunkEKkb8EHA4pje0ET1Nyb+YpYcNvwoQItHzUMDb:25b8y45V2IVEHASjezfYHwoDzUM"
+            },
+            "size": 1668232,
+            "name": "mod_rft.so",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--faa8b707-d7f3-47da-a3f8-9f523cc7a390",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "name": "mod_rft.so",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact, belonging to the SALTWATER malware family,  is a 32-bit Linux Shared Object (.so) file.  The malware can intake data over the network, using a previously established socket, with the 'recv' function as shown in Figure 11. Figure 12 shows the malware creating a new thread, within the calling process.  This is thread injection and it can inject two different functions. Figure 13 shows the first function that can perform DNS resolution. Figures 14 and 15 show the second function.  The second function can establish communications, over the network, using a TLS version 1 connection. Lastly, using 'popen', the malware can execute any shell command with the same privileges as its calling process.",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10454006_13 rule_content=rule CISA_10454006_13 : SALTWATER backdoor exploit_kit communicates_with_c2 determines_c2_server hides_executing_code exploitation\n{\n\tmeta:\n\t\tauthor = \"CISA Code & Media Analysis\"\n\t\tincident = \"10454006\"\n\t\tdate = \"2023-08-10\"\n\t\tlast_modified = \"20230905_1500\"\n\t\tactor = \"n/a\"\n\t\tfamily = \"SALTWATER\"\n\t\tcapabilities = \"communicates-with-c2 determines-c2-server hides-executing-code\"\n\t\tmalware_type = \"backdoor exploit-kit\"\n\t\ttool_type = \"exploitation\"\n\t\tdescription = \"Detects SALTWATER samples\"\n\t\tsha256 = \"caab341a35badbc65046bd02efa9ad2fe2671eb80ece0f2fa9cf70f5d7f4bedc\"\n\tstrings:\n\t\t$s1 = { 70 74 68 72 65 61 64 5f 63 72 65 61 74 65 }\n\t\t$s2 = { 67 65 74 68 6f 73 74 62 79 6e 61 6d 65 }\n\t\t$s3 = { 54 72 61 6d 70 6f 6c 69 6e 65 }\n\t\t$s4 = { 64 73 65 6c 64 73 }\n\t\t$s5 = { 25 30 38 78 20 28 25 30 32 64 29 20 25 2d 32 34 73 20 25 73 25 73 25 73 0a }\n\t\t$s6 = { 45 6e 74 65 72 20 6f 75 73 63 64 6f 6f 65 7c 70 72 65 64 61 72 65 28 25 70 2c 20 25 70 2c 20 25 70 29 }\n\t\t$s7 = { 45 6e 74 65 72 20 61 75 74 63 63 6f 6f 71 38 63 72 65 61 74 65 }\n\t\t$s8 = { 74 6e 6f 72 6f 74 65 63 74 6a 73 65 6d 6f 72 79 }\n\t\t$s9 = { 56 55 43 4f 4d 49 53 53 }\n\t\t$s10 = { 56 43 4f 4d 49 53 53 }\n\t\t$s11 = { 55 43 4f 4d 49 53 44 }\n\t\t$s12 = { 41 45 53 4b 45 59 47 45 4e 41 53 53 49 53 54 }\n\t\t$s13 = { 46 55 43 4f 4d 50 50 }\n\t\t$s14 = { 55 43 4f 4d 49 53 53 }\n\tcondition:\n\t\tuint16(0) == 0x457f and filesize < 1800KB and 8 of them\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-09-05T22:40:38.971618Z"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--f75cbe0a-559e-49cb-a943-4313f5b8be09",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "ahnlab",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Malware/Linux.Agent",
+            "result": "unknown",
+            "sample_ref": "file--b5a1b743-933d-549e-9a58-a7a4307076d6"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--ae36c0db-68a9-49a9-b894-31980a96aefd",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "antiy",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Trojan/Linux.SaltWater.b",
+            "result": "unknown",
+            "sample_ref": "file--b5a1b743-933d-549e-9a58-a7a4307076d6"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--ca9788ce-fe03-4f53-abf8-55c75f63bebd",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "bitdefender",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Trojan.Linux.Generic.313776",
+            "result": "unknown",
+            "sample_ref": "file--b5a1b743-933d-549e-9a58-a7a4307076d6"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--218aade7-baa8-431a-b74d-3f549fe0cc1c",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "eset",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "a variant of Linux/SaltWater.B trojan",
+            "result": "unknown",
+            "sample_ref": "file--b5a1b743-933d-549e-9a58-a7a4307076d6"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--3557d7eb-2b08-477f-811e-efc9db3cafe2",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "emsisoft",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Trojan.Linux.Generic.313776 (B)",
+            "result": "unknown",
+            "sample_ref": "file--b5a1b743-933d-549e-9a58-a7a4307076d6"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--5c23f4eb-eb70-413b-822a-de4c7a04a59b",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "mcafee",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Generic trojan.xj",
+            "result": "unknown",
+            "sample_ref": "file--b5a1b743-933d-549e-9a58-a7a4307076d6"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--1ab7c53f-f9d6-47a9-9a0d-ea646281fecc",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "quickheal",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "ELF.WhirlPool.48041.GC",
+            "result": "unknown",
+            "sample_ref": "file--b5a1b743-933d-549e-9a58-a7a4307076d6"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--51508fcb-8b38-41e6-9cbb-10f2c04bd4bc",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "sophos",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Linux/Agnt-BS",
+            "result": "unknown",
+            "sample_ref": "file--b5a1b743-933d-549e-9a58-a7a4307076d6"
+        },
+        {
+            "type": "malware",
+            "spec_version": "2.1",
+            "id": "malware--4902be36-7613-4ad3-a5e5-cc6798a86d2f",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact, belonging to the SALTWATER malware family,  is a 32-bit Linux Shared Object (.so) file.  The malware can intake data over the network, using a previously established socket, with the 'recv' function as shown in Figure 11. Figure 12 shows the malware creating a new thread, within the calling process.  This is thread injection and it can inject two different functions. Figure 13 shows the first function that can perform DNS resolution. Figures 14 and 15 show the second function.  The second function can establish communications, over the network, using a TLS version 1 connection. Lastly, using 'popen', the malware can execute any shell command with the same privileges as its calling process.",
+            "malware_types": [
+                "trojan"
+            ],
+            "is_family": false,
+            "sample_refs": [
+                "file--b5a1b743-933d-549e-9a58-a7a4307076d6"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--ea4e34b8-98a7-49ac-b93f-10e73f852187",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "name": "mod_rft.so",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[file:hashes.'MD5'='4ec4ceda84c580054f191caa09916c68' OR file:hashes.'SHA-1'='6505513ca06db10b17f6d4792c30a53733309231' OR file:hashes.'SHA-256'='caab341a35badbc65046bd02efa9ad2fe2671eb80ece0f2fa9cf70f5d7f4bedc' OR file:hashes.'SHA-512'='c61493cfa3c6c41520b6ef608da9398b4fa6a7805293bc98d628335f536509d95585d42f93b8edeabf971390e874c5291b552afe66d72651839a295b76c42380']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-09-05T22:40:38.978838Z"
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--2c477973-49dd-45c9-bffc-bf169bc22439",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "relationship_type": "related-to",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "source_ref": "file--423b6e9c-bf6b-5198-8481-aee8e57a23fa",
+            "target_ref": "malware--54014492-05d5-4735-a1dc-30bdada6f80b"
+        },
+        {
+            "type": "report",
+            "spec_version": "2.1",
+            "id": "report--051d525f-d08e-4159-8b74-6f6a77add883",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-09-05T22:40:39.006546Z",
+            "name": "MAR-10454006.r5.v1",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "CISA obtained five malware samples - including artifacts related to SUBMARINE, SKIPJACK, SEASPRAY, WHIRLPOOL, and SALTWATER backdoors. The device was compromised by threat actors exploiting CVE-2023-2868, a former zero-day vulnerability affecting versions 5.1.3.001-9.2.0.006 of Barracuda Email Security Gateway (ESG). \r\n\r\nFor information about related malware, specifically information on the initial exploit payload, SEASPY backdoor, WHIRLPOOL backdoor, and the SUBMARINE backdoor, see CISA Alert: CISA Releases Malware Analysis Reports on Barracuda Backdoors.",
+            "report_types": [
+                "observed-data",
+                "malware",
+                "indicator"
+            ],
+            "published": "2023-08-09T21:12:58Z",
+            "object_refs": [
+                "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+                "file--5d97ca80-8d58-5a92-814b-256a32549eec",
+                "note--3dbb81a0-caeb-4749-9dc0-385bfa65fd9e",
+                "file--838a5a98-f2fc-5eb0-8356-76eb2df2070b",
+                "indicator--afb30e8b-d52a-45f7-b273-9533ff5a1882",
+                "malware-analysis--b15e0588-766b-48ac-92bf-8507fdf51e18",
+                "note--b5ba47f6-bfea-4fc8-a846-366801f3ac96",
+                "file--423b6e9c-bf6b-5198-8481-aee8e57a23fa",
+                "indicator--8b17034f-18ac-4434-8e87-49db4b974a54",
+                "note--8ec7df4b-729f-45af-9869-8705e8653f8d",
+                "file--b9899d45-ae73-5e39-9ce0-fa384867960a",
+                "indicator--025e892a-5083-47e8-a330-7cc37a714fe4",
+                "malware-analysis--ee2feaf1-5182-45ff-b29b-c0355ace9fd7",
+                "malware-analysis--cb655166-d9c4-4ebd-926c-0fcb5e7f777a",
+                "malware-analysis--bc065a47-7c17-4060-a5b8-bfd46a87a985",
+                "malware-analysis--fb855070-1f71-44d5-89d9-b7cf5c294b51",
+                "malware-analysis--e1553517-f07b-4338-862a-52c185ad6d24",
+                "malware-analysis--477228f9-a3fb-4d73-ba00-c99ec7cbd391",
+                "malware-analysis--81da5102-32e4-4333-b75b-334b2d65329f",
+                "malware-analysis--2c71b57d-a825-47fa-b40e-5a5d2e6f64ec",
+                "malware--54014492-05d5-4735-a1dc-30bdada6f80b",
+                "indicator--6fa1753f-2b61-4140-9983-8098132224f7",
+                "file--b5a1b743-933d-549e-9a58-a7a4307076d6",
+                "indicator--faa8b707-d7f3-47da-a3f8-9f523cc7a390",
+                "malware-analysis--f75cbe0a-559e-49cb-a943-4313f5b8be09",
+                "malware-analysis--ae36c0db-68a9-49a9-b894-31980a96aefd",
+                "malware-analysis--ca9788ce-fe03-4f53-abf8-55c75f63bebd",
+                "malware-analysis--218aade7-baa8-431a-b74d-3f549fe0cc1c",
+                "malware-analysis--3557d7eb-2b08-477f-811e-efc9db3cafe2",
+                "malware-analysis--5c23f4eb-eb70-413b-822a-de4c7a04a59b",
+                "malware-analysis--1ab7c53f-f9d6-47a9-9a0d-ea646281fecc",
+                "malware-analysis--51508fcb-8b38-41e6-9cbb-10f2c04bd4bc",
+                "malware--4902be36-7613-4ad3-a5e5-cc6798a86d2f",
+                "indicator--ea4e34b8-98a7-49ac-b93f-10e73f852187",
+                "relationship--2c477973-49dd-45c9-bffc-bf169bc22439"
+            ]
+        }
+    ]
+}
