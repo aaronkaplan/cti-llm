@@ -3,20 +3,95 @@ document.addEventListener('DOMContentLoaded', function() {
     const token = window.location.hash.substring(1); // Remove '#' from the beginning
     // Populate the token into the form field
     const tokenField = document.getElementById('tokenField');
-
+    const checkButton = this.getElementById('checkTokenButton');
+    const processButton = this.getElementById('processButton');
+    
     // Populate the token into the form field and adjust field properties if token exists
     if (token) {
         tokenField.value = token;
-        tokenField.disabled = true; // Disable the field
-        // TODO: Check if actually valid
-        tokenField.classList.add('is-valid'); // Add success class to change background color
+        checkTokenValidity(token).then(isValid => {
+            if (isValid) {
+                tokenField.disabled = true; // Disable the field
+                checkButton.disabled = true; // Disable the field
+                tokenField.classList.add('is-valid');
+                processButton.classList.replace('btn-outline-secondary', 'btn-outline-dark');
+                processButton.disabled = false;
+                console.log('Token is valid.');
+            } else {
+                tokenField.classList.add('is-invalid');
+                processButton.disabled = true;
+                console.log('Token is invalid.');
+            }
+        });
     }
+
+    checkTokenButton.addEventListener('click', function() {
+        // Get the current value of the token input field
+        const token = document.getElementById('tokenField').value;
+        // Call the checkTokenValidity function with the token
+        checkTokenValidity(token).then(isValid => {
+            if (isValid) {
+                tokenField.classList.replace('is-invalid', 'is-valid');
+                processButton.classList.replace('btn-outline-secondary', 'btn-outline-dark');
+                processButton.disabled = false;
+                console.log('Token is valid.');
+            } else {
+                tokenField.classList.replace('is-valid', 'is-invalid');
+                processButton.disabled = true;
+                console.log('Token is invalid.');
+            }
+        });
+    });
+
+    
 });
+
+async function checkTokenValidity(token) {
+    // Define the URL for the API endpoint
+    const url = '/api/auth/validate_token';
+
+    // Prepare the request body
+    const requestBody = {
+        token: token
+    };
+
+    try {
+        // Send a POST request to the API endpoint
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestBody),
+        });
+
+        // Check if the request was successful
+        if (!response.ok) {
+            console.error('Error validating token:', response.statusText);
+            return false; // Return false if the request failed
+        }
+
+        // Parse the JSON response
+        const data = await response.json();
+
+        if (data.status === 'valid') {
+            return true; // Return true if the token is valid
+        } else {
+            return false; // Return false if the token is invalid
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        return false; // Return false in case of any error
+    }
+}
 
 async function processAndDisplay() {
     // Get the text from the input field
     const text = document.getElementById('textInput').value;
     const token = document.getElementById('tokenField').value;
+    const processButton = document.getElementById('loadingIndicator');
+
+    processButton.classList.remove("invisible");
 
     // Ensure the token is present
     if (!token) {
@@ -125,4 +200,8 @@ async function processAndDisplay() {
 
     // Call the new function to generate and display the JSON output
     generateJsonOutput(matches);
+
+    // Hide loading indicator
+    processButton.classList.add("invisible");
+
 }
