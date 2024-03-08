@@ -1,0 +1,264 @@
+{
+    "type": "bundle",
+    "id": "bundle--987a9961-3313-4913-b706-0d93ba988605",
+    "objects": [
+        {
+            "type": "identity",
+            "spec_version": "2.1",
+            "id": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created_by_ref": "identity--42ac3c92-60d2-418f-ba8e-838944e6110b",
+            "created": "2023-04-12T17:53:09.646Z",
+            "modified": "2023-04-12T17:53:09.646Z",
+            "name": "GeminiProduction_CMA",
+            "description": "Cybersecurity and Infrastructure Security Agency Production Identity. Code and Media Analysis.",
+            "identity_class": "system",
+            "confidence": 100,
+            "lang": "en",
+            "object_marking_refs": [
+                "marking-definition--bab4a63c-aed9-4cf5-a766-dfca5abac2bb"
+            ]
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--a4ec2c32-8c61-5c48-8e7b-d8fb3a0b973d",
+            "hashes": {
+                "MD5": "5d6cba7909980a7b424b133fbac634ac",
+                "SHA-1": "d114a707fc6abbd8060f821893a9ee64dc3b2714",
+                "SHA-256": "69935a1ce0240edf42dbe24535577140601bcf3226fa01e4481682f6de22d192",
+                "SHA-512": "ef966e1d679daa44ee4c86848b71a0be27a79c8824eba8e74c866322e59a8bdce66b32f3d4417256af351f87dd149a73ed7e8e40df5794c5273cf029d04b6f25",
+                "SSDEEP": "49152:IaMq45lHsbhe9YBU80A3hvJeD7ANjQ4maMTFhmwzHPm0WhphC:oqJh4YWkLeDKOhmwa0WhphC"
+            },
+            "size": 2924089,
+            "name": "6931018-BarracudaMailService.2",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--827a0100-21e4-468a-b9c2-3c11f6c2ec63",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "name": "6931018-BarracudaMailService.2",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact is a 64-bit ELF file that has been identified as a \"SEASPY\" malware variant installed as a system service. The sample is a persistent backdoor that masquerades as a legitimate Barracuda Networks service. The malware is designed to listen to commands received from the Threat Actor\u2019s (TA) Command-and-Control (C2) through Transmission Control Protocol (TCP) packets. When executed, the malware uses libpcap sniffer to monitor traffic for a magic packet on TCP port 25 (SMTP) and TCP port 587. It checks the network packet captured for a hard-coded string \"oXmp\". Note: This hard-coded string may change for other SEASPY variants. When the right sequence of packet is captured, it establishes a TCP reverse shell to the TA's C2 server for further exploitation. This allows the TA to execute arbitrary commands on the compromised system.\r\n\r\nThe malware is based on an open-source backdoor program named \"cd00r\" and it is executed using the parameter below: \r\n\r\n--Begin argument\u2014\r\nUsage: \"./BarracudaMailService <Network-Interface>\" \r\nSample: \"./<malware> eth0\" \r\n--End argument\u2014",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10452108_01 rule_content=rule CISA_10452108_01 : SEASPY backdoor communicates_with_c2 installs_other_components\n{\n\tmeta:\n\t\tAuthor = \"CISA Code & Media Analysis\"\n\t\tIncident = \"10452108\"\n\t\tDate = \"2023-06-20\"\n\t\tLast_Modified = \"20230628_1000\"\n\t\tActor = \"n/a\"\n\t\tFamily = \"SEASPY\"\n\t\tCapabilities = \"communicates-with-c2 installs-other-components\"\n\t\tMalware_Type = \"backdoor\"\n\t\tTool_Type = \"unknown\"\n\t\tDescription = \"Detects malicious Linux SEASPY samples\"\n\t\tSHA256_1 = \"3f26a13f023ad0dcd7f2aa4e7771bba74910ee227b4b36ff72edc5f07336f115\"\n\t\tSHA256_2 = \"69935a1ce0240edf42dbe24535577140601bcf3226fa01e4481682f6de22d192\"\n\t\tSHA256_3 = \"5f5b8cc4d297c8d46a26732ae47c6ac80338b7be97a078a8e1b6eefd1120a5e5\"\n\t\tSHA256_4 = \"10efa7fe69e43c189033006010611e84394569571c4f08ea1735073d6433be81\"\n\tstrings:\n\t\t$s0 = { 2e 2f 42 61 72 72 61 63 75 64 61 4d 61 69 6c 53 65 72 76 69 63 65 20 65 74 68 30 }\n\t\t$s1 = { 75 73 61 67 65 3a 20 2e 2f 42 61 72 72 61 63 75 64 61 4d 61 69 6C 53 65 72 76 69 63 65 20 3c 4e 65 74 77 6f 72 6b 2d 49 6e 74 65 72 66 61 63 65 }\n\t\t$s2 = { 65 6e 74 65 72 20 6f 70 65 6e 20 74 74 79 20 73 68 65 6c 6c }\n\t\t$s3 = { 25 64 00 4e 4f 20 70 6f 72 74 20 63 6f 64 65 }\n\t\t$s4 = { 70 63 61 70 5f 6c 6f 6f 6b 75 70 6e 65 74 3a 20 25 73 }\n\t\t$s5 = { 43 68 69 6c 64 20 70 72 6f 63 65 73 73 20 69 64 3a 25 64 }\n\t\t$s6 = { 5b 2a 5d 53 75 63 63 65 73 73 21 } \n\t\t$a7 = { bf 90 47 90 ec 18 fe e3 83 e2 a9 f7 8d 85 18 1d }\n\t\t$a8 = { 81 35 1e f0 94 ab 2a ba 5d f0 37 76 69 19 9f 1e }\n\t\t$a9 = { 6a 8e c7 89 ce c1 fe 64 78 a6 e1 c5 fe 03 d1 a7 }\n\t\t$a10 = { c2 ff d1 0d 24 23 ec c0 57 f9 8d 4b 05 34 41 b8 }\n\tcondition:\n\t\tuint32(0) == 0x464c457f and (all of ($s*)) or ( all of ($a*))\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-07-27T20:33:00.753385Z"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--d05ce908-0b46-4fd3-ad0d-2141c45e01a8",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "product": "eset",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "a variant of Linux/SeaSpy.A trojan",
+            "result": "unknown",
+            "sample_ref": "file--a4ec2c32-8c61-5c48-8e7b-d8fb3a0b973d"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--8403b6a9-577b-43b4-bc70-4c1104ea4197",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "product": "mcafee",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Linux/Seaspy!5D6CBA790998",
+            "result": "unknown",
+            "sample_ref": "file--a4ec2c32-8c61-5c48-8e7b-d8fb3a0b973d"
+        },
+        {
+            "type": "malware",
+            "spec_version": "2.1",
+            "id": "malware--cf14d1f7-0edb-4b73-b2c0-705bed480481",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact is a 64-bit ELF file that has been identified as a \"SEASPY\" malware variant installed as a system service. The sample is a persistent backdoor that masquerades as a legitimate Barracuda Networks service. The malware is designed to listen to commands received from the Threat Actor\u2019s (TA) Command-and-Control (C2) through Transmission Control Protocol (TCP) packets. When executed, the malware uses libpcap sniffer to monitor traffic for a magic packet on TCP port 25 (SMTP) and TCP port 587. It checks the network packet captured for a hard-coded string \"oXmp\". Note: This hard-coded string may change for other SEASPY variants. When the right sequence of packet is captured, it establishes a TCP reverse shell to the TA's C2 server for further exploitation. This allows the TA to execute arbitrary commands on the compromised system.\r\n\r\nThe malware is based on an open-source backdoor program named \"cd00r\" and it is executed using the parameter below: \r\n\r\n--Begin argument\u2014\r\nUsage: \"./BarracudaMailService <Network-Interface>\" \r\nSample: \"./<malware> eth0\" \r\n--End argument\u2014",
+            "malware_types": [
+                "trojan"
+            ],
+            "is_family": false,
+            "sample_refs": [
+                "file--a4ec2c32-8c61-5c48-8e7b-d8fb3a0b973d"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--73f86b45-6bbc-4f69-ab85-0ae0d20ad468",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "name": "6931018-BarracudaMailService.2",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[file:hashes.'MD5'='5d6cba7909980a7b424b133fbac634ac' OR file:hashes.'SHA-1'='d114a707fc6abbd8060f821893a9ee64dc3b2714' OR file:hashes.'SHA-256'='69935a1ce0240edf42dbe24535577140601bcf3226fa01e4481682f6de22d192' OR file:hashes.'SHA-512'='ef966e1d679daa44ee4c86848b71a0be27a79c8824eba8e74c866322e59a8bdce66b32f3d4417256af351f87dd149a73ed7e8e40df5794c5273cf029d04b6f25']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-07-27T20:33:00.757892Z"
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--efbcbec1-b079-5f52-b3ba-d630dafd21b0",
+            "hashes": {
+                "MD5": "32ffe48d1a8ced49c53033eb65eff6f3",
+                "SHA-1": "2c7ad0e7897f348bec2e32f2af4282bd65916f8d",
+                "SHA-256": "3e21e547cf94cb07c010fe82d6965e5bd52dbdd9255b4dd164f64addfaa87abb",
+                "SHA-512": "12fd230c78c9e14b1bbb7f3c6776a14710693fa4224b4376775f118fc35584a5946a57dda43db20bd9ffc2950f4e62e8c206506744bca5fe39e6cb9a1a91b981",
+                "SSDEEP": "49152:bgt0bmh2EXaRuFmK3cnlBceICm4ewQ/MTs/dgPm0WhphC:Ma0gug7bceI4ih/dp0WhphC"
+            },
+            "size": 2924089,
+            "name": "BarracudaMailService.1",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--392d269a-034f-4d7c-8db5-7d9f8322dac4",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "name": "BarracudaMailService.1",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact is a 64-bit ELF file that has been identified as a \"SEASPY\" malware variant installed as a system service. This sample has the sample malicious capabilities as BarracudaMailService.2 (5d6cba7909980a7b424b133fbac634ac). The only difference between the binaries is located in the function named \"start_pcap_listener\". In the function \"start_pcap_listener\" both binaries call a function named \"reverse shell\" to start the reverse shell functionality of the malware. The difference is that BarracudaMailService.1 (32ffe48d1a8ced49c53033eb65eff6f3) jumps directly to the set of instructions that start the reverse shell, as opposed to BarracudaMailService.2 (5d6cba7909980a7b424b133fbac634ac), which contains an extra set of instructions before jumping to the instructions that start the reverse shell.",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10452108_01 rule_content=rule CISA_10452108_01 : SEASPY backdoor communicates_with_c2 installs_other_components\n{\n\tmeta:\n\t\tAuthor = \"CISA Code & Media Analysis\"\n\t\tIncident = \"10452108\"\n\t\tDate = \"2023-06-20\"\n\t\tLast_Modified = \"20230628_1000\"\n\t\tActor = \"n/a\"\n\t\tFamily = \"SEASPY\"\n\t\tCapabilities = \"communicates-with-c2 installs-other-components\"\n\t\tMalware_Type = \"backdoor\"\n\t\tTool_Type = \"unknown\"\n\t\tDescription = \"Detects malicious Linux SEASPY samples\"\n\t\tSHA256_1 = \"3f26a13f023ad0dcd7f2aa4e7771bba74910ee227b4b36ff72edc5f07336f115\"\n\t\tSHA256_2 = \"69935a1ce0240edf42dbe24535577140601bcf3226fa01e4481682f6de22d192\"\n\t\tSHA256_3 = \"5f5b8cc4d297c8d46a26732ae47c6ac80338b7be97a078a8e1b6eefd1120a5e5\"\n\t\tSHA256_4 = \"10efa7fe69e43c189033006010611e84394569571c4f08ea1735073d6433be81\"\n\tstrings:\n\t\t$s0 = { 2e 2f 42 61 72 72 61 63 75 64 61 4d 61 69 6c 53 65 72 76 69 63 65 20 65 74 68 30 }\n\t\t$s1 = { 75 73 61 67 65 3a 20 2e 2f 42 61 72 72 61 63 75 64 61 4d 61 69 6C 53 65 72 76 69 63 65 20 3c 4e 65 74 77 6f 72 6b 2d 49 6e 74 65 72 66 61 63 65 }\n\t\t$s2 = { 65 6e 74 65 72 20 6f 70 65 6e 20 74 74 79 20 73 68 65 6c 6c }\n\t\t$s3 = { 25 64 00 4e 4f 20 70 6f 72 74 20 63 6f 64 65 }\n\t\t$s4 = { 70 63 61 70 5f 6c 6f 6f 6b 75 70 6e 65 74 3a 20 25 73 }\n\t\t$s5 = { 43 68 69 6c 64 20 70 72 6f 63 65 73 73 20 69 64 3a 25 64 }\n\t\t$s6 = { 5b 2a 5d 53 75 63 63 65 73 73 21 } \n\t\t$a7 = { bf 90 47 90 ec 18 fe e3 83 e2 a9 f7 8d 85 18 1d }\n\t\t$a8 = { 81 35 1e f0 94 ab 2a ba 5d f0 37 76 69 19 9f 1e }\n\t\t$a9 = { 6a 8e c7 89 ce c1 fe 64 78 a6 e1 c5 fe 03 d1 a7 }\n\t\t$a10 = { c2 ff d1 0d 24 23 ec c0 57 f9 8d 4b 05 34 41 b8 }\n\tcondition:\n\t\tuint32(0) == 0x464c457f and (all of ($s*)) or ( all of ($a*))\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-07-27T20:33:00.777845Z"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--5ce36286-edb2-4cf0-b82d-797306110490",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "product": "eset",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "a variant of Linux/SeaSpy.A trojan",
+            "result": "unknown",
+            "sample_ref": "file--efbcbec1-b079-5f52-b3ba-d630dafd21b0"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--5736912e-649a-489f-a7e1-1cd4fa173cd0",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "product": "mcafee",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Linux/Seaspy!32FFE48D1A8C",
+            "result": "unknown",
+            "sample_ref": "file--efbcbec1-b079-5f52-b3ba-d630dafd21b0"
+        },
+        {
+            "type": "malware",
+            "spec_version": "2.1",
+            "id": "malware--f4c21697-8b7d-4147-abf2-b7dc91f45526",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact is a 64-bit ELF file that has been identified as a \"SEASPY\" malware variant installed as a system service. This sample has the sample malicious capabilities as BarracudaMailService.2 (5d6cba7909980a7b424b133fbac634ac). The only difference between the binaries is located in the function named \"start_pcap_listener\". In the function \"start_pcap_listener\" both binaries call a function named \"reverse shell\" to start the reverse shell functionality of the malware. The difference is that BarracudaMailService.1 (32ffe48d1a8ced49c53033eb65eff6f3) jumps directly to the set of instructions that start the reverse shell, as opposed to BarracudaMailService.2 (5d6cba7909980a7b424b133fbac634ac), which contains an extra set of instructions before jumping to the instructions that start the reverse shell.",
+            "malware_types": [
+                "trojan"
+            ],
+            "is_family": false,
+            "sample_refs": [
+                "file--efbcbec1-b079-5f52-b3ba-d630dafd21b0"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--71e4782a-d854-4ab3-bd6a-13fe16a05c68",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "name": "BarracudaMailService.1",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[file:hashes.'MD5'='32ffe48d1a8ced49c53033eb65eff6f3' OR file:hashes.'SHA-1'='2c7ad0e7897f348bec2e32f2af4282bd65916f8d' OR file:hashes.'SHA-256'='3e21e547cf94cb07c010fe82d6965e5bd52dbdd9255b4dd164f64addfaa87abb' OR file:hashes.'SHA-512'='12fd230c78c9e14b1bbb7f3c6776a14710693fa4224b4376775f118fc35584a5946a57dda43db20bd9ffc2950f4e62e8c206506744bca5fe39e6cb9a1a91b981']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-07-27T20:33:00.782232Z"
+        },
+        {
+            "type": "report",
+            "spec_version": "2.1",
+            "id": "report--c9fc0a5d-58a3-4c33-a22d-2e65fcfe7398",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-07-27T20:33:00.791335Z",
+            "name": "MAR-10454006.r2.v1",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "CISA obtained two SEASPY malware samples. The malware was used by threat actors exploiting CVE-2023-2868, a former zero-day vulnerability affecting versions 5.1.3.001-9.2.0.006 of Barracuda Email Security Gateway (ESG).\r\n\r\nSEASPY is a persistent and passive backdoor that masquerades as a legitimate Barracuda service \u201cBarracudaMailService\u201d that allows the threat actors to execute arbitrary commands on the ESG appliance.\r\n\r\nFor information about related malware, specifically information on the initial exploit payload and other backdoors, see CISA Alert: CISA Releases Malware Analysis Reports on Barracuda Backdoors. ",
+            "report_types": [
+                "observed-data",
+                "malware",
+                "indicator"
+            ],
+            "published": "2023-05-31T22:05:07Z",
+            "object_refs": [
+                "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+                "file--a4ec2c32-8c61-5c48-8e7b-d8fb3a0b973d",
+                "indicator--827a0100-21e4-468a-b9c2-3c11f6c2ec63",
+                "malware-analysis--d05ce908-0b46-4fd3-ad0d-2141c45e01a8",
+                "malware-analysis--8403b6a9-577b-43b4-bc70-4c1104ea4197",
+                "malware--cf14d1f7-0edb-4b73-b2c0-705bed480481",
+                "indicator--73f86b45-6bbc-4f69-ab85-0ae0d20ad468",
+                "file--efbcbec1-b079-5f52-b3ba-d630dafd21b0",
+                "indicator--392d269a-034f-4d7c-8db5-7d9f8322dac4",
+                "malware-analysis--5ce36286-edb2-4cf0-b82d-797306110490",
+                "malware-analysis--5736912e-649a-489f-a7e1-1cd4fa173cd0",
+                "malware--f4c21697-8b7d-4147-abf2-b7dc91f45526",
+                "indicator--71e4782a-d854-4ab3-bd6a-13fe16a05c68"
+            ]
+        }
+    ]
+}

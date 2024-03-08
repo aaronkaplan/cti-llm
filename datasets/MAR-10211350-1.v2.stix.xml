@@ -1,0 +1,761 @@
+<stix:STIX_Package 
+	xmlns:cyboxCommon="http://cybox.mitre.org/common-2"
+	xmlns:cybox="http://cybox.mitre.org/cybox-2"
+	xmlns:cyboxVocabs="http://cybox.mitre.org/default_vocabularies-2"
+	xmlns:AddressObj="http://cybox.mitre.org/objects#AddressObject-2"
+	xmlns:FileObj="http://cybox.mitre.org/objects#FileObject-2"
+	xmlns:HTTPSessionObj="http://cybox.mitre.org/objects#HTTPSessionObject-2"
+	xmlns:MutexObj="http://cybox.mitre.org/objects#MutexObject-2"
+	xmlns:URIObj="http://cybox.mitre.org/objects#URIObject-2"
+	xmlns:WhoisObj="http://cybox.mitre.org/objects#WhoisObject-2"
+	xmlns:marking="http://data-marking.mitre.org/Marking-1"
+	xmlns:tlpMarking="http://data-marking.mitre.org/extensions/MarkingStructure#TLP-1"
+	xmlns:TOUMarking="http://data-marking.mitre.org/extensions/MarkingStructure#Terms_Of_Use-1"
+	xmlns:maecBundle="http://maec.mitre.org/XMLSchema/maec-bundle-4"
+	xmlns:maecPackage="http://maec.mitre.org/XMLSchema/maec-package-2"
+	xmlns:maecVocabs="http://maec.mitre.org/default_vocabularies-1"
+	xmlns:incident="http://stix.mitre.org/Incident-1"
+	xmlns:indicator="http://stix.mitre.org/Indicator-2"
+	xmlns:ttp="http://stix.mitre.org/TTP-1"
+	xmlns:stixCommon="http://stix.mitre.org/common-1"
+	xmlns:stixVocabs="http://stix.mitre.org/default_vocabularies-1"
+	xmlns:stix-maec="http://stix.mitre.org/extensions/Malware#MAEC4.1-1"
+	xmlns:stix="http://stix.mitre.org/stix-1"
+	xmlns:NCCIC="http://www.us-cert.gov/"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+	http://cybox.mitre.org/common-2 http://cybox.mitre.org/XMLSchema/common/2.1/cybox_common.xsd
+	http://cybox.mitre.org/cybox-2 http://cybox.mitre.org/XMLSchema/core/2.1/cybox_core.xsd
+	http://cybox.mitre.org/default_vocabularies-2 http://cybox.mitre.org/XMLSchema/default_vocabularies/2.1/cybox_default_vocabularies.xsd
+	http://cybox.mitre.org/objects#AddressObject-2 http://cybox.mitre.org/XMLSchema/objects/Address/2.1/Address_Object.xsd
+	http://cybox.mitre.org/objects#FileObject-2 http://cybox.mitre.org/XMLSchema/objects/File/2.1/File_Object.xsd
+	http://cybox.mitre.org/objects#HTTPSessionObject-2 http://cybox.mitre.org/XMLSchema/objects/HTTP_Session/2.1/HTTP_Session_Object.xsd
+	http://cybox.mitre.org/objects#MutexObject-2 http://cybox.mitre.org/XMLSchema/objects/Mutex/2.1/Mutex_Object.xsd
+	http://cybox.mitre.org/objects#URIObject-2 http://cybox.mitre.org/XMLSchema/objects/URI/2.1/URI_Object.xsd
+	http://cybox.mitre.org/objects#WhoisObject-2 http://cybox.mitre.org/XMLSchema/objects/Whois/2.1/Whois_Object.xsd
+	http://data-marking.mitre.org/Marking-1 http://stix.mitre.org/XMLSchema/data_marking/1.1.1/data_marking.xsd
+	http://data-marking.mitre.org/extensions/MarkingStructure#TLP-1 http://stix.mitre.org/XMLSchema/extensions/marking/tlp/1.1.1/tlp_marking.xsd
+	http://data-marking.mitre.org/extensions/MarkingStructure#Terms_Of_Use-1 http://stix.mitre.org/XMLSchema/extensions/marking/terms_of_use/1.0.1/terms_of_use_marking.xsd
+	http://maec.mitre.org/XMLSchema/maec-bundle-4 http://maec.mitre.org/language/version4.1/maec_bundle_schema.xsd
+	http://maec.mitre.org/XMLSchema/maec-package-2 http://maec.mitre.org/language/version4.1/maec_package_schema.xsd
+	http://maec.mitre.org/default_vocabularies-1 http://maec.mitre.org/language/version4.1/maec_default_vocabularies.xsd
+	http://stix.mitre.org/Incident-1 http://stix.mitre.org/XMLSchema/incident/1.1.1/incident.xsd
+	http://stix.mitre.org/Indicator-2 http://stix.mitre.org/XMLSchema/indicator/2.1.1/indicator.xsd
+	http://stix.mitre.org/TTP-1 http://stix.mitre.org/XMLSchema/ttp/1.1.1/ttp.xsd
+	http://stix.mitre.org/common-1 http://stix.mitre.org/XMLSchema/common/1.1.1/stix_common.xsd
+	http://stix.mitre.org/default_vocabularies-1 http://stix.mitre.org/XMLSchema/default_vocabularies/1.1.1/stix_default_vocabularies.xsd
+	http://stix.mitre.org/extensions/Malware#MAEC4.1-1 http://stix.mitre.org/XMLSchema/extensions/malware/maec_4.1/1.0.1/maec_4.1_malware.xsd
+	http://stix.mitre.org/stix-1 http://stix.mitre.org/XMLSchema/core/1.1.1/stix_core.xsd" id="NCCIC:Package-70c0be93-35a2-43f0-8cd7-52bfbbed5d04" version="1.1.1" timestamp="2020-05-07T11:16:21-04:00">
+    <stix:STIX_Header>
+        <stix:Title>MAR-10211350.r1.v2</stix:Title>
+        <stix:Package_Intent>Malware Characterization</stix:Package_Intent>
+        <stix:Handling>
+            <marking:Marking>
+                <marking:Controlled_Structure>//node() | //@*</marking:Controlled_Structure>
+                <marking:Marking_Structure xsi:type='tlpMarking:TLPMarkingStructureType' color="WHITE"/>
+                <marking:Marking_Structure xsi:type='TOUMarking:TermsOfUseMarkingStructureType'>
+                    <TOUMarking:Terms_Of_Use>This document is marked TLP:WHITE--Disclosure is not limited. Sources may use TLP:WHITE when information carries minimal or no foreseeable risk of misuse, in accordance with applicable rules and procedures for public release. Subject to standard copyright rules, TLP:WHITE information may be distributed without restriction. For more information on the Traffic Light Protocol (TLP), see http://www.us-cert.gov/tlp.</TOUMarking:Terms_Of_Use>
+                </marking:Marking_Structure>
+            </marking:Marking>
+        </stix:Handling>
+        <stix:Information_Source>
+            <stixCommon:Identity>
+                <stixCommon:Name>US-CERT</stixCommon:Name>
+            </stixCommon:Identity>
+            <stixCommon:Time>
+                <cyboxCommon:Produced_Time>2020-05-07T11:16:21-04:00</cyboxCommon:Produced_Time>
+            </stixCommon:Time>
+            <stixCommon:Tools>
+                <cyboxCommon:Tool>
+                    <cyboxCommon:Name>BMachine</cyboxCommon:Name>
+                    <cyboxCommon:Description>134</cyboxCommon:Description>
+                    <cyboxCommon:Version>7.1.0</cyboxCommon:Version>
+                </cyboxCommon:Tool>
+            </stixCommon:Tools>
+        </stix:Information_Source>
+    </stix:STIX_Header>
+    <stix:Observables cybox_major_version="2" cybox_minor_version="1" cybox_update_version="0">
+        <cybox:Observable id="NCCIC:Observable-277d3e4f-8f8a-45b3-bc5f-61f573f3ae22">
+            <cybox:Description><![CDATA[This file is a XLSX spreadsheet file with a protected workbook. The file contains hidden malicious code designed to download and execute a payload onto the victim’s system. Upon opening the XLSX, it attempts to download and execute a payload onto the victim’s system using the Universal Resource Identifier (URI) shortened address “hxxp://urlz.fr/7pMA”. 
+
+Displayed below is the original URI from the shortened URI:
+
+--Begin original URI from the shortened URI--
+hxxp://151.106.30.115/~winvps/3_com/putty/win32.exe
+--End original URI from the shortened URI--
+
+The payload is installed and executed from “%AppData%\Roaming\svchost.exe”.
+The payload the malware attempted to download was not available at the time of analysis.]]></cybox:Description>
+            <cybox:Object id="NCCIC:File-26c91b3f-e3c2-4d19-aaca-77b2b23d48ce">
+                <cybox:Properties xsi:type="FileObj:FileObjectType">
+                    <FileObj:File_Name>2018_07_16_PO_4500612088_Difmal_.xlsx</FileObj:File_Name>
+                    <FileObj:Size_In_Bytes>48344</FileObj:Size_In_Bytes>
+                    <FileObj:File_Format>CDFV2 Encrypted</FileObj:File_Format>
+                    <FileObj:Hashes>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">MD5</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>3eae562fd6a0232eb874914364b6ca8a</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA1</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>b704762f817556f82a6addc3f11a45089d92ba18</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA256</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>ce108a3810fc2b644ca65c791941f11d0c389f3dea4ba40cf276d5ac6c93d322</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA512</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>4119a3ce3032c937a2a4c5c95c786a25c0bbba6ad44593eeb71546d0097fcf1052d39c3a9e5fcbcf53fdfb87a3e18603f8741d304fab927ed717f3eb98eb49aa</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SSDEEP</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>768:gj16EyKQ09a/kk9mqmBsUN/KMXXSpdiZBVJeUXXXnu7UJHdJ7JNU:7Ua/Qs3wwlEHdlJNU</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                    </FileObj:Hashes>
+                    <FileObj:Peak_Entropy>7.714565</FileObj:Peak_Entropy>
+                </cybox:Properties>
+                <cybox:Related_Objects>
+                    <cybox:Related_Object idref="NCCIC:Mutex-15b40ad9-36d2-442e-85fd-2bbe552d651c">
+                        <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.1">Created</cybox:Relationship>
+                    </cybox:Related_Object>
+                    <cybox:Related_Object idref="NCCIC:Mutex-9c01bd4b-ab83-4618-b88c-d0db741646bb">
+                        <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.1">Created</cybox:Relationship>
+                    </cybox:Related_Object>
+                    <cybox:Related_Object idref="NCCIC:Mutex-bfdde37d-ed4a-4c90-b5ca-38e3057bd48f">
+                        <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.1">Created</cybox:Relationship>
+                    </cybox:Related_Object>
+                    <cybox:Related_Object idref="NCCIC:URI-7749b396-c2fa-426d-b469-8951f840d197">
+                        <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.1">Connected_To</cybox:Relationship>
+                    </cybox:Related_Object>
+                </cybox:Related_Objects>
+            </cybox:Object>
+        </cybox:Observable>
+        <cybox:Observable id="NCCIC:Observable-b924e713-1c2f-49e9-95d4-f657496498b0">
+            <cybox:Object id="NCCIC:Mutex-15b40ad9-36d2-442e-85fd-2bbe552d651c">
+                <cybox:Properties xsi:type="MutexObj:MutexObjectType">
+                    <MutexObj:Name>Local\ZonesCacheCounterMutex</MutexObj:Name>
+                </cybox:Properties>
+            </cybox:Object>
+        </cybox:Observable>
+        <cybox:Observable id="NCCIC:Observable-2feec6ef-4976-46c6-aea8-94de6233b1af">
+            <cybox:Object id="NCCIC:Mutex-bfdde37d-ed4a-4c90-b5ca-38e3057bd48f">
+                <cybox:Properties xsi:type="MutexObj:MutexObjectType">
+                    <MutexObj:Name>Local\ZonesLockedCacheCounterMutex</MutexObj:Name>
+                </cybox:Properties>
+            </cybox:Object>
+        </cybox:Observable>
+        <cybox:Observable id="NCCIC:Observable-9e4a6ec9-9747-4ef1-b7af-977b3ef1a86e">
+            <cybox:Object id="NCCIC:Mutex-9c01bd4b-ab83-4618-b88c-d0db741646bb">
+                <cybox:Properties xsi:type="MutexObj:MutexObjectType">
+                    <MutexObj:Name>{100184D2-BDC3-477a-B8D3-65548B67914C}_2816</MutexObj:Name>
+                </cybox:Properties>
+            </cybox:Object>
+        </cybox:Observable>
+        <cybox:Observable id="NCCIC:Observable-c73ddeee-3261-4856-bd1a-e5657874df20">
+            <cybox:Description><![CDATA[The spreadsheet connects to the shortened URI. The domain urlz.fr appears to be a free URL shortening service.]]></cybox:Description>
+            <cybox:Object id="NCCIC:URI-7749b396-c2fa-426d-b469-8951f840d197">
+                <cybox:Properties xsi:type="URIObj:URIObjectType" type="Domain Name">
+                    <URIObj:Value>urlz.fr</URIObj:Value>
+                </cybox:Properties>
+                <cybox:Related_Objects>
+                    <cybox:Related_Object idref="NCCIC:URI-90ed8e40-5b40-4022-8b7a-c40c184d42e9">
+                        <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.1">Related_To</cybox:Relationship>
+                    </cybox:Related_Object>
+                    <cybox:Related_Object idref="NCCIC:WhoisEntry-f31b893b-063c-4020-8f7b-4feb4ad8ceac">
+                        <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.1">Related_To</cybox:Relationship>
+                    </cybox:Related_Object>
+                    <cybox:Related_Object idref="NCCIC:HTTPSession-faa8f8e7-46ec-4000-829f-0c5ccb5f1858">
+                        <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.1">Related_To</cybox:Relationship>
+                    </cybox:Related_Object>
+                    <cybox:Related_Object idref="NCCIC:File-26c91b3f-e3c2-4d19-aaca-77b2b23d48ce">
+                        <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.1">Connected_From</cybox:Relationship>
+                    </cybox:Related_Object>
+                    <cybox:Related_Object idref="NCCIC:Address-39eb1ac6-47dd-4ae0-b4d3-0c8b079ff422">
+                        <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.1">Related_To</cybox:Relationship>
+                    </cybox:Related_Object>
+                </cybox:Related_Objects>
+            </cybox:Object>
+        </cybox:Observable>
+        <cybox:Observable id="NCCIC:Observable-4acc3ccb-ec43-4b7e-aacc-88f51225bc4e">
+            <cybox:Object id="NCCIC:URI-90ed8e40-5b40-4022-8b7a-c40c184d42e9">
+                <cybox:Properties xsi:type="URIObj:URIObjectType" type="URL">
+                    <URIObj:Value> http://urlz.fr/7pMA</URIObj:Value>
+                </cybox:Properties>
+            </cybox:Object>
+        </cybox:Observable>
+        <cybox:Observable id="NCCIC:Observable-05859568-b993-4752-960b-61d9f2c7563a">
+            <cybox:Object id="NCCIC:HTTPSession-faa8f8e7-46ec-4000-829f-0c5ccb5f1858">
+                <cybox:Properties xsi:type="HTTPSessionObj:HTTPSessionObjectType">
+                    <HTTPSessionObj:HTTP_Request_Response>
+                        <HTTPSessionObj:HTTP_Client_Request>
+                            <HTTPSessionObj:HTTP_Request_Line/>
+                            <HTTPSessionObj:HTTP_Request_Header>
+                                <HTTPSessionObj:Raw_Header><![CDATA[GET /7pMA HTTP/1.1
+Host: urlz.fr
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.9
+Cookie: __cfduid=d91fd5e13aae8ae89cb4fee65add758f31541801459
+
+HTTP/1.1 403 Forbidden
+Date: Fri, 09 Nov 2018 22:25:58 GMT
+Content-Type: text/html; charset=UTF-8
+Transfer-Encoding: chunked
+Connection: close
+CF-Chl-Bypass: 1
+Cache-Control: max-age=2
+Expires: Fri, 09 Nov 2018 22:26:00 GMT
+X-Frame-Options: SAMEORIGIN
+Vary: Accept-Encoding
+Server: cloudflare
+CF-RAY: 4773b2c2454c3852-ATL
+Content-Encoding: gzip
+]]></HTTPSessionObj:Raw_Header>
+                            </HTTPSessionObj:HTTP_Request_Header>
+                        </HTTPSessionObj:HTTP_Client_Request>
+                    </HTTPSessionObj:HTTP_Request_Response>
+                </cybox:Properties>
+            </cybox:Object>
+        </cybox:Observable>
+        <cybox:Observable id="NCCIC:Observable-db49a061-cf17-454b-a383-c6e0b87de4c7">
+            <cybox:Object id="NCCIC:WhoisEntry-f31b893b-063c-4020-8f7b-4feb4ad8ceac">
+                <cybox:Properties xsi:type="WhoisObj:WhoisObjectType">
+                    <WhoisObj:Remarks>domain:      urlz.fr
+status:      ACTIVE
+hold:        NO
+holder-c:    ANO00-FRNIC
+admin-c:     ANO00-FRNIC
+tech-c:      OVH5-FRNIC
+zone-c:      NFC1-FRNIC
+nsl-id:      NSL23278-FRNIC
+dsl-id:      SIGN872881-FRNIC
+registrar:   OVH
+Expiry Date: 14/05/2019
+created:     14/05/2011
+last-update: 21/12/2017
+source:      FRNIC
+
+ns-list:     NSL23278-FRNIC
+nserver:     igor.ns.cloudflare.com
+nserver:     nina.ns.cloudflare.com
+source:      FRNIC
+
+ds-list:     SIGN872881-FRNIC
+key1-tag:    2371
+key1-algo:   13 [ECDSAP256SHA256]
+key1-dgst-t: 2 [SHA-256]
+key1-dgst:   D598F5FD1FDD37838EA09B6166792AE4322364BC2DD319C8783002BDB6BCCC05
+source:      FRNIC
+
+registrar:   OVH
+type:        Isp Option 1
+address:     2 Rue Kellermann
+address:     59100 ROUBAIX
+country:     FR
+phone:       +33 8 99 70 17 61
+fax-no:      +33 3 20 20 09 58
+e-mail:      support@ovh.net
+website:     http://www.ovh.com
+anonymous:   NO
+registered:  21/10/1999
+source:      FRNIC
+
+nic-hdl:     ANO00-FRNIC
+type:        PERSON
+contact:     Ano Nymous
+remarks:     -------------- WARNING --------------
+remarks:     While the registrar knows him/her,
+remarks:     this person chose to restrict access
+remarks:     to his/her personal data. So PLEASE,
+remarks:     don't send emails to Ano Nymous. This
+remarks:     address is bogus and there is no hope
+remarks:     of a reply.
+remarks:     -------------- WARNING --------------
+registrar:   OVH
+changed:     04/06/2018 anonymous@anonymous
+anonymous:   YES
+obsoleted:   NO
+eligstatus:  not identified
+reachstatus: not identified
+source:      FRNIC
+
+nic-hdl:     ANO00-FRNIC
+type:        PERSON
+contact:     Ano Nymous
+remarks:     -------------- WARNING --------------
+remarks:     While the registrar knows him/her,
+remarks:     this person chose to restrict access
+remarks:     to his/her personal data. So PLEASE,
+remarks:     don't send emails to Ano Nymous. This
+remarks:     address is bogus and there is no hope
+remarks:     of a reply.
+remarks:     -------------- WARNING --------------
+registrar:   OVH
+changed:     04/06/2018 anonymous@anonymous
+anonymous:   YES
+obsoleted:   NO
+eligstatus:  not identified
+reachstatus: not identified
+source:      FRNIC
+
+nic-hdl:     OVH5-FRNIC
+type:        ROLE
+contact:     OVH NET
+address:     OVH
+address:     140, quai du Sartel
+address:     59100 Roubaix
+country:     FR
+phone:       +33 8 99 70 17 61
+e-mail:      tech@ovh.net
+trouble:     Information: http://www.ovh.fr
+trouble:     Questions:  mailto:tech@ovh.net
+trouble:     Spam: mailto:abuse@ovh.net
+admin-c:     OK217-FRNIC
+tech-c:      OK217-FRNIC
+notify:      tech@ovh.net
+registrar:   OVH
+changed:     11/10/2006 tech@ovh.net
+anonymous:   NO
+obsoleted:   NO
+eligstatus:  not identified
+reachstatus: not identified
+source:      FRNIC</WhoisObj:Remarks>
+                </cybox:Properties>
+            </cybox:Object>
+        </cybox:Observable>
+        <cybox:Observable id="NCCIC:Observable-07a30f1c-90da-4d2b-b7f1-13f9d7d75444">
+            <cybox:Description><![CDATA[The shortened URI "hxxp://urlz.fr/7pMA" expands to the IP address.]]></cybox:Description>
+            <cybox:Object id="NCCIC:Address-39eb1ac6-47dd-4ae0-b4d3-0c8b079ff422">
+                <cybox:Properties xsi:type="AddressObj:AddressObjectType" category="ipv4-addr">
+                    <AddressObj:Address_Value>151.106.30.115</AddressObj:Address_Value>
+                </cybox:Properties>
+                <cybox:Related_Objects>
+                    <cybox:Related_Object idref="NCCIC:URI-487abfaf-9f81-4f3f-a8af-bfa6fd0b2b0f">
+                        <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.1">Related_To</cybox:Relationship>
+                    </cybox:Related_Object>
+                    <cybox:Related_Object idref="NCCIC:WhoisEntry-81ba5b27-5bf8-446c-b2c0-ec3dce26205f">
+                        <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.1">Related_To</cybox:Relationship>
+                    </cybox:Related_Object>
+                    <cybox:Related_Object idref="NCCIC:HTTPSession-fbd9873f-8713-469d-99f1-599b68f6f180">
+                        <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.1">Related_To</cybox:Relationship>
+                    </cybox:Related_Object>
+                    <cybox:Related_Object idref="NCCIC:URI-7749b396-c2fa-426d-b469-8951f840d197">
+                        <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.1">Related_To</cybox:Relationship>
+                    </cybox:Related_Object>
+                </cybox:Related_Objects>
+            </cybox:Object>
+        </cybox:Observable>
+        <cybox:Observable id="NCCIC:Observable-08ba90a1-ca7a-4796-af93-95a41939fc08">
+            <cybox:Object id="NCCIC:URI-487abfaf-9f81-4f3f-a8af-bfa6fd0b2b0f">
+                <cybox:Properties xsi:type="URIObj:URIObjectType" type="URL">
+                    <URIObj:Value>http://151.106.30.115/~winvps/3_com/putty/win32.exe</URIObj:Value>
+                </cybox:Properties>
+            </cybox:Object>
+        </cybox:Observable>
+        <cybox:Observable id="NCCIC:Observable-6ae56164-d7a6-4bd1-b343-23304ef3324a">
+            <cybox:Object id="NCCIC:HTTPSession-fbd9873f-8713-469d-99f1-599b68f6f180">
+                <cybox:Properties xsi:type="HTTPSessionObj:HTTPSessionObjectType">
+                    <HTTPSessionObj:HTTP_Request_Response>
+                        <HTTPSessionObj:HTTP_Client_Request>
+                            <HTTPSessionObj:HTTP_Request_Line/>
+                            <HTTPSessionObj:HTTP_Request_Header>
+                                <HTTPSessionObj:Raw_Header><![CDATA[GET /~winvps/3_com/putty/win32.exe HTTP/1.1
+Host: 151.106.30.115
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.9
+]]></HTTPSessionObj:Raw_Header>
+                            </HTTPSessionObj:HTTP_Request_Header>
+                        </HTTPSessionObj:HTTP_Client_Request>
+                    </HTTPSessionObj:HTTP_Request_Response>
+                </cybox:Properties>
+            </cybox:Object>
+        </cybox:Observable>
+        <cybox:Observable id="NCCIC:Observable-96f2870f-b8b8-43fd-9543-3aa3f914ed45">
+            <cybox:Object id="NCCIC:WhoisEntry-81ba5b27-5bf8-446c-b2c0-ec3dce26205f">
+                <cybox:Properties xsi:type="WhoisObj:WhoisObjectType">
+                    <WhoisObj:Remarks>IP Location: France Strasbourg Velia.net Internetdienste Gmbh 
+ASN: AS29066 VELIANET-AS velia.net Internetdienste GmbH, DE (registered May 23, 2003) 
+Whois Server: whois.ripe.net 
+IP Address: 151.106.30.115
+
+Whois Server
+whois.ripe.net 
+IP Address
+151.106.30.115 
+
+inetnum:        151.106.30.0 - 151.106.30.255
+netname:        VELIANET-FR-PINETLLC
+descr:          Pi NET, LLC
+country:        FR
+org:            ORG-PNL20-RIPE
+admin-c:        PNL16-RIPE
+tech-c:         PNL16-RIPE
+status:         LEGACY
+remarks:        ticket.velia.net 110128
+notify:         
+mnt-by:         FGK-MNT
+created:        2018-04-24T19:17:51Z
+last-modified:  2018-04-24T19:17:51Z
+source:         RIPE
+
+organisation:   ORG-PNL20-RIPE
+org-name:       Pi NET, LLC
+org-type:       OTHER
+address:        No 74, Tang Thiet Giap, Co Nhue
+address:        Tu Liem
+address:        100000 Hanoi
+address:        Viet Nam
+phone:          +84 977471775
+e-mail:         
+admin-c:        PNL16-RIPE
+tech-c:         PNL16-RIPE
+abuse-c:        PNL16-RIPE
+mnt-ref:        FGK-MNT
+mnt-by:         FGK-MNT
+created:        2017-09-07T11:08:29Z
+last-modified:  2017-09-07T11:08:29Z
+source:         RIPE
+
+role:           Pi NET, LLC
+address:        No 74, Tang Thiet Giap, Co Nhue
+address:        Tu Liem
+address:        100000 Hanoi
+address:        Viet Nam
+phone:          +84 977471775
+e-mail:         
+nic-hdl:        PNL16-RIPE
+mnt-by:         FGK-MNT
+created:        2017-09-07T11:08:29Z
+last-modified:  2017-09-07T11:08:29Z
+source:         RIPE
+abuse-mailbox:  
+
+route:          151.106.0.0/19
+descr:          velia.net
+origin:         AS29066
+notify:         
+mnt-by:         FGK-MNT
+created:        2017-11-03T11:55:17Z
+last-modified:  2017-11-03T11:55:17Z
+source:         RIPE
+
+</WhoisObj:Remarks>
+                </cybox:Properties>
+            </cybox:Object>
+        </cybox:Observable>
+    </stix:Observables>
+    <stix:Indicators>
+        <stix:Indicator id="NCCIC:indicator-8346c37b-c178-4a42-815a-1315ed0d7647" timestamp="2020-05-08T14:16:45.418509+00:00" xsi:type='indicator:IndicatorType'>
+            <indicator:Title>MD5 and SHA1 of Malicious File</indicator:Title>
+            <indicator:Type>Malware Artifacts</indicator:Type>
+            <indicator:Observable id="NCCIC:Observable-52249b4d-4af3-4267-b17d-595ec9632722">
+                <cybox:Object id="NCCIC:File-13624711-796d-40c3-9e83-89643258bbe9">
+                    <cybox:Properties xsi:type="FileObj:FileObjectType">
+                        <FileObj:Hashes>
+                            <cyboxCommon:Hash>
+                                <cyboxCommon:Type condition="Equals" xsi:type="cyboxVocabs:HashNameVocab-1.0">MD5</cyboxCommon:Type>
+                                <cyboxCommon:Simple_Hash_Value condition="Equals">3eae562fd6a0232eb874914364b6ca8a</cyboxCommon:Simple_Hash_Value>
+                            </cyboxCommon:Hash>
+                            <cyboxCommon:Hash>
+                                <cyboxCommon:Type condition="Equals" xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA1</cyboxCommon:Type>
+                                <cyboxCommon:Simple_Hash_Value condition="Equals">b704762f817556f82a6addc3f11a45089d92ba18</cyboxCommon:Simple_Hash_Value>
+                            </cyboxCommon:Hash>
+                            <cyboxCommon:Hash>
+                                <cyboxCommon:Type condition="Equals" xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA256</cyboxCommon:Type>
+                                <cyboxCommon:Simple_Hash_Value condition="Equals">ce108a3810fc2b644ca65c791941f11d0c389f3dea4ba40cf276d5ac6c93d322</cyboxCommon:Simple_Hash_Value>
+                            </cyboxCommon:Hash>
+                        </FileObj:Hashes>
+                    </cybox:Properties>
+                </cybox:Object>
+            </indicator:Observable>
+            <indicator:Indicated_TTP>
+                <stixCommon:TTP idref="NCCIC:ttp-bcfbb72f-29a6-47d3-ae27-8526becef6c9" xsi:type='ttp:TTPType'/>
+            </indicator:Indicated_TTP>
+            <indicator:Indicated_TTP>
+                <stixCommon:TTP idref="NCCIC:ttp-b4c6c9b6-613b-4d27-a9c3-34f17bd05b6e" xsi:type='ttp:TTPType'/>
+            </indicator:Indicated_TTP>
+            <indicator:Indicated_TTP>
+                <stixCommon:TTP idref="NCCIC:ttp-067b9e96-3a28-4a95-8a79-cd876f529edf" xsi:type='ttp:TTPType'/>
+            </indicator:Indicated_TTP>
+            <indicator:Indicated_TTP>
+                <stixCommon:TTP idref="NCCIC:ttp-609845b1-fabd-4644-b73b-fe89fe60b53d" xsi:type='ttp:TTPType'/>
+            </indicator:Indicated_TTP>
+            <indicator:Producer>
+                <stixCommon:Identity>
+                    <stixCommon:Name>NCCIC</stixCommon:Name>
+                </stixCommon:Identity>
+                <stixCommon:Time>
+                    <cyboxCommon:Produced_Time>2020-05-08T14:16:45+00:00</cyboxCommon:Produced_Time>
+                </stixCommon:Time>
+            </indicator:Producer>
+        </stix:Indicator>
+        <stix:Indicator id="NCCIC:indicator-b4f02b1d-4261-421a-b8ab-e0fecad83657" timestamp="2020-05-08T14:16:45.530004+00:00" xsi:type='indicator:IndicatorType'>
+            <indicator:Title>Malicious IP</indicator:Title>
+            <indicator:Type>IP Watchlist</indicator:Type>
+            <indicator:Observable id="NCCIC:Observable-a13dcc4b-3495-40b6-9670-9a9e095d2c6e">
+                <cybox:Object id="NCCIC:Address-2c35e5c4-ea08-4f65-b15f-de3c11360147">
+                    <cybox:Properties xsi:type="AddressObj:AddressObjectType" category="ipv4-addr">
+                        <AddressObj:Address_Value condition="Equals">151.106.30.115</AddressObj:Address_Value>
+                    </cybox:Properties>
+                </cybox:Object>
+            </indicator:Observable>
+            <indicator:Indicated_TTP>
+                <stixCommon:TTP idref="NCCIC:ttp-b114b199-f7c9-4b84-98ba-1db5e400cffd" xsi:type='ttp:TTPType'/>
+            </indicator:Indicated_TTP>
+            <indicator:Producer>
+                <stixCommon:Identity>
+                    <stixCommon:Name>NCCIC</stixCommon:Name>
+                </stixCommon:Identity>
+                <stixCommon:Time>
+                    <cyboxCommon:Produced_Time>2020-05-08T14:16:45+00:00</cyboxCommon:Produced_Time>
+                </stixCommon:Time>
+            </indicator:Producer>
+        </stix:Indicator>
+    </stix:Indicators>
+    <stix:TTPs>
+        <stix:TTP id="NCCIC:ttp-bcfbb72f-29a6-47d3-ae27-8526becef6c9" timestamp="2020-05-08T14:16:45.417505+00:00" xsi:type='ttp:TTPType'>
+            <ttp:Title>MAEC Characterization of 3eae562fd6a0232eb874914364b6ca8a</ttp:Title>
+            <ttp:Behavior>
+                <ttp:Malware>
+                    <ttp:Malware_Instance xsi:type='stix-maec:MAEC4.1InstanceType'>
+                        <stix-maec:MAEC id="NCCIC:package-34636c3f-4c5d-464a-8512-66a647711815" schema_version="2.1">
+                            <maecPackage:Malware_Subjects>
+                                <maecPackage:Malware_Subject id="NCCIC:malware_subject-83187810-31cd-40c4-b7c7-7a1d53b98e7d">
+                                    <maecPackage:Malware_Instance_Object_Attributes idref="NCCIC:File-26c91b3f-e3c2-4d19-aaca-77b2b23d48ce"/>
+                                    <maecPackage:Findings_Bundles>
+                                        <maecPackage:Bundle defined_subject="true" id="NCCIC:bundle-df29d025-f42a-4317-91b0-d5238ec618b6" schema_version="4.1">
+                                            <maecBundle:AV_Classifications>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>ClamAV</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Doc.Dropper.Agent-6614040-0</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>McAfee</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>RDN/Generic Exploit</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>NetGate</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Exploit.Win32.Agent</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>Symantec</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Trojan.Mdropper</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>BitDefender</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Trojan.Agent.DBOV</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>Microsoft Security Essentials</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Exploit:O97M/CVE-2017-11882</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>Sophos</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Exp/20180802-B</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>TrendMicro House Call</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>TROJ_FR.1405EAFC</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>TrendMicro</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>TROJ_FR.1405EAFC</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>Emsisoft</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Trojan.Agent.DBOV (B)</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>ESET</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Win32/Exploit.Agent.LS trojan</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>TACHYON</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Suspicious/W97.CVE-2017-11882</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>Ikarus</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Trojan.Office.Doc</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                            </maecBundle:AV_Classifications>
+                                        </maecPackage:Bundle>
+                                    </maecPackage:Findings_Bundles>
+                                </maecPackage:Malware_Subject>
+                            </maecPackage:Malware_Subjects>
+                        </stix-maec:MAEC>
+                    </ttp:Malware_Instance>
+                </ttp:Malware>
+            </ttp:Behavior>
+            <ttp:Resources>
+                <ttp:Infrastructure>
+                    <ttp:Observable_Characterization cybox_major_version="2" cybox_minor_version="1" cybox_update_version="0">
+                        <cybox:Observable idref="NCCIC:Observable-277d3e4f-8f8a-45b3-bc5f-61f573f3ae22">
+                        </cybox:Observable>
+                    </ttp:Observable_Characterization>
+                </ttp:Infrastructure>
+            </ttp:Resources>
+        </stix:TTP>
+        <stix:TTP id="NCCIC:ttp-b4c6c9b6-613b-4d27-a9c3-34f17bd05b6e" timestamp="2020-05-08T14:16:45.439234+00:00" xsi:type='ttp:TTPType'>
+            <ttp:Title>CVE-2017-11882</ttp:Title>
+            <ttp:Resources>
+                <ttp:Infrastructure>
+                    <ttp:Observable_Characterization cybox_major_version="2" cybox_minor_version="1" cybox_update_version="0">
+                        <cybox:Observable idref="NCCIC:Observable-277d3e4f-8f8a-45b3-bc5f-61f573f3ae22">
+                        </cybox:Observable>
+                    </ttp:Observable_Characterization>
+                </ttp:Infrastructure>
+            </ttp:Resources>
+        </stix:TTP>
+        <stix:TTP id="NCCIC:ttp-067b9e96-3a28-4a95-8a79-cd876f529edf" timestamp="2020-05-08T14:16:45.439742+00:00" xsi:type='ttp:TTPType'>
+            <ttp:Title>dropper</ttp:Title>
+            <ttp:Resources>
+                <ttp:Infrastructure>
+                    <ttp:Observable_Characterization cybox_major_version="2" cybox_minor_version="1" cybox_update_version="0">
+                        <cybox:Observable idref="NCCIC:Observable-277d3e4f-8f8a-45b3-bc5f-61f573f3ae22">
+                        </cybox:Observable>
+                    </ttp:Observable_Characterization>
+                </ttp:Infrastructure>
+            </ttp:Resources>
+        </stix:TTP>
+        <stix:TTP id="NCCIC:ttp-609845b1-fabd-4644-b73b-fe89fe60b53d" timestamp="2020-05-08T14:16:45.440230+00:00" xsi:type='ttp:TTPType'>
+            <ttp:Title>trojan</ttp:Title>
+            <ttp:Resources>
+                <ttp:Infrastructure>
+                    <ttp:Observable_Characterization cybox_major_version="2" cybox_minor_version="1" cybox_update_version="0">
+                        <cybox:Observable idref="NCCIC:Observable-277d3e4f-8f8a-45b3-bc5f-61f573f3ae22">
+                        </cybox:Observable>
+                    </ttp:Observable_Characterization>
+                </ttp:Infrastructure>
+            </ttp:Resources>
+        </stix:TTP>
+        <stix:TTP id="NCCIC:ttp-b114b199-f7c9-4b84-98ba-1db5e400cffd" timestamp="2020-05-08T14:16:45.531133+00:00" xsi:type='ttp:TTPType'>
+            <ttp:Title>command-and-control</ttp:Title>
+            <ttp:Resources>
+                <ttp:Infrastructure>
+                    <ttp:Observable_Characterization cybox_major_version="2" cybox_minor_version="1" cybox_update_version="0">
+                        <cybox:Observable idref="NCCIC:Observable-07a30f1c-90da-4d2b-b7f1-13f9d7d75444">
+                        </cybox:Observable>
+                    </ttp:Observable_Characterization>
+                </ttp:Infrastructure>
+            </ttp:Resources>
+        </stix:TTP>
+    </stix:TTPs>
+    <stix:Incidents>
+        <stix:Incident id="NCCIC:incident-e7497391-4deb-4e10-ad32-6a906ce74a5a" timestamp="2020-05-07T11:16:21-04:00" xsi:type='incident:IncidentType'>
+            <incident:Title>10211350.r1.v2</incident:Title>
+            <incident:Description><![CDATA[##### Incident Summary #####
+
+None
+
+##### Report Summary #####
+
+NCCIC received one artifact which was a Microsoft Excel Open XML Format spreadsheet file (XLSX) with a protected workbook. The file contains hidden malicious code designed to download and execute a payload onto the victim’s system.
+
+##### Conclusion #####
+
+None
+
+##### Mitigation #####
+
+None]]></incident:Description>
+            <incident:Categories>
+                <incident:Category xsi:type="stixVocabs:IncidentCategoryVocab-1.0">Malicious Code</incident:Category>
+            </incident:Categories>
+            <incident:Related_Indicators>
+                <incident:Related_Indicator>
+                    <stixCommon:Indicator idref="NCCIC:indicator-8346c37b-c178-4a42-815a-1315ed0d7647" xsi:type='indicator:IndicatorType'/>
+                </incident:Related_Indicator>
+                <incident:Related_Indicator>
+                    <stixCommon:Indicator idref="NCCIC:indicator-b4f02b1d-4261-421a-b8ab-e0fecad83657" xsi:type='indicator:IndicatorType'/>
+                </incident:Related_Indicator>
+            </incident:Related_Indicators>
+            <incident:Related_Observables>
+                <incident:Related_Observable>
+                    <stixCommon:Relationship>Malicious Artifact Detected</stixCommon:Relationship>
+                    <stixCommon:Observable idref="NCCIC:Observable-277d3e4f-8f8a-45b3-bc5f-61f573f3ae22">
+                    </stixCommon:Observable>
+                </incident:Related_Observable>
+                <incident:Related_Observable>
+                    <stixCommon:Relationship>Malicious Artifact Detected</stixCommon:Relationship>
+                    <stixCommon:Observable idref="NCCIC:Observable-b924e713-1c2f-49e9-95d4-f657496498b0">
+                    </stixCommon:Observable>
+                </incident:Related_Observable>
+                <incident:Related_Observable>
+                    <stixCommon:Relationship>Malicious Artifact Detected</stixCommon:Relationship>
+                    <stixCommon:Observable idref="NCCIC:Observable-2feec6ef-4976-46c6-aea8-94de6233b1af">
+                    </stixCommon:Observable>
+                </incident:Related_Observable>
+                <incident:Related_Observable>
+                    <stixCommon:Relationship>Malicious Artifact Detected</stixCommon:Relationship>
+                    <stixCommon:Observable idref="NCCIC:Observable-9e4a6ec9-9747-4ef1-b7af-977b3ef1a86e">
+                    </stixCommon:Observable>
+                </incident:Related_Observable>
+                <incident:Related_Observable>
+                    <stixCommon:Relationship>Malicious Artifact Detected</stixCommon:Relationship>
+                    <stixCommon:Observable idref="NCCIC:Observable-c73ddeee-3261-4856-bd1a-e5657874df20">
+                    </stixCommon:Observable>
+                </incident:Related_Observable>
+                <incident:Related_Observable>
+                    <stixCommon:Relationship>Malicious Artifact Detected</stixCommon:Relationship>
+                    <stixCommon:Observable idref="NCCIC:Observable-4acc3ccb-ec43-4b7e-aacc-88f51225bc4e">
+                    </stixCommon:Observable>
+                </incident:Related_Observable>
+                <incident:Related_Observable>
+                    <stixCommon:Relationship>Malicious Artifact Detected</stixCommon:Relationship>
+                    <stixCommon:Observable idref="NCCIC:Observable-05859568-b993-4752-960b-61d9f2c7563a">
+                    </stixCommon:Observable>
+                </incident:Related_Observable>
+                <incident:Related_Observable>
+                    <stixCommon:Relationship>Malicious Artifact Detected</stixCommon:Relationship>
+                    <stixCommon:Observable idref="NCCIC:Observable-db49a061-cf17-454b-a383-c6e0b87de4c7">
+                    </stixCommon:Observable>
+                </incident:Related_Observable>
+                <incident:Related_Observable>
+                    <stixCommon:Relationship>Malicious Artifact Detected</stixCommon:Relationship>
+                    <stixCommon:Observable idref="NCCIC:Observable-07a30f1c-90da-4d2b-b7f1-13f9d7d75444">
+                    </stixCommon:Observable>
+                </incident:Related_Observable>
+                <incident:Related_Observable>
+                    <stixCommon:Relationship>Malicious Artifact Detected</stixCommon:Relationship>
+                    <stixCommon:Observable idref="NCCIC:Observable-08ba90a1-ca7a-4796-af93-95a41939fc08">
+                    </stixCommon:Observable>
+                </incident:Related_Observable>
+                <incident:Related_Observable>
+                    <stixCommon:Relationship>Malicious Artifact Detected</stixCommon:Relationship>
+                    <stixCommon:Observable idref="NCCIC:Observable-6ae56164-d7a6-4bd1-b343-23304ef3324a">
+                    </stixCommon:Observable>
+                </incident:Related_Observable>
+                <incident:Related_Observable>
+                    <stixCommon:Relationship>Malicious Artifact Detected</stixCommon:Relationship>
+                    <stixCommon:Observable idref="NCCIC:Observable-96f2870f-b8b8-43fd-9543-3aa3f914ed45">
+                    </stixCommon:Observable>
+                </incident:Related_Observable>
+            </incident:Related_Observables>
+            <incident:Leveraged_TTPs>
+                <incident:Leveraged_TTP>
+                    <stixCommon:TTP idref="NCCIC:ttp-bcfbb72f-29a6-47d3-ae27-8526becef6c9" xsi:type='ttp:TTPType'/>
+                </incident:Leveraged_TTP>
+                <incident:Leveraged_TTP>
+                    <stixCommon:TTP idref="NCCIC:ttp-b4c6c9b6-613b-4d27-a9c3-34f17bd05b6e" xsi:type='ttp:TTPType'/>
+                </incident:Leveraged_TTP>
+                <incident:Leveraged_TTP>
+                    <stixCommon:TTP idref="NCCIC:ttp-067b9e96-3a28-4a95-8a79-cd876f529edf" xsi:type='ttp:TTPType'/>
+                </incident:Leveraged_TTP>
+                <incident:Leveraged_TTP>
+                    <stixCommon:TTP idref="NCCIC:ttp-609845b1-fabd-4644-b73b-fe89fe60b53d" xsi:type='ttp:TTPType'/>
+                </incident:Leveraged_TTP>
+                <incident:Leveraged_TTP>
+                    <stixCommon:TTP idref="NCCIC:ttp-b114b199-f7c9-4b84-98ba-1db5e400cffd" xsi:type='ttp:TTPType'/>
+                </incident:Leveraged_TTP>
+            </incident:Leveraged_TTPs>
+        </stix:Incident>
+    </stix:Incidents>
+</stix:STIX_Package>

