@@ -35,7 +35,7 @@ The obvious downside to ROUGE is that it does not compare *semantics* in summari
 
 #### BERTScore
 
-From the [paper](https://arxiv.org/pdf/1904.09675.pdf)"
+From the [paper](https://arxiv.org/pdf/1904.09675.pdf):
 > "BERTSCORE computes the similarity of two sentences as a sum of cosine similarities between their tokens’ embeddings"
 
 #### BARTScore
