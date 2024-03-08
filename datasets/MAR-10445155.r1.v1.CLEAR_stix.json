@@ -1,0 +1,243 @@
+{
+    "type": "bundle",
+    "id": "bundle--9de1e2b6-5606-429c-8c3f-bd0e4c59dae5",
+    "objects": [
+        {
+            "type": "identity",
+            "spec_version": "2.1",
+            "id": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created_by_ref": "identity--42ac3c92-60d2-418f-ba8e-838944e6110b",
+            "created": "2023-04-12T17:53:09.646Z",
+            "modified": "2023-04-12T17:53:09.646Z",
+            "name": "GeminiProduction_CMA",
+            "description": "Cybersecurity and Infrastructure Security Agency Production Identity. Code and Media Analysis.",
+            "identity_class": "system",
+            "confidence": 100,
+            "lang": "en",
+            "object_marking_refs": [
+                "marking-definition--bab4a63c-aed9-4cf5-a766-dfca5abac2bb"
+            ]
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--da8a3448-d8b5-5439-88b0-2f04fefdabe9",
+            "hashes": {
+                "MD5": "5588286a702e0c36c8318be0b164fa8c",
+                "SHA-1": "5449f3f141958de2d1140bc8323f5ac95c203287",
+                "SHA-256": "7d75244449fb5c25d8f196a43a6eb9e453652b2185392376e7d44c21bd8431e7",
+                "SHA-512": "105e72e1f1e3af8942e0e77e1294f74cd0518f7d601e4e2f20f7ed9db3cd1c67739c31e085e028eafe0394af74b2fbeb6ffbffb67d7731023a04c53a6784924e",
+                "SSDEEP": "25165824:d1AuQ/FFyK8db8kdjeyPpiMh5gbiwcfYjh+dkfaeLq4H/LLhtf:Q/FoK8rteknh54ZcfvdkfpnLhtf"
+            },
+            "size": 1200732656,
+            "name": "3LXJyAv6Gf.exe",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--9e2208b7-ab35-4cc4-9d89-135c9f652c2f",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "name": "3LXJyAv6Gf.exe",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact is a variant of the TrueBot downloader. The file is padded with over one gigabyte (Gb) of junk code, designed to hinder analysis. When the bot is executed on the system, it will check the current Operating System (OS) version (RtlGetVersion) and the processor architecture (GetNativeSystemInfo).  From this information the bot will create a unique ID for the compromised system. It will store the ID in C:\\ProgramData as a randomly named 13 character file with a .JSONIP extension, e.g. \u2018IgtyXEQuCEvAM.JSONIP\u2019.\r\n\r\nThe malware proceeds to enumerate all running processes on the system. The bot configuration contains a list of common Windows processes that are excluded from its list. The remaining process names are concatenated into a base64 encoded string. The malware specifically looks for the presence of the following disassembly and debugging tools:\r\n\r\n\u2014Begin Disassembly & Debugging Tools\u2014\r\nIDA Pro\r\nProcess Monitor\r\nProcessHacker\r\nProcess Explorer\r\nCFF Explorer\r\nResource Hacker\r\nCheatengine-x86_64\r\nOllyDbg\r\nRadare2\r\nX64dbg\r\nWinDbg\r\nZeta Debugger\r\nRock Debugger\r\nObsidian debugger\r\n\u2014End Disassembly & Debugging Tools\u2014\r\n\r\nThe presence of these tools does not change the execution of the malware. They are also concatenated into a base64 encoded string and sent along with the system information.  \r\n\r\nNext, the malware will collect the ComputerName and Domain name of the system. All of the collected information and the unique ID is sent to a hard-coded Uniform Resource Locator (URL) in a POST request using a unique User-agent string:\r\n\r\n\u2014Begin POST Request\u2014\r\nPOST\r\ndremmfyttrred.com/dns.php\r\nContent-type: application/x-www-form-urlencoded\r\nMozilla/112.0 (compatible; MSIE 11.0; Windows NT 10.00)\r\n\u2014End POST Request\u2014\r\n\r\nThe malware uses a second obfuscated domain to accept commands and receive additional payloads. The configuration contains two base64 encoded strings that the malware will decode and run through a string operation to generate a unique hexadecimal string. The hexadecimal string is decoded using the embedded RC4 key \u2018YiPumybosaWiWexy\u2019. The following URL was decoded from the strings:\r\n\r\n\u2014Begin Decoded URL\u2014\r\ndroogggdhfhf.com/gate.php\r\n\u2014End Decoded URL\u2014",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10445155_01 rule_content=rule CISA_10445155_01 : TRUEBOT downloader\n{\n\tmeta:\n\t\tAuthor = \"CISA Code & Media Analysis\"\n\t\tIncident = \"10445155\"\n\t\tDate = \"2023-05-17\"\n\t\tLast_Modified = \"20230523_1500\"\n\t\tActor = \"n/a\"\n\t\tFamily = \"TRUEBOT\"\n\t\tCapabilities = \"n/a\"\n\t\tMalware_Type = \"downloader\"\n\t\tTool_Type = \"n/a\"\n\t\tDescription = \"Detects TRUEBOT downloader samples\"\n\t\tSHA256 = \"7d75244449fb5c25d8f196a43a6eb9e453652b2185392376e7d44c21bd8431e7\"\n\tstrings:\n\t\t$s1 = { 64 72 65 6d 6d 66 79 74 74 72 72 65 64 2e 63 6f 6d }\n\t\t$s2 = { 4e 73 75 32 4f 64 69 77 6f 64 4f 73 32 }\n\t\t$s3 = { 59 69 50 75 6d 79 62 6f 73 61 57 69 57 65 78 79 }\n\t\t$s4 = { 72 65 70 6f 74 73 5f 65 72 72 6f 72 2e 74 78 74 }\n\t\t$s5 = { 4c 6b 6a 64 73 6c 66 6a 33 32 6f 69 6a 72 66 65 77 67 77 2e 6d 70 34 }\n\t\t$s6 = { 54 00 72 00 69 00 67 00 67 00 65 00 72 00 31 00 32 }\n\t\t$s7 = { 54 00 55 00 72 00 66 00 57 00 65 00 73 00 54 00 69 00 66 00 73 00 66 }\n\tcondition:\n\t\t5 of them\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-06-08T17:25:23.184675Z"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--66fd3ba3-347a-4d95-a491-348e0f58c073",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "product": "eset",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "a variant of Win64/Agent.BVF trojan",
+            "result": "unknown",
+            "sample_ref": "file--da8a3448-d8b5-5439-88b0-2f04fefdabe9"
+        },
+        {
+            "type": "malware",
+            "spec_version": "2.1",
+            "id": "malware--a7c380c8-3b51-4997-8ba9-a368dba5fa5a",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact is a variant of the TrueBot downloader. The file is padded with over one gigabyte (Gb) of junk code, designed to hinder analysis. When the bot is executed on the system, it will check the current Operating System (OS) version (RtlGetVersion) and the processor architecture (GetNativeSystemInfo).  From this information the bot will create a unique ID for the compromised system. It will store the ID in C:\\ProgramData as a randomly named 13 character file with a .JSONIP extension, e.g. \u2018IgtyXEQuCEvAM.JSONIP\u2019.\r\n\r\nThe malware proceeds to enumerate all running processes on the system. The bot configuration contains a list of common Windows processes that are excluded from its list. The remaining process names are concatenated into a base64 encoded string. The malware specifically looks for the presence of the following disassembly and debugging tools:\r\n\r\n\u2014Begin Disassembly & Debugging Tools\u2014\r\nIDA Pro\r\nProcess Monitor\r\nProcessHacker\r\nProcess Explorer\r\nCFF Explorer\r\nResource Hacker\r\nCheatengine-x86_64\r\nOllyDbg\r\nRadare2\r\nX64dbg\r\nWinDbg\r\nZeta Debugger\r\nRock Debugger\r\nObsidian debugger\r\n\u2014End Disassembly & Debugging Tools\u2014\r\n\r\nThe presence of these tools does not change the execution of the malware. They are also concatenated into a base64 encoded string and sent along with the system information.  \r\n\r\nNext, the malware will collect the ComputerName and Domain name of the system. All of the collected information and the unique ID is sent to a hard-coded Uniform Resource Locator (URL) in a POST request using a unique User-agent string:\r\n\r\n\u2014Begin POST Request\u2014\r\nPOST\r\ndremmfyttrred.com/dns.php\r\nContent-type: application/x-www-form-urlencoded\r\nMozilla/112.0 (compatible; MSIE 11.0; Windows NT 10.00)\r\n\u2014End POST Request\u2014\r\n\r\nThe malware uses a second obfuscated domain to accept commands and receive additional payloads. The configuration contains two base64 encoded strings that the malware will decode and run through a string operation to generate a unique hexadecimal string. The hexadecimal string is decoded using the embedded RC4 key \u2018YiPumybosaWiWexy\u2019. The following URL was decoded from the strings:\r\n\r\n\u2014Begin Decoded URL\u2014\r\ndroogggdhfhf.com/gate.php\r\n\u2014End Decoded URL\u2014",
+            "malware_types": [
+                "trojan"
+            ],
+            "is_family": false,
+            "sample_refs": [
+                "file--da8a3448-d8b5-5439-88b0-2f04fefdabe9"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--5b5336d5-f757-4dd6-9fde-6b5ced13097e",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "name": "3LXJyAv6Gf.exe",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[file:hashes.'MD5'='5588286a702e0c36c8318be0b164fa8c' OR file:hashes.'SHA-1'='5449f3f141958de2d1140bc8323f5ac95c203287' OR file:hashes.'SHA-256'='7d75244449fb5c25d8f196a43a6eb9e453652b2185392376e7d44c21bd8431e7' OR file:hashes.'SHA-512'='105e72e1f1e3af8942e0e77e1294f74cd0518f7d601e4e2f20f7ed9db3cd1c67739c31e085e028eafe0394af74b2fbeb6ffbffb67d7731023a04c53a6784924e']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-06-08T17:25:23.188246Z"
+        },
+        {
+            "type": "domain-name",
+            "spec_version": "2.1",
+            "id": "domain-name--5cb475f7-57d2-55f2-b568-9bb533815510",
+            "value": "dremmfyttrred.com",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--2a9d81ec-df2b-4d43-a7f9-54a886670c48",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "name": "dremmfyttrred.com",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "3LXJyA6Gf.exe attempts to send the collected system information to this domain.",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[domain-name:value = 'dremmfyttrred.com']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-06-08T17:25:23.199541Z"
+        },
+        {
+            "type": "network-traffic",
+            "spec_version": "2.1",
+            "id": "network-traffic--e4ddbe67-5573-5805-95bd-a1f98e169dc4",
+            "dst_ref": "domain-name--5cb475f7-57d2-55f2-b568-9bb533815510",
+            "protocols": [
+                "http"
+            ],
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "domain-name",
+            "spec_version": "2.1",
+            "id": "domain-name--62a17b86-a4b5-5d91-9b45-843e6f1b7dfd",
+            "value": "droogggdhfhf.com",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--7beb74fb-0990-45e7-a49a-35e94991e909",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "name": "droogggdhfhf.com",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "3LXJyA6Gf.exe receives commands and payloads from this domain.",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[domain-name:value = 'droogggdhfhf.com']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-06-08T17:25:23.212991Z"
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--272e1cf9-705f-4dfa-ad91-36c3f81cd81d",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "relationship_type": "communicates-with",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "source_ref": "malware--a7c380c8-3b51-4997-8ba9-a368dba5fa5a",
+            "target_ref": "domain-name--5cb475f7-57d2-55f2-b568-9bb533815510"
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--f0c488b8-df76-44c6-bef9-f299e7b07640",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-05-31T22:05:07.000Z",
+            "relationship_type": "communicates-with",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "source_ref": "malware--a7c380c8-3b51-4997-8ba9-a368dba5fa5a",
+            "target_ref": "domain-name--62a17b86-a4b5-5d91-9b45-843e6f1b7dfd"
+        },
+        {
+            "type": "report",
+            "spec_version": "2.1",
+            "id": "report--056f5ef7-b397-4d65-b5d1-1e390f107aee",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:07.000Z",
+            "modified": "2023-06-08T17:25:23.227759Z",
+            "name": "MAR-10445155.r1.v1 TrueBot",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "CISA received one Windows Portable Executable (PE) file for analysis. The file is a variant of TrueBot malware. It is designed to collect system information and report it to a command-and-control (C2). The bot is also capable of downloading and executing additional payloads.",
+            "report_types": [
+                "observed-data",
+                "malware",
+                "indicator"
+            ],
+            "published": "2023-05-31T22:05:07Z",
+            "object_refs": [
+                "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+                "file--da8a3448-d8b5-5439-88b0-2f04fefdabe9",
+                "indicator--9e2208b7-ab35-4cc4-9d89-135c9f652c2f",
+                "malware-analysis--66fd3ba3-347a-4d95-a491-348e0f58c073",
+                "malware--a7c380c8-3b51-4997-8ba9-a368dba5fa5a",
+                "indicator--5b5336d5-f757-4dd6-9fde-6b5ced13097e",
+                "domain-name--5cb475f7-57d2-55f2-b568-9bb533815510",
+                "indicator--2a9d81ec-df2b-4d43-a7f9-54a886670c48",
+                "network-traffic--e4ddbe67-5573-5805-95bd-a1f98e169dc4",
+                "domain-name--62a17b86-a4b5-5d91-9b45-843e6f1b7dfd",
+                "indicator--7beb74fb-0990-45e7-a49a-35e94991e909",
+                "relationship--272e1cf9-705f-4dfa-ad91-36c3f81cd81d",
+                "relationship--f0c488b8-df76-44c6-bef9-f299e7b07640"
+            ]
+        }
+    ]
+}
