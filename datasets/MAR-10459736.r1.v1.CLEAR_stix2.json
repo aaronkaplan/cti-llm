@@ -1,0 +1,138 @@
+{
+    "type": "bundle",
+    "id": "bundle--78d7405d-c769-4efb-9550-405a358a2d76",
+    "objects": [
+        {
+            "type": "identity",
+            "spec_version": "2.1",
+            "id": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created_by_ref": "identity--42ac3c92-60d2-418f-ba8e-838944e6110b",
+            "created": "2023-04-12T17:53:09.646Z",
+            "modified": "2023-04-12T17:53:09.646Z",
+            "name": "GeminiProduction_CMA",
+            "description": "Cybersecurity and Infrastructure Security Agency Production Identity. Code and Media Analysis.",
+            "identity_class": "system",
+            "confidence": 100,
+            "lang": "en",
+            "object_marking_refs": [
+                "marking-definition--bab4a63c-aed9-4cf5-a766-dfca5abac2bb"
+            ]
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--efd3fd98-6f1b-590d-bdd4-1e0753d3a689",
+            "hashes": {
+                "MD5": "77e1e9bf69b09ed0840534adb8258540",
+                "SHA-1": "deadca9bd85ee5c4e086fd81eee09407b769e9b6",
+                "SHA-256": "0af253e60456b03af49cc675f71d47b2dd9a48f50a927e43b9d8116985c06459",
+                "SHA-512": "3ad6bd00c4195c9b1757a9d697196e8beffb343c331509c2eda24bbbd009cc1af552a1900ab04d169a22d273e6359cb2ff149050a7f792b9630108a4af226e2d",
+                "SSDEEP": "98304:1z2EGoxipg0NPbuqbVxbNgqE+Q+F4YGZLx4BAFm/CyU:LLXYGNFLj"
+            },
+            "size": 5034648,
+            "name": "ssld",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--3e5f8fc0-da1f-47f0-8b6e-f4c4b033ce47",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:59.000Z",
+            "modified": "2023-08-09T21:12:59.000Z",
+            "name": "ssld",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "The file 'ssld' is a Linux ELF reverse shell and is a variant of WHIRLPOOL malware used on the Barracuda Email Security Gateway (ESG) device (Figure 1). The file looks for an encoded string with a '.io' extension (Figure 2). The string will be decoded and the data will be passed as the C2 which will include the Internet Protocol (IP) address and port number used to establish a reverse shell.",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10452108_02 rule_content=rule CISA_10452108_02 : WHIRLPOOL backdoor communicates_with_c2 installs_other_components\n{\n\tmeta:\n\t\tAuthor = \"CISA Code & Media Analysis\"\n\t\tIncident = \"10452108\"\n\t\tDate = \"2023-06-20\"\n\t\tLast_Modified = \"20230804_1730\"\n\t\tActor = \"n/a\"\n\t\tFamily = \"WHIRLPOOL\"\n\t\tCapabilities = \"communicates-with-c2 installs-other-components\"\n\t\tMalware_Type = \"backdoor\"\n\t\tTool_Type = \"unknown\"\n\t\tDescription = \"Detects malicious Linux WHIRLPOOL samples\"\n\t\tSHA256_1 = \"83ca636253fd1eb898b244855838e2281f257bbe8ead428b69528fc50b60ae9c\"\n\t\tSHA256_2 = \"8849a3273e0362c45b4928375d196714224ec22cb1d2df5d029bf57349860347\"\n\tstrings:\n\t\t$s0 = { 65 72 72 6f 72 20 2d 31 20 65 78 69 74 }\n\t\t$s1 = { 63 72 65 61 74 65 20 73 6f 63 6b 65 74 20 65 72 72 6f 72 3a 20 25 73 28 65 72 72 6f 72 3a 20 25 64 29 }\n\t\t$s2 = { c7 00 20 32 3e 26 66 c7 40 04 31 00 }\n\t\t$a3 = { 70 6c 61 69 6e 5f 63 6f 6e 6e 65 63 74 }\n\t\t$a4 = { 63 6f 6e 6e 65 63 74 20 65 72 72 6f 72 3a 20 25 73 28 65 72 72 6f 72 3a 20 25 64 29 }\n\t\t$a5 = { 73 73 6c 5f 63 6f 6e 6e 65 63 74 }\n\tcondition:\n\t\tuint32(0) == 0x464c457f and 4 of them\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-08-17T19:19:43.944668Z"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--07141506-e989-4a25-b510-797383e9b01a",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:59.000Z",
+            "modified": "2023-08-09T21:12:59.000Z",
+            "product": "eset",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "a variant of Linux/WhirlPool.A trojan",
+            "result": "unknown",
+            "sample_ref": "file--efd3fd98-6f1b-590d-bdd4-1e0753d3a689"
+        },
+        {
+            "type": "malware",
+            "spec_version": "2.1",
+            "id": "malware--626a2549-5775-43a8-b8bb-2fe2682a6dae",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:59.000Z",
+            "modified": "2023-08-09T21:12:59.000Z",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "The file 'ssld' is a Linux ELF reverse shell and is a variant of WHIRLPOOL malware used on the Barracuda Email Security Gateway (ESG) device (Figure 1). The file looks for an encoded string with a '.io' extension (Figure 2). The string will be decoded and the data will be passed as the C2 which will include the Internet Protocol (IP) address and port number used to establish a reverse shell.",
+            "malware_types": [
+                "trojan"
+            ],
+            "is_family": false,
+            "sample_refs": [
+                "file--efd3fd98-6f1b-590d-bdd4-1e0753d3a689"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--31532fc0-d3ee-479f-8482-a4d49732d5af",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:59.000Z",
+            "modified": "2023-08-09T21:12:59.000Z",
+            "name": "ssld",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[file:hashes.'MD5'='77e1e9bf69b09ed0840534adb8258540' OR file:hashes.'SHA-1'='deadca9bd85ee5c4e086fd81eee09407b769e9b6' OR file:hashes.'SHA-256'='0af253e60456b03af49cc675f71d47b2dd9a48f50a927e43b9d8116985c06459' OR file:hashes.'SHA-512'='3ad6bd00c4195c9b1757a9d697196e8beffb343c331509c2eda24bbbd009cc1af552a1900ab04d169a22d273e6359cb2ff149050a7f792b9630108a4af226e2d']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-08-17T19:19:43.953009Z"
+        },
+        {
+            "type": "report",
+            "spec_version": "2.1",
+            "id": "report--6b6fa46d-4a17-44a4-a234-d69487b04597",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:59.000Z",
+            "modified": "2023-08-17T19:19:43.989429Z",
+            "name": "MAR-10459736.r1.v1 - WHIRLPOOL Variant",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "CISA obtained a variant of the WHIRLPOOL backdoor. The malware was used by threat actors exploiting CVE-2023-2868, a former zero-day vulnerability affecting versions 5.1.3.001-9.2.0.006 of Barracuda Email Security Gateway (ESG).\r\n\r\nWHIRLPOOL is a backdoor that establishes a Transport Layer Security (TLS) reverse shell to the Command-and-Control (C2) server.\r\n\r\nFor information about related malware, specifically information on the initial exploit payload and other backdoors, see CISA Alert: CISA Releases Malware Analysis Reports on Barracuda Backdoors.  ",
+            "report_types": [
+                "observed-data",
+                "malware",
+                "indicator"
+            ],
+            "published": "2023-08-09T21:12:59Z",
+            "object_refs": [
+                "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+                "file--efd3fd98-6f1b-590d-bdd4-1e0753d3a689",
+                "indicator--3e5f8fc0-da1f-47f0-8b6e-f4c4b033ce47",
+                "malware-analysis--07141506-e989-4a25-b510-797383e9b01a",
+                "malware--626a2549-5775-43a8-b8bb-2fe2682a6dae",
+                "indicator--31532fc0-d3ee-479f-8482-a4d49732d5af"
+            ]
+        }
+    ]
+}

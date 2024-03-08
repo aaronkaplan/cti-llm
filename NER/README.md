@@ -155,8 +155,12 @@ The entites here are heavily inspired by STIX, though this is still an early ske
 
 ### TODO: Prototype:
 
+- [ ] Server side find_substring_positions_spacy_format
+- [ ] Throw away kor
+- [ ] New langchain
+- [ ] Detailed model
 - [ ] Download JSON
-- [ ] Progress indicator
+- [X] Progress indicator
 - [ ] Delete Annotations / Add annotations
 - [ ] Annotate via keyboard
 - [ ] Consent to adding to dataset (mandatory?)

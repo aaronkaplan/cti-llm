@@ -1,0 +1,300 @@
+Title,File Name,Blog Title,Blog URL
+EVASIVE SERPENS,evasive-serpens.json,Agonizing Serpens (Aka Agrius) Targeting the Israeli Higher ...,https://unit42.paloaltonetworks.com/agonizing-serpens-targets-israeli-tech-higher-ed-sectors/
+EVASIVE SERPENS,evasive-serpens.json,pan-unit42/playbook_viewer - GitHub,https://github.com/pan-unit42/playbook_viewer
+EVASIVE SERPENS,evasive-serpens.json,Than Meets the Eye: Exposing a Polyglot File That Delivers IcedID,https://unit42.paloaltonetworks.com/polyglot-file-icedid-payload/
+FIGHTING URSA,fighting-ursa.json,Fighting Ursa Aka APT28: Illuminating a Covert Campaign - Unit 42,https://unit42.paloaltonetworks.com/russian-apt-fighting-ursa-exploits-cve-2023-233397/
+FIGHTING URSA,fighting-ursa.json,Russia's Trident Ursa (aka Gamaredon APT) Cyber Conflict ... - Unit 42,https://unit42.paloaltonetworks.com/trident-ursa/
+FIGHTING URSA,fighting-ursa.json,Ukraine Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/ukraine/
+FIGHTING URSA,fighting-ursa.json,Russia Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/russia/
+FIGHTING URSA,fighting-ursa.json,APT28 Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/apt28/
+FIGHTING URSA,fighting-ursa.json,APT Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/apt/
+FIGHTING URSA,fighting-ursa.json,Diplomats Beware: Cloaked Ursa Phishing With a Twist - Unit 42,https://unit42.paloaltonetworks.com/cloaked-ursa-phishing/
+PRYING LIBRA,pryinglibra.json,Why LaZagne Makes D-Bus API Vigilance Crucial - Unit 42,https://unit42.paloaltonetworks.com/lazagne-leverages-d-bus/
+OBSCURE SERPENS,obscureserpens.json,,
+MOLDY PISCES,moldypisces.json,,
+RANCOR TAURUS,rancortaurus.json,"Mike Harbison, Author at Unit 42",https://unit42.paloaltonetworks.com/author/mike-harbison/
+RANCOR TAURUS,rancortaurus.json,Remote Access Trojan Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/remote-access-trojan/
+RANCOR TAURUS,rancortaurus.json,"Jen Miller-Osborn, Author at Unit 42 - Palo Alto Networks",https://unit42.paloaltonetworks.com/author/jen-miller-osborn/
+RANCOR TAURUS,rancortaurus.json,"Josh Grunzweig, Author at Unit 42",https://unit42.paloaltonetworks.com/author/joshgruznweig/
+STALKER TAURUS,stalkertaurus.json,,
+SHALLOW TAURUS,shallowtaurus.json,,
+GRANITE TAURUS,granite-taurus.json,,
+IRON TAURUS,iron-taurus.json,Stately Taurus Linked to Attacks on Southeast Asian Government,https://unit42.paloaltonetworks.com/stately-taurus-attacks-se-asian-government/
+IRON TAURUS,iron-taurus.json,Rare Backdoors Suspected to be Tied to Gelsemium APT Found in ...,https://unit42.paloaltonetworks.com/rare-possible-gelsemium-attack-targets-se-asia/
+IRON TAURUS,iron-taurus.json,Chinese Playful Taurus Activity in Iran - Unit 42 - Palo Alto Networks,https://unit42.paloaltonetworks.com/playful-taurus/
+IRON TAURUS,iron-taurus.json,IronNetInjector: Turla's New Malware Loading Tool - Unit 42,https://unit42.paloaltonetworks.com/ironnetinjector/
+BOGGY SERPENS,boggyserpens.json,,
+RADIO SERPENS,radioserpens.json,,
+AGED LIBRA,agedlibra.json,P2PInfect: The Rusty Peer-to-Peer Self-Replicating Worm - Unit 42,https://unit42.paloaltonetworks.com/peer-to-peer-worm-p2pinfect/
+AGED LIBRA,agedlibra.json,Unit 42 Threat Group Naming Update - Palo Alto Networks,https://unit42.paloaltonetworks.com/unit-42-threat-group-naming-update/
+MULE LIBRA,mulelibra.json,,
+CLEAN URSA,clean-ursa.json,Fighting Ursa Aka APT28: Illuminating a Covert Campaign - Unit 42,https://unit42.paloaltonetworks.com/russian-apt-fighting-ursa-exploits-cve-2023-233397/
+CLEAN URSA,clean-ursa.json,Threat Group Assessment: Turla (aka Pensive Ursa) - Unit 42,https://unit42.paloaltonetworks.com/turla-pensive-ursa-threat-assessment/
+CLEAN URSA,clean-ursa.json,Unit 42 Intel Objects Feed - Cortex XSOAR,https://xsoar.pan.dev/docs/reference/integrations/unit42-intel-objects-feed
+CLEAN URSA,clean-ursa.json,Unit 42 ATOMs Feed - Cortex XSOAR,https://xsoar.pan.dev/docs/reference/integrations/unit42v2-feed
+PASTY DRACO,pastydraco.json,,
+GOLFING TAURUS,golfing-taurus.json,,
+CRAWLING TAURUS,crawling-taurus.json,,
+WINDY PHOENIX,windyphoenix.json,,
+STATELY TAURUS,statelytaurus.json,Stately Taurus Targets the Philippines As Tensions Flare in ... - Unit 42,https://unit42.paloaltonetworks.com/stately-taurus-targets-philippines-government-cyberespionage/
+STATELY TAURUS,statelytaurus.json,Stately Taurus Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/stately-taurus/
+STATELY TAURUS,statelytaurus.json,Stately Taurus Linked to Attacks on Southeast Asian Government,https://unit42.paloaltonetworks.com/stately-taurus-attacks-se-asian-government/
+STATELY TAURUS,statelytaurus.json,Unit 42 Researchers Discover Multiple Espionage Operations ...,https://unit42.paloaltonetworks.com/analysis-of-three-attack-clusters-in-se-asia/
+STATELY TAURUS,statelytaurus.json,Attacks on Southeast Asian Government Have Links to Alloy Taurus,https://unit42.paloaltonetworks.com/alloy-taurus-targets-se-asian-government/
+STATELY TAURUS,statelytaurus.json,Rare Backdoors Suspected to be Tied to Gelsemium APT Found in ...,https://unit42.paloaltonetworks.com/rare-possible-gelsemium-attack-targets-se-asia/
+CROOKED PISCES,crooked-pisces.json,,
+HUNTER SERPENS,hunter-serpens.json,,
+MAZE RANSOMWARE,maze-ransomware.json,Threat Brief: Maze Ransomware - Unit 42,https://unit42.paloaltonetworks.com/threat-brief-maze-ransomware-activities/
+MAZE RANSOMWARE,maze-ransomware.json,Highlights from the 2021 Unit 42 Ransomware Threat Report,https://unit42.paloaltonetworks.com/ransomware-threat-report-highlights/
+MAZE RANSOMWARE,maze-ransomware.json,2022 Unit 42 Ransomware Threat Report Highlights,https://unit42.paloaltonetworks.com/2022-ransomware-threat-report-highlights/
+MAZE RANSOMWARE,maze-ransomware.json,Ransomware Threat Assessments - Unit 42 - Palo Alto Networks,https://unit42.paloaltonetworks.com/ransomware-threat-assessments/
+MAZE RANSOMWARE,maze-ransomware.json,Threat Assessment: Egregor Ransomware - Unit 42,https://unit42.paloaltonetworks.com/egregor-ransomware-courses-of-action/
+MAZE RANSOMWARE,maze-ransomware.json,Breaking Down Ransomware Attacks - Unit 42,https://unit42.paloaltonetworks.com/breaking-down-ransomware-attacks/
+ACIDBOX MALWARE,temp-acidbox.json,AcidBox: Rare Malware Repurposing Turla Group Exploit Targeted ...,https://unit42.paloaltonetworks.com/acidbox-rare-malware/
+EKANS RANSOMWARE,ekans-ransomware.json,Threat Assessment: EKANS Ransomware - Unit 42,https://unit42.paloaltonetworks.com/threat-assessment-ekans-ransomware/
+EKANS RANSOMWARE,ekans-ransomware.json,threat assessment Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/threat-assessment/
+EKANS RANSOMWARE,ekans-ransomware.json,Threat Assessment: WastedLocker Ransomware - Unit 42,https://unit42.paloaltonetworks.com/wastedlocker/
+EKANS RANSOMWARE,ekans-ransomware.json,"Alex Hinchliffe, Author at Unit 42 - Palo Alto Networks",https://unit42.paloaltonetworks.com/author/alex-hinchliffe/
+EKANS RANSOMWARE,ekans-ransomware.json,Introducing Actionable Threat Objects and Mitigations (ATOMs),https://unit42.paloaltonetworks.com/actionable-threat-objects-and-mitigations/
+WASTEDLOCKER RANSOMWARE,wastedlocker-ransomware.json,Threat Assessment: WastedLocker Ransomware - Unit 42,https://unit42.paloaltonetworks.com/wastedlocker/
+WASTEDLOCKER RANSOMWARE,wastedlocker-ransomware.json,Ransomware Threat Assessments - Unit 42 - Palo Alto Networks,https://unit42.paloaltonetworks.com/ransomware-threat-assessments/
+WASTEDLOCKER RANSOMWARE,wastedlocker-ransomware.json,threat assessment Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/threat-assessment/
+WASTEDLOCKER RANSOMWARE,wastedlocker-ransomware.json,URL filtering Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/url-filtering/
+WASTEDLOCKER RANSOMWARE,wastedlocker-ransomware.json,"Alex Hinchliffe, Author at Unit 42 - Palo Alto Networks",https://unit42.paloaltonetworks.com/author/alex-hinchliffe/
+WASTEDLOCKER RANSOMWARE,wastedlocker-ransomware.json,Introducing Actionable Threat Objects and Mitigations (ATOMs),https://unit42.paloaltonetworks.com/actionable-threat-objects-and-mitigations/
+ADEPT LIBRA,adept-libra.json,P2PInfect: The Rusty Peer-to-Peer Self-Replicating Worm - Unit 42,https://unit42.paloaltonetworks.com/peer-to-peer-worm-p2pinfect/
+ADEPT LIBRA,adept-libra.json,Why LaZagne Makes D-Bus API Vigilance Crucial - Unit 42,https://unit42.paloaltonetworks.com/lazagne-leverages-d-bus/
+ADEPT LIBRA,adept-libra.json,Navigating the Evolving Threat Landscape: Resilient Cybersecurity ...,https://www.paloaltonetworks.com/resources/ebooks/unit42-ciso-cybersecurity-tactics-advisory
+RYUK RANSOMWARE,ryuk-ransomware.json,Threat Assessment: Ryuk Ransomware - Unit 42,https://unit42.paloaltonetworks.com/ryuk-ransomware/
+RYUK RANSOMWARE,ryuk-ransomware.json,Highlights from the 2021 Unit 42 Ransomware Threat Report,https://unit42.paloaltonetworks.com/ransomware-threat-report-highlights/
+RYUK RANSOMWARE,ryuk-ransomware.json,Threat Assessment: Royal Ransomware - Unit 42,https://unit42.paloaltonetworks.com/royal-ransomware/
+RYUK RANSOMWARE,ryuk-ransomware.json,Ransomware Families: 2021 Data to Supplement the Unit 42 ...,https://unit42.paloaltonetworks.com/ransomware-families/
+RYUK RANSOMWARE,ryuk-ransomware.json,Ransomware Threat Assessments - Unit 42 - Palo Alto Networks,https://unit42.paloaltonetworks.com/ransomware-threat-assessments/
+RYUK RANSOMWARE,ryuk-ransomware.json,threat assessment Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/threat-assessment/
+TRICKBOT MALWARE,trickbot.json,Wireshark Tutorial: Examining Trickbot Infections - Unit 42,https://unit42.paloaltonetworks.com/wireshark-tutorial-examining-trickbot-infections/
+TRICKBOT MALWARE,trickbot.json,TrickBot Campaign Uses Fake Payroll Emails to Conduct Phishing ...,https://unit42.paloaltonetworks.com/trickbot-campaign-uses-fake-payroll-emails-to-conduct-phishing-attacks/
+TRICKBOT MALWARE,trickbot.json,Malware Team Up: Malspam Pushing Emotet + Trickbot - Unit 42,https://unit42.paloaltonetworks.com/unit42-malware-team-malspam-pushing-emotet-trickbot/
+TRICKBOT MALWARE,trickbot.json,"Goodbye Mworm, Hello Nworm: TrickBot Updates Propagation Module",https://unit42.paloaltonetworks.com/goodbye-mworm-hello-nworm-trickbot-updates-propagation-module/
+TRICKBOT MALWARE,trickbot.json,Threat Assessment: Ryuk Ransomware - Unit 42,https://unit42.paloaltonetworks.com/ryuk-ransomware/
+TRICKBOT MALWARE,trickbot.json,Trickbot Updates Password Grabber Module - Unit 42,https://unit42.paloaltonetworks.com/trickbot-updates-password-grabber-module/
+TRICKBOT MALWARE,trickbot.json,Banking Trojan Techniques: Financially Motivated Malware - Unit 42,https://unit42.paloaltonetworks.com/banking-trojan-techniques/
+TRICKBOT MALWARE,trickbot.json,pan-unit42/tweets - GitHub,https://github.com/pan-unit42/tweets
+EGREGOR RANSOMWARE,egregor-ransomware.json,Threat Assessment: Egregor Ransomware - Unit 42,https://unit42.paloaltonetworks.com/egregor-ransomware-courses-of-action/
+EGREGOR RANSOMWARE,egregor-ransomware.json,2022 Unit 42 Ransomware Threat Report Highlights,https://unit42.paloaltonetworks.com/2022-ransomware-threat-report-highlights/
+EGREGOR RANSOMWARE,egregor-ransomware.json,Ransomware Threat Assessments - Unit 42 - Palo Alto Networks,https://unit42.paloaltonetworks.com/ransomware-threat-assessments/
+EGREGOR RANSOMWARE,egregor-ransomware.json,threat assessment Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/threat-assessment/
+EGREGOR RANSOMWARE,egregor-ransomware.json,Threat Assessment: Black Basta Ransomware - Unit 42,https://unit42.paloaltonetworks.com/threat-assessment-black-basta-ransomware/
+SOLAR PHOENIX,solarphoenix.json,,
+MONSTER LIBRA,monsterlibra.json,Threat Group Assessment: Muddled Libra (Updated) - Unit 42,https://unit42.paloaltonetworks.com/muddled-libra/
+MONSTER LIBRA,monsterlibra.json,pan-unit42/tweets - GitHub,https://github.com/pan-unit42/tweets
+MANGA TAURUS,mangataurus.json,,
+ZERO-DAY-MICROSOFT-EXCHANGE-VULNERABILITIES,zero-day-microsoft-exchange-vulnerabilities.json,zero-day Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/zero-day/
+ZERO-DAY-MICROSOFT-EXCHANGE-VULNERABILITIES,zero-day-microsoft-exchange-vulnerabilities.json,Threat Assessment: Active Exploitation of Four Zero-Day ... - Unit 42,https://unit42.paloaltonetworks.com/microsoft-exchange-server-vulnerabilities/
+ZERO-DAY-MICROSOFT-EXCHANGE-VULNERABILITIES,zero-day-microsoft-exchange-vulnerabilities.json,Microsoft Exchange Server Attack Timeline - Unit 42,https://unit42.paloaltonetworks.com/microsoft-exchange-server-attack-timeline/
+ZERO-DAY-MICROSOFT-EXCHANGE-VULNERABILITIES,zero-day-microsoft-exchange-vulnerabilities.json,Remediation Steps for the Microsoft Exchange Server Vulnerabilities,https://unit42.paloaltonetworks.com/remediation-steps-for-the-microsoft-exchange-server-vulnerabilities/
+ZERO-DAY-MICROSOFT-EXCHANGE-VULNERABILITIES,zero-day-microsoft-exchange-vulnerabilities.json,"Actor Exploits Microsoft Exchange Server Vulnerabilities, Cortex ...",https://unit42.paloaltonetworks.com/exchange-server-credential-harvesting/
+ZERO-DAY-MICROSOFT-EXCHANGE-VULNERABILITIES,zero-day-microsoft-exchange-vulnerabilities.json,2022 Incident Response Interactive - Palo Alto Networks,https://www.paloaltonetworks.co.uk/unit42/2022-incident-response-report
+ZERO-DAY-MICROSOFT-EXCHANGE-VULNERABILITIES,zero-day-microsoft-exchange-vulnerabilities.json,ProxyNotShell Threat Brief - CVE-2022-41040 and CVE ... - Unit 42,https://unit42.paloaltonetworks.com/proxynotshell-cve-2022-41040-cve-2022-41082/
+ZERO-DAY-MICROSOFT-EXCHANGE-VULNERABILITIES,zero-day-microsoft-exchange-vulnerabilities.json,[PDF] INCIDENT RESPONSE REPORT 2022 - StarLink,https://assets.starlinkme.net/gitex-vendor-assets/palo-alto-networks/2022-unit42-incident-response-report-final.pdf
+ZERO-DAY-MICROSOFT-EXCHANGE-VULNERABILITIES,zero-day-microsoft-exchange-vulnerabilities.json,[PDF] 2022 Unit 42 Network Threat Trends Research Report - AWS,https://evessio.s3.amazonaws.com/customer/8c4659ee-526a-4e9c-89dc-f6f4c3c1a789/event/0b7464eb-6f92-4b29-8c84-2f2e2d61641a/responses/eaa7f9ee-4369-4558-90be-1f7a6d0c6f44/11d72d3e-profile_unit42-network-threat-research-report-vol1.pdf
+DEARCRY RANSOMWARE,dearcry-ransomware.json,Threat Assessment: DearCry Ransomware - Unit 42,https://unit42.paloaltonetworks.com/dearcry-ransomware/
+DEARCRY RANSOMWARE,dearcry-ransomware.json,threat assessment Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/threat-assessment/
+DEARCRY RANSOMWARE,dearcry-ransomware.json,Ransomware Families: 2021 Data to Supplement the Unit 42 ...,https://unit42.paloaltonetworks.com/ransomware-families/
+DEARCRY RANSOMWARE,dearcry-ransomware.json,Microsoft Exchange Server Attack Timeline - Unit 42,https://unit42.paloaltonetworks.com/microsoft-exchange-server-attack-timeline/
+DEARCRY RANSOMWARE,dearcry-ransomware.json,LockBit 2.0: How This RaaS Operates and How to Protect Against It,https://unit42.paloaltonetworks.com/lockbit-2-ransomware/
+CLOP RANSOMWARE,clop-ransomware.json,Threat Assessment: Clop Ransomware - Unit 42,https://unit42.paloaltonetworks.com/clop-ransomware/
+CLOP RANSOMWARE,clop-ransomware.json,CL0P Seeds ^_- Gotta Catch Em All! - Unit 42,https://unit42.paloaltonetworks.com/cl0p-group-distributes-ransomware-data-with-torrents/
+CLOP RANSOMWARE,clop-ransomware.json,threat assessment Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/threat-assessment/
+CLOP RANSOMWARE,clop-ransomware.json,2022 Unit 42 Ransomware Threat Report Highlights,https://unit42.paloaltonetworks.com/2022-ransomware-threat-report-highlights/
+DARKSIDE RANSOMWARE,darkside-ransomware.json,DarkSide Ransomware Gang: An Overview - Unit 42,https://unit42.paloaltonetworks.com/darkside-ransomware/
+DARKSIDE RANSOMWARE,darkside-ransomware.json,Ransomware Groups to Watch: Emerging Threats - Unit 42,https://unit42.paloaltonetworks.com/emerging-ransomware-groups/
+DARKSIDE RANSOMWARE,darkside-ransomware.json,2022 Unit 42 Ransomware Threat Report Highlights,https://unit42.paloaltonetworks.com/2022-ransomware-threat-report-highlights/
+PROMETHEUS RANSOMWARE,prometheus-ransomware.json,Prometheus Ransomware Gang: A Group of REvil? - Unit 42,https://unit42.paloaltonetworks.com/prometheus-ransomware/
+PROMETHEUS RANSOMWARE,prometheus-ransomware.json,threat assessment Archives - Unit 42,https://unit42.paloaltonetworks.jp/tag/threat-assessment-ja/
+CONTI RANSOMWARE,conti-ransomware.json,Conti Ransomware Gang: An Overview - Unit 42 - Palo Alto Networks,https://unit42.paloaltonetworks.com/conti-ransomware-gang/
+CONTI RANSOMWARE,conti-ransomware.json,2022 Unit 42 Ransomware Threat Report Highlights,https://unit42.paloaltonetworks.com/2022-ransomware-threat-report-highlights/
+CONTI RANSOMWARE,conti-ransomware.json,Threat Assessment: Royal Ransomware - Unit 42,https://unit42.paloaltonetworks.com/royal-ransomware/
+CONTI RANSOMWARE,conti-ransomware.json,Reports Archives - Unit 42,https://unit42.paloaltonetworks.com/category/reports/
+CONTI RANSOMWARE,conti-ransomware.json,[PDF] INCIDENT RESPONSE REPORT 2022 - StarLink,https://assets.starlinkme.net/gitex-vendor-assets/palo-alto-networks/2022-unit42-incident-response-report-final.pdf
+CONTI RANSOMWARE,conti-ransomware.json,Unit 42 Threat Intel Bulletin - July - LinkedIn,https://www.linkedin.com/pulse/unit-42-threat-intel-bulletin-july-unit42
+REVIL RANSOMWARE,revil-ransomware.json,Ransom Cartel Ransomware: A Possible Connection With REvil,https://unit42.paloaltonetworks.com/ransom-cartel-ransomware/
+REVIL RANSOMWARE,revil-ransomware.json,REvil Threat Actors May Have Returned (Updated) - Unit 42,https://unit42.paloaltonetworks.com/revil-threat-actors/
+REVIL RANSOMWARE,revil-ransomware.json,Prometheus Ransomware Gang: A Group of REvil? - Unit 42,https://unit42.paloaltonetworks.com/prometheus-ransomware/
+REVIL RANSOMWARE,revil-ransomware.json,Threat Assessment: GandCrab and REvil Ransomware - Unit 42,https://unit42.paloaltonetworks.com/ransomware-threat-assessments/7/
+REVIL RANSOMWARE,revil-ransomware.json,Threat Brief: Kaseya VSA Ransomware Attack - Unit 42,https://unit42.paloaltonetworks.com/threat-brief-kaseya-vsa-ransomware-attacks/
+REVIL RANSOMWARE,revil-ransomware.json,[PDF] INCIDENT RESPONSE REPORT 2022 - StarLink,https://assets.starlinkme.net/gitex-vendor-assets/palo-alto-networks/2022-unit42-incident-response-report-final.pdf
+MESPINOZA RANSOMWARE,mespinoza-ransomware.json,"Mespinoza Ransomware Gang Calls Victims “Partners,” Attacks with ...",https://unit42.paloaltonetworks.com/gasket-and-magicsocks-tools-install-mespinoza-ransomware/
+MESPINOZA RANSOMWARE,mespinoza-ransomware.json,"Quinn Cooke, Author at Unit 42",https://unit42.paloaltonetworks.com/author/quinn-cooke/
+MESPINOZA RANSOMWARE,mespinoza-ransomware.json,Observing Attacks Against Hundreds of Exposed Services in Public ...,https://unit42.paloaltonetworks.com/exposed-services-public-clouds/
+MESPINOZA RANSOMWARE,mespinoza-ransomware.json,"Alex Hinchliffe, Author at Unit 42 - Palo Alto Networks",https://unit42.paloaltonetworks.com/author/alex-hinchliffe/
+HIVE RANSOMWARE,hive-ransomware.json,Ransomware Groups to Watch: Emerging Threats - Unit 42,https://unit42.paloaltonetworks.com/emerging-ransomware-groups/
+HIVE RANSOMWARE,hive-ransomware.json,Ransom Cartel Ransomware: A Possible Connection With REvil,https://unit42.paloaltonetworks.com/ransom-cartel-ransomware/
+HIVE RANSOMWARE,hive-ransomware.json,Threat Assessment: BlackCat Ransomware - Unit 42,https://unit42.paloaltonetworks.com/blackcat-ransomware/
+HIVE RANSOMWARE,hive-ransomware.json,Vice Society: Profiling a Persistent Threat to the Education Sector,https://unit42.paloaltonetworks.com/vice-society-targets-education-sector/
+HIVE RANSOMWARE,hive-ransomware.json,[PDF] INCIDENT RESPONSE REPORT 2022 - StarLink,https://assets.starlinkme.net/gitex-vendor-assets/palo-alto-networks/2022-unit42-incident-response-report-final.pdf
+HELLOKITTY RANSOMWARE,hellokitty-ransomware.json,Ransomware Groups to Watch: Emerging Threats - Unit 42,https://unit42.paloaltonetworks.com/emerging-ransomware-groups/
+HELLOKITTY RANSOMWARE,hellokitty-ransomware.json,Vice Society: Profiling a Persistent Threat to the Education Sector,https://unit42.paloaltonetworks.com/vice-society-targets-education-sector/
+AVOSLOCKER RANSOMWARE,avoslocker-ransomware.json,Ransomware Groups to Watch: Emerging Threats - Unit 42,https://unit42.paloaltonetworks.com/emerging-ransomware-groups/
+AVOSLOCKER RANSOMWARE,avoslocker-ransomware.json,Threat Assessment: BlackCat Ransomware - Unit 42,https://unit42.paloaltonetworks.com/blackcat-ransomware/
+AVOSLOCKER RANSOMWARE,avoslocker-ransomware.json,Vice Society: Profiling a Persistent Threat to the Education Sector,https://unit42.paloaltonetworks.com/vice-society-targets-education-sector/
+LOCKBIT-2.0 RANSOMWARE,lockbit-2.0-ransomware.json,LockBit 2.0: How This RaaS Operates and How to Protect Against It,https://unit42.paloaltonetworks.com/lockbit-2-ransomware/
+LOCKBIT-2.0 RANSOMWARE,lockbit-2.0-ransomware.json,Ransomware Groups to Watch: Emerging Threats - Unit 42,https://unit42.paloaltonetworks.com/emerging-ransomware-groups/
+LOCKBIT-2.0 RANSOMWARE,lockbit-2.0-ransomware.json,[PDF] INCIDENT RESPONSE REPORT 2022 - StarLink,https://assets.starlinkme.net/gitex-vendor-assets/palo-alto-networks/2022-unit42-incident-response-report-final.pdf
+LOCKBIT-2.0 RANSOMWARE,lockbit-2.0-ransomware.json,Threat Assessment: BlackCat Ransomware - Unit 42,https://unit42.paloaltonetworks.com/blackcat-ransomware/
+TILTEDTEMPLE CAMPAIGN,tiltedtemple.json,APT Conducts Active Campaign Against ManageEngine ... - Unit 42,https://unit42.paloaltonetworks.com/tiltedtemple-manageengine-servicedesk-plus/
+TILTEDTEMPLE CAMPAIGN,tiltedtemple.json,SockDetour Backdoor Targets U.S. Defense Contractors - Unit 42,https://unit42.paloaltonetworks.com/sockdetour/
+TILTEDTEMPLE CAMPAIGN,tiltedtemple.json,2022 Incident Response Interactive - Palo Alto Networks,https://www.paloaltonetworks.co.uk/unit42/2022-incident-response-report
+TILTEDTEMPLE CAMPAIGN,tiltedtemple.json,[PDF] INCIDENT RESPONSE REPORT 2022 - StarLink,https://assets.starlinkme.net/gitex-vendor-assets/palo-alto-networks/2022-unit42-incident-response-report-final.pdf
+TILTEDTEMPLE CAMPAIGN,tiltedtemple.json,"KdcSponge, NGLite, Godzilla Webshell Used in Targeted Attack ...",https://unit42.paloaltonetworks.com/manageengine-godzilla-nglite-kdcsponge/
+RUINOUS URSA,ruinousursa.json,,
+AGENT TESLA,agent-tesla.json,OriginLogger: A Look at Agent Tesla's Successor - Unit 42,https://unit42.paloaltonetworks.com/originlogger/
+AGENT TESLA,agent-tesla.json,Analyzing the Various Layers of AgentTesla's Packing - Unit 42,https://unit42.paloaltonetworks.com/unit42-analyzing-various-layers-agentteslas-packing/
+AGENT TESLA,agent-tesla.json,Analyzing a Malicious Compiled HTML Help File Delivering Agent ...,https://unit42.paloaltonetworks.com/malicious-compiled-html-help-file-agent-tesla/
+AGENT TESLA,agent-tesla.json,Malicious XLL Files and Agent Tesla Case Studies - Unit 42,https://unit42.paloaltonetworks.com/excel-add-ins-malicious-xll-files-agent-tesla/
+AGENT TESLA,agent-tesla.json,Dridex Infection Chain Case Studies - Unit 42 - Palo Alto Networks,https://unit42.paloaltonetworks.com/excel-add-ins-dridex-infection-chain/
+AGENT TESLA,agent-tesla.json,pan-unit42/tweets - GitHub,https://github.com/pan-unit42/tweets
+AGENT TESLA,agent-tesla.json,Threat Actors Rapidly Adopt Web3 IPFS Technology - Unit 42,https://unit42.paloaltonetworks.com/ipfs-used-maliciously/
+BLACKCAT RANSOMWARE,blackcat-ransomware.json,Threat Assessment: BlackCat Ransomware - Unit 42,https://unit42.paloaltonetworks.com/blackcat-ransomware/
+BLACKCAT RANSOMWARE,blackcat-ransomware.json,BlackCat Climbs the Summit With a New Tactic,https://unit42.paloaltonetworks.com/blackcat-ransomware-releases-new-utility-munchkin/
+BLACKCAT RANSOMWARE,blackcat-ransomware.json,ALPHV Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/alphv/
+BLACKCAT RANSOMWARE,blackcat-ransomware.json,Incident Response Service - Palo Alto Networks,https://www.paloaltonetworks.com/unit42/respond/incident-response
+BLACKCAT RANSOMWARE,blackcat-ransomware.json,threat assessment Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/threat-assessment/
+BLACKCAT RANSOMWARE,blackcat-ransomware.json,Ransomware Readiness Assessment (RRA) - Palo Alto Networks,https://www.paloaltonetworks.in/unit42/assess/ransomware-readiness-assessment
+TRIDENT URSA,tridentursa.json,Russia's Trident Ursa (aka Gamaredon APT) Cyber Conflict ... - Unit 42,https://unit42.paloaltonetworks.com/trident-ursa/
+TRIDENT URSA,tridentursa.json,Ukraine Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/ukraine/
+TRIDENT URSA,tridentursa.json,Russia Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/russia/
+TRIDENT URSA,tridentursa.json,URL filtering Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/url-filtering/
+TRIDENT URSA,tridentursa.json,Resilient Cybersecurity Tactics for CISOs - Palo Alto Networks,https://www.paloaltonetworks.com.au/resources/ebooks/unit42-ciso-cybersecurity-tactics-advisory
+TRIDENT URSA,tridentursa.json,Phishing Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/phishing/
+TRIDENT URSA,tridentursa.json,Unit 42 Threat Intel Bulletin - February - LinkedIn,https://www.linkedin.com/pulse/unit-42-threat-intel-bulletin-february-unit42
+HERMETICWIPER MALWARE,hermeticwiper.json,Russia Ukraine Cyber Activity: Protect Against Related Cyberthreats,https://unit42.paloaltonetworks.com/preparing-for-cyber-impact-russia-ukraine-crisis/
+HERMETICWIPER MALWARE,hermeticwiper.json,Ukraine Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/ukraine/
+HERMETICWIPER MALWARE,hermeticwiper.json,Russia Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/russia/
+HERMETICWIPER MALWARE,hermeticwiper.json,Incident Response Service - Palo Alto Networks,https://www.paloaltonetworks.com/unit42/respond/incident-response
+HERMETICWIPER MALWARE,hermeticwiper.json,Agonizing Serpens (Aka Agrius) Targeting the Israeli Higher ...,https://unit42.paloaltonetworks.com/agonizing-serpens-targets-israeli-tech-higher-ed-sectors/
+HERMETICWIPER MALWARE,hermeticwiper.json,Unit 42: Threat Intelligence & Response - Palo Alto Networks,https://www.paloaltonetworks.com/unit42
+HERMETICWIPER MALWARE,hermeticwiper.json,Unit 42 Attack Surface Assessment - Palo Alto Networks,https://www.paloaltonetworks.in/unit42/assess/attack-surface-assessment
+HERMETICWIPER MALWARE,hermeticwiper.json,Reports Archives - Unit 42,https://unit42.paloaltonetworks.com/category/reports/
+HERMETICWIPER MALWARE,hermeticwiper.json,Incident Response Plan Development and Review,https://www.paloaltonetworks.com/unit42/transform/incident-response-plan-development-review
+HERMETICWIPER MALWARE,hermeticwiper.json,Respond to a Breach in Record Time - Palo Alto Networks,https://www.paloaltonetworks.in/unit42/respond
+NASCENT URSA,nascentursa.json,,
+THIEF LIBRA,thieflibra.json,P2PInfect: The Rusty Peer-to-Peer Self-Replicating Worm - Unit 42,https://unit42.paloaltonetworks.com/peer-to-peer-worm-p2pinfect/
+MONEY LIBRA,moneylibra.json,P2PInfect: The Rusty Peer-to-Peer Self-Replicating Worm - Unit 42,https://unit42.paloaltonetworks.com/peer-to-peer-worm-p2pinfect/
+MONEY LIBRA,moneylibra.json,ALPHV Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/alphv/
+RETURNED LIBRA,returnedlibra.json,P2PInfect: The Rusty Peer-to-Peer Self-Replicating Worm - Unit 42,https://unit42.paloaltonetworks.com/peer-to-peer-worm-p2pinfect/
+SOLARMARKER MALWARE,solarmarker.json,New SolarMarker (Jupyter) Campaign Demonstrates the Malware's ...,https://unit42.paloaltonetworks.com/solarmarker-malware/
+SOLARMARKER MALWARE,solarmarker.json,backdoor Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/backdoor/
+SOLARMARKER MALWARE,solarmarker.json,C2 Archives - Unit 42 - Palo Alto Networks,https://unit42.paloaltonetworks.com/tag/c2/
+SOLARMARKER MALWARE,solarmarker.json,Yellow Cockatoo Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/yellow-cockatoo/
+SOLARMARKER MALWARE,solarmarker.json,Infostealer Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/infostealer/
+F5-BIG-IP CVE-2022-1388,f5-big-ip-cve-2022-1388.json,Threat Brief: CVE-2022-1388 - Unit 42 - Palo Alto Networks,https://unit42.paloaltonetworks.com/cve-2022-1388/
+F5-BIG-IP CVE-2022-1388,f5-big-ip-cve-2022-1388.json,2022 Unit 42 Incident Response Report: How Attackers Exploit Zero ...,https://unit42.paloaltonetworks.com/incident-response-report/
+F5-BIG-IP CVE-2022-1388,f5-big-ip-cve-2022-1388.json,[PDF] INCIDENT RESPONSE REPORT 2022 - StarLink,https://assets.starlinkme.net/gitex-vendor-assets/palo-alto-networks/2022-unit42-incident-response-report-final.pdf
+EMOTET MALWARE,emotet.json,Emotet Summary: November 2021 Through January 2022 - Unit 42,https://unit42.paloaltonetworks.com/emotet-malware-summary-epoch-4-5/
+EMOTET MALWARE,emotet.json,Emotet Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/emotet/
+EMOTET MALWARE,emotet.json,New Emotet Infection Method - Unit 42,https://unit42.paloaltonetworks.com/new-emotet-infection-method/
+EMOTET MALWARE,emotet.json,Wireshark Tutorial: Examining Emotet Infection Traffic - Unit 42,https://unit42.paloaltonetworks.com/wireshark-tutorial-emotet-infection/
+EMOTET MALWARE,emotet.json,Emotet Command and Control Case Study - Unit 42,https://unit42.paloaltonetworks.com/emotet-command-and-control/
+EMOTET MALWARE,emotet.json,pan-unit42/wireshark-tutorial-Emotet-traffic - GitHub,https://github.com/pan-unit42/wireshark-tutorial-Emotet-traffic
+EMOTET MALWARE,emotet.json,APAC's Compromised Domains Fuel Emotet Campaign - Unit 42,https://unit42.paloaltonetworks.com/apacs-compromised-domains-fuel-emotet-campaign/
+EMOTET MALWARE,emotet.json,Attack Chain Overview: Emotet in December 2020 and January 2021,https://unit42.paloaltonetworks.com/attack-chain-overview-emotet-in-december-2020-and-january-2021/
+VMWARE VULNERABILITIES,vmware-vulnerabilities.json,Threat Brief: VMware Vulnerabilities Exploited in the Wild (CVE ...,https://unit42.paloaltonetworks.com/cve-2022-22954-vmware-vulnerabilities/
+VMWARE VULNERABILITIES,vmware-vulnerabilities.json,Network Security Trends: Recent Exploits and More - Unit 42,https://unit42.paloaltonetworks.com/recent-exploits-network-security-trends/
+VMWARE VULNERABILITIES,vmware-vulnerabilities.json,2022 Incident Response Interactive - Palo Alto Networks,https://www.paloaltonetworks.co.uk/unit42/2022-incident-response-report
+VMWARE VULNERABILITIES,vmware-vulnerabilities.json,Threat Brief Archives - Unit 42,https://unit42.paloaltonetworks.com/category/threat-briefs-assessments/threat-brief/
+VMWARE VULNERABILITIES,vmware-vulnerabilities.json,Network Security Trends: May-July 2021 - Unit 42,https://unit42.paloaltonetworks.com/network-security-trends/
+VMWARE VULNERABILITIES,vmware-vulnerabilities.json,Unit 42 Threat Intel Bulletin - August - LinkedIn,https://www.linkedin.com/pulse/unit-42-threat-intel-bulletin-august-unit42-1c
+VMWARE VULNERABILITIES,vmware-vulnerabilities.json,Network Security Trends: November 2022-January 2023 - Unit 42,https://unit42.paloaltonetworks.com/network-security-trends-nov-jan/
+POPPING-EAGLE MALWARE,popping-eagle.json,Popping Eagle: How Global Analytics Uncovered a Stealthy Threat ...,https://unit42.paloaltonetworks.com/popping-eagle-malware/
+POPPING-EAGLE MALWARE,popping-eagle.json,backdoor Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/backdoor/
+ATLASSIAN-CONFLUENCE-CVE-2022-26134,atlassian-confluence-CVE-2022-26134.json,CVE-2022-26134 Threat Brief: Atlassian Confluence RCE ... - Unit 42,https://unit42.paloaltonetworks.com/cve-2022-26134-atlassian-code-execution-vulnerability/
+ATLASSIAN-CONFLUENCE-CVE-2022-26134,atlassian-confluence-CVE-2022-26134.json,Threat Brief Archives - Unit 42,https://unit42.paloaltonetworks.com/category/threat-briefs-assessments/threat-brief/
+ATLASSIAN-CONFLUENCE-CVE-2022-26134,atlassian-confluence-CVE-2022-26134.json,Zero-Day Exploit Detection Using Machine Learning - Unit 42,https://unit42.paloaltonetworks.com/injection-detection-machine-learning/
+ATLASSIAN-CONFLUENCE-CVE-2022-26134,atlassian-confluence-CVE-2022-26134.json,"Josh Grunzweig, Author at Unit 42 - Palo Alto Networks",https://unit42.paloaltonetworks.com/author/joshgruznweig/
+BRUTE-RATEL TOOL,brute-ratel.json,Brute Ratel C4 Red Teaming Tool Being Abused by Malicious Actors,https://unit42.paloaltonetworks.com/brute-ratel-c4-tool/
+BRUTE-RATEL TOOL,brute-ratel.json,Unit 42 Threat Intel Bulletin - March - LinkedIn,https://www.linkedin.com/pulse/unit-42-threat-intel-bulletin-march-unit42
+BRUTE-RATEL TOOL,brute-ratel.json,Chinese PlugX Malware Hidden in Your USB Devices? - Unit 42,https://unit42.paloaltonetworks.com/plugx-variants-in-usbs/
+CHROMELOADER,chromeloader.json,ChromeLoader: New Stubborn Malware Campaign - Unit 42,https://unit42.paloaltonetworks.com/chromeloader-malware/
+CHROMELOADER,chromeloader.json,browser hijacker Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/browser-hijacker/
+CHROMELOADER,chromeloader.json,Infostealer Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/infostealer/
+API-HAMMERING-TECHNIQUE,api-hammering-technique.json,Dive Deep Into the Implementations of API Hammering by Various ...,https://unit42.paloaltonetworks.com/api-hammering-malware-families/
+API-HAMMERING-TECHNIQUE,api-hammering-technique.json,Machine Learning Versus Memory Resident Evil - Unit 42,https://unit42.paloaltonetworks.com/malware-detection-accuracy/
+API-HAMMERING-TECHNIQUE,api-hammering-technique.json,DNS Tunneling: how DNS can be (ab)used by malicious actors,https://unit42.paloaltonetworks.com/dns-tunneling-how-dns-can-be-abused-by-malicious-actors/
+WEB-SHELLS-IN-DIGIUM-PHONES,web-shells-in-digium-phones.json,Digium Phones Under Attack: Insight Into the Web Shell Implant,https://unit42.paloaltonetworks.com/digium-phones-web-shell/
+THIRSTY GEMINI,thirstygemini.json,,
+CLOAKED URSA,cloaked-ursa.json,Cloaked Ursa (APT29) Hackers Use Trusted Online Storage Services,https://unit42.paloaltonetworks.com/cloaked-ursa-online-storage-services-campaigns/
+CLOAKED URSA,cloaked-ursa.json,Diplomats Beware: Cloaked Ursa Phishing With a Twist - Unit 42,https://unit42.paloaltonetworks.com/cloaked-ursa-phishing/
+CLOAKED URSA,cloaked-ursa.json,Unit 42 Threat Intel Bulletin - August - LinkedIn,https://www.linkedin.com/pulse/unit-42-threat-intel-bulletin-august-unit42-1c
+CLOAKED URSA,cloaked-ursa.json,Ukraine Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/ukraine/
+CLOAKED URSA,cloaked-ursa.json,Russia Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/russia/
+CLOAKED URSA,cloaked-ursa.json,Phishing Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/phishing/
+CLOAKED URSA,cloaked-ursa.json,Midnight Blizzard Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/midnight-blizzard/
+PROJECTOR LIBRA,projector-libra.json,Email Lures and File Sharing Services Lead to Malware - Unit 42,https://unit42.paloaltonetworks.com/bumblebee-malware-projector-libra/
+PROJECTOR LIBRA,projector-libra.json,不安全 - unSafe.sh,https://unsafe.sh/?page=8&domain=unit42.paloaltonetworks.com
+TROPICAL SCORPIUS,tropicalscorpius.json,Novel News on Cuba Ransomware: Greetings From Tropical Scorpius,https://unit42.paloaltonetworks.com/cuba-ransomware-tropical-scorpius/
+BLACK BASTA RANSOMWARE,blackbasta-ransomware.json,Threat Assessment: Black Basta Ransomware - Unit 42,https://unit42.paloaltonetworks.com/threat-assessment-black-basta-ransomware/
+BLACK BASTA RANSOMWARE,blackbasta-ransomware.json,2023 Unit 42 Ransomware and Extortion Report - Palo Alto Networks,https://start.paloaltonetworks.com/2023-unit42-ransomware-extortion-report
+BLACK BASTA RANSOMWARE,blackbasta-ransomware.json,threat assessment Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/threat-assessment/
+BLACK BASTA RANSOMWARE,blackbasta-ransomware.json,Resilient Cybersecurity Tactics for CISOs - Palo Alto Networks,https://www.paloaltonetworks.com.au/resources/ebooks/unit42-ciso-cybersecurity-tactics-advisory
+BLACK BASTA RANSOMWARE,blackbasta-ransomware.json,Unit 42 Threat Intel Bulletin - March - LinkedIn,https://www.linkedin.com/pulse/unit-42-threat-intel-bulletin-march-unit42
+ICEDID MALWARE,icedid.json,IcedID Archives - Unit 42 - Palo Alto Networks,https://unit42.paloaltonetworks.com/tag/icedid/
+ICEDID MALWARE,icedid.json,Cold as Ice: Unit 42 Wireshark Quiz for IcedID - Palo Alto Networks,https://unit42.paloaltonetworks.com/wireshark-quiz-icedid/
+ICEDID MALWARE,icedid.json,Than Meets the Eye: Exposing a Polyglot File That Delivers IcedID,https://unit42.paloaltonetworks.com/polyglot-file-icedid-payload/
+ICEDID MALWARE,icedid.json,Cold as Ice: Answers to Unit 42 Wireshark Quiz for IcedID,https://unit42.paloaltonetworks.com/wireshark-quiz-icedid-answers/
+ICEDID MALWARE,icedid.json,TA551: Email Attack Campaign Switches from Valak to IcedID - Unit 42,https://unit42.paloaltonetworks.com/ta551-shathak-icedid/
+ICEDID MALWARE,icedid.json,Unit 42 Threat Intel Bulletin - July - LinkedIn,https://www.linkedin.com/pulse/unit-42-threat-intel-bulletin-july-unit42
+ICEDID MALWARE,icedid.json,Teasing the Secrets From Threat Actors: Malware Configuration ...,https://unit42.paloaltonetworks.com/teasing-secrets-malware-configuration-parsing/
+ICEDID MALWARE,icedid.json,pan-unit42/tweets - GitHub,https://github.com/pan-unit42/tweets
+RANSOM-CARTEL RANSOMWARE,ransom-cartel.json,Ransom Cartel Ransomware: A Possible Connection With REvil,https://unit42.paloaltonetworks.com/ransom-cartel-ransomware/
+BLUESKY RANSOMWARE,bluesky-ransomware.json,BlueSky Ransomware: Fast Encryption via Multithreading - Unit 42,https://unit42.paloaltonetworks.com/bluesky-ransomware/
+BLUESKY RANSOMWARE,bluesky-ransomware.json,URL filtering Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/url-filtering/
+BLUESKY RANSOMWARE,bluesky-ransomware.json,RedLine infostealer Archives - Unit 42 - Palo Alto Networks,https://unit42.paloaltonetworks.com/tag/redline-infostealer/
+BLUESKY RANSOMWARE,bluesky-ransomware.json,Tor 101: How Tor Works and its Risks to the Enterprise - Unit 42,https://unit42.paloaltonetworks.com/tor-traffic-enterprise-networks/
+VICE-SOCIETY RANSOMWARE,vicesociety.json,Vice Society: Profiling a Persistent Threat to the Education Sector,https://unit42.paloaltonetworks.com/vice-society-targets-education-sector/
+VICE-SOCIETY RANSOMWARE,vicesociety.json,"Vice Society: A Tale of Victim Data Exfiltration via PowerShell, aka ...",https://unit42.paloaltonetworks.com/vice-society-ransomware-powershell/
+VICE-SOCIETY RANSOMWARE,vicesociety.json,Unit 42 Threat Intel Bulletin - June - LinkedIn,https://www.linkedin.com/pulse/unit-42-threat-intel-bulletin-june-unit42
+OWASSRF-VULNERABILITY EXPLOITATION,owassrf-vulnerability-exploitation.json,Threat Brief: OWASSRF Vulnerability Exploitation - Unit 42,https://unit42.paloaltonetworks.com/threat-brief-owassrf/
+OWASSRF-VULNERABILITY EXPLOITATION,owassrf-vulnerability-exploitation.json,OWASSRF Archives - Unit 42 - Palo Alto Networks,https://unit42.paloaltonetworks.com/tag/owassrf/
+OWASSRF-VULNERABILITY EXPLOITATION,owassrf-vulnerability-exploitation.json,incident response Archives - Palo Alto Networks Unit 42,https://unit42.paloaltonetworks.com/tag/incident-response/
+OWASSRF-VULNERABILITY EXPLOITATION,owassrf-vulnerability-exploitation.json,CVE-2022-41082 Archives - Unit 42 - Palo Alto Networks,https://unit42.paloaltonetworks.com/tag/cve-2022-41082/
+PLAYFUL TAURUS,playful-taurus.json,Chinese Playful Taurus Activity in Iran - Unit 42 - Palo Alto Networks,https://unit42.paloaltonetworks.com/playful-taurus/
+PLAYFUL TAURUS,playful-taurus.json,APT Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/apt/
+PLAYFUL TAURUS,playful-taurus.json,backdoor Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/backdoor/
+PLAYFUL TAURUS,playful-taurus.json,Unit 42 Threat Intel Bulletin - March - LinkedIn,https://www.linkedin.com/pulse/unit-42-threat-intel-bulletin-march-unit42
+PLAYFUL TAURUS,playful-taurus.json,Stately Taurus Targets the Philippines As Tensions Flare in ... - Unit 42,https://unit42.paloaltonetworks.com/stately-taurus-targets-philippines-government-cyberespionage/
+PLAYFUL TAURUS,playful-taurus.json,Precious Gemstones: The New Generation of Kerberos Attacks,https://unit42.paloaltonetworks.com/next-gen-kerberos-attacks/
+PLUGX MALWARE,plugx-malware.json,Chinese PlugX Malware Hidden in Your USB Devices? - Unit 42,https://unit42.paloaltonetworks.com/plugx-variants-in-usbs/
+PLUGX MALWARE,plugx-malware.json,THOR: Previously Unseen PlugX Variant Deployed During Microsoft ...,https://unit42.paloaltonetworks.com/thor-plugx-variant/
+PLUGX MALWARE,plugx-malware.json,Paranoid PlugX - Unit 42,https://unit42.paloaltonetworks.com/unit42-paranoid-plugx/
+PLUGX MALWARE,plugx-malware.json,PlugX Uses Legitimate Samsung Application for DLL Side-Loading,https://unit42.paloaltonetworks.com/plugx-uses-legitimate-samsung-application-for-dll-side-loading/
+PLUGX MALWARE,plugx-malware.json,Unit 42 Threat Intel Bulletin - March - LinkedIn,https://www.linkedin.com/pulse/unit-42-threat-intel-bulletin-march-unit42
+PLUGX MALWARE,plugx-malware.json,PKPLUG: Chinese Cyber Espionage Group Attacking Southeast Asia,https://unit42.paloaltonetworks.com/pkplug_chinese_cyber_espionage_group_attacking_asia/
+PLUGX MALWARE,plugx-malware.json,GootLoader Archives - Unit 42 - Palo Alto Networks,https://unit42.paloaltonetworks.com/tag/gootloader/
+LOKIBOT,lokibot.json,Spike in LokiBot Activity During Final Week of 2022 - Unit 42,https://unit42.paloaltonetworks.com/lokibot-spike-analysis/
+LOKIBOT,lokibot.json,Machine Learning Archives - Unit 42 - Palo Alto Networks,https://unit42.paloaltonetworks.com/tag/machine-learning/
+LOKIBOT,lokibot.json,Business Email Compromise Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/business-email-compromise/
+LOKIBOT,lokibot.json,Don't Panic: COVID-19 Cyber Threats - Unit 42,https://unit42.paloaltonetworks.com/covid19-cyber-threats/
+LOKIBOT,lokibot.json,COVID-19 Themed Malware Within Cloud Environments - Unit 42,https://unit42.paloaltonetworks.com/covid-19-themed-malware-within-cloud-environments/
+LOKIBOT,lokibot.json,"Durgesh Sangvikar, Author at Unit 42",https://unit42.paloaltonetworks.com/author/durgesh-sangvikar/
+LOKIBOT,lokibot.json,"Chris Navarrete, Author at Unit 42 - Palo Alto Networks",https://unit42.paloaltonetworks.com/author/chris-navarrete/
+GOBRUTEFORCER,gobruteforcer.json,GoBruteforcer: Golang-Based Botnet Actively Harvests Web Servers,https://unit42.paloaltonetworks.com/gobruteforcer-golang-botnet/
+GOBRUTEFORCER,gobruteforcer.json,botnet Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/botnet/
+GOBRUTEFORCER,gobruteforcer.json,web server Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/web-server/
+GOBRUTEFORCER,gobruteforcer.json,"Siddharth Sharma, Author at Unit 42 - Palo Alto Networks",https://unit42.paloaltonetworks.com/author/siddharth-sharma/
+GOBRUTEFORCER,gobruteforcer.json,pan-unit42/playbook_viewer - GitHub,https://github.com/pan-unit42/playbook_viewer
+GOBRUTEFORCER,gobruteforcer.json,"Siddharth Sharma, Author at Unit 42 - Palo Alto Networks",https://unit42.paloaltonetworks.jp/author/siddharth-sharma/
+TRIGONA-RANSOMWARE,trigona-ransomware.json,"Bee-Ware of Trigona, An Emerging Ransomware Strain - Unit 42",https://unit42.paloaltonetworks.com/trigona-ransomware-update/
+TRIGONA-RANSOMWARE,trigona-ransomware.json,Trigona Archives - Unit 42 - Palo Alto Networks,https://unit42.paloaltonetworks.com/tag/trigona/
+TRIGONA-RANSOMWARE,trigona-ransomware.json,threat assessment Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/threat-assessment/
+TRIGONA-RANSOMWARE,trigona-ransomware.json,ALPHV Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/alphv/
+JAVASCRIPT-INJECTION,javascript-injection.json,Malicious JavaScript Injection Campaign Infects 51k Websites,https://unit42.paloaltonetworks.com/malicious-javascript-injection/
+JAVASCRIPT-INJECTION,javascript-injection.json,Web Threat Trends: Malicious JavaScript Downloader and Others,https://unit42.paloaltonetworks.com/web-threats-malicious-javascript-downloader/
+JAVASCRIPT-INJECTION,javascript-injection.json,Detect JavaScript-Based Phishing With Deep Learning - Unit 42,https://unit42.paloaltonetworks.com/javascript-based-phishing/
+JAVASCRIPT-INJECTION,javascript-injection.json,deep learning Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/deep-learning/
+JAVASCRIPT-INJECTION,javascript-injection.json,Benign Append Attacks: How IUPG Deep Learning Can Overcome ...,https://unit42.paloaltonetworks.com/benign-append-attacks-iupg/
+CRYPTOCLIPPY,cryptoclippy.json,CryptoClippy Speaks Portuguese - Unit 42,https://unit42.paloaltonetworks.com/crypto-clipper-targets-portuguese-speakers/
+MUDDLED LIBRA,muddled-libra.json,Threat Group Assessment: Muddled Libra (Updated) - Unit 42,https://unit42.paloaltonetworks.com/muddled-libra/
+MUDDLED LIBRA,muddled-libra.json,Phishing Archives - Unit 42,https://unit42.paloaltonetworks.com/tag/phishing/
+MUDDLED LIBRA,muddled-libra.json,Resilient Cybersecurity Tactics for CISOs - Palo Alto Networks,https://www.paloaltonetworks.com.au/resources/ebooks/unit42-ciso-cybersecurity-tactics-advisory
+MUDDLED LIBRA,muddled-libra.json,Scattered Spider Archives - Unit 42 - Palo Alto Networks,https://unit42.paloaltonetworks.com/tag/scattered-spider/
+MUDDLED LIBRA,muddled-libra.json,Unit 42 Threat Intel Bulletin - August - LinkedIn,https://www.linkedin.com/pulse/unit-42-threat-intel-bulletin-august-unit42-1c

@@ -1,0 +1,794 @@
+{
+    "type": "bundle",
+    "id": "bundle--1e0a109f-3503-4106-a5b1-fbea26cd0163",
+    "objects": [
+        {
+            "type": "identity",
+            "spec_version": "2.1",
+            "id": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created_by_ref": "identity--42ac3c92-60d2-418f-ba8e-838944e6110b",
+            "created": "2023-04-12T17:53:09.646Z",
+            "modified": "2023-04-12T17:53:09.646Z",
+            "name": "GeminiProduction_CMA",
+            "description": "Cybersecurity and Infrastructure Security Agency Production Identity. Code and Media Analysis.",
+            "identity_class": "system",
+            "confidence": 100,
+            "lang": "en",
+            "object_marking_refs": [
+                "marking-definition--bab4a63c-aed9-4cf5-a766-dfca5abac2bb"
+            ]
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--e9cb8a66-e821-5878-9f9d-5edfab435cc5",
+            "hashes": {
+                "MD5": "4ca4f582418b2cc0626700511a6315c0",
+                "SHA-1": "0ea36676bd7169bcbf432f721c4edb5fde0a46a9",
+                "SHA-256": "3f26a13f023ad0dcd7f2aa4e7771bba74910ee227b4b36ff72edc5f07336f115",
+                "SHA-512": "71e0aaaf8981782ccb09331548d2458671d1dd65433052e44583ece98fffda9b6f0a3805d6d9c653dd0e1378602a7c1a3b0482a563b6644af49c908876ec1a3b",
+                "SSDEEP": "49152:X7PdfV6LWGqla76yHbSgfrNr1glmyifFTZwwP80WhpKG:zdfBlm6cbxr1pDw30WhpKG"
+            },
+            "size": 2924217,
+            "name": "BarracudaMailService.old",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--1a8283ba-ee38-4286-af5b-7128b30bec93",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "name": "BarracudaMailService.old",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact is a 64-bit Executable and Linkable Format (ELF) file that has been identified as a \"SEASPY\" malware variant installed as a system service. The malware is a persistent backdoor that masquerades as a legitimate Barracuda Networks service. The malware is designed to listen to commands received from the Threat Actor's (TA's) C2 through TCP packets. When executed, the malware uses libpcap sniffer to monitor traffic for a magic packet on TCP port 25 (Simple Mail Transfer Protocol (SMTP)) and TCP port 587. It checks the network packet captured for a hard-coded string \"oXmp\". When the right sequence of packets is captured, it establishes a TCP reverse shell to the TA's C2 server for further exploitation. This allows the TA to execute arbitrary commands on the compromised system.\r\n\r\nThe malware is based on an open-source backdoor program named \"cd00r\" and it is executed using the parameter below:\r\n\r\n--Begin argument--\r\nUsage: \"./BarracudaMailService <Network-Interface>\"\r\nSample: \"./<malware> eth0\"\r\n--End argument--",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10452108_01 rule_content=rule CISA_10452108_01 : SEASPY backdoor communicates_with_c2 installs_other_components\n{\n\tmeta:\n\t\tAuthor = \"CISA Code & Media Analysis\"\n\t\tIncident = \"10452108\"\n\t\tDate = \"2023-06-20\"\n\t\tLast_Modified = \"20230628_1000\"\n\t\tActor = \"n/a\"\n\t\tFamily = \"SEASPY\"\n\t\tCapabilities = \"communicates-with-c2 installs-other-components\"\n\t\tMalware_Type = \"backdoor\"\n\t\tTool_Type = \"unknown\"\n\t\tDescription = \"Detects malicious Linux SEASPY samples\"\n\t\tSHA256_1 = \"3f26a13f023ad0dcd7f2aa4e7771bba74910ee227b4b36ff72edc5f07336f115\"\n\t\tSHA256_2 = \"69935a1ce0240edf42dbe24535577140601bcf3226fa01e4481682f6de22d192\"\n\t\tSHA256_3 = \"5f5b8cc4d297c8d46a26732ae47c6ac80338b7be97a078a8e1b6eefd1120a5e5\"\n\t\tSHA256_4 = \"10efa7fe69e43c189033006010611e84394569571c4f08ea1735073d6433be81\"\n\tstrings:\n\t\t$s0 = { 2e 2f 42 61 72 72 61 63 75 64 61 4d 61 69 6c 53 65 72 76 69 63 65 20 65 74 68 30 }\n\t\t$s1 = { 75 73 61 67 65 3a 20 2e 2f 42 61 72 72 61 63 75 64 61 4d 61 69 6C 53 65 72 76 69 63 65 20 3c 4e 65 74 77 6f 72 6b 2d 49 6e 74 65 72 66 61 63 65 }\n\t\t$s2 = { 65 6e 74 65 72 20 6f 70 65 6e 20 74 74 79 20 73 68 65 6c 6c }\n\t\t$s3 = { 25 64 00 4e 4f 20 70 6f 72 74 20 63 6f 64 65 }\n\t\t$s4 = { 70 63 61 70 5f 6c 6f 6f 6b 75 70 6e 65 74 3a 20 25 73 }\n\t\t$s5 = { 43 68 69 6c 64 20 70 72 6f 63 65 73 73 20 69 64 3a 25 64 }\n\t\t$s6 = { 5b 2a 5d 53 75 63 63 65 73 73 21 } \n\t\t$a7 = { bf 90 47 90 ec 18 fe e3 83 e2 a9 f7 8d 85 18 1d }\n\t\t$a8 = { 81 35 1e f0 94 ab 2a ba 5d f0 37 76 69 19 9f 1e }\n\t\t$a9 = { 6a 8e c7 89 ce c1 fe 64 78 a6 e1 c5 fe 03 d1 a7 }\n\t\t$a10 = { c2 ff d1 0d 24 23 ec c0 57 f9 8d 4b 05 34 41 b8 }\n\tcondition:\n\t\tuint32(0) == 0x464c457f and (all of ($s*)) or ( all of ($a*))\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-08-08T18:20:23.612844Z"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--e1a2cad3-e57e-4dd4-b3c1-57d370f3d57c",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "product": "ahnlab",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "HackTool/Linux.Reverseshell",
+            "result": "unknown",
+            "sample_ref": "file--e9cb8a66-e821-5878-9f9d-5edfab435cc5"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--c7954b66-588f-433b-afe5-f25ba18d19b3",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "product": "antiy",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Trojan/Win32.Casdet",
+            "result": "unknown",
+            "sample_ref": "file--e9cb8a66-e821-5878-9f9d-5edfab435cc5"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--e2c8b340-24e0-4b35-aa7f-3e84a3e83705",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "product": "bitdefender",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Trojan.Linux.Generic.298175",
+            "result": "unknown",
+            "sample_ref": "file--e9cb8a66-e821-5878-9f9d-5edfab435cc5"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--af41944e-4c34-45af-831b-987cd4887eb2",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "product": "eset",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Linux/SeaSpy.A trojan",
+            "result": "unknown",
+            "sample_ref": "file--e9cb8a66-e821-5878-9f9d-5edfab435cc5"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--5a8a7fbd-1e29-46b2-9ca7-7bfbb32d2e0f",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "product": "emsisoft",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Trojan.Linux.Generic.298175 (B)",
+            "result": "unknown",
+            "sample_ref": "file--e9cb8a66-e821-5878-9f9d-5edfab435cc5"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--fa867b0f-db3f-40aa-ace9-3acc095aa98c",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "product": "mcafee",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "ELF/Barracuda.a",
+            "result": "unknown",
+            "sample_ref": "file--e9cb8a66-e821-5878-9f9d-5edfab435cc5"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--9969252a-c5e5-4786-9817-5a9144afd7d3",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "product": "quickheal",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "ELF.Barracuda.47823.GC",
+            "result": "unknown",
+            "sample_ref": "file--e9cb8a66-e821-5878-9f9d-5edfab435cc5"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--b278b303-1b4a-4f92-9b68-3fe7dc0a08f4",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "product": "sophos",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Linux/Agnt-BS",
+            "result": "unknown",
+            "sample_ref": "file--e9cb8a66-e821-5878-9f9d-5edfab435cc5"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--5900513e-d1ab-4215-8430-a4020d84a05e",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "product": "varist",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "E64/SeaSpy.A",
+            "result": "unknown",
+            "sample_ref": "file--e9cb8a66-e821-5878-9f9d-5edfab435cc5"
+        },
+        {
+            "type": "malware",
+            "spec_version": "2.1",
+            "id": "malware--5e6fe322-ff4f-499e-8fa8-b202478d6779",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact is a 64-bit Executable and Linkable Format (ELF) file that has been identified as a \"SEASPY\" malware variant installed as a system service. The malware is a persistent backdoor that masquerades as a legitimate Barracuda Networks service. The malware is designed to listen to commands received from the Threat Actor's (TA's) C2 through TCP packets. When executed, the malware uses libpcap sniffer to monitor traffic for a magic packet on TCP port 25 (Simple Mail Transfer Protocol (SMTP)) and TCP port 587. It checks the network packet captured for a hard-coded string \"oXmp\". When the right sequence of packets is captured, it establishes a TCP reverse shell to the TA's C2 server for further exploitation. This allows the TA to execute arbitrary commands on the compromised system.\r\n\r\nThe malware is based on an open-source backdoor program named \"cd00r\" and it is executed using the parameter below:\r\n\r\n--Begin argument--\r\nUsage: \"./BarracudaMailService <Network-Interface>\"\r\nSample: \"./<malware> eth0\"\r\n--End argument--",
+            "malware_types": [
+                "trojan"
+            ],
+            "is_family": false,
+            "sample_refs": [
+                "file--e9cb8a66-e821-5878-9f9d-5edfab435cc5"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--2078d0cc-78cb-4cde-b087-5c524744dd5f",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "name": "BarracudaMailService.old",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[file:hashes.'MD5'='4ca4f582418b2cc0626700511a6315c0' OR file:hashes.'SHA-1'='0ea36676bd7169bcbf432f721c4edb5fde0a46a9' OR file:hashes.'SHA-256'='3f26a13f023ad0dcd7f2aa4e7771bba74910ee227b4b36ff72edc5f07336f115' OR file:hashes.'SHA-512'='71e0aaaf8981782ccb09331548d2458671d1dd65433052e44583ece98fffda9b6f0a3805d6d9c653dd0e1378602a7c1a3b0482a563b6644af49c908876ec1a3b']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-08-08T18:20:23.623603Z"
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--cde77e68-96d4-57aa-a90d-6f37c4975552",
+            "hashes": {
+                "MD5": "2d841cb153bebcfdee5c54472b017af2",
+                "SHA-1": "7a791d4d7e55d7a2fdc08ac0f22ab7ae068fdf26",
+                "SHA-256": "29a41174eb9a39e0ad712ed5063c561e9c2e1db1f8f6b04b2ca369a6efc3ac9b",
+                "SHA-512": "021c28dfd1a4136a6aa80fb86546655f4b0b8a9c528af157edc556074922553d58fa793b061a18316783b8b74eb38d3e08c5ece4eecc8fa4953ac0a556595cca",
+                "SSDEEP": "48:2LrIlobkq9g03Xxk7OnoDzHyvIoXirAAAt6KWejvPqRvOojmJL0pNZiWtDjE5:2Lzbhg0nusoH2IoXirArMgqVmJL0pNZw"
+            },
+            "size": 2698,
+            "name": "QuoVadis_Root_CA_1_G3.pem",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--b55ddefb-9217-470c-bb42-2cd4ca24471e",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "name": "QuoVadis_Root_CA_1_G3.pem",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact is an initialization script. Upon its execution it sets terminal settings to default using the 'stty sane' command. It then runs through the process of setting a runlevel variable and stops other services that were started by a previous runlevel. It also kills any services that are running on the current runlevel. Next, the script will start its associated services at the current runlevel. After logging functionalities are started,  the script will then check if the runlevel is 3, which will result in the terminal screen being cleared using /usr/bin/clear. Finally, the script contains the command \u201c/sbin/BarracudaMailService eth0\u201d at the end. BarracudaMailService will be started automatically when the initialization script is run on the network interface eth0. BarracudaMailService is a known name for the SEASPY backdoor.",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10454006_10 rule_content=rule CISA_10454006_10 : trojan persists_after_system_reboot\n{\n\tmeta:\n\t\tAuthor = \"CISA Code & Media Analysis\"\n\t\tIncident = \"10454006\"\n\t\tDate = \"2023-07-20\"\n\t\tLast_Modified = \"20230726_1700\"\n\t\tActor = \"n/a\"\n\t\tFamily = \"n/a\"\n\t\tCapabilities = \"persists-after-system-reboot\"\n\t\tMalware_Type = \"trojan\"\n\t\tTool_Type = \"unknown\"\n\t\tDescription = \"Detects script samples known to start SEASPY after reboot\"\n\t\tSHA256 = \"29a41174eb9a39e0ad712ed5063c561e9c2e1db1f8f6b04b2ca369a6efc3ac9b\"\n\tstrings:\n\t\t$s1 = { 21 20 2d 64 20 24 7b 72 63 5f 62 61 73 65 7d 2f 72 63 24 7b 72 75 6e 6c 65 76 65 6c 7d 2e 64 }\n\t\t$s2 = { 52 75 6e 6e 69 6e 67 20 73 63 72 69 70 74 73 20 66 6f 72 20 72 75 6e 6c 65 76 65 6c 20 24 72 75 6e 6c 65 76 65 6c }\n\t\t$s3 = { 5b 20 2d 66 20 24 7b 70 72 65 76 5f 73 74 61 72 74 7d 20 5d 20 26 26 20 5b 20 21 20 2d 66 20 24 7b 73 74 6f 70 7d 20 5d 20 26 26 20 63 6f 6e 74 69 6e 75 65 }\n\t\t$s4 = { 24 7b 69 7d 20 73 74 61 72 74 20 3e 3e 2f 72 6f 6f 74 2f 62 6f 6f 74 2e 6c 6f 67 20 32 3e 3e 2f 72 6f 6f 74 2f 62 6f 6f 74 2e 6c 6f 67 }\n\t\t$s5 = { 2f 73 62 69 6e 2f 42 61 72 72 61 63 75 64 61 4d 61 69 6c 53 65 72 76 69 63 65 20 65 74 68 30 }\n\tcondition:\n\t\tall of them\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-08-08T18:20:23.640896Z"
+        },
+        {
+            "type": "note",
+            "spec_version": "2.1",
+            "id": "note--ba7be950-8efc-4af5-ae0f-68ba8493b96c",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "content": "This artifact is an initialization script. Upon its execution it sets terminal settings to default using the 'stty sane' command. It then runs through the process of setting a runlevel variable and stops other services that were started by a previous runlevel. It also kills any services that are running on the current runlevel. Next, the script will start its associated services at the current runlevel. After logging functionalities are started,  the script will then check if the runlevel is 3, which will result in the terminal screen being cleared using /usr/bin/clear. Finally, the script contains the command \u201c/sbin/BarracudaMailService eth0\u201d at the end. BarracudaMailService will be started automatically when the initialization script is run on the network interface eth0. BarracudaMailService is a known name for the SEASPY backdoor.",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "object_refs": [
+                "file--cde77e68-96d4-57aa-a90d-6f37c4975552"
+            ]
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--308bbc54-fbfd-5349-ac17-a3d8ae7c3511",
+            "hashes": {
+                "MD5": "45b79949276c9cb9cf5dc72597dc1006",
+                "SHA-1": "191e16b564c66b3db67f837e1dc5eac98ff9b9ef",
+                "SHA-256": "9bb7addd96f99a29658aca9800b66046823c5ef0755e29012983db6f06a999cf",
+                "SHA-512": "0f4307b5f48c193c1036b56b3cf569f79cb8fc2306f8f796d5548bcd5a96fc52127d2186d980c71d5917eb6d6026e92405a3cd453011503515e2e4f3311201c3",
+                "SSDEEP": "49152:4TnrmLlCGFyVfj+QCH2qirsZZrnYgBbfhceT+c02:KnrXxj317rs/NocJ"
+            },
+            "size": 2549176,
+            "name": "resize_reisertab",
+            "object_marking_refs": [
+                "marking-definition--55d920b0-5e8b-4f79-9ee9-91f868d9b421"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--e8c5cbe1-e2b9-4398-a1b5-82db1a6d0734",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "name": "resize_reisertab",
+            "object_marking_refs": [
+                "marking-definition--55d920b0-5e8b-4f79-9ee9-91f868d9b421"
+            ],
+            "description": "This artifact is a 64-bit ELF file that has been identified as a \"SEASPY\" malware variant installed as a system service. This variant of SEASPY has had its symbols stripped. The malware is a persistent backdoor that masquerades as a legitimate Barracuda Networks service. The malware is designed to listen to commands received from the TA's C2 through TCP packets. \r\n\r\nWhen executed, the malware uses libpcap sniffer to monitor traffic for a magic packet on TCP port 25 (SMTP) and TCP port 587. It checks the network packet captured for a hard-coded string \"TfuZ\". When the right sequence of packets is captured this SEASPY variant launches an authentication sequence prior to launching the reverse shell. Once the TA authenticates, the malware starts a reverse shell on the infected system. This allows the TA to execute arbitrary commands on the compromised system.\r\n\r\nThe malware is based on an open-source backdoor program named \"cd00r\" and it is executed using the parameter below:\r\n\r\n--Begin argument--\r\nUsage: \"./BarracudaMailService <Network-Interface>\"\r\nSample: \"./<malware> eth0\"\r\n--End argument--",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10452108_01 rule_content=rule CISA_10452108_01 : SEASPY backdoor communicates_with_c2 installs_other_components\n{\n\tmeta:\n\t\tAuthor = \"CISA Code & Media Analysis\"\n\t\tIncident = \"10452108\"\n\t\tDate = \"2023-06-20\"\n\t\tLast_Modified = \"20230628_1000\"\n\t\tActor = \"n/a\"\n\t\tFamily = \"SEASPY\"\n\t\tCapabilities = \"communicates-with-c2 installs-other-components\"\n\t\tMalware_Type = \"backdoor\"\n\t\tTool_Type = \"unknown\"\n\t\tDescription = \"Detects malicious Linux SEASPY samples\"\n\t\tSHA256_1 = \"3f26a13f023ad0dcd7f2aa4e7771bba74910ee227b4b36ff72edc5f07336f115\"\n\t\tSHA256_2 = \"69935a1ce0240edf42dbe24535577140601bcf3226fa01e4481682f6de22d192\"\n\t\tSHA256_3 = \"5f5b8cc4d297c8d46a26732ae47c6ac80338b7be97a078a8e1b6eefd1120a5e5\"\n\t\tSHA256_4 = \"10efa7fe69e43c189033006010611e84394569571c4f08ea1735073d6433be81\"\n\tstrings:\n\t\t$s0 = { 2e 2f 42 61 72 72 61 63 75 64 61 4d 61 69 6c 53 65 72 76 69 63 65 20 65 74 68 30 }\n\t\t$s1 = { 75 73 61 67 65 3a 20 2e 2f 42 61 72 72 61 63 75 64 61 4d 61 69 6C 53 65 72 76 69 63 65 20 3c 4e 65 74 77 6f 72 6b 2d 49 6e 74 65 72 66 61 63 65 }\n\t\t$s2 = { 65 6e 74 65 72 20 6f 70 65 6e 20 74 74 79 20 73 68 65 6c 6c }\n\t\t$s3 = { 25 64 00 4e 4f 20 70 6f 72 74 20 63 6f 64 65 }\n\t\t$s4 = { 70 63 61 70 5f 6c 6f 6f 6b 75 70 6e 65 74 3a 20 25 73 }\n\t\t$s5 = { 43 68 69 6c 64 20 70 72 6f 63 65 73 73 20 69 64 3a 25 64 }\n\t\t$s6 = { 5b 2a 5d 53 75 63 63 65 73 73 21 } \n\t\t$a7 = { bf 90 47 90 ec 18 fe e3 83 e2 a9 f7 8d 85 18 1d }\n\t\t$a8 = { 81 35 1e f0 94 ab 2a ba 5d f0 37 76 69 19 9f 1e }\n\t\t$a9 = { 6a 8e c7 89 ce c1 fe 64 78 a6 e1 c5 fe 03 d1 a7 }\n\t\t$a10 = { c2 ff d1 0d 24 23 ec c0 57 f9 8d 4b 05 34 41 b8 }\n\tcondition:\n\t\tuint32(0) == 0x464c457f and (all of ($s*)) or ( all of ($a*))\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-08-08T18:20:23.655842Z"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--fc045666-1b42-4962-96a9-26c6565741ed",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "product": "ahnlab",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Trojan/Linux.SeaSpy.2549176",
+            "result": "unknown",
+            "sample_ref": "file--308bbc54-fbfd-5349-ac17-a3d8ae7c3511"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--be9ad2d8-40f6-48c0-a21f-fab5ff09bd38",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "product": "antiy",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Trojan/Linux.SeaSpy.a",
+            "result": "unknown",
+            "sample_ref": "file--308bbc54-fbfd-5349-ac17-a3d8ae7c3511"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--341a7c0b-3f19-4706-b2ae-54de154666be",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "product": "bitdefender",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Trojan.Linux.Generic.298117",
+            "result": "unknown",
+            "sample_ref": "file--308bbc54-fbfd-5349-ac17-a3d8ae7c3511"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--f27c91da-f3da-4d90-bd34-2fbf2212ef30",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "product": "eset",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "a variant of Linux/SeaSpy.A trojan",
+            "result": "unknown",
+            "sample_ref": "file--308bbc54-fbfd-5349-ac17-a3d8ae7c3511"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--4fcc0db7-e4b7-4da6-a833-2360bc2c2178",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "product": "emsisoft",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Trojan.Linux.Generic.298117 (B)",
+            "result": "unknown",
+            "sample_ref": "file--308bbc54-fbfd-5349-ac17-a3d8ae7c3511"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--5af1dcaa-f071-42f7-afe8-061c205073e9",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "product": "ikarus",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Trojan.Linux.Seaspy",
+            "result": "unknown",
+            "sample_ref": "file--308bbc54-fbfd-5349-ac17-a3d8ae7c3511"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--f2526468-c7fb-4213-9d13-12f5d7a27d08",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "product": "varist",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "E64/SeaSpy.A",
+            "result": "unknown",
+            "sample_ref": "file--308bbc54-fbfd-5349-ac17-a3d8ae7c3511"
+        },
+        {
+            "type": "malware",
+            "spec_version": "2.1",
+            "id": "malware--d59944f9-0b1b-4350-ba9e-33d587e4090e",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact is a 64-bit ELF file that has been identified as a \"SEASPY\" malware variant installed as a system service. This variant of SEASPY has had its symbols stripped. The malware is a persistent backdoor that masquerades as a legitimate Barracuda Networks service. The malware is designed to listen to commands received from the TA's C2 through TCP packets. \r\n\r\nWhen executed, the malware uses libpcap sniffer to monitor traffic for a magic packet on TCP port 25 (SMTP) and TCP port 587. It checks the network packet captured for a hard-coded string \"TfuZ\". When the right sequence of packets is captured this SEASPY variant launches an authentication sequence prior to launching the reverse shell. Once the TA authenticates, the malware starts a reverse shell on the infected system. This allows the TA to execute arbitrary commands on the compromised system.\r\n\r\nThe malware is based on an open-source backdoor program named \"cd00r\" and it is executed using the parameter below:\r\n\r\n--Begin argument--\r\nUsage: \"./BarracudaMailService <Network-Interface>\"\r\nSample: \"./<malware> eth0\"\r\n--End argument--",
+            "malware_types": [
+                "trojan"
+            ],
+            "is_family": false,
+            "sample_refs": [
+                "file--308bbc54-fbfd-5349-ac17-a3d8ae7c3511"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--8ec1f7ce-961e-4df9-85e6-071c1be80001",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "name": "resize_reisertab",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[file:hashes.'MD5'='45b79949276c9cb9cf5dc72597dc1006' OR file:hashes.'SHA-1'='191e16b564c66b3db67f837e1dc5eac98ff9b9ef' OR file:hashes.'SHA-256'='9bb7addd96f99a29658aca9800b66046823c5ef0755e29012983db6f06a999cf' OR file:hashes.'SHA-512'='0f4307b5f48c193c1036b56b3cf569f79cb8fc2306f8f796d5548bcd5a96fc52127d2186d980c71d5917eb6d6026e92405a3cd453011503515e2e4f3311201c3']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-08-08T18:20:23.66148Z"
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--2d2d3f7e-1da5-5356-aab3-6ee18e7f8a5f",
+            "hashes": {
+                "MD5": "85c5b6c408e4bdb87da6764a75008adf",
+                "SHA-1": "5ce46efc6b28bd94955138833dc97916957dbde1",
+                "SHA-256": "83ca636253fd1eb898b244855838e2281f257bbe8ead428b69528fc50b60ae9c",
+                "SHA-512": "4aef99afc89062387b4987d49e5128ae37a3c25b59f05ccf324e593c67a8f5bd96e1f883d77225dbd0cc9456d736c90dd890bbead6082a14ae9f06abf07f87d8",
+                "SSDEEP": "49152:FKuknP+5ada3TUFChbGh7eMKPEGqnVoqqEoLC+2U:tkP+M834FChbGh7rE2+2U"
+            },
+            "size": 2646516,
+            "name": "rverify",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--e06c78b6-5055-4685-8668-74aeaaad4d45",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "name": "rverify",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact is a 32-bit ELF file that has been identified as a malware variant named \"WHIRLPOOL\". The malware takes two arguments (C2 IP and port number) from a module to establish a Transport Layer Security (TLS) reverse shell. The module that passes the arguments was not available for analysis.",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10452108_02 rule_content=rule CISA_10452108_02 : WHIRLPOOL backdoor communicates_with_c2 installs_other_components\n{\n\tmeta:\n\t\tAuthor = \"CISA Code & Media Analysis\"\n\t\tIncident = \"10452108\"\n\t\tDate = \"2023-06-20\"\n\t\tLast_Modified = \"20230804_1730\"\n\t\tActor = \"n/a\"\n\t\tFamily = \"WHIRLPOOL\"\n\t\tCapabilities = \"communicates-with-c2 installs-other-components\"\n\t\tMalware_Type = \"backdoor\"\n\t\tTool_Type = \"unknown\"\n\t\tDescription = \"Detects malicious Linux WHIRLPOOL samples\"\n\t\tSHA256_1 = \"83ca636253fd1eb898b244855838e2281f257bbe8ead428b69528fc50b60ae9c\"\n\t\tSHA256_2 = \"8849a3273e0362c45b4928375d196714224ec22cb1d2df5d029bf57349860347\"\n\tstrings:\n\t\t$s0 = { 65 72 72 6f 72 20 2d 31 20 65 78 69 74 }\n\t\t$s1 = { 63 72 65 61 74 65 20 73 6f 63 6b 65 74 20 65 72 72 6f 72 3a 20 25 73 28 65 72 72 6f 72 3a 20 25 64 29 }\n\t\t$s2 = { c7 00 20 32 3e 26 66 c7 40 04 31 00 }\n\t\t$a3 = { 70 6c 61 69 6e 5f 63 6f 6e 6e 65 63 74 }\n\t\t$a4 = { 63 6f 6e 6e 65 63 74 20 65 72 72 6f 72 3a 20 25 73 28 65 72 72 6f 72 3a 20 25 64 29 }\n\t\t$a5 = { 73 73 6c 5f 63 6f 6e 6e 65 63 74 }\n\tcondition:\n\t\tuint32(0) == 0x464c457f and 4 of them\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-08-08T18:20:23.677685Z"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--41924c41-6997-455c-a4fa-ba3d8d251140",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "product": "adaware",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Unavailable (production)",
+            "result": "unknown",
+            "sample_ref": "file--2d2d3f7e-1da5-5356-aab3-6ee18e7f8a5f"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--61e0b354-2372-47de-b0b3-600c7642e10d",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "product": "ahnlab",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Trojan/Linux.Whirpool.2646516",
+            "result": "unknown",
+            "sample_ref": "file--2d2d3f7e-1da5-5356-aab3-6ee18e7f8a5f"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--9ad97939-8680-4835-b6c0-34b2750757bc",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "product": "antiy",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Trojan/Linux.Agent.wl",
+            "result": "unknown",
+            "sample_ref": "file--2d2d3f7e-1da5-5356-aab3-6ee18e7f8a5f"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--33c9bd0f-5f68-4392-96cc-2a211fd95dca",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "product": "avira",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "LINUX/Agent.shpuf",
+            "result": "unknown",
+            "sample_ref": "file--2d2d3f7e-1da5-5356-aab3-6ee18e7f8a5f"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--334af3ed-e851-4cd2-97ed-ccad1fa82095",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "product": "bitdefender",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Trojan.Linux.Generic.298125",
+            "result": "unknown",
+            "sample_ref": "file--2d2d3f7e-1da5-5356-aab3-6ee18e7f8a5f"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--3d8fee73-8996-4973-8d2f-20ddbf965091",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "product": "eset",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "a variant of Linux/WhirlPool.A trojan",
+            "result": "unknown",
+            "sample_ref": "file--2d2d3f7e-1da5-5356-aab3-6ee18e7f8a5f"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--93c8b5c2-13d7-46dc-8412-a8cb6575da15",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "product": "emsisoft",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Trojan.Linux.Generic.298125 (B)",
+            "result": "unknown",
+            "sample_ref": "file--2d2d3f7e-1da5-5356-aab3-6ee18e7f8a5f"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--abfdbf5a-6009-46cd-84b4-05b09197cbc6",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "product": "ikarus",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Trojan.Linux.Agent",
+            "result": "unknown",
+            "sample_ref": "file--2d2d3f7e-1da5-5356-aab3-6ee18e7f8a5f"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--c01622c9-3935-4d26-b03d-bdf4a782c23a",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "product": "mcafee",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Trojan-FVEB!85C5B6C408E4",
+            "result": "unknown",
+            "sample_ref": "file--2d2d3f7e-1da5-5356-aab3-6ee18e7f8a5f"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--4150135a-0c06-429e-a94d-6302abf0450a",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "product": "sophos",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "Linux/Agnt-BS",
+            "result": "unknown",
+            "sample_ref": "file--2d2d3f7e-1da5-5356-aab3-6ee18e7f8a5f"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--5a9090e3-7aae-47cf-ae81-0cc27548b855",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "product": "varist",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "result_name": "E32/Agent.HC",
+            "result": "unknown",
+            "sample_ref": "file--2d2d3f7e-1da5-5356-aab3-6ee18e7f8a5f"
+        },
+        {
+            "type": "malware",
+            "spec_version": "2.1",
+            "id": "malware--5d83b1c1-4fe2-42f4-8f7d-5a849e32bcd0",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "This artifact is a 32-bit ELF file that has been identified as a malware variant named \"WHIRLPOOL\". The malware takes two arguments (C2 IP and port number) from a module to establish a Transport Layer Security (TLS) reverse shell. The module that passes the arguments was not available for analysis.",
+            "malware_types": [
+                "trojan"
+            ],
+            "is_family": false,
+            "sample_refs": [
+                "file--2d2d3f7e-1da5-5356-aab3-6ee18e7f8a5f"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--743eae08-b14a-474c-a058-4d0619d0d388",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "name": "rverify",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[file:hashes.'MD5'='85c5b6c408e4bdb87da6764a75008adf' OR file:hashes.'SHA-1'='5ce46efc6b28bd94955138833dc97916957dbde1' OR file:hashes.'SHA-256'='83ca636253fd1eb898b244855838e2281f257bbe8ead428b69528fc50b60ae9c' OR file:hashes.'SHA-512'='4aef99afc89062387b4987d49e5128ae37a3c25b59f05ccf324e593c67a8f5bd96e1f883d77225dbd0cc9456d736c90dd890bbead6082a14ae9f06abf07f87d8']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-08-08T18:20:23.684742Z"
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--2c0a34aa-d6f1-4287-82dc-24f513b1d5a8",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "relationship_type": "related-to",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "source_ref": "malware--5e6fe322-ff4f-499e-8fa8-b202478d6779",
+            "target_ref": "file--cde77e68-96d4-57aa-a90d-6f37c4975552"
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--f64034fd-6f56-4821-b312-f018f8ff5a18",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-05-31T22:05:08.000Z",
+            "relationship_type": "related-to",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "source_ref": "file--cde77e68-96d4-57aa-a90d-6f37c4975552",
+            "target_ref": "malware--5e6fe322-ff4f-499e-8fa8-b202478d6779"
+        },
+        {
+            "type": "report",
+            "spec_version": "2.1",
+            "id": "report--677b207a-2638-4fd9-9afb-81578f726998",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-05-31T22:05:08.000Z",
+            "modified": "2023-08-08T18:20:23.696746Z",
+            "name": "MAR-10454006.r4.v2 SEASPY - WHIRLPOOL",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "description": "CISA obtained four malware samples - including SEASPY and WHIRLPOOL backdoors. The device was compromised by threat actors exploiting CVE-2023-2868, a former zero-day vulnerability affecting versions 5.1.3.001-9.2.0.006 of Barracuda Email Security Gateway (ESG).\r\n\r\nSEASPY is a persistent and passive backdoor that masquerades as a legitimate Barracuda service \u201cBarracudaMailService\u201d that allows the threat actors to execute arbitrary commands on the ESG appliance.\r\n\r\nWHIRLPOOL is a backdoor that establishes a Transport Layer Security (TLS) reverse shell to the Command-and-Control (C2) server.\r\n\r\nFor information about related malware, specifically information on the initial exploit payload, a second SEASPY backdoor variant, and the SUBMARINE backdoor, see CISA Alert: CISA Releases Malware Analysis Reports on Barracuda Backdoors.",
+            "report_types": [
+                "observed-data",
+                "malware",
+                "indicator"
+            ],
+            "published": "2023-05-31T22:05:08Z",
+            "object_refs": [
+                "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+                "file--e9cb8a66-e821-5878-9f9d-5edfab435cc5",
+                "indicator--1a8283ba-ee38-4286-af5b-7128b30bec93",
+                "malware-analysis--e1a2cad3-e57e-4dd4-b3c1-57d370f3d57c",
+                "malware-analysis--c7954b66-588f-433b-afe5-f25ba18d19b3",
+                "malware-analysis--e2c8b340-24e0-4b35-aa7f-3e84a3e83705",
+                "malware-analysis--af41944e-4c34-45af-831b-987cd4887eb2",
+                "malware-analysis--5a8a7fbd-1e29-46b2-9ca7-7bfbb32d2e0f",
+                "malware-analysis--fa867b0f-db3f-40aa-ace9-3acc095aa98c",
+                "malware-analysis--9969252a-c5e5-4786-9817-5a9144afd7d3",
+                "malware-analysis--b278b303-1b4a-4f92-9b68-3fe7dc0a08f4",
+                "malware-analysis--5900513e-d1ab-4215-8430-a4020d84a05e",
+                "malware--5e6fe322-ff4f-499e-8fa8-b202478d6779",
+                "indicator--2078d0cc-78cb-4cde-b087-5c524744dd5f",
+                "file--cde77e68-96d4-57aa-a90d-6f37c4975552",
+                "indicator--b55ddefb-9217-470c-bb42-2cd4ca24471e",
+                "note--ba7be950-8efc-4af5-ae0f-68ba8493b96c",
+                "file--308bbc54-fbfd-5349-ac17-a3d8ae7c3511",
+                "indicator--e8c5cbe1-e2b9-4398-a1b5-82db1a6d0734",
+                "malware-analysis--fc045666-1b42-4962-96a9-26c6565741ed",
+                "malware-analysis--be9ad2d8-40f6-48c0-a21f-fab5ff09bd38",
+                "malware-analysis--341a7c0b-3f19-4706-b2ae-54de154666be",
+                "malware-analysis--f27c91da-f3da-4d90-bd34-2fbf2212ef30",
+                "malware-analysis--4fcc0db7-e4b7-4da6-a833-2360bc2c2178",
+                "malware-analysis--5af1dcaa-f071-42f7-afe8-061c205073e9",
+                "malware-analysis--f2526468-c7fb-4213-9d13-12f5d7a27d08",
+                "malware--d59944f9-0b1b-4350-ba9e-33d587e4090e",
+                "indicator--8ec1f7ce-961e-4df9-85e6-071c1be80001",
+                "file--2d2d3f7e-1da5-5356-aab3-6ee18e7f8a5f",
+                "indicator--e06c78b6-5055-4685-8668-74aeaaad4d45",
+                "malware-analysis--41924c41-6997-455c-a4fa-ba3d8d251140",
+                "malware-analysis--61e0b354-2372-47de-b0b3-600c7642e10d",
+                "malware-analysis--9ad97939-8680-4835-b6c0-34b2750757bc",
+                "malware-analysis--33c9bd0f-5f68-4392-96cc-2a211fd95dca",
+                "malware-analysis--334af3ed-e851-4cd2-97ed-ccad1fa82095",
+                "malware-analysis--3d8fee73-8996-4973-8d2f-20ddbf965091",
+                "malware-analysis--93c8b5c2-13d7-46dc-8412-a8cb6575da15",
+                "malware-analysis--abfdbf5a-6009-46cd-84b4-05b09197cbc6",
+                "malware-analysis--c01622c9-3935-4d26-b03d-bdf4a782c23a",
+                "malware-analysis--4150135a-0c06-429e-a94d-6302abf0450a",
+                "malware-analysis--5a9090e3-7aae-47cf-ae81-0cc27548b855",
+                "malware--5d83b1c1-4fe2-42f4-8f7d-5a849e32bcd0",
+                "indicator--743eae08-b14a-474c-a058-4d0619d0d388",
+                "relationship--2c0a34aa-d6f1-4287-82dc-24f513b1d5a8",
+                "relationship--f64034fd-6f56-4821-b312-f018f8ff5a18"
+            ]
+        }
+    ]
+}

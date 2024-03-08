@@ -1,0 +1,1062 @@
+{
+    "type": "bundle",
+    "id": "bundle--9a35c964-e785-4e97-89d4-4896023f47bb",
+    "objects": [
+        {
+            "type": "identity",
+            "spec_version": "2.1",
+            "id": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created_by_ref": "identity--42ac3c92-60d2-418f-ba8e-838944e6110b",
+            "created": "2023-04-12T17:53:09.646Z",
+            "modified": "2023-04-12T17:53:09.646Z",
+            "name": "GeminiProduction_CMA",
+            "description": "Cybersecurity and Infrastructure Security Agency Production Identity. Code and Media Analysis.",
+            "identity_class": "system",
+            "confidence": 100,
+            "lang": "en",
+            "object_marking_refs": [
+                "marking-definition--bab4a63c-aed9-4cf5-a766-dfca5abac2bb"
+            ]
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--cacb65cd-92a6-585b-89c6-503b4ba2a04f",
+            "hashes": {
+                "MD5": "b8967a33e6c1aee7682810b6b994b991",
+                "SHA-1": "bbda2ad0634aa535b9df40dc39a2d4dfdd763476",
+                "SHA-256": "334c2d0af191ed96b15095a4a098c400f2c0ce6b9c66d1800f6b74554d59ff4b",
+                "SHA-512": "75b86d329c06a60b395d539eead76f27bc4055a9743f6f33bc48b4ef54a5d0587fbfaf9742515e73936df2b6a5498a84ae8c501f0f27b6c047e994f3afcc408d",
+                "SSDEEP": "24:eFGStrJ9u0/6BonZdkBQAV7YQKZqSeNDMSCvOXpmB:is0M8kBQDQkSD9C2kB"
+            },
+            "size": 7168,
+            "name": "bitmap.exe",
+            "object_marking_refs": [
+                "marking-definition--55d920b0-5e8b-4f79-9ee9-91f868d9b421"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--23754b2f-bd98-4c5e-8c16-b1c31dbae5aa",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "name": "bitmap.exe",
+            "object_marking_refs": [
+                "marking-definition--55d920b0-5e8b-4f79-9ee9-91f868d9b421"
+            ],
+            "description": "This artifact is a malicious Windows executable file. The file is designed to connect to a remote Internet Protocol (IP) address \"179[.]60[.]147[.]4\" on Transmission Control Protocol (TCP) port 58731 and waits for a response. The response payload from the remote server is not encrypted and will be executed in memory. The payload was not available for analysis.",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10430311_01 rule_content=rule CISA_10430311_01 : METERPRETER trojan downloader\n{\n\tmeta:\n\t\tauthor = \"CISA Code & Media Analysis\"\n\t\tincident = \"10430311\"\n\t\tdate = \"2023-03-03\"\n\t\tlast_modified = \"20230404_1200\"\n\t\tactor = \"n/a\"\n\t\tfamily = \"METERPRETER\"\n\t\tCapabilities = \"n/a\"\n\t\tMalware_Type = \"trojan downloader\"\n\t\tTool_Type = \"n/a\"\n\t\tdescription = \"Detects trojan downloader samples\"\n\t\tsha256_1 = \"334c2d0af191ed96b15095a4a098c400f2c0ce6b9c66d1800f6b74554d59ff4b\"\n\tstrings:\n\t\t$s1 = { 49 be 77 73 32 5f 33 32 }\n\t\t$s2 = { 49 89 e6 48 81 ec a0 01 }\n\t\t$s3 = { 49 bc 02 00 e5 6b b3 3c 93 04 }\n\t\t$s4 = { 41 ba 4c 77 26 07 ff d5 }\n\t\t$s5 = { 41 ba ea 0f df e0 ff d5 }\n\t\t$s6 = { 41 ba 99 a5 74 61 ff d5 }\n\t\t$s7 = { 41 ba 02 d9 c8 5f ff d5 }\n\t\t$s8 = { 41 ba 58 a4 53 e5 ff d5 }\n\tcondition:\n\t\tall of them\n}\n 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10430311_02 rule_content=rule CISA_10430311_02 : METERPRETER controls_local_machine compromises_data_integrity communicates_with_c2 keylogger exploit_kit remote_access_trojan back downloader screen_capture virus remote_access exploitation network_capture\n{\n\tmeta:\n\t\tauthor = \"CISA Code & Media Analysis\"\n\t\tincident = \"10430311\"\n\t\tdate = \"2023-03-08\"\n\t\tlast_modified = \"20230405_1300\"\n\t\tactor = \"n/a\"\n\t\tfamily = \"METERPRETER\"\n\t\tCapabilities = \"controls-local-machine compromises-data-integrity communicates-with-c2\"\n\t\tMalware_Type = \"keylogger exploit-kit remote-access-trojan backdoor downloader screen-capture virus\"\n\t\tTool_Type = \"remote-access exploitation network-capture\"\n\t\tdescription = \"Detects Fresh Meterpreter bianary samples\"\n\t\tsha256_1 = \"79a9136eedbf8288ad7357ddaea3a3cd1a57b7c6f82adffd5a9540e1623bfb63\"\n\t\tsha256_2 = \"334c2d0af191ed96b15095a4a098c400f2c0ce6b9c66d1800f6b74554d59ff4b\"\n\t\tsha256_3 = \"6dcc7b5e913154abac69687fcfb6a58ac66ec9b8cc7de7afd8832a9066b7bdde\"\n\t\tsha256_4 = \"47dacb8f0b157355a4fd59ccbac1c59b8268fe84f3b8a462378b064333920622\"\n\tstrings:\n\t\t$s0 = { 58 a4 53 e5 }\n\t\t$s1 = { 02 d9 c8 5f }\n\t\t$s2 = { 99 a5 74 61 }\n\t\t$s3 = { 4c 77 26 07 }\n\t\t$s4 = { 29 80 6b 00 }\n\t\t$s5 = { 50 41 59 4c 4f 41 44 3a }\n\t\t$s6 = { 48 83 ec 28 49 c7 c1 40 }\n\tcondition:\n\t\tall of them\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-09-07T16:58:23.882645Z"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--a9e7a8f3-d40f-4238-ab56-2feb8bff676f",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "ahnlab",
+            "result_name": "Trojan/Win64.Shelma",
+            "result": "unknown",
+            "sample_ref": "file--cacb65cd-92a6-585b-89c6-503b4ba2a04f",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--c00994d4-5a5c-474f-acd2-d08a906be44f",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "antiy",
+            "result_name": "GrayWare/Win32.Rozena.j",
+            "result": "unknown",
+            "sample_ref": "file--cacb65cd-92a6-585b-89c6-503b4ba2a04f",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--db5c79a4-f1ab-4eb8-a65b-14f112c1375d",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "avira",
+            "result_name": "TR/Crypt.XPACK.Gen7",
+            "result": "unknown",
+            "sample_ref": "file--cacb65cd-92a6-585b-89c6-503b4ba2a04f",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--d5f5bc43-4c90-49e8-a3f8-6e4df6d89c13",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "bitdefender",
+            "result_name": "Trojan.Metasploit.A",
+            "result": "unknown",
+            "sample_ref": "file--cacb65cd-92a6-585b-89c6-503b4ba2a04f",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--f35f7b75-ff40-44bc-a3af-4ea853b0e70f",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "crowdstrikefalconml",
+            "result_name": "win/malicious_confidence_100",
+            "result": "unknown",
+            "sample_ref": "file--cacb65cd-92a6-585b-89c6-503b4ba2a04f",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--cda734de-cc23-4da7-a37d-9c046f6dd65d",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "cylance",
+            "result_name": "Malware",
+            "result": "unknown",
+            "sample_ref": "file--cacb65cd-92a6-585b-89c6-503b4ba2a04f",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--2729383d-6003-4f23-9dfb-6b341176ddc8",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "eset",
+            "result_name": "a variant of Win64/Rozena.M trojan",
+            "result": "unknown",
+            "sample_ref": "file--cacb65cd-92a6-585b-89c6-503b4ba2a04f",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--f8f59bc5-29f9-482f-a3ae-fe5b6337cebc",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "emsisoft",
+            "result_name": "Trojan.Metasploit.A (B)",
+            "result": "unknown",
+            "sample_ref": "file--cacb65cd-92a6-585b-89c6-503b4ba2a04f",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--6db7f33c-2494-4a99-b0d6-e3eae2f06688",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "huorong",
+            "result_name": "Trojan/Obfuscated.dq",
+            "result": "unknown",
+            "sample_ref": "file--cacb65cd-92a6-585b-89c6-503b4ba2a04f",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--875422f9-951d-4946-b014-3648bfc72748",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "ikarus",
+            "result_name": "Trojan.Win64.Meterpreter",
+            "result": "unknown",
+            "sample_ref": "file--cacb65cd-92a6-585b-89c6-503b4ba2a04f",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--34b28d1b-720f-4b0b-a2f2-55207b3f03be",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "k7",
+            "result_name": "Trojan ( 004fae881 )",
+            "result": "unknown",
+            "sample_ref": "file--cacb65cd-92a6-585b-89c6-503b4ba2a04f",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--9ab7bccb-98ad-4486-8784-10d5066fd93d",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "mcafee",
+            "result_name": "Trojan-FJIN!B8967A33E6C1",
+            "result": "unknown",
+            "sample_ref": "file--cacb65cd-92a6-585b-89c6-503b4ba2a04f",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--30611396-3a9b-48a1-974b-652a98195c6f",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "quickheal",
+            "result_name": "HackTool.Metasploit.S9212471",
+            "result": "unknown",
+            "sample_ref": "file--cacb65cd-92a6-585b-89c6-503b4ba2a04f",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--033ec8a8-c9d4-46cb-ab75-0eb8938c788f",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "sophos",
+            "result_name": "ATK/Meter-A",
+            "result": "unknown",
+            "sample_ref": "file--cacb65cd-92a6-585b-89c6-503b4ba2a04f",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--1c734a35-348e-43e6-9e14-9adab8b38d99",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "varist",
+            "result_name": "W64/S-c4a4ef26!Eldorado",
+            "result": "unknown",
+            "sample_ref": "file--cacb65cd-92a6-585b-89c6-503b4ba2a04f",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--aac48d3a-0d6b-4c91-b64e-9071a4b4a295",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "viritexplorer",
+            "result_name": "Trojan.Win32.Generic.BZPS",
+            "result": "unknown",
+            "sample_ref": "file--cacb65cd-92a6-585b-89c6-503b4ba2a04f",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--49c48cfb-7545-45ac-8f28-6096b55dc6f5",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "webrootsmd",
+            "result_name": "Malware",
+            "result": "unknown",
+            "sample_ref": "file--cacb65cd-92a6-585b-89c6-503b4ba2a04f",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware",
+            "spec_version": "2.1",
+            "id": "malware--bc9b0159-2ffd-4e7a-b049-045f48bed3c4",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "description": "This artifact is a malicious Windows executable file. The file is designed to connect to a remote Internet Protocol (IP) address \"179[.]60[.]147[.]4\" on Transmission Control Protocol (TCP) port 58731 and waits for a response. The response payload from the remote server is not encrypted and will be executed in memory. The payload was not available for analysis.",
+            "malware_types": [
+                "trojan",
+                "downloader"
+            ],
+            "is_family": false,
+            "sample_refs": [
+                "file--cacb65cd-92a6-585b-89c6-503b4ba2a04f"
+            ],
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--3ecce29f-a5ff-4dc5-ac00-837435727243",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "name": "bitmap.exe",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[file:hashes.'MD5'='b8967a33e6c1aee7682810b6b994b991' OR file:hashes.'SHA-1'='bbda2ad0634aa535b9df40dc39a2d4dfdd763476' OR file:hashes.'SHA-256'='334c2d0af191ed96b15095a4a098c400f2c0ce6b9c66d1800f6b74554d59ff4b' OR file:hashes.'SHA-512'='75b86d329c06a60b395d539eead76f27bc4055a9743f6f33bc48b4ef54a5d0587fbfaf9742515e73936df2b6a5498a84ae8c501f0f27b6c047e994f3afcc408d']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-09-07T16:58:23.89341Z",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "ipv4-addr",
+            "spec_version": "2.1",
+            "id": "ipv4-addr--49d40df3-2442-5fd4-9d21-0727364b00d3",
+            "value": "179.60.147.4",
+            "object_marking_refs": [
+                "marking-definition--55d920b0-5e8b-4f79-9ee9-91f868d9b421"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--9b870ac7-ea57-4746-b724-61a9a4422f51",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "name": "179.60.147.4",
+            "object_marking_refs": [
+                "marking-definition--55d920b0-5e8b-4f79-9ee9-91f868d9b421"
+            ],
+            "description": "The malware C2 server IP address.",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[ipv4-addr:value = '179.60.147.4']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-09-07T16:58:23.907307Z"
+        },
+        {
+            "type": "location",
+            "spec_version": "2.1",
+            "id": "location--3198ce40-9802-416e-8700-cdb515046f72",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-09-07T16:58:23.917041Z",
+            "modified": "2023-09-07T16:58:23.917041Z",
+            "name": "179.60.147.4",
+            "description": "inetnum:     179.60.147.0/24\r\nstatus:     reallocated\r\naut-num:     AS209588\r\nowner:     Cloud Solutions S.A.\r\nownerid:     VE-CSSA1-LACNIC\r\nresponsible: Alexis Sanchez\r\naddress:     Av. Libertador, Distrito Capital, ---,\r\naddress:     1050 - Caracas -\r\ncountry:     VE\r\nphone:     +507 8589115\r\nowner-c:     ALS317\r\ntech-c:     ALS317\r\nabuse-c:     ALS317\r\ninetrev:     179.60.147.0/24\r\nnserver:     NS1.SAFE-VPN.MOBI\r\nnsstat:     20230302 AA\r\nnslastaa:    20230302\r\nnserver:     NS2.SAFE-VPN.MOBI\r\nnsstat:     20230302 AA\r\nnslastaa:    20230302\r\ncreated:     20220301\r\nchanged:     20220301\r\ninetnum-up: 179.60.144.0/21\r\n\r\nnic-hdl:     ALS317\r\nperson:     Alexis Sanchez\r\ne-mail:     info@safe-vpn.mobi\r\naddress:     Av. Libertador, Distrito Capital, ---, ---\r\naddress:     1050 - Caracas -\r\ncountry:     VE\r\nphone:     +507 858 91 [15]\r\ncreated:     20220301\r\nchanged:     20220301 ",
+            "region": "south-america",
+            "country": "VE",
+            "street_address": "Av. Libertador, Distrito Capital, ---, 1050 - Caracas -",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--bed2fc97-d83e-5e43-909d-d14983288add",
+            "hashes": {
+                "MD5": "76adb0e36aac40cae0ebeb9f4bd38b52",
+                "SHA-1": "82885f8c57cf4460f52db0a85e183d372f0aeb7e",
+                "SHA-256": "79a9136eedbf8288ad7357ddaea3a3cd1a57b7c6f82adffd5a9540e1623bfb63",
+                "SHA-512": "dc3547ca38bcdc00184537f9b2bac6201d9aa1541d172fc78050636b5f0d2c438defcab937f2ac056a0522c9727d2c3ea1636c69c9780ed553b146168956c121",
+                "SSDEEP": "24:eFGStrJ9u0/6kgnZdEBQAVXBYLYKZq4eNDMSeGV1iY0im+opmB:is0dUEBQpLYGSD9e8oYKkB"
+            },
+            "size": 7168,
+            "name": "wkHPd.exe",
+            "object_marking_refs": [
+                "marking-definition--55d920b0-5e8b-4f79-9ee9-91f868d9b421"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--868cfff1-6c57-4a2b-8b71-876e8c397bfd",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "name": "wkHPd.exe",
+            "object_marking_refs": [
+                "marking-definition--55d920b0-5e8b-4f79-9ee9-91f868d9b421"
+            ],
+            "description": "This file is a malicious 64-bit Windows Portable Executable (PE) that has been identified as a variant of the Metasploit Meterpreter application. The file is designed to connect to a remote Internet Protocol (IP) address 108.62.118.160.",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10430311_02 rule_content=rule CISA_10430311_02 : METERPRETER controls_local_machine compromises_data_integrity communicates_with_c2 keylogger exploit_kit remote_access_trojan back downloader screen_capture virus remote_access exploitation network_capture\n{\n\tmeta:\n\t\tauthor = \"CISA Code & Media Analysis\"\n\t\tincident = \"10430311\"\n\t\tdate = \"2023-03-08\"\n\t\tlast_modified = \"20230405_1300\"\n\t\tactor = \"n/a\"\n\t\tfamily = \"METERPRETER\"\n\t\tCapabilities = \"controls-local-machine compromises-data-integrity communicates-with-c2\"\n\t\tMalware_Type = \"keylogger exploit-kit remote-access-trojan backdoor downloader screen-capture virus\"\n\t\tTool_Type = \"remote-access exploitation network-capture\"\n\t\tdescription = \"Detects Fresh Meterpreter bianary samples\"\n\t\tsha256_1 = \"79a9136eedbf8288ad7357ddaea3a3cd1a57b7c6f82adffd5a9540e1623bfb63\"\n\t\tsha256_2 = \"334c2d0af191ed96b15095a4a098c400f2c0ce6b9c66d1800f6b74554d59ff4b\"\n\t\tsha256_3 = \"6dcc7b5e913154abac69687fcfb6a58ac66ec9b8cc7de7afd8832a9066b7bdde\"\n\t\tsha256_4 = \"47dacb8f0b157355a4fd59ccbac1c59b8268fe84f3b8a462378b064333920622\"\n\tstrings:\n\t\t$s0 = { 58 a4 53 e5 }\n\t\t$s1 = { 02 d9 c8 5f }\n\t\t$s2 = { 99 a5 74 61 }\n\t\t$s3 = { 4c 77 26 07 }\n\t\t$s4 = { 29 80 6b 00 }\n\t\t$s5 = { 50 41 59 4c 4f 41 44 3a }\n\t\t$s6 = { 48 83 ec 28 49 c7 c1 40 }\n\tcondition:\n\t\tall of them\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-09-07T16:58:23.930649Z"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--b3230823-eb30-4265-8214-9946d26614d8",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "crowdstrikefalconml",
+            "result_name": "win/malicious_confidence_100",
+            "result": "unknown",
+            "sample_ref": "file--bed2fc97-d83e-5e43-909d-d14983288add",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--a378e70a-b810-434e-98dd-7a20dafe6243",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "cylance",
+            "result_name": "Malware",
+            "result": "unknown",
+            "sample_ref": "file--bed2fc97-d83e-5e43-909d-d14983288add",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--aaef412b-2796-4f59-b76f-fe2d9295edfe",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "eset",
+            "result_name": "a variant of Win64/Rozena.M trojan",
+            "result": "unknown",
+            "sample_ref": "file--bed2fc97-d83e-5e43-909d-d14983288add",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--bfe8b68c-83a5-4c1b-b665-357377f0879c",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "emsisoft",
+            "result_name": "Trojan.Metasploit.A (B)",
+            "result": "unknown",
+            "sample_ref": "file--bed2fc97-d83e-5e43-909d-d14983288add",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--b54c38f3-f607-43d7-ab2c-b17d9f1dada3",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "huorong",
+            "result_name": "Trojan/Obfuscated.dq",
+            "result": "unknown",
+            "sample_ref": "file--bed2fc97-d83e-5e43-909d-d14983288add",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--d4878a31-a155-4f59-88e2-f029158ad898",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "ikarus",
+            "result_name": "Trojan.Win64.Meterpreter",
+            "result": "unknown",
+            "sample_ref": "file--bed2fc97-d83e-5e43-909d-d14983288add",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--1b69ff86-ad13-4bcf-bac2-d4450346cc72",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "k7",
+            "result_name": "Trojan ( 004fae881 )",
+            "result": "unknown",
+            "sample_ref": "file--bed2fc97-d83e-5e43-909d-d14983288add",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--2541080a-b16c-4dc0-8566-8e66fbd1b4b7",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "mcafee",
+            "result_name": "Trojan-FJIN!76ADB0E36AAC",
+            "result": "unknown",
+            "sample_ref": "file--bed2fc97-d83e-5e43-909d-d14983288add",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--2f36a29e-f9a0-4b02-ba3e-a5714790fbed",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "quickheal",
+            "result_name": "HackTool.Metasploit.S9212471",
+            "result": "unknown",
+            "sample_ref": "file--bed2fc97-d83e-5e43-909d-d14983288add",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--ce438675-eca6-4ecc-83d9-c2a0470a61b7",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "sophos",
+            "result_name": "ATK/Meter-A",
+            "result": "unknown",
+            "sample_ref": "file--bed2fc97-d83e-5e43-909d-d14983288add",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--01bdb660-6438-44be-89a6-dc32e0c8d55f",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "varist",
+            "result_name": "W64/S-c4a4ef26!Eldorado",
+            "result": "unknown",
+            "sample_ref": "file--bed2fc97-d83e-5e43-909d-d14983288add",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--1628a09b-7bfb-4ea7-8c3b-52a2386421e0",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "viritexplorer",
+            "result_name": "Trojan.Win32.Generic.BZPS",
+            "result": "unknown",
+            "sample_ref": "file--bed2fc97-d83e-5e43-909d-d14983288add",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--29b0091f-064a-4940-bebe-357d6e0113bc",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "webrootsmd",
+            "result_name": "Malware",
+            "result": "unknown",
+            "sample_ref": "file--bed2fc97-d83e-5e43-909d-d14983288add",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--491bb212-bc98-4908-8e41-7c93cbe85eab",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "ahnlab",
+            "result_name": "Trojan/Win64.Agent",
+            "result": "unknown",
+            "sample_ref": "file--bed2fc97-d83e-5e43-909d-d14983288add",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--e96fd689-9d2b-4ae2-831b-1f6a24238eda",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "antiy",
+            "result_name": "GrayWare/Win32.Rozena.j",
+            "result": "unknown",
+            "sample_ref": "file--bed2fc97-d83e-5e43-909d-d14983288add",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--ac6a1508-0222-45e5-b183-9dcc18512d0c",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "avira",
+            "result_name": "TR/Crypt.XPACK.Gen7",
+            "result": "unknown",
+            "sample_ref": "file--bed2fc97-d83e-5e43-909d-d14983288add",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--32970f81-8381-47f6-b132-1baf74f147bc",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "bitdefender",
+            "result_name": "Trojan.Metasploit.A",
+            "result": "unknown",
+            "sample_ref": "file--bed2fc97-d83e-5e43-909d-d14983288add",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware",
+            "spec_version": "2.1",
+            "id": "malware--ef2a9125-c4ba-469a-9530-aba7d492f85c",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "description": "This file is a malicious 64-bit Windows Portable Executable (PE) that has been identified as a variant of the Metasploit Meterpreter application. The file is designed to connect to a remote Internet Protocol (IP) address 108.62.118.160.",
+            "malware_types": [
+                "trojan"
+            ],
+            "is_family": false,
+            "sample_refs": [
+                "file--bed2fc97-d83e-5e43-909d-d14983288add"
+            ],
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--9b77053b-4976-409e-ad75-e4024ef4539a",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "name": "wkHPd.exe",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[file:hashes.'MD5'='76adb0e36aac40cae0ebeb9f4bd38b52' OR file:hashes.'SHA-1'='82885f8c57cf4460f52db0a85e183d372f0aeb7e' OR file:hashes.'SHA-256'='79a9136eedbf8288ad7357ddaea3a3cd1a57b7c6f82adffd5a9540e1623bfb63' OR file:hashes.'SHA-512'='dc3547ca38bcdc00184537f9b2bac6201d9aa1541d172fc78050636b5f0d2c438defcab937f2ac056a0522c9727d2c3ea1636c69c9780ed553b146168956c121']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-09-07T16:58:23.940417Z",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "ipv4-addr",
+            "spec_version": "2.1",
+            "id": "ipv4-addr--cb47198f-f238-572c-9cf5-af05ccba5828",
+            "value": "108.62.118.160",
+            "object_marking_refs": [
+                "marking-definition--55d920b0-5e8b-4f79-9ee9-91f868d9b421"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--ddee7673-f3be-4d53-b3d1-6ecc6906d04b",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "name": "108.62.118.160",
+            "object_marking_refs": [
+                "marking-definition--55d920b0-5e8b-4f79-9ee9-91f868d9b421"
+            ],
+            "description": "The malware attempts to connect to this IP address.",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[ipv4-addr:value = '108.62.118.160']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-09-07T16:58:23.949821Z"
+        },
+        {
+            "type": "location",
+            "spec_version": "2.1",
+            "id": "location--9d269c66-2552-421a-97fa-1e11b7208890",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-09-07T16:58:23.955848Z",
+            "modified": "2023-09-07T16:58:23.955848Z",
+            "name": "108.62.118.160",
+            "description": "NetRange:     108.62.0.0 - 108.62.255.255\r\nCIDR:         108.62.0.0/16\r\nNetName:        NET-108-62-0-0-1\r\nNetHandle:     NET-108-62-0-0-1\r\nParent:         NET108 (NET-108-0-0-0-0)\r\nNetType:        Direct Allocation\r\nOriginAS:     AS15003\r\nOrganization: Leaseweb USA, Inc. (LU)\r\nRegDate:        2010-12-13\r\nUpdated:        2021-02-15\r\nRef:            https://rdap.arin.net/registry/ip/108.62.0.0\r\n\r\nOrgName:        Leaseweb USA, Inc.\r\nOrgId:         LU\r\nAddress:        9480 Innovation Dr\r\nCity:         Manassas\r\nStateProv:     VA\r\nPostalCode:     20109\r\nCountry:        US\r\nRegDate:        2010-09-13\r\nUpdated:        2019-08-13\r\nComment:        www.leaseweb.com\r\nRef:            https://rdap.arin.net/registry/entity/LU ",
+            "region": "northern-america",
+            "country": "US",
+            "city": "Manassas",
+            "street_address": "9480 Innovation Dr",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ],
+            "postal_code": "20109"
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--da061a12-1896-523d-8a54-2b0346006557",
+            "hashes": {
+                "MD5": "1a0e111e60e543810423ef073b545c77",
+                "SHA-1": "23cb74b530c49837595d766492279cc0cdc4692d",
+                "SHA-256": "47dacb8f0b157355a4fd59ccbac1c59b8268fe84f3b8a462378b064333920622",
+                "SHA-512": "78a6e59bb9d9320d39249ee8ae94431a7cda608476f0adc9358e558b535ceccf12e219af16b14a40948986a01ad9128f8cf0240cde866197570fd70772e92d1c",
+                "SSDEEP": "3:6DZXA/fTGYpEHJCpHT55bct7fk8fwM2aA793nJKAqTGwPW1kyKN+1Ucv2+:6e3q+ugFIt7M8fwM/A7zKAqK6ykycKUU"
+            },
+            "size": 175,
+            "name": "resource.aspx",
+            "object_marking_refs": [
+                "marking-definition--55d920b0-5e8b-4f79-9ee9-91f868d9b421"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--f84ed6d0-cb86-4e46-8137-cdc3af4cc2bd",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "name": "resource.aspx",
+            "object_marking_refs": [
+                "marking-definition--55d920b0-5e8b-4f79-9ee9-91f868d9b421"
+            ],
+            "description": "This artifact is an ASPX webshell that is designed to execute remote JavaScript code on the system. The attacker must authenticate to the webshell client with the key \"OWAwebconfig\" before executing the remote code. The 'unsafe' context keyword is intentionally obfuscated to bypass security protocols.",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10430311_03 rule_content=rule CISA_10430311_03 : ASPX_WEBSHELL webshell\n{\n\tmeta:\n\t\tauthor = \"CISA Code & Media Analysis\"\n\t\tincident = \"10430311\"\n\t\tdate = \"2023-03-21\"\n\t\tlast_modified = \"20230404_1230\"\n\t\tactor = \"n/a\"\n\t\tfamily = \"ASPX Webshell\"\n\t\tCapabilities = \"n/a\"\n\t\tMalware_Type = \"webshell\"\n\t\tTool_Type = \"n/a\"\n\t\tdescription = \"Detects OWA targeting ASPX Webshell samples\"\n\t\tsha256_1 = \"6dcc7b5e913154abac69687fcfb6a58ac66ec9b8cc7de7afd8832a9066b7bdde\"\n\t\tsha256_1 = \"47dacb8f0b157355a4fd59ccbac1c59b8268fe84f3b8a462378b064333920622\"\n\tstrings:\n\t\t$s1 = { 5a 30 32 6a 77 36 43 36 63 55 }\n\t\t$s2 = { 5a 38 49 30 32 38 33 6e 77 38 }\n\t\t$s3 = { 4f 57 41 77 65 62 63 6f 6e 66 69 67 }\n\t\t$s4 = { 54 55 43 53 4f 4e }\n\t\t$s5 = { 65 76 61 6c }\n\tcondition:\n\t\t3 of them\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-09-07T16:58:23.968634Z"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--a4455874-8a19-477a-830a-02b2222bad63",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "huorong",
+            "result_name": "Backdoor/ASP.WebShell.aa",
+            "result": "unknown",
+            "sample_ref": "file--da061a12-1896-523d-8a54-2b0346006557",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware",
+            "spec_version": "2.1",
+            "id": "malware--39a650f3-9fce-4a6a-8f78-cc5c2e0ba9bc",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "description": "This artifact is an ASPX webshell that is designed to execute remote JavaScript code on the system. The attacker must authenticate to the webshell client with the key \"OWAwebconfig\" before executing the remote code. The 'unsafe' context keyword is intentionally obfuscated to bypass security protocols.",
+            "malware_types": [
+                "webshell",
+                "backdoor"
+            ],
+            "is_family": false,
+            "sample_refs": [
+                "file--da061a12-1896-523d-8a54-2b0346006557"
+            ],
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--991853d3-905a-4d0a-b6cf-6da78e9cd3df",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "name": "resource.aspx",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[file:hashes.'MD5'='1a0e111e60e543810423ef073b545c77' OR file:hashes.'SHA-1'='23cb74b530c49837595d766492279cc0cdc4692d' OR file:hashes.'SHA-256'='47dacb8f0b157355a4fd59ccbac1c59b8268fe84f3b8a462378b064333920622' OR file:hashes.'SHA-512'='78a6e59bb9d9320d39249ee8ae94431a7cda608476f0adc9358e558b535ceccf12e219af16b14a40948986a01ad9128f8cf0240cde866197570fd70772e92d1c']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-09-07T16:58:23.971824Z",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "file",
+            "spec_version": "2.1",
+            "id": "file--573b2c58-4384-5f38-bc7d-c6ed5c5d8069",
+            "hashes": {
+                "MD5": "a33354d598b58f2e55eb3619c3465f24",
+                "SHA-1": "e1c6f76085234554e9a47b61105cd45981eb35d2",
+                "SHA-256": "6dcc7b5e913154abac69687fcfb6a58ac66ec9b8cc7de7afd8832a9066b7bdde",
+                "SHA-512": "180ee1378ff6ffd8b28c39208d8abb617e263defc74f6781f9f8efa373fd62c3aa0b99a4b77cf44432f9bfe4fd80f40620ffb884af2e440491d007b2e41e4d96",
+                "SSDEEP": "3:6DZX6VeeTEdYpEHJCpRZT55bcRRt+ek8fwM2aA42qPJKMWmdeuufKVeM+1Ucv2+:6NeTG+ug/JIi8fwM/A7qxKMWmgZMKUeb"
+            },
+            "size": 169,
+            "name": "ConfigLogin.aspx",
+            "object_marking_refs": [
+                "marking-definition--55d920b0-5e8b-4f79-9ee9-91f868d9b421"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--56ca72b0-c208-4143-a911-ddec9627b37a",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "name": "ConfigLogin.aspx",
+            "object_marking_refs": [
+                "marking-definition--55d920b0-5e8b-4f79-9ee9-91f868d9b421"
+            ],
+            "description": "This artifact is an ASPX webshell that is designed to execute remote JavaScript code on the system. The attacker must authenticate to the webshell client with the key \"TUCSON\" before executing the remote code. The 'unsafe' context keyword is intentionally obfuscated to bypass security protocols.",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": " 'namespace'='CISA_Consolidated.yara' rule_name=CISA_10430311_03 rule_content=rule CISA_10430311_03 : ASPX_WEBSHELL webshell\n{\n\tmeta:\n\t\tauthor = \"CISA Code & Media Analysis\"\n\t\tincident = \"10430311\"\n\t\tdate = \"2023-03-21\"\n\t\tlast_modified = \"20230404_1230\"\n\t\tactor = \"n/a\"\n\t\tfamily = \"ASPX Webshell\"\n\t\tCapabilities = \"n/a\"\n\t\tMalware_Type = \"webshell\"\n\t\tTool_Type = \"n/a\"\n\t\tdescription = \"Detects OWA targeting ASPX Webshell samples\"\n\t\tsha256_1 = \"6dcc7b5e913154abac69687fcfb6a58ac66ec9b8cc7de7afd8832a9066b7bdde\"\n\t\tsha256_1 = \"47dacb8f0b157355a4fd59ccbac1c59b8268fe84f3b8a462378b064333920622\"\n\tstrings:\n\t\t$s1 = { 5a 30 32 6a 77 36 43 36 63 55 }\n\t\t$s2 = { 5a 38 49 30 32 38 33 6e 77 38 }\n\t\t$s3 = { 4f 57 41 77 65 62 63 6f 6e 66 69 67 }\n\t\t$s4 = { 54 55 43 53 4f 4e }\n\t\t$s5 = { 65 76 61 6c }\n\tcondition:\n\t\t3 of them\n}\n",
+            "pattern_type": "yara",
+            "valid_from": "2023-09-07T16:58:23.989013Z"
+        },
+        {
+            "type": "malware-analysis",
+            "spec_version": "2.1",
+            "id": "malware-analysis--d9165339-ff2c-4d1f-90cd-b1255afd2e5f",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "product": "huorong",
+            "result_name": "Backdoor/ASP.WebShell.aa",
+            "result": "unknown",
+            "sample_ref": "file--573b2c58-4384-5f38-bc7d-c6ed5c5d8069",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "malware",
+            "spec_version": "2.1",
+            "id": "malware--0553da6d-6cbc-4f59-bbdf-b5b8204b613f",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "description": "This artifact is an ASPX webshell that is designed to execute remote JavaScript code on the system. The attacker must authenticate to the webshell client with the key \"TUCSON\" before executing the remote code. The 'unsafe' context keyword is intentionally obfuscated to bypass security protocols.",
+            "malware_types": [
+                "webshell",
+                "backdoor"
+            ],
+            "is_family": false,
+            "sample_refs": [
+                "file--573b2c58-4384-5f38-bc7d-c6ed5c5d8069"
+            ],
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--17df10f2-5b11-40f3-b041-50242917e935",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "name": "ConfigLogin.aspx",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[file:hashes.'MD5'='a33354d598b58f2e55eb3619c3465f24' OR file:hashes.'SHA-1'='e1c6f76085234554e9a47b61105cd45981eb35d2' OR file:hashes.'SHA-256'='6dcc7b5e913154abac69687fcfb6a58ac66ec9b8cc7de7afd8832a9066b7bdde' OR file:hashes.'SHA-512'='180ee1378ff6ffd8b28c39208d8abb617e263defc74f6781f9f8efa373fd62c3aa0b99a4b77cf44432f9bfe4fd80f40620ffb884af2e440491d007b2e41e4d96']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2023-09-07T16:58:23.992189Z",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--da7a321e-df7d-43c7-927e-559394e1c3e0",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "relationship_type": "communicates-with",
+            "source_ref": "malware--bc9b0159-2ffd-4e7a-b049-045f48bed3c4",
+            "target_ref": "ipv4-addr--49d40df3-2442-5fd4-9d21-0727364b00d3",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--d41f3d09-bd7e-47a9-888f-223a7d6ca5db",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-08-09T21:12:58.000Z",
+            "relationship_type": "communicates-with",
+            "source_ref": "malware--ef2a9125-c4ba-469a-9530-aba7d492f85c",
+            "target_ref": "ipv4-addr--cb47198f-f238-572c-9cf5-af05ccba5828",
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        },
+        {
+            "type": "report",
+            "spec_version": "2.1",
+            "id": "report--550b3b49-5780-4e37-9e47-3c825d33260c",
+            "created_by_ref": "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+            "created": "2023-08-09T21:12:58.000Z",
+            "modified": "2023-09-07T16:58:24.014372Z",
+            "name": "MAR-10430311.c1.v1 - Meterpreter Trojan Downloader",
+            "report_types": [
+                "observed-data",
+                "malware",
+                "indicator"
+            ],
+            "published": "2023-08-09T21:12:58Z",
+            "object_refs": [
+                "identity--8e112e72-aa8f-4190-a359-28a9abae2896",
+                "file--cacb65cd-92a6-585b-89c6-503b4ba2a04f",
+                "indicator--23754b2f-bd98-4c5e-8c16-b1c31dbae5aa",
+                "malware-analysis--a9e7a8f3-d40f-4238-ab56-2feb8bff676f",
+                "malware-analysis--c00994d4-5a5c-474f-acd2-d08a906be44f",
+                "malware-analysis--db5c79a4-f1ab-4eb8-a65b-14f112c1375d",
+                "malware-analysis--d5f5bc43-4c90-49e8-a3f8-6e4df6d89c13",
+                "malware-analysis--f35f7b75-ff40-44bc-a3af-4ea853b0e70f",
+                "malware-analysis--cda734de-cc23-4da7-a37d-9c046f6dd65d",
+                "malware-analysis--2729383d-6003-4f23-9dfb-6b341176ddc8",
+                "malware-analysis--f8f59bc5-29f9-482f-a3ae-fe5b6337cebc",
+                "malware-analysis--6db7f33c-2494-4a99-b0d6-e3eae2f06688",
+                "malware-analysis--875422f9-951d-4946-b014-3648bfc72748",
+                "malware-analysis--34b28d1b-720f-4b0b-a2f2-55207b3f03be",
+                "malware-analysis--9ab7bccb-98ad-4486-8784-10d5066fd93d",
+                "malware-analysis--30611396-3a9b-48a1-974b-652a98195c6f",
+                "malware-analysis--033ec8a8-c9d4-46cb-ab75-0eb8938c788f",
+                "malware-analysis--1c734a35-348e-43e6-9e14-9adab8b38d99",
+                "malware-analysis--aac48d3a-0d6b-4c91-b64e-9071a4b4a295",
+                "malware-analysis--49c48cfb-7545-45ac-8f28-6096b55dc6f5",
+                "malware--bc9b0159-2ffd-4e7a-b049-045f48bed3c4",
+                "indicator--3ecce29f-a5ff-4dc5-ac00-837435727243",
+                "ipv4-addr--49d40df3-2442-5fd4-9d21-0727364b00d3",
+                "indicator--9b870ac7-ea57-4746-b724-61a9a4422f51",
+                "location--3198ce40-9802-416e-8700-cdb515046f72",
+                "file--bed2fc97-d83e-5e43-909d-d14983288add",
+                "indicator--868cfff1-6c57-4a2b-8b71-876e8c397bfd",
+                "malware-analysis--b3230823-eb30-4265-8214-9946d26614d8",
+                "malware-analysis--a378e70a-b810-434e-98dd-7a20dafe6243",
+                "malware-analysis--aaef412b-2796-4f59-b76f-fe2d9295edfe",
+                "malware-analysis--bfe8b68c-83a5-4c1b-b665-357377f0879c",
+                "malware-analysis--b54c38f3-f607-43d7-ab2c-b17d9f1dada3",
+                "malware-analysis--d4878a31-a155-4f59-88e2-f029158ad898",
+                "malware-analysis--1b69ff86-ad13-4bcf-bac2-d4450346cc72",
+                "malware-analysis--2541080a-b16c-4dc0-8566-8e66fbd1b4b7",
+                "malware-analysis--2f36a29e-f9a0-4b02-ba3e-a5714790fbed",
+                "malware-analysis--ce438675-eca6-4ecc-83d9-c2a0470a61b7",
+                "malware-analysis--01bdb660-6438-44be-89a6-dc32e0c8d55f",
+                "malware-analysis--1628a09b-7bfb-4ea7-8c3b-52a2386421e0",
+                "malware-analysis--29b0091f-064a-4940-bebe-357d6e0113bc",
+                "malware-analysis--491bb212-bc98-4908-8e41-7c93cbe85eab",
+                "malware-analysis--e96fd689-9d2b-4ae2-831b-1f6a24238eda",
+                "malware-analysis--ac6a1508-0222-45e5-b183-9dcc18512d0c",
+                "malware-analysis--32970f81-8381-47f6-b132-1baf74f147bc",
+                "malware--ef2a9125-c4ba-469a-9530-aba7d492f85c",
+                "indicator--9b77053b-4976-409e-ad75-e4024ef4539a",
+                "ipv4-addr--cb47198f-f238-572c-9cf5-af05ccba5828",
+                "indicator--ddee7673-f3be-4d53-b3d1-6ecc6906d04b",
+                "location--9d269c66-2552-421a-97fa-1e11b7208890",
+                "file--da061a12-1896-523d-8a54-2b0346006557",
+                "indicator--f84ed6d0-cb86-4e46-8137-cdc3af4cc2bd",
+                "malware-analysis--a4455874-8a19-477a-830a-02b2222bad63",
+                "malware--39a650f3-9fce-4a6a-8f78-cc5c2e0ba9bc",
+                "indicator--991853d3-905a-4d0a-b6cf-6da78e9cd3df",
+                "file--573b2c58-4384-5f38-bc7d-c6ed5c5d8069",
+                "indicator--56ca72b0-c208-4143-a911-ddec9627b37a",
+                "malware-analysis--d9165339-ff2c-4d1f-90cd-b1255afd2e5f",
+                "malware--0553da6d-6cbc-4f59-bbdf-b5b8204b613f",
+                "indicator--17df10f2-5b11-40f3-b041-50242917e935",
+                "relationship--da7a321e-df7d-43c7-927e-559394e1c3e0",
+                "relationship--d41f3d09-bd7e-47a9-888f-223a7d6ca5db"
+            ],
+            "object_marking_refs": [
+                "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"
+            ]
+        }
+    ]
+}

