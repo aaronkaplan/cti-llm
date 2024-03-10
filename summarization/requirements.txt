@@ -1,5 +1,6 @@
 langchain-community==0.0.25
 langchain-core==0.1.29
 langchain-openai==0.0.8
+langchain-anthropic==0.1.4
 langsmith==0.1.12
 pypdf==4.1.0

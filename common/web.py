@@ -1,4 +1,4 @@
-""" This module contains functions for fetching HTML from the web. """
+""" This module contains functions for fetching HTML from the web and converting to text."""
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -7,6 +7,15 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
+
+import bs4
+
+
+def get_text_from_html(html: str) -> str:
+    """ Convert HTML to text using BeautifulSoup. """
+    _soup = bs4.BeautifulSoup(html, 'html.parser')
+    _text = _soup.get_text()
+    return _text
 
 
 def fetch_html_from_url_via_selenium(url: str) -> str:

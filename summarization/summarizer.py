@@ -6,23 +6,38 @@ model.  """
 
 import os
 import bs4
-from langchain import hub
-from langchain_openai import ChatOpenAI
-from langchain.schema.output_parser import StrOutputParser
 
+from langchain import hub
+from langchain.schema.output_parser import StrOutputParser
+from langchain_openai import ChatOpenAI
+from langchain_anthropic import ChatAnthropic
 from langchain_community.document_loaders import PyPDFLoader
 
 
 class Summarizer:
     """ Class using language model to summarize text. """
+    temperature = 0.2
+    model = ""
 
-    def __init__(self):
+    def __init__(self, llm_provider: str = "openai"):
         """ Initialize the Summarizer class. """
-        self.api_key = os.getenv("OPENAI_API_KEY")
-        self.model = "gpt-4-0125-preview"
-
+        self.llm_provider = llm_provider
+        if llm_provider == "openai":
+            self.model = "gpt-4-0125-preview"
+            self.api_key = os.getenv("OPENAI_API_KEY")
+        elif llm_provider == "anthropic":
+            self.model = "claude-3-sonnet-20240229"
+            self.model = "claude-3-opus-20240229"
+            self.api_key = os.getenv("ANTHROPIC_API_KEY")
+        else:
+            raise ValueError(f"Invalid LLM provider: {llm_provider}")
         try:
-            self.llm = ChatOpenAI(openai_api_key=self.api_key, model=self.model)
+            if self.llm_provider == "openai":
+                self.llm = ChatOpenAI(openai_api_key=self.api_key, model=self.model)
+            elif self.llm_provider == "anthropic":
+                self.llm = ChatAnthropic(temperature=self.temperature,
+                                         anthropic_api_key=self.api_key,
+                                         model_name=self.model)
             # see https://smith.langchain.com/hub/aaronkaplan/cti-llm
             self.prompt = hub.pull("aaronkaplan/cti-llm")
             self.output_parser = StrOutputParser()
@@ -69,7 +84,7 @@ def chop_empty_lines(_text: str) -> str:
 
 
 if __name__ == "__main__":
-    summarizer = Summarizer()
+    summarizer = Summarizer(llm_provider="claude")
     """
     import requests
     URL = "https://www.bleepingcomputer.com/news/security/russian-apt29-hackers-stealthy-malware-undetected-for-years/" # sample CTI rpoert

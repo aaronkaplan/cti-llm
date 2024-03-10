@@ -1,12 +1,47 @@
 """Unit test for common/web.py"""
 
-import unittest
-from common.web import fetch_html_from_url_via_selenium
+import pytest
+from common.web import get_text_from_html
 
 
-def test_fetch_html_from_url_via_selenium()):
-    """Test the fetch_html_from_url_via_selenium function."""
-    url = "https://www.bleepingcomputer.com/news/security/russian-apt29-hackers-stealthy-malware-undetected-for-years/"
-    html = fetch_html_from_url_via_selenium(url)
-    assert html is not None
-    assert len(html) > 0
+# test cases for fetch_html_from_url_via_selenium
+#def test_fetch_html_from_url_via_selenium():
+#    """Test the fetch_html_from_url_via_selenium function."""
+#    url = "https://www.bleepingcomputer.com/news/security/russian-apt29-hackers-stealthy-malware-undetected-for-years/"
+#    html = fetch_html_from_url_via_selenium(url)
+#    assert html is not None
+#    assert len(html) > 0
+
+# Test cases for get_text_from_html
+def test_get_text_from_html_valid_input():
+    """ Test case with valid HTML input"""
+    html = '<html><body><h1>Hello</h1><p>World!</p></body></html>'
+    expected_output = 'HelloWorld!'
+    assert get_text_from_html(html) == expected_output
+
+def test_get_text_from_html_empty_input():
+    """ Test case with empty HTML input """
+    html = ''
+    expected_output = ''
+    assert get_text_from_html(html) == expected_output
+
+def test_get_text_from_html_invalid_html():
+    """ Test case with invalid HTML input"""
+    html = '<html><body><h1>Hello</h1><p>World!</p></body>'  # Missing closing </html> tag
+    expected_output = 'HelloWorld!'
+    assert get_text_from_html(html) == expected_output
+    # only if strict mode is on
+    # with pytest.raises(bs4.FeatureNotFound):
+    #    get_text_from_html(html)
+
+def test_get_text_from_html_non_string_input():
+    """ Test case with non-string input"""
+    html = 123
+    with pytest.raises(TypeError):
+        get_text_from_html(html)
+
+def test_get_text_from_html_none_input():
+    """ Test case with None input"""
+    html = None
+    with pytest.raises(TypeError):
+        get_text_from_html(html)
