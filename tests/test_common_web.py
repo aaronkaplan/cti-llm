@@ -1,16 +1,17 @@
 """Unit test for common/web.py"""
 
 import pytest
-from common.web import get_text_from_html, fetch_html_from_url_via_selenium
+from common.web import get_text_from_html, fetch_html_from_url_via_requests
+
 
 
 # test cases for fetch_html_from_url_via_selenium
-def test_fetch_html_from_url_via_selenium():
-    """Test the fetch_html_from_url_via_selenium function."""
-    url = "https://www.bleepingcomputer.com/news/security/russian-apt29-hackers-stealthy-malware-undetected-for-years/"
-    html = fetch_html_from_url_via_selenium(url)
-    assert html is not None
-    assert len(html) > 0
+#def test_fetch_html_from_url_via_selenium():
+#    """Test the fetch_html_from_url_via_selenium function."""
+#    url = "https://www.bleepingcomputer.com/news/security/russian-apt29-hackers-stealthy-malware-undetected-for-years/"
+#    html = fetch_html_from_url_via_selenium(url)
+#    assert html is not None
+#    assert len(html) > 0
 
 # Test cases for get_text_from_html
 def test_get_text_from_html_valid_input():
@@ -45,3 +46,25 @@ def test_get_text_from_html_none_input():
     html = None
     with pytest.raises(TypeError):
         get_text_from_html(html)
+
+
+# Test cases for fetch_html_from_url_via_requests
+def test_fetch_html_from_url_via_requests(mocker):
+    """ Mock the requests.get function"""
+    mock_get = mocker.patch('requests.get')
+    mock_response = mocker.Mock()
+    mock_response.text = '<html><body>Test HTML</body></html>'
+    mock_get.return_value = mock_response
+
+    # Define the test URL and user agent
+    test_url = 'https://example.com'
+    test_user_agent = 'TestUserAgent'
+
+    # Call the function with the test URL and user agent
+    html = fetch_html_from_url_via_requests(test_url, test_user_agent)
+
+    # Assert that the requests.get function was called with the correct arguments
+    mock_get.assert_called_once_with(test_url, headers={'user-agent': test_user_agent}, timeout=10)
+
+    # Assert that the function returns the expected HTML
+    assert html == '<html><body>Test HTML</body></html>'
