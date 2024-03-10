@@ -1,16 +1,16 @@
 """Unit test for common/web.py"""
 
 import pytest
-from common.web import get_text_from_html
+from common.web import get_text_from_html, fetch_html_from_url_via_selenium
 
 
 # test cases for fetch_html_from_url_via_selenium
-#def test_fetch_html_from_url_via_selenium():
-#    """Test the fetch_html_from_url_via_selenium function."""
-#    url = "https://www.bleepingcomputer.com/news/security/russian-apt29-hackers-stealthy-malware-undetected-for-years/"
-#    html = fetch_html_from_url_via_selenium(url)
-#    assert html is not None
-#    assert len(html) > 0
+def test_fetch_html_from_url_via_selenium():
+    """Test the fetch_html_from_url_via_selenium function."""
+    url = "https://www.bleepingcomputer.com/news/security/russian-apt29-hackers-stealthy-malware-undetected-for-years/"
+    html = fetch_html_from_url_via_selenium(url)
+    assert html is not None
+    assert len(html) > 0
 
 # Test cases for get_text_from_html
 def test_get_text_from_html_valid_input():
