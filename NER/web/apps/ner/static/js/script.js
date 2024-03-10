@@ -31,12 +31,22 @@ document.addEventListener('DOMContentLoaded', function() {
         // Call the checkTokenValidity function with the token
         checkTokenValidity(token).then(isValid => {
             if (isValid) {
-                tokenField.classList.replace('is-invalid', 'is-valid');
+                if (tokenField.classList.contains('is-invalid')) {
+                    tokenField.classList.replace('is-invalid', 'is-valid');
+                }
+                else {
+                    tokenField.classList.add('is-valid');
+                }
                 processButton.classList.replace('btn-outline-secondary', 'btn-outline-dark');
                 processButton.disabled = false;
                 console.log('Token is valid.');
             } else {
-                tokenField.classList.replace('is-valid', 'is-invalid');
+                if (tokenField.classList.contains('is-valid')) {
+                    tokenField.classList.replace('is-valid', 'is-invalid');
+                }
+                else {
+                    tokenField.classList.add('is-invalid');
+                }
                 processButton.disabled = true;
                 console.log('Token is invalid.');
             }
