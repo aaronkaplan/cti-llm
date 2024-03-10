@@ -5,11 +5,11 @@ The class uses the langchain_community package to interface with the language
 model.  """
 
 import os
-import bs4
 
 from langchain import hub
 from langchain.schema.output_parser import StrOutputParser
 from langchain_openai import ChatOpenAI
+from langchain_openai import AzureChatOpenAI 
 from langchain_anthropic import ChatAnthropic
 from langchain_community.document_loaders import PyPDFLoader
 
@@ -29,6 +29,12 @@ class Summarizer:
             self.model = "claude-3-sonnet-20240229"
             self.model = "claude-3-opus-20240229"
             self.api_key = os.getenv("ANTHROPIC_API_KEY")
+        elif llm_provider == "azure":
+            self.model = os.getenv("ENGINE")
+            self.api_key = os.getenv("OPENAI_API_KEY")
+            self.api_version = os.getenv("OPENAI_API_VERSION")
+            self.azure_endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
+            self.api_type = os.getenv("OPENAI_API_TYPE")
         else:
             raise ValueError(f"Invalid LLM provider: {llm_provider}")
         try:
@@ -38,12 +44,18 @@ class Summarizer:
                 self.llm = ChatAnthropic(temperature=self.temperature,
                                          anthropic_api_key=self.api_key,
                                          model_name=self.model)
+            elif self.llm_provider == "azure":
+                self.llm = AzureChatOpenAI(azure_endpoint=self.azure_endpoint,
+                                       openai_api_key=self.api_key,
+                                       api_version=self.api_version,
+                                       temperature=0.0, max_retries=1, timeout=60)
+
             # see https://smith.langchain.com/hub/aaronkaplan/cti-llm
             self.prompt = hub.pull("aaronkaplan/cti-llm")
             self.output_parser = StrOutputParser()
             self.chain = self.prompt | self.llm   # | self.output_parser
         except Exception as e:
-            print(f"Error: {e}")
+            print(f"Summarizer class: Error: {e}")
             raise e
 
     def summarize_text(self, _text: str) -> str:
@@ -71,11 +83,6 @@ class Summarizer:
             return "Error: Unable to read PDF file."
 
 
-def get_text_from_html(html: str) -> str:
-    """ Convert HTML to text using BeautifulSoup. """
-    _soup = bs4.BeautifulSoup(html, 'html.parser')
-    _text = _soup.get_text()
-    return _text
 
 
 def chop_empty_lines(_text: str) -> str:
@@ -84,7 +91,8 @@ def chop_empty_lines(_text: str) -> str:
 
 
 if __name__ == "__main__":
-    summarizer = Summarizer(llm_provider="claude")
+    summarizer = Summarizer(llm_provider="anthropic")
+    # summarizer = Summarizer(llm_provider="azure")
     """
     import requests
     URL = "https://www.bleepingcomputer.com/news/security/russian-apt29-hackers-stealthy-malware-undetected-for-years/" # sample CTI rpoert
