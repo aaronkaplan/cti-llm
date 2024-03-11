@@ -43,6 +43,7 @@ for ent in doc.ents:
     if ent.label_ == "THREAT_ACTOR":
         obj = ThreatActor(name=ent.text)
         obs.append(obj)
+
 # build a stix package
 bundle = Bundle(obs)
 print(bundle.serialize(pretty=True))
