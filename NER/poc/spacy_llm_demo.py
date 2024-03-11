@@ -29,5 +29,20 @@ configures them to do so.
 # Print entities
 print(doc.to_json())
 
+from stix2.v21 import (ThreatActor, Identity, Relationship, Bundle)
+from stix2 import IPv4Address,IPv6Address,EmailAddress,URL,ThreatActor
+
+obs = []
+
 for ent in doc.ents:
     print(ent.text, ent.label_)
+
+    if ent.label_ == "ORGANIZATION":
+        obj = Identity(name=ent.text)
+        obs.append(obj)
+    if ent.label_ == "THREAT_ACTOR":
+        obj = ThreatActor(name=ent.text)
+        obs.append(obj)
+# build a stix package
+bundle = Bundle(obs)
+print(bundle.serialize(pretty=True))
