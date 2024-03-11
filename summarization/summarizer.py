@@ -13,6 +13,8 @@ from langchain_openai import AzureChatOpenAI
 from langchain_anthropic import ChatAnthropic
 from langchain_community.document_loaders import PyPDFLoader
 
+from common.web import fetch_html_from_url_via_langchain
+
 
 class Summarizer:
     """ Class using language model to summarize text. """
@@ -62,6 +64,15 @@ class Summarizer:
         """ Summarize the text using the language model. """
         return self.chain.invoke({"context": _text})
 
+    def summarize_url(self, url: str) -> str:
+        """ Summarize the URL using the language model. """
+        try:
+            docs = fetch_html_from_url_via_langchain(url)
+            return self.chain.invoke({"context": docs})
+        except Exception as e:
+            print(f"Error: {e}")
+            return "Error: Unable to fetch URL."
+
     def summarize_file(self, file_path: str) -> str:
         """ Summarize the file using the language model. """
         try:
@@ -82,12 +93,6 @@ class Summarizer:
             print(f"Error: {e}")
             return "Error: Unable to read PDF file."
 
-
-
-
-def chop_empty_lines(_text: str) -> str:
-    """ Remove empty lines from the text. """
-    return "\n".join([line for line in _text.split("\n") if line.strip() != ""])
 
 
 if __name__ == "__main__":

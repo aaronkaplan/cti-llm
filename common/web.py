@@ -5,10 +5,16 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 
+import nest_asyncio
+
+from langchain_community.document_loaders import WebBaseLoader
+from langchain_core.documents import Document
+
 import requests
 import bs4
 
 
+nest_asyncio.apply()
 DEFAULT_USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 
@@ -27,6 +33,23 @@ def fetch_html_from_url_via_requests(url: str, user_agent=DEFAULT_USER_AGENT) ->
     headers = {"user-agent": user_agent}
     html = requests.get(url, headers=headers, timeout=10).text
     return html
+
+
+def fetch_html_from_url_via_langchain(url: str, user_agent=DEFAULT_USER_AGENT) -> list[Document]:
+    """Use Langchain's document loaders to fetch HTML from the URL.
+
+    Args:
+        url (str): The URL of the webpage to download.
+        user_agent (str, optional): The user-agent string to emulate. Defaults to a common Chrome UA.
+    
+    Returns:
+        a list of Document objects containing the (bs4 parsed) content of the webpage(s)
+    """
+    kwargs = {'verify':True, 'timeout':10, 'headers':{'user-agent': user_agent}}
+    # XXX we could give a list of URLs to the loader and it will return a list of Document objects
+    loader = WebBaseLoader(url, verify_ssl=False, requests_per_second=20, requests_kwargs=kwargs)
+    data = loader.load()
+    return data
 
 
 def get_text_from_html(html: str) -> str:
@@ -70,3 +93,8 @@ def fetch_html_from_url_via_selenium(url: str, user_agent=DEFAULT_USER_AGENT) ->
     finally:
         driver.quit()  # Ensure the driver is quit properly
     return ""
+
+
+def chop_empty_lines(_text: str) -> str:
+    """ Remove empty lines from the text. """
+    return "\n".join([line for line in _text.split("\n") if line.strip() != ""])
