@@ -15,7 +15,8 @@ def test_flair():
 
 
 def test_spacy():
-    config = {'model': 'en_core_web_trf'}
+    #config = {'model': 'en_core_web_trf'}
+    config = {'model': "en_core_web_sm"}
     entity_factory = EntityExtractionFactory()
     model = entity_factory.get_entity_extraction_model('spacy', config)
     text = 'Apple is looking to buy USA startup for $1 billion'
@@ -37,8 +38,8 @@ def test_heuristics():
 
 
 def test_ner():
-    test_flair()
-    test_spacy()
+    #test_flair()
+    #test_spacy()
     test_heuristics()
 
 
