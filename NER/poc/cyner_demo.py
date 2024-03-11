@@ -1,7 +1,7 @@
 from NER import cyner
 
 # use only heuristics
-model_regex = cyner.CyNER(use_heuristic=True,flair_model=None)
+model_regex = cyner.CyNER(transformer_model=None,use_heuristic=True,flair_model=None,priority="H")
 
 
 # Example text to test the matcher
