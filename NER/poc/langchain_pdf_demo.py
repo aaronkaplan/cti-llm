@@ -17,4 +17,6 @@ for pdf_report in glob.glob("../../datasets/*.pdf"):
         entities = model_regex.get_entities(document.page_content)
         print(f"Found {len(entities)} entities")
 
+    # now load the ground truth and see what was found!
+    # TODO: load the stix file...
 
