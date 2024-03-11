@@ -1,4 +1,7 @@
 import logging
+from dotenv import load_dotenv
+
+load_dotenv()  # take environment variables from .env.
 
 from spacy_llm import logger
 from spacy_llm.util import assemble
