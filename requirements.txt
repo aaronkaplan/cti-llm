@@ -6,3 +6,4 @@ langsmith==0.1.12
 pypdf==4.1.0
 pytest==8.1.1
 pytest-mock==3.12.0
+spacy==3.7.4
