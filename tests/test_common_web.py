@@ -1,7 +1,8 @@
 """Unit test for common/web.py"""
 
 import pytest
-from common.web import get_text_from_html, fetch_html_from_url_via_requests
+from common.web import get_text_from_html, fetch_html_from_url_via_requests,\
+        fetch_html_from_url_via_langchain, chop_empty_lines
 
 
 
@@ -68,3 +69,28 @@ def test_fetch_html_from_url_via_requests(mocker):
 
     # Assert that the function returns the expected HTML
     assert html == '<html><body>Test HTML</body></html>'
+
+
+# Test cases for fetch_html_from_url_via_langchain
+def test_fetch_html_from_url_via_langchain():
+    """ Mock the WebBaseLoader.load function"""
+
+    # Define the test URL and user agent
+    test_url = 'https://example.com'
+    _test_user_agent = 'TestUserAgent'
+
+    # Call the function with the test URL and user agent
+    docs = fetch_html_from_url_via_langchain(test_url)
+    text = str(docs)
+
+
+    # Assert that the function returns the expected HTML
+    assert 'Example Domain' in text
+
+# Test cases for chop_empty_lines
+def test_chop_empty_lines_valid_input():
+    """ Test case with valid input"""
+    input_text = 'Hello\n\nWorld!\n'
+    expected_output = 'Hello\nWorld!'
+
+    assert chop_empty_lines(input_text) == expected_output
