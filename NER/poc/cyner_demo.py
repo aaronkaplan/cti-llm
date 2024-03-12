@@ -1,8 +1,7 @@
 from NER import cyner
 
 # use only heuristics
-model_regex = cyner.CyNER(use_heuristic=True,flair_model=None)
-
+model_regex = cyner.CyNER(transformer_model=None,use_heuristic=True,flair_model=None,priority="H")
 
 # Example text to test the matcher
 text = "The server at 192.168.1.1 responded with error code 404. Contact admin@example.com for details."
