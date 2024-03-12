@@ -42,8 +42,25 @@ doc = nlp(text)
 # Apply the matcher
 matches = matcher(doc)
 
+from stix2.v21 import (ThreatActor, Identity, Relationship, Bundle)
+from stix2 import IPv4Address,IPv6Address,EmailAddress,URL
+
+obs = []
 # Display results
 for match_id, start, end in matches:
     string_id = nlp.vocab.strings[match_id]  # Get string representation
-    span = doc[start:end]  # The matched span
-    print(f"{string_id}: {span.text}")
+
+    if string_id == "IPV4_ADDRESS":
+        span = doc[start:end]  # The matched span
+        print(f"{string_id}: {span.text}")
+        obj = IPv4Address(value=span.text)
+        obs.append(obj)
+    elif string_id == "EMAIL_ADDRESS":
+        obj = EmailAddress(value=span.text)
+        obs.append(obj)
+    elif string_id == "URL":
+        obj = URL(value=span.text)
+        obs.append(obj)
+# build a stix package
+bundle = Bundle(obs)
+print(bundle.serialize(pretty=True))
