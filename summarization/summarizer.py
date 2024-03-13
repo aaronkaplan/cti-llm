@@ -6,14 +6,27 @@ model.  """
 
 import os
 
+from typing import List
+
+from pprint import pprint
+
 from langchain import hub
-from langchain.schema.output_parser import StrOutputParser
+# from langchain.schema.output_parser import StrOutputParser
+from langchain_core.output_parsers import JsonOutputParser
+# for caching
+from langchain.globals import set_llm_cache
+from langchain.cache import SQLiteCache
+# for LLM models
 from langchain_openai import ChatOpenAI
 from langchain_openai import AzureChatOpenAI 
 from langchain_anthropic import ChatAnthropic
+# And finally document loaders
 from langchain_community.document_loaders import PyPDFLoader
 
 from common.web import fetch_html_from_url_via_langchain
+from common.logger import logger
+
+from summarization.summary_db import SummaryDB
 
 
 class Summarizer:
@@ -23,6 +36,9 @@ class Summarizer:
 
     def __init__(self, llm_provider: str = "openai"):
         """ Initialize the Summarizer class. """
+        set_llm_cache(SQLiteCache(database_path=".langchain.db"))
+
+
         self.llm_provider = llm_provider
         if llm_provider == "openai":
             self.model = "gpt-4-0125-preview"
@@ -54,8 +70,8 @@ class Summarizer:
 
             # see https://smith.langchain.com/hub/aaronkaplan/cti-llm
             self.prompt = hub.pull("aaronkaplan/cti-llm")
-            self.output_parser = StrOutputParser()
-            self.chain = self.prompt | self.llm   # | self.output_parser
+            self.output_parser =  JsonOutputParser()            # StrOutputParser()
+            self.chain = self.prompt | self.llm  | self.output_parser
         except Exception as e:
             print(f"Summarizer class: Error: {e}")
             raise e
@@ -64,11 +80,15 @@ class Summarizer:
         """ Summarize the text using the language model. """
         return self.chain.invoke({"context": _text})
 
-    def summarize_url(self, url: str) -> str:
+    def summarize_urls(self, urls: List[str]) -> dict:
         """ Summarize the URL using the language model. """
         try:
-            docs = fetch_html_from_url_via_langchain(url)
-            return self.chain.invoke({"context": docs})
+            docs = fetch_html_from_url_via_langchain(urls)
+            result = self.chain.invoke({"context": docs})
+            print(120*"=")
+            print(f"summarize_url: type(result): '{type(result)}'")
+            print(120*"=")
+            return result
         except Exception as e:
             print(f"Error: {e}")
             return "Error: Unable to fetch URL."
@@ -94,8 +114,28 @@ class Summarizer:
             return "Error: Unable to read PDF file."
 
 
+class Orchestrator:
+    """ Class to fetch and store summaries in the database. """
+    def __init__(self, llm_provider: str = "openai"):
+        """ Initialize the FetchAndStoreSummaries class. """
+        self.summarizer = Summarizer(llm_provider=llm_provider)
+
+    def fetch_and_store_summary(self, urls: List[str]) -> None:     # noqa:
+        """ Fetch and store the summary in the database. """
+        summaries = self.summarizer.summarize_urls(urls)
+        pprint(f"fetch_and_store_summary: summaries: '{summaries}'")
+        db = SummaryDB()
+        for url, summary in zip(urls, summaries):
+            print(80*"=")
+            print(f"Storing summary for {url}")
+            pprint(f"Summary: {summary}")
+            print(80*"=")
+            db.store_summary(url=url, summary=summary)
+
 
 if __name__ == "__main__":
+    logger.info("Starting the summarizer...")
+
     summarizer = Summarizer(llm_provider="anthropic")
     # summarizer = Summarizer(llm_provider="azure")
     """
@@ -115,4 +155,20 @@ if __name__ == "__main__":
     print(summarizer.summarize_text(text))
     """
     # print(summarizer.summarize_file("sample.txt"))
+    print(80*"=")
+    print("About to summarize a PDF file...")
     print(summarizer.summarize_pdf("test_data/sample.pdf"))
+
+    # print(80*"=")
+    # print("About to summarize a URL...")
+    # print(summarizer.summarize_url("https://www.bleepingcomputer.com/news/security/russian-apt29-hackers-stealthy-malware-undetected-for-years/"))
+
+    print(80*"=")
+    print("Fetching multiple URLs and storing the summaries in the database...")
+    orchestrator = Orchestrator(llm_provider="anthropic")
+    # read urls.txt , remove the newline character and store in a list
+    with open("summarization/test_data/urls.txt", "r") as file:
+        urls = file.readlines()
+        urls = [url.strip() for url in urls]
+        pprint(urls)
+        orchestrator.fetch_and_store_summary(urls)
