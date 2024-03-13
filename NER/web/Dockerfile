@@ -11,6 +11,7 @@ WORKDIR /app
 # Install dependencies
 COPY requirements.txt /app/
 RUN pip install -r requirements.txt
+RUN python -m spacy download en_core_web_sm
 
 # Copy the current directory contents into the container at /app/
 COPY . /app/

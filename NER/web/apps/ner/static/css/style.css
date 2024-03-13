@@ -1,25 +1,17 @@
 :root {
-    --color-1: #D3AB9E;
-    --color-2: #6e7582;
-    --color-3: #bb8082;
-    --color-4: #f39189;
-    --color-5: #A7BED3;
-    /* Pastel Blue */
-    --color-6: #C6E2E9;
-    /* Light Cyan */
-    --color-7: #FAD2E1;
-    /* Soft Pink */
-    --color-8: #E2CFC4;
-    /* Pastel Beige */
-    --color-9: #F9E2AE;
-    /* Pastel Yellow */
-    --color-10: #A8D5BA;
-    /* Mint Green */
-    --color-11: #D1BEED;
-    /* Lavender */
-    --color-12: #FFC8A2;
-    /* Peach */
-    --color-13: #B8A9C9;
+    --color-1: #bf6489;
+    --color-2: #6cbb4c;
+    --color-3: #8862c9;
+    --color-4: #c4af49;
+    --color-5: #d053ad;
+    --color-6: #638b3d;
+    --color-7: #d44149;
+    --color-8: #53c4ad;
+    --color-9: #d77a2d;
+    --color-10: #6c8ccd;
+    --color-11: #8f7838;
+    --color-12: #3c8d62;
+    --color-13: #c16c4f;
     /* Lilac */
     --color-14: #FBE4D5;
     /* Cream */
@@ -34,6 +26,126 @@
     --color-19: #FFDACC;
     /* Melon */
 }
+
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* Aligns items to the start of the container */
+}
+
+#nerForm {
+  position: fixed;
+  margin-left: -160px;
+  width: 150px;
+}
+
+#text-container {
+  margin: 1em;  
+}
+
+span.highlight{
+  transition: all 0.3s ease;
+  /* Change this to your preferred highlight color */
+  /* Optional: Adds a border around the highlighted text */
+  padding: 4px 6px;
+  /* Optional: Adds some space around the text inside the span */
+}
+
+/* General style for all entity types */
+span {
+  padding: 2px 4px;
+}
+
+.btn-check + .btn {
+  border-radius: 0;
+}
+
+/* Malware */
+ .ent-malware, .btn-check + .btn.ent-malware:hover {
+  background-color: var(--color-1);
+}
+
+/* Threat Actor */
+ .ent-threat_actor, .btn-check + .btn.ent-threat_actor:hover {
+  background-color: var(--color-2);
+}
+
+/* Software */
+ .ent-software, .btn-check + .btn.ent-software:hover {
+  background-color: var(--color-12);
+}
+
+/* TTP */
+ .ent-ttp, .btn-check + .btn.ent-ttp:hover {
+  background-color: var(--color-4);
+}
+
+/* OS */
+ .ent-os, .btn-check + .btn.ent-os:hover {
+  background-color: var(--color-5);
+}
+
+/* Hardware */
+ .ent-hardware, .btn-check + .btn.ent-hardware:hover {
+  background-color: var(--color-6);
+}
+
+/* Username */
+ .ent-username, .btn-check + .btn.ent-username:hover {
+  background-color: var(--color-7);
+}
+
+/* Organization */
+ .ent-organization, .btn-check + .btn.ent-organization:hover {
+  background-color: var(--color-8);
+}
+
+/* Sector */
+ .ent-sector, .btn-check + .btn.ent-sector:hover {
+  background-color: var(--color-9);
+}
+
+/* Geo Location */
+ .ent-geo_location, .btn-check + .btn.ent-geo_location:hover {
+  background-color: var(--color-10);
+}
+
+/* Exploit Name */
+ .ent-exploit_name, .btn-check + .btn.ent-exploit_name:hover {
+  background-color: var(--color-11);
+}
+
+/* Date */
+ .ent-date, .btn-check + .btn.ent-date:hover {
+  background-color: var(--color-12);
+}
+
+/* Time */
+ .ent-time, .btn-check + .btn.ent-time:hover {
+  background-color: var(--color-13);
+}
+
+.remove-btn {
+    display: none; /* Hide by default */
+    margin-left: 8px;
+    cursor: pointer;
+    border: none;
+    width: 2em;
+    height: 2em;
+    border-radius: 1em;
+    background-color: #fff;
+    color: #333;
+}
+
+span[data-entity]:hover .remove-btn {
+    display: inline; /* Show on hover */
+}
+
+.invisible {
+    display: none;
+}
+
+/* OLD  ..... */
 
 body {
     line-height: 2em;
@@ -52,36 +164,3 @@ body {
     position: relative;
     transition: all 0.3s ease;
 }
-
-.match .action {
-    display: none;
-}
-
-.match:not(:has(.match:hover)):hover > .action {
-    display: inline;
-}
-
-.match:not(:has(.match:hover)):hover::after {
-    content: attr(data-category);
-    position: absolute;
-    top: -2em;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: .2em .5em;
-    border-radius: 5px;
-    font-weight: bold;
-    white-space: nowrap;
-    z-index: 9999;
-}
-
-.match-list .match:hover::after {
-    display: none;
-}
-
-/*
-.match > .match:hover::after {
-    top: 1em;
-}
-*/

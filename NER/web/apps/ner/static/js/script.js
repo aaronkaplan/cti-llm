@@ -99,6 +99,8 @@ async function processAndDisplay() {
     // Get the text from the input field
     const text = document.getElementById('textInput').value;
     const token = document.getElementById('tokenField').value;
+    const inputForm = document.getElementById('textProcessForm');
+    const nerForm = document.getElementById('nerForm');
     const processButton = document.getElementById('loadingIndicator');
 
     processButton.classList.remove("invisible");
@@ -126,92 +128,146 @@ async function processAndDisplay() {
     }
 
     // Parse the JSON response
-    const matches = await response.json();
+    const data = await response.json();
 
-   /*OLD
-   // Get the text and matches JSON from the input fields
-    const text = document.getElementById('textInput').value;
-    const matchesJson = document.getElementById('matchesInput').value;
-
-    // Parse the JSON string into a JavaScript object
-    const matches = JSON.parse(matchesJson);
-    */
-  
-  
-    // Function to process the text and generate HTML
-    function processText(text, matches) {
-        let processedText = text;
-        let colorIndex = 1; // Initialize color index
-        // TODO: Write a heuristic for overlap, maybe longest match first
-        for (const category in matches) {
-            matches[category].forEach(item => {
-                const regex = new RegExp(item, 'g'); //gi for non case sensitive
-                processedText = processedText.replace(regex, match => {
-                    // Create a span element
-                    const span = document.createElement('span');
-                    span.className = 'match';
-                    span.style.backgroundColor = `var(--color-${colorIndex})`;
-                    span.dataset.category = category;
-                    span.textContent = match;
-
-                    // Create an action span element
-                    const actionSpan = document.createElement('span');
-                    actionSpan.className = 'action';
-                    actionSpan.textContent = '🐞';
-
-                    // Append the action span to the match span
-                    span.appendChild(actionSpan);
-
-                    // Convert the span to an HTML string
-                    return span.outerHTML;
-                });
+    const container = document.getElementById('result');
+    // Function to highlight all spans with matching entity IDs
+    const highlightEntitySpans = (entityIds, highlight) => {
+        entityIds.split(',').forEach(id => {
+            const spans = container.querySelectorAll(`span[data-entity="${id}"]`);
+            spans.forEach(span => {
+                if (highlight) {
+                    span.classList.add('highlight');
+                } else {
+                    span.classList.remove('highlight');
+                }
             });
-            colorIndex++; // Increment color index for the next category
+        });
+    };
+
+    // Function to handle hover start
+    const handleHoverStart = (event) => {
+        const entityIds = event.target.getAttribute('data-entity');
+        if (entityIds) {
+            highlightEntitySpans(entityIds, true);
         }
-        return processedText;
-    }
+    };
 
-    // Process the text and generate the HTML
-    const html = processText(text, matches);
+    // Function to handle hover end
+    const handleHoverEnd = (event) => {
+        const entityIds = event.target.getAttribute('data-entity');
+        if (entityIds) {
+            highlightEntitySpans(entityIds, false);
+        }
+    };
 
-    // Display the result
-    const resultDiv = document.getElementById('result');
-    resultDiv.innerHTML = html;
+    // Function to handle click
+    const handleClick = (event) => {
+        console.log('Entity IDs:', event.target.getAttribute('data-entity'));
+    };
+    
+    // Function to handle click
+    const handleDelete = (event) => {
+          var target = event.target;
+          var parent = target.parentElement;//parent of "target"
+        	const entityIds = parent.getAttribute('data-entity');
+        	// Assuming all entity classes are prefixed with 'ent-'
+          const entityClasses = parent.className.split(" ").filter(c => c.startsWith('ent-'));
+          entityClasses.forEach(ec => parent.classList.remove(ec));
 
-    // Attach event listeners to the newly created .match elements
-    resultDiv.querySelectorAll('.match').forEach(function(matchSpan) {
-        matchSpan.addEventListener('mouseover', function() {
-            this.classList.add('hovered');
-        });
-        matchSpan.addEventListener('mouseout', function() {
-            this.classList.remove('hovered');
-        });
+          // Clear the 'data-entity' attribute
+          parent.removeAttribute('data-entity');
+          parent.classList.remove('highlight');
+          if (entityIds) {
+              highlightEntitySpans(entityIds, false);
+          }
+    };
+
+    // Create spans for each token and attach events
+    data.tokens.forEach(token => {
+        const span = document.createElement('span');
+        span.textContent = data.text.substring(token.start, token.end) + " ";
+        span.setAttribute('data-id', token.id);
+        span.setAttribute('data-start', token.start);
+        span.setAttribute('data-end', token.end);
+
+        // Create remove button
+        const removeBtn = document.createElement('button');
+        removeBtn.textContent = 'x';
+        removeBtn.setAttribute('class', 'remove-btn');
+        removeBtn.onclick = handleDelete; 
+        
+        // Attach hover events
+        span.addEventListener('mouseenter', handleHoverStart);
+        span.addEventListener('mouseleave', handleHoverEnd);
+
+        // Attach click event
+        span.addEventListener('click', handleClick);
+        
+        span.appendChild(removeBtn); // Add remove button to the span
+        container.appendChild(span);
     });
 
+    // Step 2: Mark entities on tokens
+    data.ents.forEach((entity, entityIndex) => {
+        for (let tokenId = 0; tokenId < data.tokens.length; tokenId++) {
+            const token = data.tokens[tokenId];
+            if (token.start >= entity.start && token.end <= entity.end) {
+                // This token is part of the current entity
+                let span = container.querySelector(`span[data-id="${token.id}"]`);
+                if (span) {
+                    span.classList.add(`ent-${entity.label}`);
+                    let existingEntities = span.getAttribute('data-entity');
+                    let newEntities = existingEntities ? `${existingEntities},${entity.id}` : `${entity.id}`;
+                    span.setAttribute('data-entity', newEntities);
+                }
+            }
+        }
+    });
 
-    function generateJsonOutput(matches) {
-        let outputHtml = '';
-        let colorIndex = 1; // Initialize color index
-
-        for (const category in matches) {
-            outputHtml += `<b>${category}</b>`;
+    function generateOverview(matches) {
+        let outputHtml = '<br>';
+        // Removed colorIndex since we're using specific colors for each category
+    
+        for (const category in matches.entities) { // Ensure to access matches.entities
+            outputHtml += `<b>${category.replace('_', ' ')}</b>`; // Format category names
             outputHtml += '<div class="match-list">';
-            matches[category].forEach(item => {
-                outputHtml += `<div class="match" style="background-color: var(--color-${colorIndex});">${item}</div>`;
+            matches.entities[category].forEach(item => {
+                // Use the category to dynamically create the variable name
+                outputHtml += `<div class="match ent-${category}" >${item}</div>`;
             });
             outputHtml += '</div>';
-            colorIndex++; // Increment color index for the next category
+            // No need to increment colorIndex
         }
-
+    
         // Display the JSON output in a new section of the HTML
-        const jsonOutputDiv = document.getElementById('jsonOutput');
-        jsonOutputDiv.innerHTML = outputHtml;
+        const overviewDiv = document.getElementById('overview');
+        overviewDiv.innerHTML = outputHtml;
+
+        const downloadButton = document.createElement('button');
+        downloadButton.textContent = '💾 Download JSON';
+        downloadButton.setAttribute('class', 'btn btn-outline-dark');
+        overviewDiv.prepend(downloadButton);
+
+        // Set up the download action for the button
+        downloadButton.addEventListener('click', () => {
+            const jsonData = JSON.stringify(matches.entities, null, 2); // Pretty print the JSON
+            const blob = new Blob([jsonData], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.setAttribute('href', url);
+            a.setAttribute('download', 'entities.json');
+            a.click();
+            URL.revokeObjectURL(url); // Clean up the URL object
+        });
     }
 
-    // Call the new function to generate and display the JSON output
-    generateJsonOutput(matches);
+    generateOverview(data);
+
+
 
     // Hide loading indicator
     processButton.classList.add("invisible");
-
+    inputForm.classList.add("invisible");
+    nerForm.classList.remove("invisible");
 }
