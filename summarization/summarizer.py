@@ -23,7 +23,7 @@ from langchain_anthropic import ChatAnthropic
 # And finally document loaders
 from langchain_community.document_loaders import PyPDFLoader
 
-from common.web import fetch_html_from_url_via_langchain
+from common.web import fetch_html_from_urls_via_langchain
 from common.logger import logger
 
 from summarization.summary_db import SummaryDB
@@ -80,15 +80,26 @@ class Summarizer:
         """ Summarize the text using the language model. """
         return self.chain.invoke({"context": _text})
 
-    def summarize_urls(self, urls: List[str]) -> dict:
-        """ Summarize the URL using the language model. """
+    def summarize_urls(self, urls: List[str]) -> List[dict]:
+        """ Summarize a list of URLs using the language model.
+
+        Args:
+            urls: List of URLs to summarize.
+
+        Returns:
+           List of summaries as Dict.
+        """
+        results = []
         try:
-            docs = fetch_html_from_url_via_langchain(urls)
-            result = self.chain.invoke({"context": docs})
-            print(120*"=")
-            print(f"summarize_url: type(result): '{type(result)}'")
-            print(120*"=")
-            return result
+            docs = fetch_html_from_urls_via_langchain(urls)
+            for doc in docs:
+                result = self.chain.invoke({"context": doc})
+                print(120*"=")
+                print(f"summarize_url: type(result): '{type(result)}'")
+                print(f"summarize_urls: len(result): '{len(result)}'")
+                print(120*"=")
+                results.append(result)
+            return results
         except Exception as e:
             print(f"Error: {e}")
             return "Error: Unable to fetch URL."
@@ -122,15 +133,18 @@ class Orchestrator:
 
     def fetch_and_store_summary(self, urls: List[str]) -> None:     # noqa:
         """ Fetch and store the summary in the database. """
-        summaries = self.summarizer.summarize_urls(urls)
-        pprint(f"fetch_and_store_summary: summaries: '{summaries}'")
+        responses = self.summarizer.summarize_urls(urls)
+        pprint(f"fetch_and_store_summary: summaries: '{responses}'")
         db = SummaryDB()
-        for url, summary in zip(urls, summaries):
+        for url, response in zip(urls, responses):
             print(80*"=")
             print(f"Storing summary for {url}")
-            pprint(f"Summary: {summary}")
+            print(f"Type of response: {type(response)}")
+            pprint(response)
+            summary = '\n'.join(response['summary']) if 'summary' in response else ''
             print(80*"=")
-            db.store_summary(url=url, summary=summary)
+            db.store_summary(url=url, summary=response['summary'],
+                             llm=self.summarizer.model, llm_response=response)
 
 
 if __name__ == "__main__":

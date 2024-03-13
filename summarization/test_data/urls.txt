@@ -1,0 +1,2 @@
+https://www.bleepingcomputer.com/news/security/russian-apt29-hackers-stealthy-malware-undetected-for-years/
+https://www.bleepingcomputer.com/news/security/hackers-target-docker-hadoop-redis-confluence-with-new-golang-malware/

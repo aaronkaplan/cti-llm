@@ -2,7 +2,7 @@
 
 import pytest
 from common.web import get_text_from_html, fetch_html_from_url_via_requests,\
-        fetch_html_from_url_via_langchain, chop_empty_lines
+        fetch_html_from_urls_via_langchain, chop_empty_lines
 
 
 
@@ -80,7 +80,7 @@ def test_fetch_html_from_url_via_langchain():
     _test_user_agent = 'TestUserAgent'
 
     # Call the function with the test URL and user agent
-    docs = fetch_html_from_url_via_langchain(test_url)
+    docs = fetch_html_from_urls_via_langchain(test_url)
     text = str(docs)
 
 
