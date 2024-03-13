@@ -1,75 +1,19 @@
 
 from django.conf import settings
-from django.db import transaction
 
 from ninja import Router
-from typing import List, Optional
+from apps.ner.ner import EntityExtractor
 from pydantic import BaseModel, Field
-from langchain.chat_models import ChatOpenAI
-from langchain.callbacks import get_openai_callback
-from kor import create_extraction_chain, from_pydantic, JSONEncoder
-
-from .models import InputText, Metadata, Output
 
 
 router = Router()
-
-class EntityExtractionRequest(BaseModel):
-    malware: Optional[List[str]] = Field(None, description="Malware names (e.g., 'LockBit, DarkSide, WannaCry').")
-    threat_actor: Optional[List[str]] = Field(None, description="Names of threat actors (e.g., 'BlueCharlie, APT28, Lazarus Group').")
-    software: Optional[List[str]] = Field(None, description="Software names (e.g., 'LockBit 2.0, Windows 10, OpenSSH').")
-    ttp: Optional[List[str]] = Field(None, description="Tactics, Techniques, and Procedures (e.g., 'spear-phishing, drive-by download, credential stuffing').")
-    os: Optional[List[str]] = Field(None, description="Operating System names (e.g., 'Windows, Linux, macOS').")
-    hardware: Optional[List[str]] = Field(None, description="Hardware names (e.g., 'iPhone, Netgate Firewall, Raspberry Pi').")
-    username: Optional[List[str]] = Field(None, description="Usernames (e.g., 'john_doe, admin, guest').")
-    organization: Optional[List[str]] = Field(None, description="Organization names (e.g., 'Insikt Group, OpenAI, Microsoft').")
-    sector: Optional[List[str]] = Field(None, description="Industry sectors (e.g., 'finance, healthcare, energy').")
-    geo_location: Optional[List[str]] = Field(None, description="Geographical locations (e.g., 'Russia, New York, Silicon Valley').")
-    exploit_name: Optional[List[str]] = Field(None, description="Exploit names (e.g., 'EternalBlue, Heartbleed, Shellshock').")
-    date: Optional[List[str]] = Field(None, description="Dates (e.g., 'March 2023, September 2022, Q2 2021').")
-    time: Optional[List[str]] = Field(None, description="Times (e.g., '10:00 AM, 23:45, midnight').")
 
 class TextInput(BaseModel):
     text: str
 
 @router.post("/process-text")
 def process_text(request, text_input: TextInput):
-    llm = ChatOpenAI(
-        model_name="gpt-3.5-turbo",
-        temperature=0,
-        max_tokens=2000,
-        model_kwargs={
-            'frequency_penalty': 0,
-            'presence_penalty': 0,
-            'top_p': 1.0
-        }
-    )
-    schema, validator = from_pydantic(EntityExtractionRequest)
-    chain = create_extraction_chain(llm, schema, encoder_or_encoder_class="json", validator=validator)
-    json_encoder = JSONEncoder(use_tags=True)
-
-    with get_openai_callback() as cb:
-        result = chain.invoke(text_input.text)
-
-        with transaction.atomic():
-            # Save the input text
-            input_obj = InputText.objects.create(input_text=text_input.text)
-            
-            # Save the metadata
-            Metadata.objects.create(
-                input_text=input_obj,
-                full_prompt=chain.prompt.format_prompt(text="[user input]").to_string(),  
-                total_tokens=cb.total_tokens,
-                prompt_tokens=cb.prompt_tokens,
-                completion_tokens=cb.completion_tokens,
-                successful_requests=cb.successful_requests,
-                total_cost=cb.total_cost
-            )
-            
-            # Save the output
-            Output.objects.create(
-                input_text=input_obj,
-                output_data=json_encoder.decode(result['text']['raw'])  # Ensure this is in a format suitable for your JSONField
-            )
-        
-        return json_encoder.decode(result['text']['raw'])  # PLUS ID
+    ex = EntityExtractor(text_input.text)
+    return ex.extract()
+    # Mock
+    #return {"text": "This advisory provides observed tactics, techniques, and procedures (TTPs), indicators of\ncompromise (IOCs), and recommendations to mitigate the threat posed by APT28 threat actors\nrelated to compromised EdgeRouters. Given the global popularity of EdgeRouters, the FBI and its\ninternational partners urge EdgeRouter network defenders and users to apply immediately the\nrecommendations in the Mitigations section of this CSA to reduce the likelihood and impact of\ncybersecurity incidents associated with APT28 activity.\nUbiquiti EdgeRouters have a user-friendly, Linux-based operating system that makes them popular\nfor both consumers and malicious cyber actors. EdgeRouters are often shipped with default\ncredentials and limited to no firewall protections to accommodate wireless internet service providers\n(WISPs). Additionally, EdgeRouters do not automatically update firmware unless a consumer\nconfigures them to do so.", "ents": [{"start": 161, "end": 166, "label": "threat_actor", "mention": "<re.Match object; span=(161, 166), match='APT28'>", "id": 9}, {"start": 204, "end": 215, "label": "software", "mention": "<re.Match object; span=(204, 215), match='EdgeRouters'>", "id": 10}, {"start": 248, "end": 259, "label": "software", "mention": "<re.Match object; span=(248, 259), match='EdgeRouters'>", "id": 11}, {"start": 265, "end": 268, "label": "organization", "mention": "<re.Match object; span=(265, 268), match='FBI'>", "id": 12}, {"start": 463, "end": 476, "label": "sector", "mention": "<re.Match object; span=(463, 476), match='cybersecurity'>", "id": 13}, {"start": 503, "end": 508, "label": "threat_actor", "mention": "<re.Match object; span=(503, 508), match='APT28'>", "id": 14}, {"start": 528, "end": 539, "label": "software", "mention": "<re.Match object; span=(528, 539), match='EdgeRouters'>", "id": 15}, {"start": 562, "end": 567, "label": "os", "mention": "<re.Match object; span=(562, 567), match='Linux'>", "id": 16}, {"start": 662, "end": 673, "label": "software", "mention": "<re.Match object; span=(662, 673), match='EdgeRouters'>", "id": 17}, {"start": 697, "end": 716, "label": "ttp", "mention": "<re.Match object; span=(697, 716), match='default\\ncredentials'>", "id": 18}, {"start": 830, "end": 841, "label": "software", "mention": "<re.Match object; span=(830, 841), match='EdgeRouters'>", "id": 19}], "tokens": [{"id": 0, "start": 0, "end": 4}, {"id": 1, "start": 5, "end": 13}, {"id": 2, "start": 14, "end": 22}, {"id": 3, "start": 23, "end": 31}, {"id": 4, "start": 32, "end": 39}, {"id": 5, "start": 39, "end": 40}, {"id": 6, "start": 41, "end": 51}, {"id": 7, "start": 51, "end": 52}, {"id": 8, "start": 53, "end": 56}, {"id": 9, "start": 57, "end": 67}, {"id": 10, "start": 68, "end": 69}, {"id": 11, "start": 69, "end": 73}, {"id": 12, "start": 73, "end": 74}, {"id": 13, "start": 74, "end": 75}, {"id": 14, "start": 76, "end": 86}, {"id": 15, "start": 87, "end": 89}, {"id": 16, "start": 89, "end": 90}, {"id": 17, "start": 90, "end": 100}, {"id": 18, "start": 101, "end": 102}, {"id": 19, "start": 102, "end": 106}, {"id": 20, "start": 106, "end": 107}, {"id": 21, "start": 107, "end": 108}, {"id": 22, "start": 109, "end": 112}, {"id": 23, "start": 113, "end": 128}, {"id": 24, "start": 129, "end": 131}, {"id": 25, "start": 132, "end": 140}, {"id": 26, "start": 141, "end": 144}, {"id": 27, "start": 145, "end": 151}, {"id": 28, "start": 152, "end": 157}, {"id": 29, "start": 158, "end": 160}, {"id": 30, "start": 161, "end": 166}, {"id": 31, "start": 167, "end": 173}, {"id": 32, "start": 174, "end": 180}, {"id": 33, "start": 180, "end": 181}, {"id": 34, "start": 181, "end": 188}, {"id": 35, "start": 189, "end": 191}, {"id": 36, "start": 192, "end": 203}, {"id": 37, "start": 204, "end": 215}, {"id": 38, "start": 215, "end": 216}, {"id": 39, "start": 217, "end": 222}, {"id": 40, "start": 223, "end": 226}, {"id": 41, "start": 227, "end": 233}, {"id": 42, "start": 234, "end": 244}, {"id": 43, "start": 245, "end": 247}, {"id": 44, "start": 248, "end": 259}, {"id": 45, "start": 259, "end": 260}, {"id": 46, "start": 261, "end": 264}, {"id": 47, "start": 265, "end": 268}, {"id": 48, "start": 269, "end": 272}, {"id": 49, "start": 273, "end": 276}, {"id": 50, "start": 276, "end": 277}, {"id": 51, "start": 277, "end": 290}, {"id": 52, "start": 291, "end": 299}, {"id": 53, "start": 300, "end": 304}, {"id": 54, "start": 305, "end": 315}, {"id": 55, "start": 316, "end": 323}, {"id": 56, "start": 324, "end": 333}, {"id": 57, "start": 334, "end": 337}, {"id": 58, "start": 338, "end": 343}, {"id": 59, "start": 344, "end": 346}, {"id": 60, "start": 347, "end": 352}, {"id": 61, "start": 353, "end": 364}, {"id": 62, "start": 365, "end": 368}, {"id": 63, "start": 368, "end": 369}, {"id": 64, "start": 369, "end": 384}, {"id": 65, "start": 385, "end": 387}, {"id": 66, "start": 388, "end": 391}, {"id": 67, "start": 392, "end": 403}, {"id": 68, "start": 404, "end": 411}, {"id": 69, "start": 412, "end": 414}, {"id": 70, "start": 415, "end": 419}, {"id": 71, "start": 420, "end": 423}, {"id": 72, "start": 424, "end": 426}, {"id": 73, "start": 427, "end": 433}, {"id": 74, "start": 434, "end": 437}, {"id": 75, "start": 438, "end": 448}, {"id": 76, "start": 449, "end": 452}, {"id": 77, "start": 453, "end": 459}, {"id": 78, "start": 460, "end": 462}, {"id": 79, "start": 462, "end": 463}, {"id": 80, "start": 463, "end": 476}, {"id": 81, "start": 477, "end": 486}, {"id": 82, "start": 487, "end": 497}, {"id": 83, "start": 498, "end": 502}, {"id": 84, "start": 503, "end": 508}, {"id": 85, "start": 509, "end": 517}, {"id": 86, "start": 517, "end": 518}, {"id": 87, "start": 518, "end": 519}, {"id": 88, "start": 519, "end": 527}, {"id": 89, "start": 528, "end": 539}, {"id": 90, "start": 540, "end": 544}, {"id": 91, "start": 545, "end": 546}, {"id": 92, "start": 547, "end": 551}, {"id": 93, "start": 551, "end": 552}, {"id": 94, "start": 552, "end": 560}, {"id": 95, "start": 560, "end": 561}, {"id": 96, "start": 562, "end": 567}, {"id": 97, "start": 567, "end": 568}, {"id": 98, "start": 568, "end": 573}, {"id": 99, "start": 574, "end": 583}, {"id": 100, "start": 584, "end": 590}, {"id": 101, "start": 591, "end": 595}, {"id": 102, "start": 596, "end": 601}, {"id": 103, "start": 602, "end": 606}, {"id": 104, "start": 607, "end": 614}, {"id": 105, "start": 614, "end": 615}, {"id": 106, "start": 615, "end": 618}, {"id": 107, "start": 619, "end": 623}, {"id": 108, "start": 624, "end": 633}, {"id": 109, "start": 634, "end": 637}, {"id": 110, "start": 638, "end": 647}, {"id": 111, "start": 648, "end": 653}, {"id": 112, "start": 654, "end": 660}, {"id": 113, "start": 660, "end": 661}, {"id": 114, "start": 662, "end": 673}, {"id": 115, "start": 674, "end": 677}, {"id": 116, "start": 678, "end": 683}, {"id": 117, "start": 684, "end": 691}, {"id": 118, "start": 692, "end": 696}, {"id": 119, "start": 697, "end": 704}, {"id": 120, "start": 704, "end": 705}, {"id": 121, "start": 705, "end": 716}, {"id": 122, "start": 717, "end": 720}, {"id": 123, "start": 721, "end": 728}, {"id": 124, "start": 729, "end": 731}, {"id": 125, "start": 732, "end": 734}, {"id": 126, "start": 735, "end": 743}, {"id": 127, "start": 744, "end": 755}, {"id": 128, "start": 756, "end": 758}, {"id": 129, "start": 759, "end": 770}, {"id": 130, "start": 771, "end": 779}, {"id": 131, "start": 780, "end": 788}, {"id": 132, "start": 789, "end": 796}, {"id": 133, "start": 797, "end": 806}, {"id": 134, "start": 806, "end": 807}, {"id": 135, "start": 807, "end": 808}, {"id": 136, "start": 808, "end": 813}, {"id": 137, "start": 813, "end": 814}, {"id": 138, "start": 814, "end": 815}, {"id": 139, "start": 816, "end": 828}, {"id": 140, "start": 828, "end": 829}, {"id": 141, "start": 830, "end": 841}, {"id": 142, "start": 842, "end": 844}, {"id": 143, "start": 845, "end": 848}, {"id": 144, "start": 849, "end": 862}, {"id": 145, "start": 863, "end": 869}, {"id": 146, "start": 870, "end": 878}, {"id": 147, "start": 879, "end": 885}, {"id": 148, "start": 886, "end": 887}, {"id": 149, "start": 888, "end": 896}, {"id": 150, "start": 896, "end": 897}, {"id": 151, "start": 897, "end": 907}, {"id": 152, "start": 908, "end": 912}, {"id": 153, "start": 913, "end": 915}, {"id": 154, "start": 916, "end": 918}, {"id": 155, "start": 919, "end": 921}, {"id": 156, "start": 921, "end": 922}], "entities": {"threat_actor": ["APT28"], "software": ["EdgeRouters"], "os": ["Linux"], "ttp": ["default credentials"], "organization": ["FBI"], "sector": ["cybersecurity"], "exploit_name": ["EdgeRouters compromise"]}}
