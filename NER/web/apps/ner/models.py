@@ -1,11 +1,24 @@
 from django.db import models
 
 class InputText(models.Model):
+    # TODO: LINK TO USER & TOKEN
     input_text = models.TextField(verbose_name="Input Text")
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"InputText {self.id}: {self.input_text[:50]}..."
+    
+
+class Entity(models.Model):
+    input_text = models.ForeignKey(InputText, on_delete=models.CASCADE, related_name='entities')
+    mention = models.CharField(max_length=255, verbose_name="Mention")
+    entity_class = models.CharField(max_length=100, verbose_name="Class")
+    start = models.IntegerField(verbose_name="Start Position")
+    end = models.IntegerField(verbose_name="End Position")
+    confidence = models.DecimalField(default=1.0, max_digits=5, decimal_places=2, verbose_name="Confidence")
+
+    def __str__(self):
+        return f"Entity {self.mention} of class {self.entity_class} for InputText {self.input_text.id}"
 
 class Metadata(models.Model):
     input_text = models.OneToOneField(InputText, on_delete=models.CASCADE, related_name='metadata')
