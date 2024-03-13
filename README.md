@@ -17,3 +17,5 @@ The most important use cases are:
 Please note that UC 5 can help the other use-cases. If you have the graph of the relationships in a texth, then answering questions (UC 3) becomes easier.
 
 Each use-case has its own subdirectory, please go to the individual subdirs and check their README files.
+
+

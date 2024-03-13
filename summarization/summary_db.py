@@ -20,6 +20,8 @@ from datetime import datetime
 from typing import List, Union
 
 import psycopg
+from psycopg.types.json import Jsonb
+
 
 
 DSN="dbname=summarydb user=aaron"
@@ -92,7 +94,8 @@ class SummaryDB:
             raise e
 
     def store_summary(self, url: str, summary: str, score: float = None, human_summary: str = None,
-                      evaluator_reasoning: str = None, date: datetime = datetime.today()) -> bool:
+                      evaluator_reasoning: str = None, date: datetime = datetime.today(),
+                      llm: str = None, llm_response: dict = None) -> bool:
         """Store a summary in the database.
 
         Args:
@@ -111,11 +114,13 @@ class SummaryDB:
             "date": str(date),
             "score": score,
             "human_summary": human_summary,
-            "evaluator_reasoning": evaluator_reasoning
+            "evaluator_reasoning": evaluator_reasoning,
+            "llm": llm,
+            "llm_response": Jsonb(llm_response) if llm_response else None
         }
         try:
             cur = self.db.cursor()
-            cur.execute("INSERT INTO summary (url, summary, date, score, human_summary, evaluator_reasoning) VALUES (%(url)s, %(summary)s, %(date)s, %(score)s, %(human_summary)s, %(evaluator_reasoning)s)", summary_data)
+            cur.execute("INSERT INTO summary (url, summary, date, score, human_summary, evaluator_reasoning, llm, llm_response) VALUES (%(url)s, %(summary)s, %(date)s, %(score)s, %(human_summary)s, %(evaluator_reasoning)s, %(llm)s, %(llm_response)s)", summary_data)
             self.db.commit()
         except Exception as e:
             print(f"Error storing summary: {e}")

@@ -67,3 +67,46 @@ From the [paper](https://arxiv.org/pdf/1904.09675.pdf):
 ### Metric usage by use case
 
 ![Metric usage by use case table](https://miro.medium.com/v2/resize:fit:875/1*cPTpGu8D9MuSIr_2We1eVQ.png)
+
+
+# How to get this working?
+
+## Postgresql database as backing store
+
+1. install postgresql server (if not done yet).    **Note**: XXX FIXME: this will be replaced by Docker stuff
+2. create a 'ctillm' user in postgres (you might have to do this as the `postgres` shell user):
+```bash
+$ createuser ctillm
+```
+3. create the initial DB:
+```bash
+$ psql postgres < db.sql
+```
+4. Check if the connection works:
+```
+$ psql summarydb
+summarydb=# \d
+              List of relations
+ Schema |      Name      |   Type   | Owner
+--------+----------------+----------+--------
+ public | summary        | table    | ctillm
+ public | summary_id_seq | sequence | ctillm
+(2 rows)
+```
+
+## configure the list of URLs you want to have summarized:
+
+Edit the file `summarization/test_data/urls.txt`
+Add one URL per line.
+
+## Start the process
+
+```bash
+$ python summarization/summarizer.py
+```
+
+Then check the contents of the postgresql DB:
+```bash
+psql summarydb
+SELECT * from summary;
+```
