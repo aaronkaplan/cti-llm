@@ -155,14 +155,12 @@ The entites here are heavily inspired by STIX, though this is still an early ske
 
 ### TODO: Prototype:
 
-- [ ] Server side find_substring_positions_spacy_format
-- [ ] Throw away kor
-- [ ] New langchain
-- [ ] Detailed model
-- [ ] Download JSON
-- [X] Progress indicator
-- [ ] Delete Annotations / Add annotations
-- [ ] Annotate via keyboard
-- [ ] Consent to adding to dataset (mandatory?)
-- [ ] Captach to prevent abuse
-- [ ] IOC Extractor (structured data)
+- [ ] Add the feature to add new tags by selecting the type and clicking on spans
+  - [ ] Add the subfeature to join multiple adjacent newly selected tags
+- [ ] Move the left bar into the main container
+- [ ] Make sure entities are always presented in the same order
+- [ ] Improve the entity matching algorithm
+- [ ] Allow the user to choose from one of multiple extractors
+- [ ] Add an explanation popup
+- [ ] Ask for consent to use the data for training
+- [ ] Implement a per user budget
