@@ -1,4 +1,5 @@
 """ This module contains functions for fetching HTML from the web and converting to text."""
+from typing import List
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -35,19 +36,18 @@ def fetch_html_from_url_via_requests(url: str, user_agent=DEFAULT_USER_AGENT) ->
     return html
 
 
-def fetch_html_from_url_via_langchain(url: str, user_agent=DEFAULT_USER_AGENT) -> list[Document]:
+def fetch_html_from_urls_via_langchain(urls: List[str], user_agent=DEFAULT_USER_AGENT) -> List[Document]:
     """Use Langchain's document loaders to fetch HTML from the URL.
 
     Args:
-        url (str): The URL of the webpage to download.
+        url List(str): The URLs of the webpages to download.
         user_agent (str, optional): The user-agent string to emulate. Defaults to a common Chrome UA.
     
     Returns:
         a list of Document objects containing the (bs4 parsed) content of the webpage(s)
     """
     kwargs = {'verify':True, 'timeout':10, 'headers':{'user-agent': user_agent}}
-    # XXX we could give a list of URLs to the loader and it will return a list of Document objects
-    loader = WebBaseLoader(url, verify_ssl=False, requests_per_second=20, requests_kwargs=kwargs)
+    loader = WebBaseLoader(urls, verify_ssl=False, requests_per_second=20, requests_kwargs=kwargs)
     data = loader.load()
     return data
 
