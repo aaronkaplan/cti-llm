@@ -46,6 +46,7 @@ class Summarizer:
         elif llm_provider == "anthropic":
             self.model = "claude-3-sonnet-20240229"
             self.model = "claude-3-opus-20240229"
+            self.model = "claude-3-haiku-20240307"
             self.api_key = os.getenv("ANTHROPIC_API_KEY")
         elif llm_provider == "azure":
             self.model = os.getenv("ENGINE")
