@@ -91,6 +91,19 @@ The function will calculate the following:
 >  'Recall': 0.75,
 >  'F1 Score': 0.75}
 
+## CyNER
+
+This an abstraction class design whose purpose is to combine multiple methods to extract entities.
+The methods supported:
+* Heuristics: regexes like the one described below
+* Spacy: standard NLP library
+* Flair: standard NLP library
+* Transformers: a fine tuned Roberta XL model for cyber data
+
+### Run the Roberta XL training
+
+Execute the run_bert.py script.
+
 
 ## Named Entities in CTI
 
