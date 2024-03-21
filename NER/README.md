@@ -124,6 +124,14 @@ This will take a while because it will:
 
 Please make sure you have a decent GPU, we suggest at leats a T4 card.
 
+The current performace:
+
+```
+2024-03-21 10:00:13 INFO     f1 score: 74.39353099730458
+2024-03-21 10:00:13 INFO     recall: 73.95498392282958
+2024-03-21 10:00:13 INFO     precision: 74.83731019522777
+2024-03-21 10:00:13 INFO     ckpt saved at logs/xlm-roberta-base
+```
 
 ## Named Entities in CTI
 
