@@ -1,34 +1,59 @@
 from langchain_community.document_loaders import PyPDFLoader
-from NER import cyner
+
 import glob
 import sqlalchemy as db
-from sqlalchemy.dialects.postgresql import JSONB
+from sqlalchemy.dialects.postgresql import JSONB,JSON
+from sqlalchemy import Column, Integer, String, DateTime
+from typing import List
+from typing import Optional
+from sqlalchemy import ForeignKey
+from sqlalchemy import String
+from sqlalchemy.orm import DeclarativeBase
+from sqlalchemy.orm import Mapped
+from sqlalchemy.orm import mapped_column
+from sqlalchemy.orm import relationship
+import datetime as dt
+class Base(DeclarativeBase):
+    pass
+
+class Report(Base):
+    __tablename__ = "report"
+    id = Column(Integer, primary_key=True)
+    ts = Column(DateTime, default=dt.datetime.now())
+    filename = Column(String)
+    ner_config = Column(JSON)
 
 engine = db.create_engine('sqlite:///ner_test_benchmark.sqlite')
-connection = engine.connect()
-metadata = db.MetaData()
-table= db.Table('Student', metadata,
-              db.Column('Id', db.Integer(),primary_key=True),
-              db.Column('file_name', db.String(255), nullable=False),
-              db.Column('ner_heuristics', db.JSON(), default="Math"),
-              )
 
-metadata.create_all(engine)
+Base.metadata.drop_all(engine)
+Base.metadata.create_all(engine)
+
+import cyner
 # use only heuristics
 model_regex = cyner.CyNER(transformer_model=None,use_heuristic=True,flair_model=None,priority="H")
 
-for pdf_report in glob.glob("../../datasets/*.pdf"):
-    print(pdf_report)
-    loader = PyPDFLoader(pdf_report)
-    pages = loader.load_and_split()
+from sqlalchemy.orm import Session
 
-    for document in pages:
-        # this is a document
-        print(f"Parsing page {document.metadata['page']}")
+with Session(engine) as session:
+    for pdf_report in glob.glob("../../datasets/*.pdf"):
+        print(pdf_report)
+        loader = PyPDFLoader(pdf_report)
+        pages = loader.load_and_split()
 
-        entities = model_regex.get_entities(document.page_content)
-        print(f"Found {len(entities)} entities")
+        for document in pages:
+            # this is a document
+            print(f"Parsing page {document.metadata['page']}")
 
-    # now load the ground truth and see what was found!
-    # TODO: load the stix file...
+            entities = model_regex.get_entities(document.page_content)
+            print(f"Found {len(entities)} entities")
+
+            r = Report(filename=pdf_report,ner_config={})
+
+            session.add(r)
+    session.commit()
+
+    # see how many reports
+    result = session.query(Report).count()
+    print("Total reports %d" % result)
+
 

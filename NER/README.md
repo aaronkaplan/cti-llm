@@ -98,11 +98,31 @@ The methods supported:
 * Heuristics: regexes like the one described below
 * Spacy: standard NLP library
 * Flair: standard NLP library
-* Transformers: a fine tuned Roberta XL model for cyber data
+* Transformers: a fine tuned Roberta XL model for MITRE entities in /dataset/mitre
 
 ### Run the Roberta XL training
 
-Execute the run_bert.py script.
+ First of all run the pip install:
+
+```bat
+ cd NER
+
+ pip install .
+```
+
+Then run the training script:
+
+```bat
+ cd NER
+
+ python run_bert.py
+```
+This will take a while because it will:
+* download the roberta XL model from HF
+* run the training for default of 20 epochs
+* save the results under /logs
+
+Please make sure you have a decent GPU, we suggest at leats a T4 card.
 
 
 ## Named Entities in CTI
