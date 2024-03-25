@@ -133,6 +133,16 @@ The current performace:
 2024-03-21 10:00:13 INFO     ckpt saved at logs/xlm-roberta-base
 ```
 
+### Usage
+For full usage example do:
+
+```bat
+ cd NER
+
+ python tests/basic_test.py
+ 
+```
+
 ## Named Entities in CTI
 
 The entites here are heavily inspired by STIX, though this is still an early sketch:
