@@ -5,11 +5,11 @@ from .entity_extraction_factory import EntityExtractionFactory as eef
 
 
 class CyNER(): 
-    def __init__(self, transformer_model=None, use_heuristic=True, flair_model='ner', spacy_model=None, priority='HTFS',model_dir="./logs/xlm-roberta-base"):
+    def __init__(self, transformer_model=None, use_heuristic=True, flair_model='ner', spacy_model=None, priority='HTFS'):
 
         self.transformer_model = None
         if transformer_model:
-            self.transformer_ner = eef.get_entity_extraction_model('transformers', {'model': transformer_model,'checkpoint_dir':model_dir})
+            self.transformer_ner = eef.get_entity_extraction_model('transformers', {'model': transformer_model})
 
         self.heuristic_ner = None
         if use_heuristic:

@@ -22,7 +22,7 @@ class TransformersNER:
         transformers_model: str
             model name on transformers model hub or path to model directory
         """
-        logging.info('*** initialize network ***')
+        logging.info('*** Load model.... ***')
         self.model = transformers.AutoModelForTokenClassification.from_pretrained(transformers_model)
         self.id_to_label = {v: str(k) for k, v in self.model.config.label2id.items()}
         self.transforms = Transforms(transformers_model, cache_dir=cache_dir)
