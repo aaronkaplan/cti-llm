@@ -3,7 +3,7 @@ import unittest
 import cyner
 
 class TestCynerMethods(unittest.TestCase):
-    @unittest.skip("reason for skipping")
+
     def test_cyner_heuristics(self):
 
         print("Using regexes")
@@ -22,7 +22,7 @@ class TestCynerMethods(unittest.TestCase):
         checks = []
         for e in entities:
             print(e)
-    @unittest.skip("reason for skipping")
+
     def test_cyner_flair(self):
         print("Using flair with regexes")
 
@@ -43,7 +43,6 @@ class TestCynerMethods(unittest.TestCase):
         for e in entities:
             print(e)
 
-    @unittest.skip("reason for skipping")
     def test_cyner_flair(self):
         print("Using flair with regexes")
 
@@ -63,7 +62,7 @@ class TestCynerMethods(unittest.TestCase):
         checks = []
         for e in entities:
             print(e)
-    @unittest.skip("reason for skipping")
+
     def test_cyner_spacy(self):
         print("Using flair with regexes")
 
@@ -84,7 +83,6 @@ class TestCynerMethods(unittest.TestCase):
         for e in entities:
             print(e)
 
-    @unittest.skip("reason for skipping")
     def test_cyner_spacy(self):
         print("Using flair with regexes")
 
@@ -114,7 +112,7 @@ class TestCynerMethods(unittest.TestCase):
 
         print(text)
 
-        model = cyner.CyNER(transformer_model='xlm-roberta-large', use_heuristic=False, flair_model=None, spacy_model=None,model_dir="/home/robomotic/cti-llm/NER/ckpt_large/model.safetensors")
+        model = cyner.CyNER(transformer_model='/home/robomotic/cti-llm/NER/ckpt_large', use_heuristic=False, flair_model=None, spacy_model=None)
 
         entities = model.get_entities(text)
 
@@ -123,8 +121,8 @@ class TestCynerMethods(unittest.TestCase):
         for e in entities:
             print(e)
             
-        """
-        model = cyner.CyNER(transformer_model='xlm-roberta-large', use_heuristic=True, flair_model=None, spacy_model=None,model_dir="/home/robomotic/cti-llm/NER/logs/xlm-roberta-base")
+
+        model = cyner.CyNER(transformer_model='/home/robomotic/cti-llm/NER/ckpt_large', use_heuristic=True, flair_model=None, spacy_model=None)
 
         entities = model.get_entities(text)
 
@@ -134,7 +132,7 @@ class TestCynerMethods(unittest.TestCase):
             print(e)
 
         
-        model = cyner.CyNER(transformer_model='xlm-roberta-large', use_heuristic=True, flair_model="ner",model_dir="/home/robomotic/cti-llm/NER/logs/xlm-roberta-base")
+        model = cyner.CyNER(transformer_model='/home/robomotic/cti-llm/NER/ckpt_large', use_heuristic=True, flair_model="ner")
 
         entities = model.get_entities(text)
 
@@ -142,7 +140,7 @@ class TestCynerMethods(unittest.TestCase):
         checks = []
         for e in entities:
             print(e)
-        """
+
 if __name__ == '__main__':
     unittest.main()
 
