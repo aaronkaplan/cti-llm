@@ -164,3 +164,9 @@ cython_debug/
 
 # local stuff
 .langchain.db
+
+# model files
+
+NER/ckpt_base
+NER/ckpt_large
+
