@@ -5,7 +5,7 @@ from cyner import TransformersNER
 
 
 def run_bert():
-    cfg1 = {'checkpoint_dir': 'logs/xlm-roberta-base',
+    cfg1 = {'checkpoint_dir': './ckpt_base',
             'dataset': 'dataset/mitre',
             'transformers_model': 'xlm-roberta-base',
             'lr': 1e-5,
@@ -15,14 +15,14 @@ def run_bert():
     model1 = TransformersNER(cfg1)
     model1.train()
 
-    # cfg2 = {'checkpoint_dir': 'logs/xlm-roberta-large',
-    #         'dataset': 'dataset/mitre',
-    #         'transformers_model': 'xlm-roberta-large',
-    #         'lr': 5e-6,
-    #         'epochs': 20,
-    #         'max_seq_length': 256}
-    # model2 = TransformersNER(cfg2)
-    # model2.train()
+    cfg2 = {'checkpoint_dir': './ckpt_large',
+             'dataset': 'dataset/mitre',
+             'transformers_model': 'xlm-roberta-large',
+             'lr': 5e-6,
+             'epochs': 20,
+             'max_seq_length': 256}
+    model2 = TransformersNER(cfg2)
+    model2.train()
 
 
 if __name__ == '__main__':
