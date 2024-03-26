@@ -170,3 +170,4 @@ cython_debug/
 NER/ckpt_base
 NER/ckpt_large
 
+.python-version
