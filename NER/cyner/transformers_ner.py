@@ -54,7 +54,7 @@ class TransformersNER(EntityExtraction):
 
     def get_entities(self, text):
         if self.classifier is None:
-            logging.error("Loading classifier from %s" % self.config.get('cache_dir'))
+            logging.info("Loading classifier from %s" % self.config.get('model'))
 
             self.classifier = PredictTransformersNER(transformers_model=self.config.get('model', 'xlm-roberta-base'),cache_dir=self.config.get('cache_dir',"/tmp/cyner/cache"))
             
