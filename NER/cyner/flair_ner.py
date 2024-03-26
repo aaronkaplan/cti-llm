@@ -1,6 +1,6 @@
 from flair.data import Sentence
 from flair.models import SequenceTagger
-
+import logging
 from .entity_extraction import EntityExtraction
 from .entity import Entity
 
@@ -22,6 +22,10 @@ class Flair(EntityExtraction):
         pred = sentence.to_dict(tag_type='ner')
         entities = []
         for x in pred['entities']:
-            # 'labels' are formatted as [(TAG prob), ...]
-            entities.append(Entity(x['start_pos'], x['end_pos'], x['text'], x['labels'][0].value, x['labels'][0].score))
+            if 'labels' in x:
+                for label in x['labels']:
+                    entities.append(Entity(x['start_pos'], x['end_pos'], x['text'], label['value'], label['confidence']))
+            else:
+                logging.warning("Label is missing for entity: %s" %s)
+
         return entities
