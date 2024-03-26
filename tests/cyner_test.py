@@ -112,7 +112,8 @@ class TestCynerMethods(unittest.TestCase):
 
         print(text)
 
-        model = cyner.CyNER(transformer_model='/home/robomotic/cti-llm/NER/ckpt_large', use_heuristic=False, flair_model=None, spacy_model=None)
+        model = cyner.CyNER(transformer_model='/home/robomotic/cti-llm/NER/ckpt_large', use_heuristic=False, flair_model=None, spacy_model=None, priority='T')
+
 
         entities = model.get_entities(text)
 
@@ -122,7 +123,7 @@ class TestCynerMethods(unittest.TestCase):
             print(e)
             
 
-        model = cyner.CyNER(transformer_model='/home/robomotic/cti-llm/NER/ckpt_large', use_heuristic=True, flair_model=None, spacy_model=None)
+        model = cyner.CyNER(transformer_model='/home/robomotic/cti-llm/NER/ckpt_large', use_heuristic=True, flair_model=None, spacy_model=None, priority='HT')
 
         entities = model.get_entities(text)
 
@@ -132,7 +133,7 @@ class TestCynerMethods(unittest.TestCase):
             print(e)
 
         
-        model = cyner.CyNER(transformer_model='/home/robomotic/cti-llm/NER/ckpt_large', use_heuristic=True, flair_model="ner")
+        model = cyner.CyNER(transformer_model='/home/robomotic/cti-llm/NER/ckpt_large', use_heuristic=True, flair_model="ner", priority='HTF')
 
         entities = model.get_entities(text)
 
