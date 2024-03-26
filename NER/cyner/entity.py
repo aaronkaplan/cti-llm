@@ -14,5 +14,10 @@ class Entity:
         self.confidence = confidence
 
     def __str__(self, ):
-        return 'Mention: {}, Class: {}, Start: {}, End: {}, Confidence: {:.2f}'.\
+        return 'Entity: {}, Class: {}, Start: {}, End: {}, Confidence: {:.2f}'.\
             format(self.text, self.entity_type, self.start, self.end, self.confidence)
+
+
+    def to_dict(self, ):
+        return {"text":self.text, "entity_type":self.entity_type,"start":self.start,"end":self.end,"confidence":self.confidence}
+
