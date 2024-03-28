@@ -9,7 +9,7 @@ The most important use cases are:
 
 1) *UC 1*: [Summarization](summarization) of free text CTI 
 2) *UC 2*: [NER](NER)  (Name Entity Recognition)
-3) *UC 3*: Q&A  (Answering questions on CTI texts via RAG)
+3) *UC 3*: [Q&A](QA)  (Answering questions on CTI texts via RAG)
 4) *UC 4*: TTP Tagging (extract the TTPs from the text)
 5) *UC 5*: Graph relationship extraction: extract the graph of who did what with with tools against whom etc... (the "w" questions). 
 

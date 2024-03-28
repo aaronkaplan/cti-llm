@@ -15,6 +15,7 @@ import requests
 import bs4
 
 
+# for fetching URLs in parallel
 nest_asyncio.apply()
 DEFAULT_USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
@@ -36,12 +37,21 @@ def fetch_html_from_url_via_requests(url: str, user_agent=DEFAULT_USER_AGENT) ->
     return html
 
 
-def fetch_html_from_urls_via_langchain(urls: List[str], user_agent=DEFAULT_USER_AGENT) -> List[Document]:
+def get_text_from_html(html: str) -> str:
+    """ Convert HTML to text using BeautifulSoup. """
+    _soup = bs4.BeautifulSoup(html, 'html.parser')
+    _text = _soup.get_text()
+    return _text
+
+
+def fetch_html_from_urls_via_langchain(urls: List[str], 
+                                       user_agent=DEFAULT_USER_AGENT) -> List[Document]:
     """Use Langchain's document loaders to fetch HTML from the URL.
 
     Args:
         url List(str): The URLs of the webpages to download.
-        user_agent (str, optional): The user-agent string to emulate. Defaults to a common Chrome UA.
+        user_agent (str, optional): The user-agent string to emulate. 
+        Defaults to a common Chrome UA.
     
     Returns:
         a list of Document objects containing the (bs4 parsed) content of the webpage(s)
@@ -52,20 +62,14 @@ def fetch_html_from_urls_via_langchain(urls: List[str], user_agent=DEFAULT_USER_
     return data
 
 
-def get_text_from_html(html: str) -> str:
-    """ Convert HTML to text using BeautifulSoup. """
-    _soup = bs4.BeautifulSoup(html, 'html.parser')
-    _text = _soup.get_text()
-    return _text
-
-
 def fetch_html_from_url_via_selenium(url: str, user_agent=DEFAULT_USER_AGENT) -> str:
     """ Use Selenium to fetch HTML from the URL. 
         Downloads the HTML content of a page that requires JavaScript to render.
 
      Args:
         url (str): The URL of the webpage to download.
-        user_agent (str, optional): The user-agent string to emulate. Defaults to a common Chrome UA.
+        user_agent (str, optional): The user-agent string to emulate. 
+        Defaults to a common Chrome UA.
 
     Returns:
         str: The HTML content of the webpage.

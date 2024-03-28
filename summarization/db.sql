@@ -54,6 +54,8 @@ CREATE TABLE public.summary (
     score double precision,
     human_summary text,
     evaluator_reasoning text,
+	original_text text,
+	sha256_original_text varchar(64),
     llm_response jsonb,
     llm character varying(255)
 );

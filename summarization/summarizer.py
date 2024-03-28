@@ -11,14 +11,13 @@ from typing import List
 from pprint import pprint
 
 from langchain import hub
-# from langchain.schema.output_parser import StrOutputParser
-from langchain_core.output_parsers import JsonOutputParser
-# for caching
 from langchain.globals import set_llm_cache
 from langchain.cache import SQLiteCache
-# for LLM models
+
+# from langchain.schema.output_parser import StrOutputParser
+from langchain_core.output_parsers import JsonOutputParser
 from langchain_openai import ChatOpenAI
-from langchain_openai import AzureChatOpenAI 
+from langchain_openai import AzureChatOpenAI
 from langchain_anthropic import ChatAnthropic
 # And finally document loaders
 from langchain_community.document_loaders import PyPDFLoader
@@ -33,6 +32,7 @@ class Summarizer:
     """ Class using language model to summarize text. """
     temperature = 0.2
     model = ""
+    api_key = ""
 
     def __init__(self, llm_provider: str = "openai"):
         """ Initialize the Summarizer class. """
@@ -77,7 +77,7 @@ class Summarizer:
             print(f"Summarizer class: Error: {e}")
             raise e
 
-    def summarize_text(self, _text: str) -> str:
+    def summarize_text(self, _text: str) -> str:        # XXX FIXME this should be  a dict
         """ Summarize the text using the language model. """
         return self.chain.invoke({"context": _text})
 
@@ -94,12 +94,13 @@ class Summarizer:
         try:
             docs = fetch_html_from_urls_via_langchain(urls)
             for doc in docs:
-                result = self.chain.invoke({"context": doc})
+                result = self.chain.invoke({"context": doc})        # might want to do that in parallel ?
+                original_text = doc.page_content
                 print(120*"=")
                 print(f"summarize_url: type(result): '{type(result)}'")
                 print(f"summarize_urls: len(result): '{len(result)}'")
                 print(120*"=")
-                results.append(result)
+                results.append({"result": result, "original_text": original_text})
             return results
         except Exception as e:
             print(f"Error: {e}")
@@ -138,13 +139,16 @@ class Orchestrator:
         pprint(f"fetch_and_store_summary: summaries: '{responses}'")
         db = SummaryDB()
         for url, response in zip(urls, responses):
+            original_text = response['original_text']
+            llm_output = response['result']
+        for url, response in zip(urls, responses):
             print(80*"=")
             print(f"Storing summary for {url}")
             print(f"Type of response: {type(response)}")
-            pprint(response)
-            summary = '\n'.join(response['summary']) if 'summary' in response else ''
+            pprint(llm_output)
+            summary = '\n'.join(llm_output['summary']) if 'summary' in llm_output else ''
             print(80*"=")
-            db.store_summary(url=url, summary=response['summary'],
+            db.store_summary(url=url, summary=summary, original_text=original_text,
                              llm=self.summarizer.model, llm_response=response)
 
 
@@ -152,23 +156,6 @@ if __name__ == "__main__":
     logger.info("Starting the summarizer...")
 
     summarizer = Summarizer(llm_provider="anthropic")
-    # summarizer = Summarizer(llm_provider="azure")
-    """
-    import requests
-    URL = "https://www.bleepingcomputer.com/news/security/russian-apt29-hackers-stealthy-malware-undetected-for-years/" # sample CTI rpoert
-    USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
-    headers = {"user-agent": USER_AGENT}
-    html = requests.get(URL, headers=headers, timeout=10).text
-    # html = fetch_html_from_url_via_selenium(URL)
-    text = get_text_from_html(html)
-
-    # cleanup
-    text = chop_empty_lines(text)
-
-    print(f"About to summarize {URL}")
-    print(f"text: {text[:800]}")
-    print(summarizer.summarize_text(text))
-    """
     # print(summarizer.summarize_file("sample.txt"))
     print(80*"=")
     print("About to summarize a PDF file...")
@@ -176,7 +163,8 @@ if __name__ == "__main__":
 
     # print(80*"=")
     # print("About to summarize a URL...")
-    # print(summarizer.summarize_url("https://www.bleepingcomputer.com/news/security/russian-apt29-hackers-stealthy-malware-undetected-for-years/"))
+    # url = "https://www.bleepingcomputer.com/news/security/russian-apt29-hackers-stealthy-malware-undetected-for-years/"
+    # print(summarizer.summarize_url(url)
 
     print(80*"=")
     print("Fetching multiple URLs and storing the summaries in the database...")

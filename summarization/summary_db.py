@@ -16,24 +16,17 @@ We use postgresql as the database for this project.
 
 """
 
+import os
 from datetime import datetime
 from typing import List, Union
 
 import psycopg
 from psycopg.types.json import Jsonb
 
+import hashlib
 
 
-DSN="dbname=summarydb user=aaron"
-CREATE_SQL = """
-    CREATE TABLE summary (id SERIAL PRIMARY KEY, 
-        url TEXT, 
-        summary TEXT, 
-        date DATE, 
-        score FLOAT, 
-        human_summary TEXT, 
-        evaluator_reasoning TEXT);
-"""
+DSN=os.getenv("DSN")
 
 
 # Helper function to create the database in postgresql.
@@ -42,7 +35,7 @@ CREATE_SQL = """
 def create_summary_db() -> bool:
     """Create the summary database in postgresql."""
     try:
-        conn = psycopg.connect(DSN)
+        conn = psycopg.connect(DSN, cursor_factory=psycopg.ClientCursor)
         # Open a cursor to perform database operations
         with conn.cursor() as cur:
             # Execute a command: this creates a new table
@@ -68,7 +61,7 @@ def check_if_summary_db_exists() -> bool:
     except Exception as e:
         print(f"Error checking if summary database exists: {e}")
         return False
-    
+
 def delete_summary_table():
     """Drop the summary table from the database."""
     try:
@@ -93,8 +86,8 @@ class SummaryDB:
             print(f"Error connecting to summary database: {e}")
             raise e
 
-    def store_summary(self, url: str, summary: str, score: float = None, human_summary: str = None,
-                      evaluator_reasoning: str = None, date: datetime = datetime.today(),
+    def store_summary(self, url: str, summary: str, score: float = None, human_summary: str = None,     # nopep8
+                      evaluator_reasoning: str = None, date: datetime = datetime.today(), original_text: str = None,
                       llm: str = None, llm_response: dict = None) -> bool:
         """Store a summary in the database.
 
@@ -108,19 +101,40 @@ class SummaryDB:
         Returns:
             bool: True if the summary was stored successfully, False otherwise
         """
+
+        print(120 * "X")
+        original_text = original_text.page_content if original_text else ""
+        print(original_text)
+        print(120 * "Y")
+        print(llm_response['result'])
+        print(120 * "/X")
+
         summary_data = {
             "url": url,
             "summary": summary,
             "date": str(date),
             "score": score,
             "human_summary": human_summary,
+            "original_text": str(original_text),
+            "sha256_original_text": hashlib.sha256(original_text.encode()).hexdigest(),
             "evaluator_reasoning": evaluator_reasoning,
             "llm": llm,
-            "llm_response": Jsonb(llm_response) if llm_response else None
+            "llm_response": "",
+            # "llm_response": Jsonb(llm_response['result']) if llm_response else None
         }
+        print(summary_data)
         try:
             cur = self.db.cursor()
-            cur.execute("INSERT INTO summary (url, summary, date, score, human_summary, evaluator_reasoning, llm, llm_response) VALUES (%(url)s, %(summary)s, %(date)s, %(score)s, %(human_summary)s, %(evaluator_reasoning)s, %(llm)s, %(llm_response)s)", summary_data)
+            SQL_STMT = """INSERT INTO summary (
+                    url, summary, date, score, human_summary, 
+                    evaluator_reasoning, original_text, sha256_original_text, 
+                    llm, llm_response) 
+                VALUES (
+                    %(url)s, %(summary)s, %(date)s, %(score)s, %(human_summary)s, 
+                    %(evaluator_reasoning)s, %(llm)s, %(llm_response)s
+                )"""
+            # print(cur.mogrify(SQL_STMT, summary_data))
+            cur.execute(SQL_STMT, summary_data)
             self.db.commit()
         except Exception as e:
             print(f"Error storing summary: {e}")
@@ -130,12 +144,11 @@ class SummaryDB:
     def get_summary(self, url: str) -> Union[None, dict]:
         """Get a summary from the database, given the url"""
         cur = self.db.cursor()
-        results = cur.execute("SELECT * FROM summary WHERE url = %(url)s", {"url": url})
+        cur.execute("SELECT * FROM summary WHERE url = %(url)s", {"url": url})
         if cur.rowcount == 0:
             return None
-        else:
-            summary = cur.fetchone()
-            return summary
+        summary = cur.fetchone()
+        return summary
 
     def get_summary_by_score(self, score: float) -> List[dict]:
         """Get summaries from the database, given the score"""
