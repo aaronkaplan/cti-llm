@@ -12,18 +12,26 @@ services:
       - POSTGRES_PASSWORD=postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - web
 
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: python manage.py runserver 0.0.0.0:8010
     volumes:
       - ./:/app
     ports:
-      - "8000:8000"
+      - "8010:8010"
     depends_on:
       - db
     environment:
       - DATABASE_URL=postgres://postgres:postgres@db:5432/postgres
       - DJANGO_SETTINGS_MODULE=config.settings.development
       - OPENAI_API_KEY
+    networks:
+      - web
 
+networks:
+  web:
+    name: "web"
+    external: true
