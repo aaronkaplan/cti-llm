@@ -67,3 +67,11 @@ class CyNER():
             entities = model.get_entities(text)
             merged_entities = self.merge_entities(merged_entities, entities)
         return merged_entities
+
+    def map_stix_entities(self,merged_entities):
+
+        """
+            Map them to STIX objects
+        """
+
+        return []
