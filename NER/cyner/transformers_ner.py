@@ -5,6 +5,7 @@ from .entity import Entity
 from .tner import TrainTransformersNER
 from .tner import TransformersNER as PredictTransformersNER
 
+import logging
 
 class TransformersNER(EntityExtraction):
     """
@@ -53,15 +54,17 @@ class TransformersNER(EntityExtraction):
 
     def get_entities(self, text):
         if self.classifier is None:
-            self.classifier = PredictTransformersNER(self.config.get('model', 'xlm-roberta-base'))
+            logging.info("Loading classifier from %s" % self.config.get('model'))
+
+            self.classifier = PredictTransformersNER(transformers_model=self.config.get('model', 'xlm-roberta-base'),cache_dir=self.config.get('cache_dir',"/tmp/cyner/cache"))
             
         spans = list(pt().span_tokenize(text))
-        print(spans)
+        logging.debug(spans)
         entities = []
         for span in spans:
-            print(span)
+            logging.info(span)
             sent = text[span[0]: span[1]]
-            print(sent)
+            logging.info(sent)
             ret = self.classifier.predict([sent])
             for x in ret[0]['entity']:
                 start, end = x['position']

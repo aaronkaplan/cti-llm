@@ -91,6 +91,57 @@ The function will calculate the following:
 >  'Recall': 0.75,
 >  'F1 Score': 0.75}
 
+## CyNER
+
+This an abstraction class design whose purpose is to combine multiple methods to extract entities.
+The methods supported:
+* Heuristics: regexes like the one described below
+* Spacy: standard NLP library
+* Flair: standard NLP library
+* Transformers: a fine tuned Roberta XL model for MITRE entities in /dataset/mitre
+
+### Run the Roberta XL training
+
+ First of all run the pip install:
+
+```bat
+ cd NER
+
+ pip install .
+```
+
+Then run the training script:
+
+```bat
+ cd NER
+
+ python run_bert.py
+```
+This will take a while because it will:
+* download the roberta XL model from HF
+* run the training for default of 20 epochs
+* save the results under /logs
+
+Please make sure you have a decent GPU, we suggest at leats a T4 card.
+
+The current performace:
+
+```
+2024-03-21 10:00:13 INFO     f1 score: 74.39353099730458
+2024-03-21 10:00:13 INFO     recall: 73.95498392282958
+2024-03-21 10:00:13 INFO     precision: 74.83731019522777
+2024-03-21 10:00:13 INFO     ckpt saved at logs/xlm-roberta-base
+```
+
+### Usage
+For full usage example do:
+
+```bat
+ cd NER
+
+ python tests/basic_test.py
+ 
+```
 
 ## Named Entities in CTI
 

@@ -72,6 +72,7 @@ def delete_summary_table():
         print("Summary table emptied successfully")
     except Exception as e:
         print(f"Error flushing summary table: {e}")
+        print(f"Error flushing summary table: {e}")
 
 
 class SummaryDB:
