@@ -16,11 +16,14 @@ class TestCynerMethods(unittest.TestCase):
 
         print(text)
 
-
         entities = model.get_entities(text)
 
-        checks = []
         for e in entities:
+            print(e)
+
+        stix_entities = model.get_stix_entities()
+
+        for e in stix_entities:
             print(e)
 
     def test_cyner_flair(self):
