@@ -2,7 +2,7 @@ import sys
 import os
 
 from .entity_extraction_factory import EntityExtractionFactory as eef
-
+from .entity import Entity
 
 class CyNER(): 
     def __init__(self, transformer_model=None, use_heuristic=True, flair_model='ner', spacy_model=None, priority='HTFS'):
