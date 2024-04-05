@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CTI AI Workbench</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    {% block head %}
+    {% endblock %}
+</head>
+
+<body>
+    <div class="columns">
+        <div class="column is-four-fifths is-offset-1">
+    <div class="container">
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                  </a>
+            </div>
+            <div id="navbar-menu" class="navbar-menu">
+                <a class="navbar-item" href="/">CTI Toolbox</a>
+                <a class="navbar-item" href="/summarizer">Summarizer</a>
+                <a class="navbar-item" href="/NER">Knowledge Extractor (NER)</a>
+                <a class="navbar-item" href="/RAG">Question Answering (RAG)</a>
+            </div>
+        <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="field is-grouped">
+                <p class="control">
+                    <a class="button is-primary" href="/login">
+                        <span class="icon"><i class="fa fa-sign-in"></i></span>
+                        <span>Login</span>
+                    </a>
+                    <a class="button" href="https://github.com/aaronkaplan/cti-llm">
+                        <span class="icon"><i class="fa fa-github"></i></span>
+                        <span>Source code</span>
+                    </a>
+                </p>
+              </div>
+            </div>
+        </div>
+        </nav>
+    </div>  <!-- container -->
+    <section class="section">
+        <div class="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+        </div>
+    </section>
+    {% block scripts %}
+    {% endblock %}
+</div> <!-- column -->
+</div> <!-- columns -->
+</body>
+
+</html>

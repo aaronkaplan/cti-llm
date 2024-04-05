@@ -6,11 +6,23 @@ import re
 from pydantic import BaseModel, Field
 from langchain.chat_models import ChatOpenAI
 from langchain.callbacks import get_openai_callback
+
+# Langchain offers caching. Let's use it. See: https://python.langchain.com/docs/modules/model_io/llms/llm_caching
+from langchain.globals import set_llm_cache
+# from langchain.cache import SQLiteCache
+from langchain.cache import InMemoryCache     # alternative in memory DB
+
 from kor import create_extraction_chain, from_pydantic, JSONEncoder
 from django.db import transaction
 import spacy
 
 from .models import InputText, Metadata, Output, Entity
+
+
+# caching
+set_llm_cache(InMemoryCache())
+# or:
+# set_llm_cache(SQLiteCache(database_path="/app/cache/langchain.db"))
 
 
 def find_substring_positions(text, substrings_with_labels):

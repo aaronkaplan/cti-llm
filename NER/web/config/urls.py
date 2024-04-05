@@ -28,7 +28,10 @@ api.add_router("/auth/", "apps.users.api.router")
 api.add_router("/ner/", "apps.ner.api.router")
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='index.html'), name='home'),
+    path('', TemplateView.as_view(template_name='index.html'), name='index'),
+    path('summarizer/', TemplateView.as_view(template_name='summarizer.html'), name='summarizer'),
+    path('NER/', TemplateView.as_view(template_name='ner.html'), name='NER'),
+    path('RAG/', TemplateView.as_view(template_name='rag.html'), name='RAG'),
     path('admin/', admin.site.urls),
     path("accounts/", include("allauth.urls")),
     path("api/", api.urls),

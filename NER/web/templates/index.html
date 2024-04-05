@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<img src="{% static "logo.png" %}" alt="CTI AI Workbench" style="width: 200px; height: 200px; display: block; margin-left: auto; margin-right: auto; margin-top: 20px; margin-bottom: 20px;">
+            <!-- Center the image -->
+            <h1>Welcome to the CTI AI Workbench</h1>
+            <p>
+                <!-- Include a block tag for main content so you can extend from this base template -->
+                Summarize CTI reports or extract TTPs, IOCs, and other entities from CTI reports.
+                Or talk with your CTI reports using RAG.
+            </p>
+{% endblock %}
+
