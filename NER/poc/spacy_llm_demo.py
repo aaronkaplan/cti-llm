@@ -1,7 +1,8 @@
 import logging
-#from dotenv import load_dotenv
+from spacy.matcher import Matcher
+from dotenv import load_dotenv
 
-#load_dotenv()  # take environment variables from .env.
+load_dotenv()  # take environment variables from .env.
 
 from spacy_llm import logger
 from spacy_llm.util import assemble
@@ -26,8 +27,23 @@ credentials and limited to no firewall protections to accommodate wireless inter
 configures them to do so.
           """)
 
+matcher = Matcher(nlp.vocab)
+
 # Print entities
 print(doc.to_json())
+
+# Add matchers
+for ent in doc.ents:
+    # Add match ID "HelloWorld" with no callback and one pattern
+    pattern = [{"ORTH": ent.text}]
+    matcher.add(ent.label_, [pattern])
+
+matches = matcher(doc)
+for match_id, start, end in matches:
+    string_id = nlp.vocab.strings[match_id]  # Get string representation
+    span = doc[start:end]  # The matched span
+    print(match_id, string_id, start, end, span.text)
+
 
 from stix2.v21 import (ThreatActor, Identity, Relationship, Bundle)
 from stix2 import IPv4Address,IPv6Address,EmailAddress,URL,ThreatActor
@@ -35,7 +51,8 @@ from stix2 import IPv4Address,IPv6Address,EmailAddress,URL,ThreatActor
 obs = []
 
 for ent in doc.ents:
-    print(ent.text, ent.label_)
+    print(ent)
+    #print(ent.text, ent.label_)
 
     if ent.label_ == "ORGANIZATION":
         obj = Identity(name=ent.text)

@@ -19,3 +19,8 @@ Please note that UC 5 can help the other use-cases. If you have the graph of the
 Each use-case has its own subdirectory, please go to the individual subdirs and check their README files.
 
 
+# Dataset attribution
+
+The STIX reports are pulled from the following sources:
+* Palo Alto UNIT42 [github](https://github.com/pan-unit42)
+* CISA advisories [website](https://www.cisa.gov/news-events/cybersecurity-advisories?)

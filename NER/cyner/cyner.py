@@ -2,7 +2,7 @@ import sys
 import os
 
 from .entity_extraction_factory import EntityExtractionFactory as eef
-
+from .entity import Entity
 
 class CyNER(): 
     def __init__(self, transformer_model=None, use_heuristic=True, flair_model='ner', spacy_model=None, priority='HTFS'):
@@ -66,4 +66,47 @@ class CyNER():
         for model in models:
             entities = model.get_entities(text)
             merged_entities = self.merge_entities(merged_entities, entities)
+
+        self.merged_entities = merged_entities
         return merged_entities
+
+    def get_stix_entities(self):
+
+        """
+            Map them to STIX objects
+        """
+        stix_entities= []
+        for e in self.merged_entities:
+            stix_e = Entity(e.start,e.end,e.text,e.entity_type,e.confidence)
+
+            if e.entity_type == "MISC": 
+                continue
+            elif e.entity_type == "Location"  or e.entity_type == "LOC": 
+                # we don't know this can be a region, country, city, etc
+                stix_e.entity_type = "location"
+                stix_entities.append(stix_e)
+            elif e.entity_type == "Malware": 
+                stix_e = "malware.name"
+                stix_entities.append(stix_e)
+            elif e.entity_type == "Organization" or e.entity_type=="ORG": 
+                # we don't know this can be a region, country, city, etc
+                stix_e.entity_type = "location"
+                stix_entities.append(stix_e)
+            elif e.entity_type == "Person" or e.entity_type == "PER": 
+                # we don't know this can be a region, country, city, etc
+                stix_e.entity_type = "identity.name"
+                stix_entities.append(stix_e)
+            elif e.entity_type == "Domain": 
+                # we don't know this can be a region, country, city, etc
+                stix_e.entity_type = "domain-name.value"
+                stix_entities.append(stix_e)
+            elif e.entity_type.lower() == "filename": 
+                stix_e.entity_type = "file.name"
+                stix_entities.append(stix_e)
+            elif e.entity_type.lower() == "email": 
+                stix_e.entity_type = "email.value"
+                stix_entities.append(stix_e)
+            else:
+                continue
+            
+        return stix_entities
