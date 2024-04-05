@@ -13,6 +13,7 @@ class TextInput(BaseModel):
 
 @router.post("/process-text")
 def process_text(request, text_input: TextInput):
+    """Process text and extract entities."""
     ex = EntityExtractor(text_input.text)
     return ex.extract()
     # Mock
