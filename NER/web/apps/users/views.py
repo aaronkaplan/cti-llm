@@ -2,11 +2,31 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import get_object_or_404
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.utils.translation import gettext_lazy as _
+from django.views.generic import CreateView
+
+from .models import InviteCode
+
+import uuid
+
 from django.views.generic import DetailView, RedirectView, UpdateView
 
 User = get_user_model()
+
+
+class GenerateInviteCodeView(LoginRequiredMixin, CreateView):
+    model = InviteCode
+    fields = []  # No fields are needed from the user in the form
+    template_name = 'users/generate_invite_code.html'
+    success_url = reverse_lazy('where_to_redirect_after_creation')  # Adjust this
+
+    def form_valid(self, form):
+        form.instance.code = str(uuid.uuid4())[:8]
+        form.instance.creator = self.request.user  # Set the creator as the current user
+        return super().form_valid(form)
+
+generate_invite_view = GenerateInviteCodeView.as_view()
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):

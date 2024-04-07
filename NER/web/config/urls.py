@@ -30,6 +30,7 @@ api.add_router("/ner/", "apps.ner.api.router")
 urlpatterns = [
     path('', TemplateView.as_view(template_name='index.html'), name='home'),
     path('admin/', admin.site.urls),
-    path("accounts/", include("allauth.urls")),
+    path("accounts/", include("allauth.urls"), name="accounts"),
+    path("users/", include("apps.users.urls"), name="users"),
     path("api/", api.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

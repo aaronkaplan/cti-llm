@@ -79,6 +79,24 @@ class User(AbstractUser):
         return reverse("users:detail")
 
 
+class InviteCode(models.Model):
+    code = models.CharField(max_length=100, unique=True)
+    is_active = models.BooleanField(default=True)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True, related_name='redeemed_invite')
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='created_invites')
+
+    def __str__(self):
+        return self.code
+
+    @property
+    def consumed(self):
+        return self.user is not None
+
+    def save(self, *args, **kwargs):
+        self.is_active = not self.consumed
+        super().save(*args, **kwargs)
+
+
 class Token(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="tokens"
