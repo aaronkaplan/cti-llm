@@ -1,0 +1,16 @@
+<!-- templates/users/generate_invite_code.html -->
+
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Generate Invite Code</h2>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Generate New Invite Code</button>
+</form>
+
+{% if invite_code %}
+    <p>Your new invite code: <strong>{{ invite_code }}</strong></p>
+    <p>Share this code with someone you want to invite.</p>
+{% endif %}
+{% endblock %}

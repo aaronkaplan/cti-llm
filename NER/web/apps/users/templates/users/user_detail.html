@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% load static i18n %}
+
+{% block title %}
+  User Settings
+{% endblock title %}
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <h2>{{ object.name }}</h2>
+        <!-- Display Newsletter Preferences -->
+        {% if newsletter_preferences %}
+          <h3>Newsletter Preferences</h3>
+          <p>
+            Frequency: <b>{{ newsletter_preferences.frequency }}</b>
+          </p>
+          <p>Categories:</p>
+          <ul>
+            {% for category in newsletter_preferences.categories.all %}<li>{{ category.title }}</li>{% endfor %}
+          </ul>
+        {% endif %}
+        <!-- Action buttons -->
+        <a class="btn btn-primary"
+           href="{% url 'account_email' %}"
+           role="button">Change E-Mail</a>
+        <a class="btn btn-primary"
+           href="{% url 'users:newsletter-preferences-update' %}"
+           role="button">Edit Newsletter Preferences</a>
+        <a class="btn btn-light" href="{% url 'account_logout' %}">{% translate "Sign Out" %}</a>
+      </div>
+    </div>
+    <!-- End Action buttons -->
+  </div>
+{% endblock content %}

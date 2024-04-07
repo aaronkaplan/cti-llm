@@ -33,6 +33,7 @@ urlpatterns = [
     path('NER/', TemplateView.as_view(template_name='ner.html'), name='NER'),
     path('RAG/', TemplateView.as_view(template_name='rag.html'), name='RAG'),
     path('admin/', admin.site.urls),
-    path("accounts/", include("allauth.urls")),
+    path("accounts/", include("allauth.urls"), name="accounts"),
+    path("users/", include("apps.users.urls"), name="users"),
     path("api/", api.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
