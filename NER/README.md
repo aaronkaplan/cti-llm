@@ -159,7 +159,7 @@ The entites here are heavily inspired by STIX, though this is still an early ske
 | `SHA256_HASH`   | regex  | `\b[a-f0-9]{64}\b` | (Examples for this hash type would be long, so it's common to see just partials like `0e4d7...aad3f`) | |
 | `FILE_PATH`     | regex  | `(pattern depends on OS specifics)` | `C:\Windows\system32`, `/home/user/file.txt`, `\\Network\Share\file.doc` | |
 | `CVE_ID`        | regex  | `CVE-\d{4}-\d{4,}` | `CVE-2021-3156`, `CVE-2020-1472`, `CVE-2019-0708` | |
-| `PORT_NUMBER`   | regex  | `([pP][oO][rR][tT]:?)|:)\w*\d{1,5}\b` | `Port 80`, `:443`, `: 22`, `port:22` | Should we really have that? |
+| `PORT_NUMBER`   | regex  | `([pP][oO][rR][tT])?:?\w*\d{1,5}\b` | `Port 80`, `:443`, `: 22`, `port:22` , `1234` | Should we really have that?  It will match any number, like page numbers! |
 | `REGISTRY_KEY`  | regex  | `(HKEY_[a-zA-Z0-9_]+\\)([a-zA-Z0-9_\\]*)*` | `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows`, `HKEY_CURRENT_USER\Software\OpenAI`, `HKEY_CLASSES_ROOT\.txt` | |
 | `T-CODE`        | regex  | `\bT-?\d{1,4}` | `T1203`, `T-1203` | Are T-codes always 4-digits? |
 | `MALWARE`       | ner    | `MW` | `LockBit`, `DarkSide`, `WannaCry` | |
