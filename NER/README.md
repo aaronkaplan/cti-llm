@@ -147,35 +147,36 @@ For full usage example do:
 
 The entites here are heavily inspired by STIX, though this is still an early sketch:
 
-| Tag Name        | Method | Pattern/Label            | Examples                           |
-|-----------------|--------|--------------------------|------------------------------------|
-| `IPV4_ADDRESS`  | regex  | `\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b` | `192.168.1.1`, `10.0.0.1`, `172.16.254.1` |
-| `IPV6_ADDRESS`  | regex  | `(complex pattern for IPv6)` | `2001:0db8:85a3:0000:0000:8a2e:0370:7334`, `::1`, `fe80::202:b3ff:fe1e:8329` |
-| `DOMAIN`        | regex  | `([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}` | `example.com`, `subdomain.example.org`, `openai.com` |
-| `URL`           | regex  | `(https?://)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?` | `http://example.com`, `https://sub.example.org/path`, `openai.com` |
-| `EMAIL_ADDRESS` | regex  | `[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}` | `john@example.com`, `alice@openai.com`, `admin@test.org` |
-| `MD5_HASH`      | regex  | `\b[a-f0-9]{32}\b` | `e99a18c428cb38d5f260853678922e03`, `d41d8cd98f00b204e9800998ecf8427e`, `098f6bcd4621d373cade4e832627b4f6` |
-| `SHA1_HASH`     | regex  | `\b[a-f0-9]{40}\b` | `5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8`, `2fd4e1c67a2d28fced849ee1bb76e7391b93eb12`, `a94a8fe5ccb19ba61c4c0873d391e987982fbbd3` |
-| `SHA256_HASH`   | regex  | `\b[a-f0-9]{64}\b` | (Examples for this hash type would be long, so it's common to see just partials like `0e4d7...aad3f`) |
-| `FILE_PATH`     | regex  | `(pattern depends on OS specifics)` | `C:\Windows\system32`, `/home/user/file.txt`, `\\Network\Share\file.doc` |
-| `CVE_ID`        | regex  | `CVE-\d{4}-\d{4,}` | `CVE-2021-3156`, `CVE-2020-1472`, `CVE-2019-0708` |
-| `PORT_NUMBER`   | regex  | `\b\d{1,5}\b` | `80`, `443`, `22` |
-| `REGISTRY_KEY`  | regex  | `(HKEY_[a-zA-Z0-9_]+\\)([a-zA-Z0-9_\\]*)*` | `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows`, `HKEY_CURRENT_USER\Software\OpenAI`, `HKEY_CLASSES_ROOT\.txt` |
-| `MALWARE`       | ner    | `MW` | `LockBit`, `DarkSide`, `WannaCry` |
-| `THREAT_ACTOR`  | ner    | `TA` | `BlueCharlie`, `APT28`, `Lazarus Group` |
-| `SOFTWARE`      | ner    | `SW` | `LockBit 2.0`, `Windows 10`, `OpenSSH` |
-| `TTP`           | ner    | `TTP` | `spear-phishing`, `drive-by download`, `credential stuffing` |
-| `OS`            | ner    | `OS` | `Windows`, `Linux`, `macOS` |
-| `HARDWARE`      | ner    | `HW` | `iPhone`, `Netgate Firewall`, `Raspberry Pi` |
-| `USERNAME`      | ner    | `USR` | `john_doe`, `admin`, `guest` |
-| `ORGANIZATION`  | ner    | `ORG` | `Insikt Group`, `OpenAI`, `Microsoft` |
-| `SECTOR`        | ner    | `SCT` | `finance`, `healthcare`, `energy` |
-| `GEO_LOCATION`  | ner    | `LOC` | `Russia`, `New York`, `Silicon Valley` |
-| `EXPLOIT_NAME`  | ner    | `EXP` | `EternalBlue`, `Heartbleed`, `Shellshock` |
-| `DATE`          | ner    | `DAT` | `March 2023`, `September 2022`, `Q2 2021` |
-| `TIME`          | ner    | `TIM` | `10:00 AM`, `23:45`, `midnight` |
-| `CODE_CMD`      | ner    | `CODE` | `$ mimikatz.exe`, `import os; import pandas as pd`; ... any type of code or command line snippet |
-| `CLASSIFICATION` | ner    | `CLS` | `TLP:AMBER`, `CLASSIFIED`, `UNCLASSIFIED`, `SECRET`, `TOP SECRET`, `iep:traffic-light-protocol="WHITE"`, `NATO CONFIDENTIAL`, `NATO UNCLASSIFIED` |
+| Tag Name        | Method | Pattern/Label            | Examples                           | Comment |
+|-----------------|--------|--------------------------|------------------------------------|---------|
+| `IPV4_ADDRESS`  | regex  | `\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b` | `192.168.1.1`, `10.0.0.1`, `172.16.254.1` | |
+| `IPV6_ADDRESS`  | regex  | `(complex pattern for IPv6)` | `2001:0db8:85a3:0000:0000:8a2e:0370:7334`, `::1`, `fe80::202:b3ff:fe1e:8329` | |
+| `DOMAIN`        | regex  | `([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}` | `example.com`, `subdomain.example.org`, `openai.com` | |
+| `URL`           | regex  | `(https?://)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?` | `http://example.com`, `https://sub.example.org/path`, `openai.com` | |
+| `EMAIL_ADDRESS` | regex  | `[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}` | `john@example.com`, `alice@openai.com`, `admin@test.org` | |
+| `MD5_HASH`      | regex  | `\b[a-f0-9]{32}\b` | `e99a18c428cb38d5f260853678922e03`, `d41d8cd98f00b204e9800998ecf8427e`, `098f6bcd4621d373cade4e832627b4f6` | |
+| `SHA1_HASH`     | regex  | `\b[a-f0-9]{40}\b` | `5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8`, `2fd4e1c67a2d28fced849ee1bb76e7391b93eb12`, `a94a8fe5ccb19ba61c4c0873d391e987982fbbd3` | |
+| `SHA256_HASH`   | regex  | `\b[a-f0-9]{64}\b` | (Examples for this hash type would be long, so it's common to see just partials like `0e4d7...aad3f`) | |
+| `FILE_PATH`     | regex  | `(pattern depends on OS specifics)` | `C:\Windows\system32`, `/home/user/file.txt`, `\\Network\Share\file.doc` | |
+| `CVE_ID`        | regex  | `CVE-\d{4}-\d{4,}` | `CVE-2021-3156`, `CVE-2020-1472`, `CVE-2019-0708` | |
+| `PORT_NUMBER`   | regex  | `([pP][oO][rR][tT]:?)|:)\w*\d{1,5}\b` | `Port 80`, `:443`, `: 22`, `port:22` | Should we really have that? |
+| `REGISTRY_KEY`  | regex  | `(HKEY_[a-zA-Z0-9_]+\\)([a-zA-Z0-9_\\]*)*` | `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows`, `HKEY_CURRENT_USER\Software\OpenAI`, `HKEY_CLASSES_ROOT\.txt` | |
+| `T-CODE`        | regex  | `\bT-?\d{1,4}` | `T1203`, `T-1203` | Are T-codes always 4-digits? |
+| `MALWARE`       | ner    | `MW` | `LockBit`, `DarkSide`, `WannaCry` | |
+| `THREAT_ACTOR`  | ner    | `TA` | `BlueCharlie`, `APT28`, `Lazarus Group` | |
+| `SOFTWARE`      | ner    | `SW` | `LockBit 2.0`, `Windows 10`, `OpenSSH` | Will be hard to distinguish from MALWARE |
+| `TTP`           | ner    | `TTP` | `spear-phishing`, `drive-by download`, `credential stuffing` | |
+| `OS`            | ner    | `OS` | `Windows`, `Linux`, `macOS` | |
+| `HARDWARE`      | ner    | `HW` | `iPhone`, `Netgate Firewall`, `Raspberry Pi` | |
+| `USERNAME`      | ner    | `USR` | `john_doe`, `admin`, `guest` | |
+| `ORGANIZATION`  | ner    | `ORG` | `Insikt Group`, `OpenAI`, `Microsoft` | |
+| `SECTOR`        | ner    | `SCT` | `finance`, `healthcare`, `energy` | |
+| `GEO_LOCATION`  | ner    | `LOC` | `Russia`, `New York`, `Silicon Valley` | |
+| `EXPLOIT_NAME`  | ner    | `EXP` | `EternalBlue`, `Heartbleed`, `Shellshock`  | |
+| `DATE`          | ner    | `DAT` | `March 2023`, `September 2022`, `Q2 2021` | |
+| `TIME`          | ner    | `TIM` | `10:00 AM`, `23:45`, `midnight` | |
+| `CODE_CMD`      | ner    | `CODE` | `$ mimikatz.exe`, `import os; import pandas as pd`; ... any type of code or command line snippet | |
+| `CLASSIFICATION` | ner    | `CLS` | `TLP:AMBER`, `CLASSIFIED`, `UNCLASSIFIED`, `SECRET`, `TOP SECRET`, `iep:traffic-light-protocol="WHITE"`, `NATO CONFIDENTIAL`, `NATO UNCLASSIFIED` | |
 
 ## Prior-Art
 
