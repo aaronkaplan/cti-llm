@@ -174,7 +174,8 @@ The entites here are heavily inspired by STIX, though this is still an early ske
 | `EXPLOIT_NAME`  | ner    | `EXP` | `EternalBlue`, `Heartbleed`, `Shellshock` |
 | `DATE`          | ner    | `DAT` | `March 2023`, `September 2022`, `Q2 2021` |
 | `TIME`          | ner    | `TIM` | `10:00 AM`, `23:45`, `midnight` |
-
+| `CODE_CMD`      | ner    | `CODE` | `$ mimikatz.exe`, `import os; import pandas as pd`; ... any type of code or command line snippet |
+| `CLASSIFICATION` | ner    | `CLS` | `TLP:AMBER`, `CLASSIFIED`, `UNCLASSIFIED`, `SECRET`, `TOP SECRET`, `iep:traffic-light-protocol="WHITE"`, `NATO CONFIDENTIAL`, `NATO UNCLASSIFIED` |
 
 ## Prior-Art
 
