@@ -5,7 +5,7 @@ openai==1.13.3
 spacy==3.7.4
 spacy-llm==0.7.1
 # WEB STUFF
-Django==5.0.3
+Django==5.0.7
 django-ninja==1.1.0
 psycopg[binary]
 django-environ==0.11.2
