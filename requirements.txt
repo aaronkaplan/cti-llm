@@ -11,4 +11,4 @@ nltk==3.9
 kor==1.0.1
 spacy-llm==0.7.3
 stix2==3.0.1
-flair==0.13.1
+flair==0.15.0
