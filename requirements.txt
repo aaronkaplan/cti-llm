@@ -1,10 +1,10 @@
 langchain-community==0.2.19
 langchain-core==0.3.81
-langchain-openai==0.0.8
+langchain-openai==1.1.14
 langchain-anthropic==0.1.4
-langsmith==0.1.12
-pypdf==4.1.0
-pytest==8.1.1
+langsmith==0.7.31
+pypdf==6.6.2
+pytest==9.0.3
 pytest-mock==3.12.0
 spacy==3.7.4
 nltk==3.9
