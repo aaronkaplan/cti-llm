@@ -9,7 +9,7 @@ Django==5.0.13
 django-ninja==1.1.0
 psycopg[binary]
 django-environ==0.11.2
-django-allauth==0.61.1
+django-allauth==65.13.0
 django-crispy-forms==2.1  
 crispy-bootstrap5==2024.2
 
